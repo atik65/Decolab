@@ -3,7 +3,9 @@ import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import { Navigation, Pagination } from "swiper/modules";
+import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
+import "swiper/css/effect-fade";
+
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
@@ -108,9 +110,11 @@ const HomeBanner = () => {
   //   const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 4"];
 
   return (
-    <div className="relative shadow">
+    <div className="relative ">
       <Swiper
-        modules={[Navigation, Pagination]}
+        // effect={"fade"}
+        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        autoplay={{ delay: 5000 }}
         spaceBetween={50}
         slidesPerView={1}
         onSlideChange={() => console.log("slide change")}
@@ -199,11 +203,11 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
 
   // Update the active index when the swiper changes
   swiper.on("slideChange", () => {
-    setActiveIndex(swiper.activeIndex);
+    setActiveIndex(swiper.realIndex);
   });
 
   return (
-    <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 z-20 flex space-x-2 sm:space-x-5 justify-center  h-4 sm:h-7 items-center  select-none">
+    <div className="absolute bottom-6 md:bottom-0 left-1/2 md:left-10 transform -translate-x-1/2 md:translate-x-0 z-20 flex space-x-2 sm:space-x-5 justify-center  h-4 sm:h-7 items-center  select-none">
       {slides.map((_, index) => (
         <div key={index}>
           {activeIndex === index ? (
@@ -250,8 +254,8 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
 
 const SlideItem = ({ slide }: { slide: Slide }) => {
   return (
-    <div className="h-[70vh] lg:grid grid-cols-2 bg-[ABE108]">
-      <div className="hidden lg:flex flex-col items-start justify-center gap-4  h-[70vh] px-10 pr-20 bg-[ABE108] overflow-hidden ">
+    <div className="h-auto md:h-[70vh] grid grid-cols-1 md:grid-cols-2 bg-[ABE108]">
+      <div className="flex flex-col items-start md:justify-center gap-4 h-auto py-10 pb-16 md:py-0  md:h-[70vh] px-10 pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
         <motion.div
           initial={{ opacity: 0, x: -400 }}
           whileInView={{ opacity: 1, x: 0 }}
@@ -261,7 +265,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
             // initial={{ opacity: 0, x: -100 }}
             // whileInView={{ opacity: 1, x: 0 }}
             // transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-[22px] md:text-[46px] font-bold"
+            className="text-[22px] md:text-[28px] lg:text-[32px] xl:text-[36px] 2xl:text-[46px] font-bold text-center md:text-start leading-[1.2] md:leading-[1.4] lg:leading-[1.5] 2xl:leading-[1.6] "
           >
             {slide.title}
           </motion.h1>
@@ -270,7 +274,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
             initial={{ opacity: 0, x: 400 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: 0.7 }}
-            className="mt-8"
+            className="mt-5 md:mt-10 text-center md:text-start leading-6 md:leading-7 lg:leading-8 2xl:leading-10 text-[14px] md:text-[16px] "
           >
             {slide.description}
           </motion.p>
@@ -280,13 +284,13 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3, delay: 1 }}
-            className="mt-12"
+            className="pt-8 md:mt-12 flex justify-center md:justify-start"
           >
-            <Link href="/shop">
+            <Link href="/">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce"
+                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce "
               >
                 Shop Now
               </motion.button>
@@ -300,7 +304,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
         alt="banner"
         width={1920}
         height={500}
-        className=" h-full w-full object-contain bg-gray-100 "
+        className="h-auto sm:h-[50vh] md:h-full w-full object-contain bg-gray-100 order-1 md:order-2"
       />
     </div>
   );
