@@ -286,7 +286,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-black text-white py-4 px-12 uppercase font-bold"
+                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce"
               >
                 Shop Now
               </motion.button>
