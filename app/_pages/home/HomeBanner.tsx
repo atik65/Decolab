@@ -228,7 +228,7 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
               <span className="text-black font-medium text-[10px]">
                 {(index + 1).toString().padStart(2, "0")}
               </span>
-              <div className="w-2 sm:w-4 h-[2px] bg-black group-hover:w-12 duration-200"></div>
+              <div className="w-2 sm:w-6 h-[2px] bg-black group-hover:w-12 duration-200"></div>
             </div>
           )}
         </div>
@@ -290,7 +290,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce "
+                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce delay-900"
               >
                 Shop Now
               </motion.button>
