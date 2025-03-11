@@ -1,4 +1,3 @@
-import Image from "next/image";
 import HomeBanner from "./_pages/home/HomeBanner";
 import HomeCategories from "./_pages/home/HomeCategories";
 
