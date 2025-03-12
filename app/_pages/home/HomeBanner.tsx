@@ -207,7 +207,7 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
   });
 
   return (
-    <div className="absolute bottom-6 md:bottom-0 left-1/2 md:left-10 transform -translate-x-1/2 md:translate-x-0 z-20 flex space-x-2 sm:space-x-5 justify-center  h-4 sm:h-7 items-center  select-none">
+    <div className="absolute bottom-5 md:bottom-5 left-1/2 md:left-10 transform -translate-x-1/2 md:translate-x-0 z-20 flex space-x-2 sm:space-x-5 justify-center  h-4 sm:h-7 items-center  select-none">
       {slides.map((_, index) => (
         <div key={index}>
           {activeIndex === index ? (
@@ -254,7 +254,7 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
 
 const SlideItem = ({ slide }: { slide: Slide }) => {
   return (
-    <div className="h-auto md:h-[70vh] grid grid-cols-1 md:grid-cols-2 bg-[ABE108]">
+    <div className="h-auto md:h-[75vh] grid grid-cols-1 md:grid-cols-2 md:bg-[#f9f9f9]">
       <div className="flex flex-col items-start md:justify-center gap-4 h-auto py-10 pb-16 md:py-0  md:h-[70vh] px-10 pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
         <motion.div
           initial={{ opacity: 0, x: -400 }}
