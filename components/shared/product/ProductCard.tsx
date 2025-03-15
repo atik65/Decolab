@@ -14,6 +14,13 @@ const ProductCard = ({
   subtitle,
   price,
 }: ProductCardProps) => {
+  console.table({
+    imageUrl,
+    title,
+    subtitle,
+    price,
+  });
+
   return (
     <div className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer">
       <div className="overflow-hidden">
