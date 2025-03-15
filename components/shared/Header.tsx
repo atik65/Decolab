@@ -10,12 +10,10 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "HOME" },
-  { href: "/shop", label: "SHOP" },
-  { href: "/blog", label: "BLOG" },
-  { href: "/pages", label: "PAGES" },
-  { href: "/elements", label: "ELEMENTS" },
-  { href: "/buy", label: "BUY" },
+  { href: "/", label: "House Numbers" },
+  { href: "/", label: "Diwaniya" },
+  { href: "/", label: "Islamic Phrases" },
+  { href: "/", label: "Advertisement Signage" },
 ];
 
 const Header: React.FC = () => {
@@ -28,7 +26,7 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="w-full bg-white border-b border-gray-200 relative z-40">
+    <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Mobile Menu Button */}
@@ -42,14 +40,14 @@ const Header: React.FC = () => {
 
           {/* Logo */}
           <Link href="/" className="text-2xl font-bold tracking-tight">
-            woodmart.
+            One Direction
           </Link>
 
           {/* Navigation */}
           <nav className="hidden md:flex space-x-8">
             {navLinks.map((link) => (
               <Link
-                key={link.href}
+                key={link.label}
                 href={link.href}
                 className="text-sm font-medium text-gray-700 hover:text-black transition-colors"
               >
@@ -60,12 +58,12 @@ const Header: React.FC = () => {
 
           {/* User Actions */}
           <div className="flex items-center space-x-6">
-            <Link
+            {/* <Link
               href="/login"
               className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"
             >
               LOGIN / REGISTER
-            </Link>
+            </Link> */}
             <button
               className="text-gray-700 hover:text-black transition-colors relative"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
@@ -136,7 +134,7 @@ const Header: React.FC = () => {
             <nav className="flex flex-col p-4">
               {navLinks.map((link) => (
                 <Link
-                  key={link.href}
+                  key={link.label}
                   href={link.href}
                   className="py-2 text-gray-700 hover:text-black transition-colors"
                   onClick={() => setIsMobileMenuOpen(false)}
@@ -144,13 +142,13 @@ const Header: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
-              <Link
+              {/* <Link
                 href="/login"
                 className="py-2 text-gray-700 hover:text-black transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 LOGIN / REGISTER
-              </Link>
+              </Link> */}
             </nav>
           </div>
         </div>
