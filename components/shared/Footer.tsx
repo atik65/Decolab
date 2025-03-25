@@ -3,16 +3,16 @@ import React from "react";
 
 const Footer = () => {
   return (
-    <footer className="bg-white text-gray-500 pb-2">
-      <div className="container mx-auto flex justify-between items-center">
+    <footer className="bg-white text-gray-500 pb-3">
+      <div className="container mx-auto flex flex-col md:flex-row justify-between items-center px-4">
         {/* Left Section: Copyright Text */}
-        <p className="text-sm font-light">
+        <p className="text-sm font-light text-center sm:text-start">
           One Direction © 2025 CREATED BY{" "}
           <span className="font-bold">ATIK</span> PREMIUM E-COMMERCE SOLUTIONS.
         </p>
 
         {/* Right Section: Payment Method Logos */}
-        <div className="f">
+        <div className="">
           {/* Visa */}
           <Image
             src="/images/icons/payment.png"
