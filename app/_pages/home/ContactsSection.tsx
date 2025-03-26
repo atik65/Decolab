@@ -56,7 +56,7 @@ const ContactSection = () => {
             {/* facebook */}
             <a
               href="#"
-              className="text-gray-500 hover:text-green-500 transition duration-300"
+              className="text-gray-500 hover:text-[#99b998] transition duration-300"
             >
               <Facebook className="h-6 w-6" />
             </a>
@@ -64,7 +64,7 @@ const ContactSection = () => {
             {/* x */}
             <a
               href="#"
-              className="text-gray-500 hover:text-green-500 transition duration-300"
+              className="text-gray-500 hover:text-[#99b998] transition duration-300"
             >
               <TwitterIcon className="h-6 w-6" />
             </a>
@@ -72,7 +72,7 @@ const ContactSection = () => {
             {/* instagram */}
             <a
               href="#"
-              className="text-gray-500 hover:text-green-500 transition duration-300"
+              className="text-gray-500 hover:text-[#99b998] transition duration-300"
             >
               <InstagramIcon className="h-6 w-6" />
             </a>
@@ -80,7 +80,7 @@ const ContactSection = () => {
             {/* youtube */}
             <a
               href="#"
-              className="text-gray-500 hover:text-green-500 transition duration-300"
+              className="text-gray-500 hover:text-[#99b998] transition duration-300"
             >
               <YoutubeIcon className="h-6 w-6" />
             </a>
@@ -88,7 +88,7 @@ const ContactSection = () => {
             {/* linkedin */}
             <a
               href="#"
-              className="text-gray-500 hover:text-green-500 transition duration-300"
+              className="text-gray-500 hover:text-[#99b998] transition duration-300"
             >
               <LucideLinkedin className="h-6 w-6" />
             </a>

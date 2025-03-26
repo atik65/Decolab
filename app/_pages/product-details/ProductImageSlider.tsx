@@ -13,6 +13,7 @@ import { Swiper as SwiperType } from "swiper/types";
 import { ImageOff } from "lucide-react";
 import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 import { Product } from "@/types/product";
+import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 // import ReactImageMagnify from "react-image-magnify";
 
 // import {
@@ -50,7 +51,7 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
     <section className="">
       <div className="relative">
         {" "}
-        <div className="lg:absolute left-0 right-0 -top-[100px] 2xl:-top-[100px]  ">
+        <div className=" ">
           <div className="">
             {/* Main Image Slider */}
             <Swiper
@@ -74,7 +75,7 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
             </Swiper>
           </div>
 
-          <div className="w-full sm:w-[85%] mx-auto ">
+          <div className="w-full sm:w-[90%] mx-auto ">
             {/* Thumbs Slider */}
             <Swiper
               onSwiper={setThumbsSwiper}
@@ -96,8 +97,8 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
             </Swiper>
           </div>
 
-          <div className="custom-swiper-button-prev-prod absolute -left-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
-            <Image
+          <div className="custom-swiper-button-prev-prod absolute -left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
+            {/* <Image
               height={200}
               width={200}
               src="/images/home/left-arrow.svg"
@@ -111,11 +112,12 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
               src="/images/home/PREV.svg"
               alt="Previous"
               className="w-9 h-9 sm:w-11 sm:h-11  rounded-full p-2 block md:hidden"
-            />
+            /> */}
+            <TfiAngleLeft size={20} />
           </div>
 
-          <div className="custom-swiper-button-next-prod absolute -right-2 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
-            <Image
+          <div className="custom-swiper-button-next-prod absolute -right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer">
+            {/* <Image
               src="/images/home/right-arrow.svg"
               alt="Next"
               height={200}
@@ -128,7 +130,9 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
               src="/images/home/NEXT.svg"
               alt="Previous"
               className="w-9 h-9 sm:w-11 sm:h-11  rounded-full p-2 block md:hidden"
-            />
+            /> */}
+
+            <TfiAngleRight size={20} />
           </div>
         </div>
       </div>
@@ -148,15 +152,15 @@ const ThumbsComponent = ({
   activeIndex: number;
 }) => {
   return (
-    <div className="cursor-pointer">
+    <div className="cursor-pointer select-none">
       <Image
         height={500}
         width={500}
         alt="product image"
         // src={"/images/home/bed.png"}
         src={imgURI}
-        className={`rounded-[15px] border-[5px] h-16 w-20 sm:h-[70px] md:w-40 object-cover ${
-          index === activeIndex ? "border-[#CFB284]" : "border-transparent "
+        className={` border-[5px] h-16 w-20 md:h-auto xl:h-[100px] md:w-40 object-cover ${
+          index === activeIndex ? "border-[#99b998]" : "border-transparent "
         }`}
       />
     </div>

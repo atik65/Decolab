@@ -3,8 +3,8 @@ import ProductImageSlider from "./ProductImageSlider";
 
 const products = {
   images: [
-    "/images/home/banner1.jpg",
-    "/images/home/banner2.jpg",
+    // "/images/home/banner1.jpg",
+    // "/images/home/banner2.jpg",
     "/images/home/banner3.jpg",
     "/images/home/banner4.jpg",
     "/images/home/banner5.jpg",

@@ -20,27 +20,27 @@ const ImageZoomViewModal = ({ imgURI }: ImageZoomViewModalProps) => {
   return (
     <div className="w-full">
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger className="w-full">
+        <DialogTrigger className="w-full cursor-pointer border-none outline-none">
           <Image
             src={imgURI}
             alt="Product Image"
             height={500}
             width={500}
-            className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
+            className=" w-[100%] lg:w-[100%] object-contain   rounded-[15px]  mx-auto  lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
           />
         </DialogTrigger>
         <DialogContent
           style={{
-            backgroundImage: "linear-gradient(to right, #fffff1 , #f3ece0 )",
+            backgroundImage: "linear-gradient(to right, #d1e7d1, #fffff1  )",
           }}
-          className="p-0 w-[90%] rounded-[10px] border border-[#CFB284] md:w-[90%] overflow-auto "
+          className="p-0 w-[90%] rounded-[10px] border border-[#99b998] md:w-[50%] overflow-auto "
         >
           <DialogHeader className="p-5">
             <DialogTitle className="flex justify-end">
               {/* close button */}
               <button
                 onClick={() => setOpen(false)}
-                className="text-black h-6 w-6 flex justify-center items-center border-2 border-[#CFB284] rounded-md"
+                className="text-black h-6 w-6 flex justify-center items-center border-2 border-[ #99b998 ,] rounded-md"
               >
                 <X size={16} />
               </button>
@@ -53,7 +53,7 @@ const ImageZoomViewModal = ({ imgURI }: ImageZoomViewModalProps) => {
                 height={500}
                 width={500}
                 // className="w-full lg:w-[90%] object-contain   rounded-[15px]  mx-auto h-[360px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px] overflow-hidden "
-                className="w-[130%] sm:w-[100%]  object-contain   rounded-[15px]  mx-auto  "
+                className="w-[130%] sm:w-[100%] sm:max-h-[70vh] object-contain   rounded-[15px]  mx-auto  "
               />
             </div>
           </DialogHeader>
