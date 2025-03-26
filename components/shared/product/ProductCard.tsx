@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 interface ProductCardProps {
@@ -22,7 +23,10 @@ const ProductCard = ({
   });
 
   return (
-    <div className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer">
+    <Link
+      href={`/products/${"box-on-the-wall"}`}
+      className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer"
+    >
       <div className="overflow-hidden">
         <Image
           height={500}
@@ -51,7 +55,7 @@ const ProductCard = ({
           <div className="w-16 h-[2px] bg-[#99b998]"></div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 
