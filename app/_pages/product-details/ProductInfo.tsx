@@ -1,5 +1,6 @@
 import React from "react";
 import ProductImageSlider from "./ProductImageSlider";
+import ProductIntroCart from "./ProductIntro-cart";
 
 const products = {
   images: [
@@ -16,12 +17,14 @@ const products = {
 
 const ProductInfo = () => {
   return (
-    <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 px-4">
+    <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 px-4 gap-x-10 gap-y-5 pt-10">
       <div>
         <ProductImageSlider product={products} />
       </div>
 
-      <div>Product information and add to cart</div>
+      <div>
+        <ProductIntroCart />
+      </div>
     </div>
   );
 };

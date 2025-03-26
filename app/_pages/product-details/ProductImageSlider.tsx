@@ -169,7 +169,7 @@ const ThumbsComponent = ({
 
 const SlideComponent = ({ imgURI }: { imgURI: string }) => {
   return (
-    <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 ">
+    <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0 ">
       {/* <Image
         // src={"/images/home/bed.png"}
         src={imgURI}
