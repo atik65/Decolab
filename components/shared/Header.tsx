@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { Search, Heart, ShoppingCart, Menu, X } from "lucide-react";
+import SearchBar from "./SearchBar";
 
 interface NavLink {
   href: string;
@@ -57,20 +58,23 @@ const Header: React.FC = () => {
           </nav>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-6 ">
             {/* <Link
               href="/login"
               className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"
             >
               LOGIN / REGISTER
             </Link> */}
-            <button
+            {/* <button
               className="text-gray-700 hover:text-black transition-colors relative"
               onClick={() => setIsSearchOpen(!isSearchOpen)}
               aria-label="Toggle search"
             >
               <Search size={20} />
-            </button>
+            </button> */}
+
+            <SearchBar />
+
             <Link
               href="/wishlist"
               className="text-gray-700 hover:text-black transition-colors"
