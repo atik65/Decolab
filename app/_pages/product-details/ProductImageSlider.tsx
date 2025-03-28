@@ -48,7 +48,7 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
   }
 
   return (
-    <section className="">
+    <section className="sticky top-20">
       <div className="relative">
         {" "}
         <div className=" ">
@@ -159,7 +159,7 @@ const ThumbsComponent = ({
         alt="product image"
         // src={"/images/home/bed.png"}
         src={imgURI}
-        className={` border-[5px] h-16 w-20 md:h-auto xl:h-[100px] md:w-40 object-cover ${
+        className={` border-[5px] h-16 w-20 md:h-auto xl:h-[80px] md:w-40 object-cover ${
           index === activeIndex ? "border-[#99b998]" : "border-transparent "
         }`}
       />

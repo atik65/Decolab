@@ -15,6 +15,8 @@ import {
   FaPinterestP,
 } from "react-icons/fa"; // Importing icons from react-icons
 import { FiBarChart2, FiHeart } from "react-icons/fi";
+import { ColorOptions, LightColorOptions } from "./ColorSelection";
+import DesignSelection from "./DesignSelection";
 
 const ProductIntroCart = ({
   productName = "Box On The Wall",
@@ -84,6 +86,9 @@ const ProductIntroCart = ({
       {/* Product Description */}
       <p className="mt-4 text-base text-gray-600">{description}</p>
 
+      {/* Product options */}
+      <ProductOptions />
+
       {/* Quantity Selector and Add to Cart */}
       <div className="mt-6 flex items-center space-x-3">
         {/* Quantity Selector */}
@@ -151,3 +156,70 @@ const ProductIntroCart = ({
 };
 
 export default ProductIntroCart;
+
+const ProductOptions = () => {
+  return (
+    <div className=" space-y-4 mt-8">
+      {/* Size Dropdown */}
+      <div>
+        <label
+          htmlFor="size"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Size <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="size"
+          name="size"
+          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
+        >
+          <option value="">-- Please select --</option>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+        </select>
+      </div>
+
+      {/* Color Options */}
+      <ColorOptions />
+
+      {/*Light Color Options */}
+      <LightColorOptions />
+
+      {/* House Number Input */}
+      <div>
+        <label
+          htmlFor="house-number"
+          className="block text-sm font-medium text-gray-700"
+        >
+          House Number
+        </label>
+        <input
+          type="text"
+          id="house-number"
+          name="house-number"
+          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
+        />
+      </div>
+
+      {/* Text Area */}
+      <div>
+        <label
+          htmlFor="text"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Text
+        </label>
+        <textarea
+          id="text"
+          name="text"
+          rows={4}
+          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
+        ></textarea>
+      </div>
+
+      {/* design selection */}
+      <DesignSelection />
+    </div>
+  );
+};
