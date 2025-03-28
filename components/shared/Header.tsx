@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Search, Heart, ShoppingCart, Menu, X } from "lucide-react";
+import {  ShoppingCart, Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 
 interface NavLink {
@@ -75,13 +75,13 @@ const Header: React.FC = () => {
 
             <SearchBar />
 
-            <Link
+            {/* <Link
               href="/wishlist"
               className="text-gray-700 hover:text-black transition-colors"
               aria-label="Wishlist"
             >
               <Heart size={20} />
-            </Link>
+            </Link> */}
             <Link
               href="/cart"
               className="flex items-center text-gray-700 hover:text-black transition-colors"
