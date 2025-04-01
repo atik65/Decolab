@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const Footer = () => {
@@ -8,7 +9,15 @@ const Footer = () => {
         {/* Left Section: Copyright Text */}
         <p className="text-sm font-light text-center sm:text-start">
           One Direction © 2025 CREATED BY{" "}
-          <span className="font-bold">ATIK</span> PREMIUM E-COMMERCE SOLUTIONS.
+          <Link
+            href={"https://www.linkedin.com/in/atik65/"}
+            target="_blank"
+            className="font-bold"
+          >
+            {" "}
+            ATIK
+          </Link>{" "}
+          PREMIUM E-COMMERCE SOLUTIONS.
         </p>
 
         {/* Right Section: Payment Method Logos */}
