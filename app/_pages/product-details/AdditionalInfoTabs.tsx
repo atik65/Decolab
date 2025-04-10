@@ -1,7 +1,6 @@
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import React from "react";
-import { ChevronRight, ListIcon } from "lucide-react"; // Import Lucide icon
-import Image from "next/image"; // For handling
+import { ChevronRight } from "lucide-react"; // Import Lucide icon
 import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 
 const tabs = [
