@@ -118,7 +118,7 @@
 
 ::-webkit-scrollbar {
   width: 6px;
-  height: 6px;
+  height: 4px;
 }
 
 /* .review-scroll::-webkit-scrollbar-track {
@@ -129,6 +129,6 @@
 ::-webkit-scrollbar-thumb {
   background-color: #99b998;
   border-radius: 10px;
-  cursor: crosshair;
+  cursor: grabbing;
   height: 50px;
 }

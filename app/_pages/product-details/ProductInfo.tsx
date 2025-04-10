@@ -25,6 +25,8 @@ const ProductInfo = () => {
       <div>
         <ProductIntroCart />
       </div>
+
+
     </div>
   );
 };
