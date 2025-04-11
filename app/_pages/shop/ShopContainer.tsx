@@ -16,35 +16,35 @@ import {
 
 const ShopContainer = () => {
   // Mock data for products
-  const products = [
-    {
-      id: 1,
-      image: "/images/watch.jpg",
-      title: "Smart watches wood edition",
-      categories: ["Accessories", "Clocks"],
-      price: "$359.00",
-      isHot: false,
-      rating: 0,
-    },
-    {
-      id: 2,
-      image: "/images/penguin.jpg",
-      title: "Penatibus parturient orci morbi",
-      categories: ["Toys"],
-      price: "$444.00",
-      isHot: false,
-      rating: 0,
-    },
-    {
-      id: 3,
-      image: "/images/bowtie.jpg",
-      title: "Wooden bow tie man",
-      categories: ["Accessories"],
-      price: "$359.00",
-      isHot: true,
-      rating: 5,
-    },
-  ];
+  // const products = [
+  //   {
+  //     id: 1,
+  //     image: "/images/watch.jpg",
+  //     title: "Smart watches wood edition",
+  //     categories: ["Accessories", "Clocks"],
+  //     price: "$359.00",
+  //     isHot: false,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 2,
+  //     image: "/images/penguin.jpg",
+  //     title: "Penatibus parturient orci morbi",
+  //     categories: ["Toys"],
+  //     price: "$444.00",
+  //     isHot: false,
+  //     rating: 0,
+  //   },
+  //   {
+  //     id: 3,
+  //     image: "/images/bowtie.jpg",
+  //     title: "Wooden bow tie man",
+  //     categories: ["Accessories"],
+  //     price: "$359.00",
+  //     isHot: true,
+  //     rating: 5,
+  //   },
+  // ];
 
   return (
     <div className="container mx-auto px-4">
