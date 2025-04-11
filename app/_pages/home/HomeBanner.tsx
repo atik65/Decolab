@@ -286,7 +286,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
             transition={{ duration: 0.3, delay: 1 }}
             className="pt-8 md:mt-12 flex justify-center md:justify-start"
           >
-            <Link href="/">
+            <Link href="/shop">
               <motion.button
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}

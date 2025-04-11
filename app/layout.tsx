@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/components/shared/Header";
 import Footer from "@/components/shared/Footer";
 import ContactSection from "./_pages/home/ContactsSection";
+import CustomRootProvider from "@/providers/CustomRootProvider";
 
 // const geistSans = Geist({
 //   variable: "--font-geist-sans",
@@ -36,11 +37,12 @@ export default function RootLayout({
       <body
         className={`${josefinSans.className} ${josefinSans.className} antialiased`}
       >
-        <Header />
-        {children}
+        {/* <Header /> */}
 
-        <ContactSection />
-        <Footer />
+        <CustomRootProvider>{children}</CustomRootProvider>
+
+        {/* <ContactSection />
+        <Footer /> */}
       </body>
     </html>
   );
