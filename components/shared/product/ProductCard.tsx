@@ -50,7 +50,12 @@ const ProductCard = ({
         </div>
 
         {/* add to cart */}
-        <div className="flex flex-col items-start opacity-0 translate-y-0 group-hover:-translate-y-6 group-hover:opacity-100 duration-300">
+        <div
+          style={{
+            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+          className="flex flex-col items-start opacity-0 translate-y-0 group-hover:-translate-y-6 group-hover:opacity-100 duration-300"
+        >
           <h2 className="text-[12px] font-bold">Add To Cart</h2>
           <div className="w-16 h-[2px] bg-[#99b998]"></div>
         </div>
