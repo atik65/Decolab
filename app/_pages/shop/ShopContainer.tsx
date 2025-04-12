@@ -108,7 +108,7 @@ const ShopContainer = () => {
         </ul>
       </nav>
 
-      <div className="grid grid-cols-1 md:grid-cols-2">
+      <div className="grid grid-cols-1 md:grid-cols-2 items-center">
         {/* Breadcrumb */}
         <nav className="mb-6">
           <ol className="flex items-center space-x-2 text-gray-500">

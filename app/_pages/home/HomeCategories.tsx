@@ -63,18 +63,24 @@ function CategoryCard({ data }: { data?: Category }) {
             {data?.title}
           </h1>
         </div>
-
-        <p className="group-hover:text-black translate-y-5 opacity-0 group-hover:opacity-100 group-hover:-translate-y-2  border-b-2 border-[#99b998] duration-[0.4s] text-[12px]  font-bold text-gray-500">
+        {/* 
+        <p className="group-hover:text-black -translate-y-5 opacity-0 group-hover:opacity-100 group-hover:-translate-y-5  border-b-2 border-[#99b998] duration-400 text-[12px]  font-bold text-gray-500"> */}
+        <p
+          style={{
+            transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
+          }}
+          className="group-hover:text-black opacity-0 translate-y-4 group-hover:-translate-y-5 group-hover:opacity-100  border-b-2 border-[#99b998] font-bold text-gray-500 text-[10px] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
+        >
           READ MORE
         </p>
       </div>
-      <div className="col-span-3 xl:col-span-4">
+      <div className="col-span-3 xl:col-span-4 cursor-pointer">
         <Image
           src={data?.image || ""}
           alt=""
           width={500}
           height={500}
-          className="w-full object-contain group-hover:scale-110 duration-300"
+          className="w-full object-contain group-hover:scale-110 group-hover:translate-x-3  duration-500"
         />
       </div>
     </div>
