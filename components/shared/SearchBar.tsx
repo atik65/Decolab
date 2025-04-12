@@ -26,8 +26,8 @@ const SearchBar = () => {
       </DrawerTrigger>
       {/* <DrawerOverlay /> */}
       <DrawerContent
-        overlayClassName="bg-transparent"
-        className="!h-[calc(100vh-70px)] rounded-none border-none outline-none"
+        overlayClassName="bg-white md:bg-transparent"
+        className="!h-[calc(60vh-70px)] md:!h-[calc(100vh-70px)] rounded-none border-none outline-none "
       >
         <DrawerHeader className="px-0 ">
           <DrawerTitle>
@@ -56,13 +56,14 @@ interface Props {
 
 const SearchInput = ({ open, onOpenChange }: Props) => {
   return (
-    <div>
+    <div className="">
       <div className="border-b flex">
         <input
           type="text"
           placeholder="Search for products"
           // value={searchTerm}
           // onChange={handleInputChange}
+          autoFocus
           className="w-full min-h-16 lg:min-h-28 flex items-center  placeholder:text-black placeholder:text-center placeholder:font-bold placeholder:text-xl sm:placeholder:text-2xl md:placeholder:text-3xl xl:placeholder:text-5xl placeholder:pt-5  text-center outline-none text-black text-xl sm:text-2xl md:text-3xl xl:text-5xl font-bold py-10"
         />
 

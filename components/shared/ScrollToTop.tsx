@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useState, useEffect } from "react";
+import { MdArrowUpward } from "react-icons/md";
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
@@ -27,18 +28,19 @@ export default function ScrollToTopButton() {
 
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`z-50 fixed bottom-[50px] right-[50px] h-[40px] w-[40px] bg-[#FFFCC7] border-2 border-[#CFB284] rounded-full  transform grid place-items-center shadow-lg  ${
+      className={`z-50 fixed bottom-[50px] right-[50px] h-[40px] w-[40px] bg-[#c7e6c6b7] border-2 border-[#99b998] rounded-full  transform grid place-items-center shadow-lg  ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-80"
       } duration-200 ease-in-out`}
     >
-      <Image
+      {/* <Image
         src={"/images/icons/up-arrow.svg"}
         alt="Scroll to Top"
         width={100}
         height={100}
         className="object-contain w-[23px] h-[23px]"
         quality={100}
-      />
+      /> */}
+      <MdArrowUpward fill="#99b998" className="h-6 w-6" />
     </button>
   );
 }
