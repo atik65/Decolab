@@ -3,10 +3,10 @@ import React from "react";
 
 interface FiltersProps {
   show: boolean;
-  setShow: (show: boolean) => void;
+  setShow?: (show: boolean) => void;
 }
 
-const Filters = ({ show, setShow }: FiltersProps) => {
+const Filters = ({ show }: FiltersProps) => {
   return (
     <div className="bg-white  w-full ">
       {/* line */}

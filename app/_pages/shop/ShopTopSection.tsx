@@ -1,24 +1,10 @@
 "use client";
 import React from "react";
-import {
-  MdMusicNote,
-  MdCheckroom,
-  MdLocalOffer,
-  MdPhotoCamera,
-  MdCollections,
-  MdFavorite,
-  MdViewList,
-  MdGridView,
-  MdViewModule,
-  MdApps,
-  MdFilterList,
-} from "react-icons/md";
-import { BsSortUp } from "react-icons/bs";
-import { CiSliderHorizontal, CiSliderVertical } from "react-icons/ci";
+import { MdGridView, MdViewModule, MdApps } from "react-icons/md";
 import { LiaSlidersHSolid } from "react-icons/lia";
 import Filters from "./Filters";
 
-const ShopTopSection = () => {
+const ShopTopSection = () => {  
   const [showFilters, setShowFilters] = React.useState(false);
 
   return (
