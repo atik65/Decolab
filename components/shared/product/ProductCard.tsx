@@ -1,6 +1,12 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useRef, useState } from "react";
+import { gsap } from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 interface ProductCardProps {
   imageUrl?: string;
@@ -22,17 +28,70 @@ const ProductCard = ({
     price,
   });
 
+  const [hoveredImage] = useState("/images/home/banner8.jpg");
+  const [mainImage] = useState("/images/home/banner9.jpg");
+  const [currentImage, setCurrentImage] = useState(mainImage);
+
+  const container = useRef<HTMLAnchorElement>(null);
+  const imageRef = useRef<HTMLImageElement>(null);
+
+  useGSAP(
+    () => {
+
+      // image change on hover start
+      imageRef.current?.addEventListener("mouseenter", () => {
+        gsap.to(imageRef.current, {
+          opacity: 0.8,
+          scale: 1.1,
+          duration: 0.2,
+
+          onComplete: () => {
+            setCurrentImage(hoveredImage);
+            gsap.to(imageRef.current, {
+              opacity: 1,
+              scale: 1.1,
+              duration: 0.5,
+            });
+          },
+        });
+      });
+
+      // image change on hover end
+      imageRef.current?.addEventListener("mouseleave", () => {
+        gsap.to(imageRef.current, {
+          opacity: 0.8,
+          scale: 1,
+          duration: 0.2,
+          onComplete: () => {
+            setCurrentImage(mainImage);
+            gsap.to(imageRef.current, {
+              opacity: 1,
+              scale: 1,
+              duration: 0.3,
+            });
+          },
+        });
+      });
+    },
+    {
+      scope: container,
+    }
+  );
+
   return (
     <Link
+      ref={container}
       href={`/products/${"box-on-the-wall"}`}
       className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer"
     >
       <div className="overflow-hidden">
         <Image
+          ref={imageRef}
           height={500}
           width={500}
-          className="w-full mx-auto object-contain mt-0 pt-0 group-hover:scale-105 duration-300"
-          src="/images/home/banner9.jpg"
+          // className="w-full mx-auto object-contain mt-0 pt-0 group-hover:scale-105 duration-300 "
+          className="w-full mx-auto object-contain mt-0 pt-0 "
+          src={currentImage}
           alt={"Product"}
         />
       </div>
