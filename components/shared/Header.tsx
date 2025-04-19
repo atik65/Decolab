@@ -41,7 +41,7 @@ const Header: React.FC = () => {
       logoRef.current,
       {
         opacity: 0,
-        x: -100,
+        x: -200,
         duration: 0.5,
         ease: "power3.out",
       },
@@ -61,7 +61,7 @@ const Header: React.FC = () => {
       actionRef.current,
       {
         opacity: 0,
-        x: 100,
+        x: 200,
         duration: 0.5,
         ease: "power3.out",
       },
@@ -93,7 +93,7 @@ const Header: React.FC = () => {
 
           {/* Navigation */}
           <nav ref={linksRef} className="hidden md:flex space-x-8">
-            {navLinks.map((link, index) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
