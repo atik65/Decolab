@@ -1,9 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { ShoppingCart, Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+
+gsap.registerPlugin(useGSAP);
 
 interface NavLink {
   href: string;
@@ -26,6 +30,45 @@ const Header: React.FC = () => {
     // Add search functionality here
   };
 
+  const logoRef = useRef<HTMLAnchorElement>(null);
+  const linksRef = useRef<HTMLDivElement>(null);
+  const actionRef = useRef<HTMLDivElement>(null);
+
+  useGSAP(() => {
+    const tl = gsap.timeline();
+
+    tl.from(
+      logoRef.current,
+      {
+        opacity: 0,
+        x: -100,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "same"
+    );
+
+    tl.from(".nav-link", {
+      opacity: 0,
+      y: -100,
+      duration: 0.5,
+      ease: "power3.out",
+      stagger: 0.1,
+      scope: linksRef.current,
+    });
+
+    tl.from(
+      actionRef.current,
+      {
+        opacity: 0,
+        x: 100,
+        duration: 0.5,
+        ease: "power3.out",
+      },
+      "same"
+    );
+  });
+
   return (
     <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">
       <div className="container mx-auto px-4">
@@ -40,17 +83,21 @@ const Header: React.FC = () => {
           </button>
 
           {/* Logo */}
-          <Link href="/" className="text-2xl font-bold tracking-tight">
+          <Link
+            ref={logoRef}
+            href="/"
+            className="text-2xl font-bold tracking-tight "
+          >
             One Direction
           </Link>
 
           {/* Navigation */}
-          <nav className="hidden md:flex space-x-8">
-            {navLinks.map((link) => (
+          <nav ref={linksRef} className="hidden md:flex space-x-8">
+            {navLinks.map((link, index) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="text-sm font-medium text-gray-700 hover:text-black transition-colors"
+                className="nav-link text-sm font-medium text-gray-700 hover:text-black transition-colors"
               >
                 {link.label}
               </Link>
@@ -58,7 +105,7 @@ const Header: React.FC = () => {
           </nav>
 
           {/* User Actions */}
-          <div className="flex items-center space-x-6 ">
+          <div ref={actionRef} className="flex items-center space-x-6 ">
             {/* <Link
               href="/login"
               className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"
