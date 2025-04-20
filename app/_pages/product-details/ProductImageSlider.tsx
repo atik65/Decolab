@@ -169,7 +169,7 @@ const ThumbsComponent = ({
 
 const SlideComponent = ({ imgURI }: { imgURI: string }) => {
   return (
-    <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0 ">
+    <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0  ">
       {/* <Image
         // src={"/images/home/bed.png"}
         src={imgURI}
@@ -178,7 +178,7 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
         width={500}
         className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
       /> */}
-      <ImageZoomViewModal imgURI={imgURI} />
+      <ImageZoomViewModal imgURI={imgURI} className="mx-auto" />
     </div>
   );
 };
