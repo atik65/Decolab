@@ -53,7 +53,7 @@ const DesignSelection = () => {
               htmlFor="size"
               className="block text-sm font-medium text-gray-700"
             >
-              Design <span className="text-red-500">*</span>
+              Select Design <span className="text-red-500">*</span>
             </label>
           </AccordionTrigger>
           <AccordionContent>

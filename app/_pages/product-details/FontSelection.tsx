@@ -1,0 +1,112 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import Image from "next/image";
+import { useState } from "react";
+
+const fonts = [
+  {
+    id: 1,
+    image: "/images/products/fonts/f1.avif",
+    name: "Font 1",
+  },
+  {
+    id: 2,
+    image: "/images/products/fonts/f2.avif",
+    name: "Font 2",
+  },
+  {
+    id: 3,
+    image: "/images/products/fonts/f3.avif",
+    name: "Font 3",
+  },
+  {
+    id: 4,
+    image: "/images/products/fonts/f4.avif",
+    name: "Font 4",
+  },
+  {
+    id: 5,
+    image: "/images/products/fonts/f5.avif",
+    name: "Font 5",
+  },
+  {
+    id: 6,
+    image: "/images/products/fonts/f6.avif",
+    name: "Font 6",
+  },
+  {
+    id: 7,
+    image: "/images/products/fonts/f7.avif",
+    name: "Font 7",
+  },
+  {
+    id: 8,
+    image: "/images/products/fonts/f8.avif",
+    name: "Font 8",
+  },
+  {
+    id: 9,
+    image: "/images/products/fonts/f9.avif",
+    name: "Font 9",
+  },
+];
+const FontSelection = () => {
+  const [selectedFont, setSelectedFont] = useState<number | null>(null);
+
+  const handleFontSelect = (fontId: number) => {
+    setSelectedFont(fontId);
+  };
+
+  return (
+    <div>
+      {/* accordion */}
+      <Accordion type="single" collapsible defaultValue="font">
+        <AccordionItem value="font">
+          <AccordionTrigger className="">
+            {" "}
+            <label
+              htmlFor="size"
+              className="block text-sm font-medium text-gray-700"
+            >
+              Select Font <span className="text-red-500">*</span>
+            </label>
+          </AccordionTrigger>
+          <AccordionContent>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 p-1">
+              {fonts?.map((font) => {
+                const isSelected = selectedFont === font.id;
+                return (
+                  <div
+                    key={font.id}
+                    onClick={() => handleFontSelect(font.id)}
+                    className={`relative cursor-pointer transition-all duration-200 ${
+                      isSelected
+                        ? "ring-2 ring-[#87A786] ring-offset-2 scale-100"
+                        : "hover:scale-105"
+                    }`}
+                  >
+                    <Image
+                      height={300}
+                      width={300}
+                      alt={font.name}
+                      src={font?.image}
+                    />
+                    {isSelected && (
+                      <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </AccordionContent>
+        </AccordionItem>
+      </Accordion>
+    </div>
+  );
+};
+
+export default FontSelection;

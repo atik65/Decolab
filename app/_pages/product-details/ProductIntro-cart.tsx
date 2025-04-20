@@ -18,6 +18,7 @@ import { FiBarChart2, FiHeart } from "react-icons/fi";
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim } from "lucide-react";
+import FontSelection from "./FontSelection";
 
 const ProductIntroCart = ({
   productName = "Box On The Wall",
@@ -222,6 +223,9 @@ const ProductOptions = () => {
 
       {/* design selection */}
       <DesignSelection />
+
+      {/* Font selection */}
+      <FontSelection />
     </div>
   );
 };

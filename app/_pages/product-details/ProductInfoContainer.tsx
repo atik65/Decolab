@@ -15,7 +15,7 @@ const products = {
   ],
 };
 
-const ProductInfo = () => {
+const ProductInfoContainer = () => {
   return (
     <div className="container mx-auto grid grid-cols-1 lg:grid-cols-2 px-4 gap-x-10 gap-y-5 pt-10">
       <div>
@@ -25,10 +25,8 @@ const ProductInfo = () => {
       <div>
         <ProductIntroCart />
       </div>
-
-
     </div>
   );
 };
 
-export default ProductInfo;
+export default ProductInfoContainer;
