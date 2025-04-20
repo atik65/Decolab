@@ -17,6 +17,7 @@ import {
 import { FiBarChart2, FiHeart } from "react-icons/fi";
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
+import { BaggageClaim } from "lucide-react";
 
 const ProductIntroCart = ({
   productName = "Box On The Wall",
@@ -113,8 +114,9 @@ const ProductIntroCart = ({
         </div>
 
         {/* Add to Cart Button */}
-        <button className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold">
-          ADD TO CART
+        <button className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center">
+          <span>Order Now </span>
+          <BaggageClaim size={16} />
         </button>
       </div>
 

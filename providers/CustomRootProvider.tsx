@@ -11,6 +11,7 @@ import ScrollToTopButton from "@/components/shared/ScrollToTop";
 import ContactSection from "@/app/_pages/home/ContactsSection";
 import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
+import FloatingWP from "@/components/shared/FloatingWP";
 // import ScrollToTopButton from "@/components/shared/ScrollToTop";
 // import FloatingCart from "@/components/shared/FloatingCart";
 // import useGetCartFromLS from "@/hooks/zustand/useGetCartFromLS";
@@ -58,11 +59,13 @@ const CustomRootProvider = ({ children }: Props) => {
             <Header />
 
             {children}
+
             <ContactSection />
             <Footer />
             {/* <Footer /> */}
 
             {/* <FloatingCart /> */}
+            <FloatingWP />
             <ScrollToTopButton />
           </AppProgressProvider>
         </SnackbarProvider>

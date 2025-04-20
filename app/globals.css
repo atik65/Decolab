@@ -132,3 +132,14 @@
   cursor: grabbing;
   height: 50px;
 }
+
+/* for call to whatsapp floating button for booking layout */
+.whatsapp-booking {
+  position: fixed;
+  left: 30px;
+  bottom: 50px;
+  background-color: #99b998;
+  color: #fff;
+  border-radius: 50%;
+  z-index: 1000;
+}
