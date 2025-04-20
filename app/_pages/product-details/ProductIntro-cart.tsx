@@ -174,7 +174,7 @@ const ProductOptions = () => {
         <select
           id="size"
           name="size"
-          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
+          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm cursor-pointer"
         >
           <option value="">-- Please select --</option>
           <option value="small">Small</option>
@@ -183,6 +183,32 @@ const ProductOptions = () => {
         </select>
       </div>
 
+      {/* How Many Digits dropdown */}
+      <div>
+        <label
+          htmlFor="how-many-digits"
+          className="block text-sm font-medium text-gray-700"
+        >
+          How Many Digits <span className="text-red-500">*</span>
+        </label>
+        <select
+          id="how-many-digits"
+          name="how-many-digits"
+          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm cursor-pointer"
+        >
+          <option value="">-- Please select --</option>
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+          <option value="6">6</option>
+          <option value="7">7</option>
+          <option value="8">8</option>
+          <option value="9">9</option>
+          <option value="10">10</option>
+        </select>
+      </div>
       {/* Color Options */}
       <ColorOptions />
 

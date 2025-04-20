@@ -221,116 +221,126 @@ const ShippingInfo = () => {
 
 const AdditionalInfo = () => {
   return (
-    <div className="space-y-6 container mx-auto px-5">
-      {/* Order Process */}
-      <section>
-        <h3 className="text-xl font-semibold mb-4">Order Process</h3>
-        <div className="bg-[#f8f8f8] p-4 rounded-lg border border-[#CFB284] mb-6">
-          <p className="text-gray-700">
-            Dear customer, after purchasing, the design department will contact
-            you in 10 minutes or less to confirm your design & size before
-            starting manufacturing.
-          </p>
-        </div>
-      </section>
-
-      {/* Product Specifications */}
-      <section>
-        <h3 className="text-xl font-semibold mb-4">Product Specifications</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="space-y-3">
-            {/* Material */}
-            <div className="flex items-center justify-between py-2 border-b">
-              <span className="text-gray-600">Material</span>
-              <span className="font-medium">High-quality Aluminum</span>
-            </div>
-
-            {/* Installation */}
-            <div className="flex items-center justify-between py-2 border-b">
-              <span className="text-gray-600">Installation</span>
-              <span className="font-medium">Wall-mounted</span>
-            </div>
+    <div className="space-y-8 container mx-auto px-5">
+      {/* Ramadan Crescent Moon */}
+      <section className="border rounded-lg p-6 bg-white">
+        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Ramadan Crescent Moon</h3>
+        
+        <div className="space-y-6">
+          {/* Product Description */}
+          <div>
+            <p className="text-gray-700">
+              Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.
+              The Ramadan Crescent Moon withstand the elements, backed by a 1-year warranty on the light
+              and 5 years on the paint for your peace of mind.
+            </p>
           </div>
 
-          <div className="space-y-3">
-            {/* Warranty */}
-            <div className="flex items-center justify-between py-2 border-b">
-              <span className="text-gray-600">Light Warranty</span>
-              <span className="font-medium">1 Year</span>
-            </div>
-
-            <div className="flex items-center justify-between py-2 border-b">
-              <span className="text-gray-600">Paint Warranty</span>
-              <span className="font-medium">5 Years</span>
-            </div>
+          {/* Delivery Info */}
+          <div>
+            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <ul className="space-y-2">
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Your order will be delivered and installed within 3 days or less</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Enjoy free delivery and installation by our team of experts</span>
+              </li>
+            </ul>
           </div>
         </div>
       </section>
 
-      {/* Delivery & Installation */}
-      <section>
-        <h3 className="text-xl font-semibold mb-3">Delivery & Installation</h3>
-        <ul className="space-y-2">
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>
-              Your order will be delivered and installed within a week or less
-            </span>
-          </li>
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>
-              Free delivery and professional installation by our team of experts
-            </span>
-          </li>
-        </ul>
-      </section>
+      {/* Wall-Mounted House Numbers */}
+      <section className="border rounded-lg p-6 bg-white">
+        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Aluminum House Numbers</h3>
+        
+        <div className="space-y-6">
+          {/* Product Description */}
+          <div>
+            <p className="text-gray-700">
+              Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.
+              The house numbers withstand the elements, backed by a 1-year warranty on the light
+              and 5 years on the paint for your peace of mind.
+            </p>
+          </div>
 
-      {/* Important Note */}
-      <section>
-        <h3 className="text-xl font-semibold mb-3">Important Note</h3>
-        <div className="bg-[#fff9e5] p-4 rounded-lg border border-[#CFB284]">
-          <p className="text-gray-700">
-            The customer is responsible for providing a properly placed
-            electrical connection. We are not responsible for installing or
-            supplying the electrical point needed for this product.
-          </p>
+          {/* Delivery Info */}
+          <div>
+            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <ul className="space-y-2">
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Your order will be delivered and installed within a week or less</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Enjoy free delivery and installation by our team of experts</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Important Note */}
+          <div className="bg-[#87A786]/5 p-4 rounded-lg border border-[#87A786]">
+            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Important Note</h4>
+            <p className="text-gray-700">
+              The customer is responsible for providing a properly placed electrical connection.
+              We are not responsible for installing or supplying the electrical point needed for this product.
+            </p>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section>
-        <h3 className="text-xl font-semibold mb-3">Product Features</h3>
-        <ul className="space-y-2">
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>Premium aluminum construction for durability</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>Weather-resistant design</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>Integrated back lighting for enhanced visibility</span>
-          </li>
-          <li className="flex items-start gap-2">
-            <div className="mt-1">
-              <ChevronRight className="w-4 h-4" />
-            </div>
-            <span>Professional installation included</span>
-          </li>
-        </ul>
+      {/* Double-Sided House Numbers */}
+      <section className="border rounded-lg p-6 bg-white">
+        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Double-Sided House Numbers</h3>
+        
+        <div className="space-y-6">
+          {/* Product Description */}
+          <div>
+            <p className="text-gray-700">
+              Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.
+              The house numbers withstand the elements, backed by a 1-year warranty on the light
+              and 5 years on the paint for your peace of mind. Specially designed for installation
+              on Car Parking Umbrellas.
+            </p>
+          </div>
+
+          {/* Delivery Info */}
+          <div>
+            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <ul className="space-y-2">
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Your order will be delivered and installed within a week or less</span>
+              </li>
+              <li className="flex items-start gap-2">
+                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <span>Enjoy free delivery and installation by our team of experts</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Important Note */}
+          <div className="bg-[#87A786]/5 p-4 rounded-lg border border-[#87A786]">
+            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Important Note</h4>
+            <p className="text-gray-700">
+              The customer is responsible for providing a properly placed electrical connection.
+              We are not responsible for installing or supplying the electrical point needed for this product.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* Order Process - Common for all products */}
+      <section className="bg-[#87A786]/5 p-6 rounded-lg border border-[#87A786]">
+        <h3 className="text-xl font-semibold mb-3 text-[#87A786]">Order Process</h3>
+        <p className="text-gray-700">
+          Dear customer, after purchasing, the design department will contact you in 10 minutes or less
+          to confirm your design before starting manufacturing.
+        </p>
       </section>
     </div>
   );
