@@ -42,13 +42,14 @@ const ProductCard = ({
         gsap.to(imageRef.current, {
           opacity: 0.8,
           scale: 1.1,
-          duration: 0.2,
+          duration: 0.1,
 
           onComplete: () => {
             setCurrentImage(hoveredImage);
             gsap.to(imageRef.current, {
               opacity: 1,
               scale: 1.1,
+              delay: 0.1,
               duration: 0.5,
             });
           },
@@ -66,7 +67,7 @@ const ProductCard = ({
             gsap.to(imageRef.current, {
               opacity: 1,
               scale: 1,
-              duration: 0.3,
+              duration: 0.2,
             });
           },
         });
