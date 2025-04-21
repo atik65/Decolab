@@ -1,4 +1,7 @@
+"use client";
+
 import Image from "next/image";
+import { enqueueSnackbar } from "notistack";
 import React from "react";
 import { GiPayMoney } from "react-icons/gi";
 
@@ -59,7 +62,18 @@ const OrderSummary = () => {
         </div>
 
         {/* Place Order Button */}
-        <button className="w-full mt-4 bg-[#87A786] hover:bg-[#87a786ea] text-white py-2  font-bold flex justify-center items-center gap-2">
+        <button
+          onClick={() => {
+            enqueueSnackbar("Coming Soon", {
+              variant: "info",
+              style: {
+                backgroundColor: "#87a786ef",
+                fontWeight: "bold",
+              },
+            });
+          }}
+          className="w-full mt-4 bg-[#87A786] hover:bg-[#87a786ea] text-white py-2  font-bold flex justify-center items-center gap-2"
+        >
           <span>Pay Now</span> <GiPayMoney size={20} />
         </button>
       </div>

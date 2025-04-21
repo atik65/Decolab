@@ -6,7 +6,7 @@ const FloatingWP = () => {
     <div>
       {" "}
       {/* for call to whatsapp floating button */}
-      <div className="whatsapp-booking">
+      <div className="whatsapp-booking animate-bounce">
         <a
           href="https://api.whatsapp.com/send?phone=96567059197"
           className="text-decoration-none"
