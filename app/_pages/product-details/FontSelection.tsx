@@ -54,6 +54,7 @@ const fonts = [
     name: "Font 9",
   },
 ];
+
 const FontSelection = () => {
   const [selectedFont, setSelectedFont] = useState<number | null>(null);
 
@@ -70,7 +71,7 @@ const FontSelection = () => {
             {" "}
             <label
               htmlFor="size"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-bold text-gray-700"
             >
               Select Font <span className="text-red-500">*</span>
             </label>

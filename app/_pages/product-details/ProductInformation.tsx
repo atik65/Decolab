@@ -29,8 +29,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useRouter } from "@bprogress/next";
 
-const ProductIntroCart = ({
+const ProductInformation = ({
   productName = "Box On The Wall",
   price = 19.99,
   description = "Introducing our Aluminum House Numbers, Installed on the wall. Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.The house numbers withstand the elements, backed by a 1-year warranty on the light and 5 years on the paint for your peace of mind.Enjoy free delivery, and installation by our team of experts.",
@@ -46,6 +47,12 @@ const ProductIntroCart = ({
     } else if (type === "decrease" && quantity > 1) {
       setQuantity((prev) => prev - 1);
     }
+  };
+
+  const router = useRouter();
+
+  const handleOrderNow = () => {
+    router.push("/checkout");
   };
 
   return (
@@ -101,7 +108,7 @@ const ProductIntroCart = ({
       {/* Product options */}
       <ProductOptions />
 
-      {/* Quantity Selector and Add to Cart */}
+      {/* Quantity Selector and place order */}
       <div className="mt-6 flex items-center space-x-3">
         {/* Quantity Selector */}
         <div className="flex items-center space-x-1">
@@ -124,14 +131,17 @@ const ProductIntroCart = ({
           </button>
         </div>
 
-        {/* Add to Cart Button */}
-        <button className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center">
+        {/* order now Button */}
+        <button
+          onClick={handleOrderNow}
+          className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center"
+        >
           <span>Order Now </span>
           <BaggageClaim size={16} />
         </button>
       </div>
 
-      {/* Additional Actions */}
+      {/* Additional Actions  */}
       <div className="mt-4 flex items-center space-x-4">
         <button className="flex items-center text-sm text-gray-600 hover:text-gray-900">
           <FiBarChart2 className="w-5 h-5 mr-1" /> Add to compare
@@ -168,11 +178,11 @@ const ProductIntroCart = ({
   );
 };
 
-export default ProductIntroCart;
+export default ProductInformation;
 
 const ProductOptions = () => {
   return (
-    <div className=" space-y-4 mt-8">
+    <div className=" space-y-4 mt-7">
       {/* Size Dropdown */}
       <div>
         <label

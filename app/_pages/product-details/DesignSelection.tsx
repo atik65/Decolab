@@ -51,7 +51,7 @@ const DesignSelection = () => {
             {" "}
             <label
               htmlFor="size"
-              className="block text-sm font-medium text-gray-700"
+              className="block text-sm font-bold text-gray-700"
             >
               Select Design <span className="text-red-500">*</span>
             </label>

@@ -1,6 +1,6 @@
 import React from "react";
 import ProductImageSlider from "./ProductImageSlider";
-import ProductIntroCart from "./ProductIntro-cart";
+import ProductInformation from "./ProductInformation";
 
 const products = {
   images: [
@@ -23,7 +23,7 @@ const ProductInfoContainer = () => {
       </div>
 
       <div>
-        <ProductIntroCart />
+        <ProductInformation />
       </div>
     </div>
   );
