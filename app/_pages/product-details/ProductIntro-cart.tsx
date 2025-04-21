@@ -19,6 +19,16 @@ import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim } from "lucide-react";
 import FontSelection from "./FontSelection";
+import Link from "next/link";
+import { Input, TextArea } from "@/components/ui/input";
+
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const ProductIntroCart = ({
   productName = "Box On The Wall",
@@ -47,31 +57,31 @@ const ProductIntroCart = ({
           className="flex items-center space-x-2 text-sm font-medium text-gray-500"
         >
           <li>
-            <a
-              href="#"
+            <Link
+              href="/"
               className="text-[#87A786] hover:text-black duration-200"
             >
               Home
-            </a>
+            </Link>
           </li>
           <li>/</li>
           <li>
-            <a
-              href="#"
+            <Link
+              href="/shop"
               className="text-[#87A786] hover:text-black duration-200"
             >
               Shop
-            </a>
+            </Link>
           </li>
-          <li>/</li>
-          <li>
+          {/* <li>/</li> */}
+          {/* <li>
             <a
               href="#"
               className="text-[#87A786] hover:text-black duration-200"
             >
               Other
             </a>
-          </li>
+          </li> */}
           <li>/</li>
           <li className="hover:text-[#87A786] text-black duration-200">
             {productName}
@@ -167,89 +177,65 @@ const ProductOptions = () => {
       <div>
         <label
           htmlFor="size"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm  text-gray-700 mb-1 font-bold"
         >
           Size <span className="text-red-500">*</span>
         </label>
-        <select
-          id="size"
-          name="size"
-          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm cursor-pointer"
-        >
-          <option value="">-- Please select --</option>
-          <option value="small">Small</option>
-          <option value="medium">Medium</option>
-          <option value="large">Large</option>
-        </select>
-      </div>
 
+        <Select>
+          <SelectTrigger className="">
+            <SelectValue placeholder="-- Select Size --" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="small">Small</SelectItem>
+            <SelectItem value="medium">Medium</SelectItem>
+            <SelectItem value="large">Large</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       {/* How Many Digits dropdown */}
       <div>
         <label
           htmlFor="how-many-digits"
-          className="block text-sm font-medium text-gray-700"
+          className="block text-sm font-bold text-gray-700 mb-1 "
         >
           How Many Digits <span className="text-red-500">*</span>
         </label>
-        <select
-          id="how-many-digits"
-          name="how-many-digits"
-          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm cursor-pointer"
-        >
-          <option value="">-- Please select --</option>
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
+        <Select>
+          <SelectTrigger className="">
+            <SelectValue placeholder="-- Select Digit --" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="1">1</SelectItem>
+            <SelectItem value="2">2</SelectItem>
+            <SelectItem value="3">3</SelectItem>
+            <SelectItem value="4">4</SelectItem>
+            <SelectItem value="5">5</SelectItem>
+            <SelectItem value="6">6</SelectItem>
+            <SelectItem value="7">7</SelectItem>
+            <SelectItem value="8">8</SelectItem>
+            <SelectItem value="9">9</SelectItem>
+            <SelectItem value="10">10</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
       {/* Color Options */}
       <ColorOptions />
-
       {/*Light Color Options */}
       <LightColorOptions />
-
       {/* House Number Input */}
-      <div>
-        <label
-          htmlFor="house-number"
-          className="block text-sm font-medium text-gray-700"
-        >
-          House Number
-        </label>
-        <input
-          type="number"
-          id="house-number"
-          name="house-number"
-          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
-        />
-      </div>
 
+      <Input
+        label="House Number"
+        type="number"
+        name="house-number"
+        id="house-number"
+      />
       {/* Text Area */}
-      <div>
-        <label
-          htmlFor="text"
-          className="block text-sm font-medium text-gray-700"
-        >
-          Text
-        </label>
-        <textarea
-          id="text"
-          name="text"
-          rows={4}
-          className="mt-1 block w-full border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm"
-        ></textarea>
-      </div>
+      <TextArea label="Text" name="text" id="text" rows={4} />
 
       {/* design selection */}
       <DesignSelection />
-
       {/* Font selection */}
       <FontSelection />
     </div>

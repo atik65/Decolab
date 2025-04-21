@@ -26,7 +26,7 @@ export const ColorOptions = () => {
 
   return (
     <div className="">
-      <h3 className="text-sm  mb-2 font-bold">Colors</h3>
+      <h3 className="text-sm  mb-2 font-bold text-gray-700">Colors</h3>
       <div className="flex flex-wrap gap-2">
         {colors.map((color) => (
           <button
@@ -110,7 +110,7 @@ export const LightColorOptions = () => {
 
   return (
     <div className="">
-      <h3 className="mb-2 text-sm font-bold">Light Colors</h3>
+      <h3 className="mb-2 text-sm font-bold text-gray-700">Light Colors</h3>
       <div className="flex flex-wrap gap-2">
         {lightColors.map((color) => (
           <button
