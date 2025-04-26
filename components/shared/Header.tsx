@@ -2,10 +2,12 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { ShoppingCart, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useTranslations } from "next-intl";
+import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 
 gsap.registerPlugin(useGSAP);
 
@@ -15,10 +17,10 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { href: "/", label: "House Numbers" },
-  { href: "/", label: "Diwaniya" },
-  { href: "/", label: "Islamic Phrases" },
-  { href: "/", label: "Advertisement Signage" },
+  { href: "/", label: "houseNumbers" },
+  { href: "/", label: "diwaniya" },
+  { href: "/", label: "islamicPhrases" },
+  { href: "/", label: "advertisements" },
 ];
 
 const Header: React.FC = () => {
@@ -69,6 +71,8 @@ const Header: React.FC = () => {
     );
   });
 
+  const t = useTranslations("NavLinks");
+
   return (
     <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">
       <div className="container mx-auto px-4">
@@ -86,7 +90,7 @@ const Header: React.FC = () => {
           <Link
             ref={logoRef}
             href="/"
-            className="text-2xl font-bold tracking-tight "
+            className="text-2xl font-bold tracking-tight hidden md:block"
           >
             One Direction
           </Link>
@@ -99,13 +103,13 @@ const Header: React.FC = () => {
                 href={link.href}
                 className="nav-link text-sm font-medium text-gray-700 hover:text-black transition-colors"
               >
-                {link.label}
+                {t(link.label)}
               </Link>
             ))}
           </nav>
 
           {/* User Actions */}
-          <div ref={actionRef} className="flex items-center space-x-6 ">
+          <div ref={actionRef} className="flex items-center space-x-4 ">
             {/* <Link
               href="/login"
               className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"
@@ -129,14 +133,15 @@ const Header: React.FC = () => {
             >
               <Heart size={20} />
             </Link> */}
-            <Link
+            <LocaleSwitcher />
+            {/* <Link
               href="/cart"
               className="flex items-center text-gray-700 hover:text-black transition-colors"
               aria-label="Shopping cart"
             >
               <ShoppingCart size={20} />
               <span className="ml-2 text-sm font-medium">$0.00</span>
-            </Link>
+            </Link> */}
           </div>
         </div>
 

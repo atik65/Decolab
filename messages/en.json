@@ -1,0 +1,16 @@
+{
+  "HomePage": {
+    "title": "Hello world!",
+    "about": "Go to the about page"
+  },
+  "NavLinks": {
+    "houseNumbers": "House Numbers",
+    "diwaniya": "Diwaniya",
+    "islamicPhrases": "Islamic Phrases",
+    "advertisements": "Advertisement Signage"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ar {🇸🇦 Arabic} en {🇬🇧 English} other {Unknown}}"
+  }
+}

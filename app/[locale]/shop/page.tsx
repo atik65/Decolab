@@ -1,10 +1,10 @@
+import ShopContainer from "@/app/_pages/shop/ShopContainer";
 import React from "react";
-import { CheckoutContainer } from "../_pages/checkout/CheckoutContainer";
 
 const page = () => {
   return (
     <div>
-      <CheckoutContainer />
+      <ShopContainer />
     </div>
   );
 };

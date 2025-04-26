@@ -1,0 +1,16 @@
+{
+  "HomePage": {
+    "title": "Kaifa Haluka!",
+    "about": "Go to the about page"
+  },
+  "NavLinks": {
+    "houseNumbers": "أرقام المنازل",
+    "diwaniya": "الديوانية",
+    "islamicPhrases": "العبارات الإسلامية",
+    "advertisements": "الإعلانات"
+  },
+  "LocaleSwitcher": {
+    "label": "Change language",
+    "locale": "{locale, select, ar {🇸🇦 Arabic} en {🇬🇧 English} other {Unknown}}"
+  }
+}
