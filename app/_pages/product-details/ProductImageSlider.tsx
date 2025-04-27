@@ -13,7 +13,12 @@ import { Swiper as SwiperType } from "swiper/types";
 import { ImageOff } from "lucide-react";
 import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 import { Product } from "@/types/product";
-import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
+// import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
+import dynamic from "next/dynamic";
+
+const TfiAngleLeft = dynamic(() => import("react-icons/tfi").then((mod) => mod.TfiAngleLeft));
+const TfiAngleRight = dynamic(() => import("react-icons/tfi").then((mod) => mod.TfiAngleRight));
+
 // import ReactImageMagnify from "react-image-magnify";
 
 // import {

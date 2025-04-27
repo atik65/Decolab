@@ -3,7 +3,12 @@
 import Image from "next/image";
 import { enqueueSnackbar } from "notistack";
 import React from "react";
-import { GiPayMoney } from "react-icons/gi";
+// import { GiPayMoney } from "react-icons/gi";
+import dynamic from "next/dynamic";
+
+const GiPayMoney = dynamic(() =>
+  import("react-icons/gi").then((mod) => mod.GiPayMoney)
+);
 
 const OrderSummary = () => {
   return (

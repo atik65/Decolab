@@ -8,13 +8,24 @@ interface ProductIntroCartProps {
   category?: string;
 }
 
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaPinterestP,
-} from "react-icons/fa"; // Importing icons from react-icons
-import { FiBarChart2, FiHeart } from "react-icons/fi";
+import dynamic from "next/dynamic";
+
+// import {
+//   FaFacebookF,
+//   FaTwitter,
+//   FaInstagram,
+//   FaPinterestP,
+// } from "react-icons/fa"; 
+
+// import { FiBarChart2, FiHeart } from "react-icons/fi";
+
+const FaFacebookF = dynamic(() => import("react-icons/fa").then((mod) => mod.FaFacebookF));
+const FaTwitter = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTwitter));
+const FaInstagram = dynamic(() => import("react-icons/fa").then((mod) => mod.FaInstagram));
+const FaPinterestP = dynamic(() => import("react-icons/fa").then((mod) => mod.FaPinterestP));
+const FiBarChart2 = dynamic(() => import("react-icons/fi").then((mod) => mod.FiBarChart2));
+const FiHeart = dynamic(() => import("react-icons/fi").then((mod) => mod.FiHeart));
+
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim } from "lucide-react";

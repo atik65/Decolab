@@ -1,10 +1,25 @@
 "use client";
 import React from "react";
-import { MdGridView, MdViewModule, MdApps } from "react-icons/md";
-import { LiaSlidersHSolid } from "react-icons/lia";
+// import { MdGridView, MdViewModule, MdApps } from "react-icons/md";
+// import { LiaSlidersHSolid } from "react-icons/lia";
+
+import dynamic from "next/dynamic";
+const MdGridView = dynamic(() =>
+  import("react-icons/md").then((mod) => mod.MdGridView)
+);
+const MdViewModule = dynamic(() =>
+  import("react-icons/md").then((mod) => mod.MdViewModule)
+);
+const MdApps = dynamic(() =>
+  import("react-icons/md").then((mod) => mod.MdApps)
+);
+const LiaSlidersHSolid = dynamic(() =>
+  import("react-icons/lia").then((mod) => mod.LiaSlidersHSolid)
+);
+
 import Filters from "./Filters";
 
-const ShopTopSection = () => {  
+const ShopTopSection = () => {
   const [showFilters, setShowFilters] = React.useState(false);
 
   return (

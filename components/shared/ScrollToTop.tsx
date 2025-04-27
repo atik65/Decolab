@@ -1,7 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { MdArrowUpward } from "react-icons/md";
+// import { MdArrowUpward } from "react-icons/md";
+import dynamic from "next/dynamic";
+
+const MdArrowUpward = dynamic(() =>
+  import("react-icons/md").then((mod) => mod.MdArrowUpward)
+);
 
 export default function ScrollToTopButton() {
   const [isVisible, setIsVisible] = useState(false);
