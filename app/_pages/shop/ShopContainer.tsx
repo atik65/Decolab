@@ -2,6 +2,7 @@ import React from "react";
 import ProductCard from "@/components/shared/product/ProductCard";
 
 import ShopTopSection from "./ShopTopSection";
+import { products } from "@/data/products";
 
 const ShopContainer = () => {
   // Mock data for products
@@ -40,8 +41,8 @@ const ShopContainer = () => {
       <ShopTopSection />
       {/* Product Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {Array.from({ length: 10 }).map((_, index) => (
-          <ProductCard key={index} />
+        {products.map((product, index) => (
+          <ProductCard key={index} product={product} />
         ))}
       </div>
     </div>

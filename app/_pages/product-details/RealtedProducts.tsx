@@ -3,6 +3,7 @@
 import ProductCard from "@/components/shared/product/ProductCard";
 import React from "react";
 import { motion } from "framer-motion";
+import { products } from "@/data/products";
 
 const RelatedProducts = () => {
   return (
@@ -17,21 +18,21 @@ const RelatedProducts = () => {
 
       {/* products container */}
       <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 gap-x-8  px-0">
-        {[1, 2, 3, 4].map((item) => {
+        {products.map((item, index) => {
           return (
             <motion.div
-              key={item}
+              key={item.id}
               initial={{ opacity: 0, y: 200 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{
                 duration: 0.4,
-                delay: item < 5 ? item * 0.2 : (item - 5) * 0.2,
+                delay: index < 5 ? index * 0.2 : (index - 5) * 0.2,
               }}
               viewport={{
                 once: true,
               }}
             >
-              <ProductCard />
+              <ProductCard product={item} />
             </motion.div>
           );
         })}

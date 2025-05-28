@@ -6,14 +6,12 @@ import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLocale } from "next-intl";
+import { FinalProduct } from "@/types/product";
 
 gsap.registerPlugin(useGSAP);
 
 interface ProductCardProps {
-  imageUrl?: string;
-  title?: string;
-  subtitle?: string;
-  price?: number;
+  product: FinalProduct;
 }
 
 interface ProductData {
@@ -24,7 +22,7 @@ interface ProductData {
   price: string;
 }
 
-const product: Record<string, ProductData> = {
+const product1: Record<string, ProductData> = {
   ar: {
     title: "المنتجات المميزة",
     mainImage: "/images/home/banner9.jpg",
@@ -41,22 +39,18 @@ const product: Record<string, ProductData> = {
   },
 } as const;
 
-type Locale = keyof typeof product;
+type ProductLocale = "ar" | "en";
 
-const ProductCard = ({
-  imageUrl,
-  title,
-  subtitle,
-  price,
-}: ProductCardProps) => {
-  const locale = (useLocale() as Locale) || "ar";
-  const currentProduct = product[locale] || product["ar"];
+const ProductCard = ({ product }: ProductCardProps) => {
+  const locale = (useLocale() as ProductLocale) || "ar";
+  console.log("locale = ", locale);
+  const currentProduct = product[locale] || {};
 
   console.table({
-    imageUrl,
-    title,
-    subtitle,
-    price,
+    imageUrl: currentProduct.mainImage,
+    title: currentProduct.title,
+    subtitle: currentProduct.category,
+    price: currentProduct.price,
   });
 
   const [hoveredImage] = useState(currentProduct.hoveredImage);
