@@ -5,6 +5,7 @@ import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
+import { useLocale } from "next-intl";
 
 gsap.registerPlugin(useGSAP);
 
@@ -15,12 +16,42 @@ interface ProductCardProps {
   price?: number;
 }
 
+interface ProductData {
+  title: string;
+  mainImage: string;
+  hoveredImage: string;
+  category: string;
+  price: string;
+}
+
+const product: Record<string, ProductData> = {
+  ar: {
+    title: "المنتجات المميزة",
+    mainImage: "/images/home/banner9.jpg",
+    hoveredImage: "/images/home/banner8.jpg",
+    category: "تقليلية",
+    price: "100",
+  },
+  en: {
+    title: "House Numbers",
+    mainImage: "/images/home/banner9.jpg",
+    hoveredImage: "/images/home/banner8.jpg",
+    category: "Minimalism",
+    price: "100",
+  },
+} as const;
+
+type Locale = keyof typeof product;
+
 const ProductCard = ({
   imageUrl,
   title,
   subtitle,
   price,
 }: ProductCardProps) => {
+  const locale = (useLocale() as Locale) || "ar";
+  const currentProduct = product[locale] || product["ar"];
+
   console.table({
     imageUrl,
     title,
@@ -28,9 +59,9 @@ const ProductCard = ({
     price,
   });
 
-  const [hoveredImage] = useState("/images/home/banner8.jpg");
-  const [mainImage] = useState("/images/home/banner9.jpg");
-  const [currentImage, setCurrentImage] = useState(mainImage);
+  const [hoveredImage] = useState(currentProduct.hoveredImage);
+  const [mainImage] = useState(currentProduct.mainImage);
+  const [currentImage, setCurrentImage] = useState(currentProduct.mainImage);
 
   const container = useRef<HTMLAnchorElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -78,6 +109,10 @@ const ProductCard = ({
     }
   );
 
+  // const locale: string = useLocale();
+
+  // console.log("locale = ", locale);
+
   return (
     <Link
       ref={container}
@@ -97,14 +132,16 @@ const ProductCard = ({
       </div>
       <div className="mt-2">
         <div className="font-bold text-[14px] md:text-[16px]">
-          Box On The Wall{" "}
+          {product[locale].title}
         </div>
-        <p className="text-gray-700 text-[12px] md:text-[14px]">Minimalism</p>
+        <p className="text-gray-700 text-[12px] md:text-[14px]">
+          {product[locale].category}
+        </p>
       </div>
       <div className="h-6 mt-1  overflow-hidden">
         <div className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
           <span className="inline-block font-bold text-[#99b998]  text-sm  ">
-            $100
+            {product[locale].price}
           </span>
         </div>
 

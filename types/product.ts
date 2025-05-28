@@ -5,3 +5,59 @@ export interface Product {
   price?: number;
   images?: string[];
 }
+
+type Size = {
+  id: number;
+  title: string;
+  value: string;
+}
+
+type Digit = {
+  id: number;
+  title: number;
+  value: number;
+}
+
+type Color = {
+  id: number;
+  name: string;
+  colorCode: string;
+}
+
+type LightColor = {
+  id: number;
+  name: string;
+  colorCode: string;
+}
+
+type Design = {
+  id: number;
+  url: string;
+  designName: string;
+}
+
+type Font = {
+  id: number;
+  name: string;
+  url: string;
+}
+
+export interface Product1 {
+  id: number;
+  title: string;
+  images: string[];
+  category: string;
+  price: string;
+  description: string;
+  sizes: Size[];
+  digits: Digit[];
+  colors: Color[];
+  lightColors: LightColor[];
+  designs: Design[];
+  fonts: Font[];
+}
+
+export interface FinalProduct {
+  'ar': Product1;
+  'en': Product1;
+}
