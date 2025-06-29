@@ -33,7 +33,7 @@ type LightColor = {
 type Design = {
   id: number;
   url: string;
-  designName: string;
+  name: string;
 };
 
 type Font = {
@@ -42,7 +42,7 @@ type Font = {
   url: string;
 };
 
-export interface Product1 {
+export interface ProductLN {
   id: number;
   title: string;
   images: string[];
@@ -61,6 +61,6 @@ export interface Product1 {
 
 export interface FinalProduct {
   id: number;
-  ar: Product1;
-  en: Product1;
+  ar: ProductLN;
+  en: ProductLN;
 }

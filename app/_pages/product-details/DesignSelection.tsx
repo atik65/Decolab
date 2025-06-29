@@ -4,6 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useGetLocale } from "@/hooks/useGetLocale";
+import { ProductLN } from "@/types/product";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -35,8 +37,9 @@ const designs = [
   },
 ];
 
-const DesignSelection = () => {
+const DesignSelection = ({ product }: { product: ProductLN }) => {
   const [selectedDesign, setSelectedDesign] = useState<number | null>(null);
+  const locale = useGetLocale();
 
   const handleDesignSelect = (designId: number) => {
     setSelectedDesign(designId);
@@ -53,12 +56,12 @@ const DesignSelection = () => {
               htmlFor="size"
               className="block text-sm font-bold text-gray-700"
             >
-              Select Design <span className="text-red-500">*</span>
+              {locale === "en" ? "Select Design" : "اختر التصميم"} <span className="text-red-500">*</span>
             </label>
           </AccordionTrigger>
           <AccordionContent>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 p-1">
-              {designs?.map((design) => {
+              {product?.designs?.map((design) => {
                 const isSelected = selectedDesign === design.id;
                 return (
                   <div
@@ -74,7 +77,7 @@ const DesignSelection = () => {
                       height={300}
                       width={300}
                       alt={design.name}
-                      src={design?.image}
+                      src={design?.url}
                     />
                     {isSelected && (
                       <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />

@@ -15,16 +15,28 @@ import dynamic from "next/dynamic";
 //   FaTwitter,
 //   FaInstagram,
 //   FaPinterestP,
-// } from "react-icons/fa"; 
+// } from "react-icons/fa";
 
 // import { FiBarChart2, FiHeart } from "react-icons/fi";
 
-const FaFacebookF = dynamic(() => import("react-icons/fa").then((mod) => mod.FaFacebookF));
-const FaTwitter = dynamic(() => import("react-icons/fa").then((mod) => mod.FaTwitter));
-const FaInstagram = dynamic(() => import("react-icons/fa").then((mod) => mod.FaInstagram));
-const FaPinterestP = dynamic(() => import("react-icons/fa").then((mod) => mod.FaPinterestP));
-const FiBarChart2 = dynamic(() => import("react-icons/fi").then((mod) => mod.FiBarChart2));
-const FiHeart = dynamic(() => import("react-icons/fi").then((mod) => mod.FiHeart));
+const FaFacebookF = dynamic(() =>
+  import("react-icons/fa").then((mod) => mod.FaFacebookF)
+);
+const FaTwitter = dynamic(() =>
+  import("react-icons/fa").then((mod) => mod.FaTwitter)
+);
+const FaInstagram = dynamic(() =>
+  import("react-icons/fa").then((mod) => mod.FaInstagram)
+);
+const FaPinterestP = dynamic(() =>
+  import("react-icons/fa").then((mod) => mod.FaPinterestP)
+);
+const FiBarChart2 = dynamic(() =>
+  import("react-icons/fi").then((mod) => mod.FiBarChart2)
+);
+const FiHeart = dynamic(() =>
+  import("react-icons/fi").then((mod) => mod.FiHeart)
+);
 
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
@@ -41,6 +53,10 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useRouter } from "@bprogress/next";
+import { useParams } from "next/navigation";
+import { findProductById } from "@/data/products";
+import { useGetLocale } from "@/hooks/useGetLocale";
+import { FinalProduct, ProductLN } from "@/types/product";
 
 const ProductInformation = ({
   productName = "Box On The Wall",
@@ -48,6 +64,12 @@ const ProductInformation = ({
   description = "Introducing our Aluminum House Numbers, Installed on the wall. Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.The house numbers withstand the elements, backed by a 1-year warranty on the light and 5 years on the paint for your peace of mind.Enjoy free delivery, and installation by our team of experts.",
   category = "Other",
 }: ProductIntroCartProps) => {
+  const { slug } = useParams();
+
+  const product = findProductById(Number(slug));
+  const locale = useGetLocale();
+  const currentProduct = product?.[locale];
+
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
 
@@ -66,6 +88,10 @@ const ProductInformation = ({
     router.push("/checkout");
   };
 
+  if (!currentProduct) {
+    return <div>Product not found</div>;
+  }
+
   return (
     <div className="bg-white shadow-md p-6 ">
       {/* Breadcrumb Navigation */}
@@ -79,7 +105,7 @@ const ProductInformation = ({
               href="/"
               className="text-[#87A786] hover:text-black duration-200"
             >
-              Home
+              {locale === "en" ? "Home" : "بيت"}
             </Link>
           </li>
           <li>/</li>
@@ -88,7 +114,7 @@ const ProductInformation = ({
               href="/shop"
               className="text-[#87A786] hover:text-black duration-200"
             >
-              Shop
+              {locale === "en" ? "Products" : "منتجات"}
             </Link>
           </li>
           {/* <li>/</li> */}
@@ -102,22 +128,34 @@ const ProductInformation = ({
           </li> */}
           <li>/</li>
           <li className="hover:text-[#87A786] text-black duration-200">
-            {productName}
+            {currentProduct.title}
           </li>
         </ol>
       </nav>
 
       {/* Product Title */}
-      <h1 className="mt-4 text-2xl font-bold text-gray-900">{productName}</h1>
+      <h1 className="mt-4 text-2xl font-bold text-gray-900">
+        {currentProduct.title}
+      </h1>
+      {/* Category Information */}
+      <div className="mt-1">
+        <span className="inline-flex items-center px-2 py-[2px] rounded-full text-xs font-medium bg-[#87A786]/10 text-[#87A786] border border-[#87A786]/20">
+          {currentProduct.category}
+        </span>
+      </div>
 
       {/* Product Price */}
-      <p className="mt-2 text-xl font-semibold text-gray-900">${price}</p>
+      <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
+        ${currentProduct.price}
+      </p>
 
       {/* Product Description */}
-      <p className="mt-4 text-base text-gray-600">{description}</p>
+      <p className="mt-4 text-base text-gray-600">
+        {currentProduct.description}
+      </p>
 
       {/* Product options */}
-      <ProductOptions />
+      <ProductOptions product={currentProduct} />
 
       {/* Quantity Selector and place order */}
       <div className="mt-6 flex items-center space-x-3">
@@ -153,23 +191,18 @@ const ProductInformation = ({
       </div>
 
       {/* Additional Actions  */}
-      <div className="mt-4 flex items-center space-x-4">
+      {/* <div className="mt-4 flex items-center space-x-4">
         <button className="flex items-center text-sm text-gray-600 hover:text-gray-900">
           <FiBarChart2 className="w-5 h-5 mr-1" /> Add to compare
         </button>
         <button className="flex items-center text-sm text-gray-600 hover:text-gray-900">
           <FiHeart className="w-5 h-5 mr-1" /> Add to wishlist
         </button>
-      </div>
-
-      {/* Category Information */}
-      <div className="mt-4">
-        <p className="text-sm text-gray-600">Category: {category}</p>
-      </div>
+      </div> */}
 
       {/* Sharing Options */}
-      <div className="mt-4">
-        <p className="text-sm text-gray-600">Share:</p>
+      <div className="mt-5">
+        {/* <p className="text-sm text-gray-600">Share:</p> */}
         <div className="flex space-x-2">
           <a href="#" className="text-gray-500 hover:text-gray-900">
             <FaFacebookF className="w-5 h-5" />
@@ -191,74 +224,97 @@ const ProductInformation = ({
 
 export default ProductInformation;
 
-const ProductOptions = () => {
-  return (
-    <div className=" space-y-4 mt-7">
-      {/* Size Dropdown */}
-      <div>
-        <label
-          htmlFor="size"
-          className="block text-sm  text-gray-700 mb-1 font-bold"
-        >
-          Size <span className="text-red-500">*</span>
-        </label>
+const ProductOptions = ({ product }: { product: ProductLN }) => {
+  const locale = useGetLocale();
 
-        <Select>
-          <SelectTrigger className="">
-            <SelectValue placeholder="-- Select Size --" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="small">Small</SelectItem>
-            <SelectItem value="medium">Medium</SelectItem>
-            <SelectItem value="large">Large</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+  return (
+    <div className=" space-y-4 mt-4">
+      {/* Size Dropdown */}
+
+      {product.sizes.length > 0 && (
+        <div>
+          <label
+            htmlFor="size"
+            className="block text-sm  text-gray-700 mb-1 font-bold"
+          >
+            {locale === "en" ? "Size" : "الحجم"}
+            <span className="text-red-500">*</span>
+          </label>
+
+          <Select>
+            <SelectTrigger className="">
+              <SelectValue
+                placeholder={
+                  locale === "en" ? "-- Select Size --" : "--اختر الحجم--"
+                }
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {product.sizes.map((size) => (
+                <SelectItem key={size.id} value={size.value}>
+                  {size.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       {/* How Many Digits dropdown */}
-      <div>
-        <label
-          htmlFor="how-many-digits"
-          className="block text-sm font-bold text-gray-700 mb-1 "
-        >
-          How Many Digits <span className="text-red-500">*</span>
-        </label>
-        <Select>
-          <SelectTrigger className="">
-            <SelectValue placeholder="-- Select Digit --" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectItem value="1">1</SelectItem>
-            <SelectItem value="2">2</SelectItem>
-            <SelectItem value="3">3</SelectItem>
-            <SelectItem value="4">4</SelectItem>
-            <SelectItem value="5">5</SelectItem>
-            <SelectItem value="6">6</SelectItem>
-            <SelectItem value="7">7</SelectItem>
-            <SelectItem value="8">8</SelectItem>
-            <SelectItem value="9">9</SelectItem>
-            <SelectItem value="10">10</SelectItem>
-          </SelectContent>
-        </Select>
-      </div>
+      {product.digits.length > 0 && (
+        <div>
+          <label
+            htmlFor="how-many-digits"
+            className="block text-sm font-bold text-gray-700 mb-1 "
+          >
+            {locale === "en" ? "How Many Digits" : "عدد الأرقام"}{" "}
+            <span className="text-red-500">*</span>
+          </label>
+          <Select>
+            <SelectTrigger className="">
+              <SelectValue
+                placeholder={
+                  locale === "en" ? "-- Select Digit --" : "--اختر الرقم--"
+                }
+              />
+            </SelectTrigger>
+            <SelectContent>
+              {product.digits.map((digit) => (
+                <SelectItem key={digit.id} value={digit.value.toString()}>
+                  {digit.title}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+        </div>
+      )}
+
       {/* Color Options */}
-      <ColorOptions />
+      {product.colors.length > 0 && <ColorOptions product={product} />}
       {/*Light Color Options */}
-      <LightColorOptions />
+      {product.lightColors.length > 0 && (
+        <LightColorOptions product={product} />
+      )}
       {/* House Number Input */}
 
       <Input
-        label="House Number"
+        label={locale === "en" ? "House Number" : "رقم المنزل"}
         type="number"
         name="house-number"
         id="house-number"
       />
       {/* Text Area */}
-      <TextArea label="Text" name="text" id="text" rows={4} />
+      <TextArea
+        label={locale === "en" ? "Text" : "النص"}
+        name="text"
+        id="text"
+        rows={4}
+      />
 
       {/* design selection */}
-      <DesignSelection />
+      {product.designs.length > 0 && <DesignSelection product={product} />}
       {/* Font selection */}
-      <FontSelection />
+      {product.fonts.length > 0 && <FontSelection product={product} />}
     </div>
   );
 };

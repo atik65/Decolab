@@ -4,6 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useGetLocale } from "@/hooks/useGetLocale";
+import { ProductLN } from "@/types/product";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -55,8 +57,9 @@ const fonts = [
   },
 ];
 
-const FontSelection = () => {
+const FontSelection = ({ product }: { product: ProductLN }) => {
   const [selectedFont, setSelectedFont] = useState<number | null>(null);
+  const locale = useGetLocale();
 
   const handleFontSelect = (fontId: number) => {
     setSelectedFont(fontId);
@@ -73,12 +76,13 @@ const FontSelection = () => {
               htmlFor="size"
               className="block text-sm font-bold text-gray-700"
             >
-              Select Font <span className="text-red-500">*</span>
+              {locale === "en" ? "Select Font" : "اختر الخط"}{" "}
+              <span className="text-red-500">*</span>
             </label>
           </AccordionTrigger>
           <AccordionContent>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 p-1">
-              {fonts?.map((font) => {
+              {product?.fonts?.map((font) => {
                 const isSelected = selectedFont === font.id;
                 return (
                   <div
@@ -94,7 +98,7 @@ const FontSelection = () => {
                       height={300}
                       width={300}
                       alt={font.name}
-                      src={font?.image}
+                      src={font?.url}
                     />
                     {isSelected && (
                       <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />

@@ -8,6 +8,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
+import { useGetLocale } from "@/hooks/useGetLocale";
 
 gsap.registerPlugin(useGSAP);
 
@@ -72,6 +73,7 @@ const Header: React.FC = () => {
   });
 
   const t = useTranslations("NavLinks");
+  const locale = useGetLocale();
 
   return (
     <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">
@@ -92,7 +94,7 @@ const Header: React.FC = () => {
             href="/"
             className="text-2xl font-bold tracking-tight hidden md:block"
           >
-            One Direction
+            {locale === "en" ? "One Direction" : "اتجاه واحد"}
           </Link>
 
           {/* Navigation */}

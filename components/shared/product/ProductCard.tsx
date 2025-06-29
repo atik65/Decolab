@@ -7,6 +7,7 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useLocale } from "next-intl";
 import { FinalProduct } from "@/types/product";
+import { useGetLocale } from "@/hooks/useGetLocale";
 
 gsap.registerPlugin(useGSAP);
 
@@ -14,36 +15,8 @@ interface ProductCardProps {
   product: FinalProduct;
 }
 
-interface ProductData {
-  title: string;
-  mainImage: string;
-  hoveredImage: string;
-  category: string;
-  price: string;
-}
-
-const product1: Record<string, ProductData> = {
-  ar: {
-    title: "المنتجات المميزة",
-    mainImage: "/images/home/banner9.jpg",
-    hoveredImage: "/images/home/banner8.jpg",
-    category: "تقليلية",
-    price: "100",
-  },
-  en: {
-    title: "House Numbers",
-    mainImage: "/images/home/banner9.jpg",
-    hoveredImage: "/images/home/banner8.jpg",
-    category: "Minimalism",
-    price: "100",
-  },
-} as const;
-
-type ProductLocale = "ar" | "en";
-
 const ProductCard = ({ product }: ProductCardProps) => {
-  const locale = (useLocale() as ProductLocale) || "ar";
-  console.log("locale = ", locale);
+  const locale = useGetLocale();
   const currentProduct = product[locale] || {};
 
   console.table({
@@ -110,7 +83,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
   return (
     <Link
       ref={container}
-      href={`/products/${"box-on-the-wall"}`}
+      href={`/products/${product.id}`}
       className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer"
     >
       <div className="overflow-hidden">
@@ -146,7 +119,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           }}
           className="flex flex-col items-start opacity-0 translate-y-0 group-hover:-translate-y-6 group-hover:opacity-100 duration-300"
         >
-          <h2 className="text-[12px] font-bold">Explore Details</h2>
+          <h2 className="text-[12px] font-bold">
+            {locale === "en" ? "Explore Details" : "تفاصيل التفاصيل"}
+          </h2>
           <div className="w-16 h-[2px] bg-[#99b998]"></div>
         </div>
       </div>

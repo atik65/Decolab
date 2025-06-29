@@ -1,4 +1,3 @@
-
 import AdditionalInfoTabs from "@/app/_pages/product-details/AdditionalInfoTabs";
 import ProductInfoContainer from "@/app/_pages/product-details/ProductInfoContainer";
 import RelatedProducts from "@/app/_pages/product-details/RealtedProducts";
@@ -8,7 +7,7 @@ const page = () => {
   return (
     <div>
       <ProductInfoContainer />
-      <AdditionalInfoTabs />
+      {/* <AdditionalInfoTabs /> */}
       <RelatedProducts />
     </div>
   );

@@ -15,9 +15,16 @@ import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 import { Product } from "@/types/product";
 // import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import dynamic from "next/dynamic";
+import { useParams } from "next/navigation";
+import { findProductById } from "@/data/products";
+import { useGetLocale } from "@/hooks/useGetLocale";
 
-const TfiAngleLeft = dynamic(() => import("react-icons/tfi").then((mod) => mod.TfiAngleLeft));
-const TfiAngleRight = dynamic(() => import("react-icons/tfi").then((mod) => mod.TfiAngleRight));
+const TfiAngleLeft = dynamic(() =>
+  import("react-icons/tfi").then((mod) => mod.TfiAngleLeft)
+);
+const TfiAngleRight = dynamic(() =>
+  import("react-icons/tfi").then((mod) => mod.TfiAngleRight)
+);
 
 // import ReactImageMagnify from "react-image-magnify";
 
@@ -34,12 +41,18 @@ interface ProductImageSliderProps {
   product: Product | null;
 }
 
-const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
+const ProductImageSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0); // Track the active slide
 
-  if (!product?.images?.length) {
+  const { slug } = useParams();
+
+  const product = findProductById(Number(slug));
+  const locale = useGetLocale();
+  const currentProduct = product?.[locale];
+
+  if (!currentProduct?.images?.length) {
     return (
       <section>
         {/* add a icons */}
@@ -72,7 +85,7 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
                 prevEl: ".custom-swiper-button-prev-prod",
               }}
             >
-              {product?.images?.map((img, index) => (
+              {currentProduct?.images?.map((img, index) => (
                 <SwiperSlide key={index}>
                   <SlideComponent imgURI={img} />
                 </SwiperSlide>
@@ -90,7 +103,7 @@ const ProductImageSlider = ({ product }: ProductImageSliderProps) => {
               watchSlidesProgress={true}
               modules={[Navigation, Thumbs, FreeMode]}
             >
-              {product?.images.map((img, index) => (
+              {currentProduct?.images.map((img, index) => (
                 <SwiperSlide key={index}>
                   <ThumbsComponent
                     activeIndex={activeIndex}
@@ -187,52 +200,3 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
     </div>
   );
 };
-
-// const SlideComponent = ({ imgURI }: { imgURI: string }) => {
-//   return (
-//     <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4">
-//       <ReactImageMagnify
-//         {...{
-//           smallImage: {
-//             alt: "Wristwatch by Ted Baker London",
-//             isFluidWidth: true,
-//             src: imgURI,
-//           },
-//           largeImage: {
-//             src: imgURI,
-//             width: 1200,
-//             height: 1800,
-//           },
-
-//           imageClassName:
-//             "w-full lg:w-[90%] object-cover   rounded-[15px]  mx-auto h-[360px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  bg-red-500",
-
-//           enlargedImagePosition: "beside",
-//           enlargedImageClassName:
-//             "w-full lg:w-[90%] object-cover   rounded-[15px]  mx-auto h-[360px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px] absolute left-0 right-0 -top-[100px] 2xl:-top-[100px]  ",
-//         }}
-//       />
-//     </div>
-//   );
-// };
-
-// const SlideComponent = ({ imgURI }: { imgURI: string }) => {
-//   return (
-//     <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4">
-
-//       <GlassMagnifier
-//         imageSrc={imgURI}
-//         imageAlt="Example"
-//         largeImageSrc={imgURI} // Optional
-//         activation={MOUSE_ACTIVATION}
-//         activationDelay={100}
-//         largeImagePosition="beside"
-//         largeImageClassName="w-full lg:w-[90%] object-cover   rounded-[15px]  mx-auto h-[360px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px] absolute left-0 right-0 -top-[100px] 2xl:-top-[100px]  "
-//         largeImageStyle={{
-//           width: "100%",
-//           height: "100%",
-//         }}
-//       />
-//     </div>
-//   );
-// };
