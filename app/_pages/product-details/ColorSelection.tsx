@@ -7,16 +7,16 @@ interface Color {
   colorCode: string;
 }
 // Define the list of colors
-const colors: Color[] = [
-  { name: "Black", colorCode: "#000000" },
-  { name: "Brown", colorCode: "#8B4513" },
-  { name: "Gray", colorCode: "#808080" },
-  { name: "dark blue", colorCode: "#000080" },
-  { name: "light blue", colorCode: "#ADD8E6" },
-  { name: "light green", colorCode: "#90EE90" },
-  { name: "red", colorCode: "#FF0000" },
-  { name: "yellow", colorCode: "#FFFF00" },
-];
+// const colors: Color[] = [
+//   { name: "Black", colorCode: "#000000" },
+//   { name: "Brown", colorCode: "#8B4513" },
+//   { name: "Gray", colorCode: "#808080" },
+//   { name: "dark blue", colorCode: "#000080" },
+//   { name: "light blue", colorCode: "#ADD8E6" },
+//   { name: "light green", colorCode: "#90EE90" },
+//   { name: "red", colorCode: "#FF0000" },
+//   { name: "yellow", colorCode: "#FFFF00" },
+// ];
 
 // Color selection
 export const ColorOptions = ({ product }: { product: ProductLN }) => {
@@ -91,18 +91,18 @@ export const ColorOptions = ({ product }: { product: ProductLN }) => {
 };
 
 // Define the list of light colors
-const lightColors: Color[] = [
-  { name: "white", colorCode: "#FFFFFF" },
-  { name: "light gray", colorCode: "#D3D3D3" },
-  { name: "light blue", colorCode: "#ADD8E6" },
-  { name: "light green", colorCode: "#90EE90" },
-  { name: "light yellow", colorCode: "#FFFFE0" },
-  { name: "light pink", colorCode: "#FFB6C1" },
-  { name: "light red", colorCode: "#FF0000" },
-  { name: "light orange", colorCode: "#FFA500" },
-  { name: "light purple", colorCode: "#C19AED" },
-  { name: "light brown", colorCode: "#A52A2A" },
-];
+// const lightColors: Color[] = [
+//   { name: "white", colorCode: "#FFFFFF" },
+//   { name: "light gray", colorCode: "#D3D3D3" },
+//   { name: "light blue", colorCode: "#ADD8E6" },
+//   { name: "light green", colorCode: "#90EE90" },
+//   { name: "light yellow", colorCode: "#FFFFE0" },
+//   { name: "light pink", colorCode: "#FFB6C1" },
+//   { name: "light red", colorCode: "#FF0000" },
+//   { name: "light orange", colorCode: "#FFA500" },
+//   { name: "light purple", colorCode: "#C19AED" },
+//   { name: "light brown", colorCode: "#A52A2A" },
+// ];
 
 // Light Color selection
 

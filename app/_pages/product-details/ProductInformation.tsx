@@ -1,12 +1,12 @@
 "use client";
 import React, { useState } from "react";
 
-interface ProductIntroCartProps {
-  productName?: string;
-  price?: number;
-  description?: string;
-  category?: string;
-}
+// interface ProductIntroCartProps {
+//   productName?: string;
+//   price?: number;
+//   description?: string;
+//   category?: string;
+// }
 
 import dynamic from "next/dynamic";
 
@@ -31,12 +31,12 @@ const FaInstagram = dynamic(() =>
 const FaPinterestP = dynamic(() =>
   import("react-icons/fa").then((mod) => mod.FaPinterestP)
 );
-const FiBarChart2 = dynamic(() =>
-  import("react-icons/fi").then((mod) => mod.FiBarChart2)
-);
-const FiHeart = dynamic(() =>
-  import("react-icons/fi").then((mod) => mod.FiHeart)
-);
+// const FiBarChart2 = dynamic(() =>
+//   import("react-icons/fi").then((mod) => mod.FiBarChart2)
+// );
+// const FiHeart = dynamic(() =>
+//   import("react-icons/fi").then((mod) => mod.FiHeart)
+// );
 
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
@@ -56,14 +56,9 @@ import { useRouter } from "@bprogress/next";
 import { useParams } from "next/navigation";
 import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { FinalProduct, ProductLN } from "@/types/product";
+import { ProductLN } from "@/types/product";
 
-const ProductInformation = ({
-  productName = "Box On The Wall",
-  price = 19.99,
-  description = "Introducing our Aluminum House Numbers, Installed on the wall. Crafted from high-quality aluminum with a layer of acrylic behind the Aluminum.The house numbers withstand the elements, backed by a 1-year warranty on the light and 5 years on the paint for your peace of mind.Enjoy free delivery, and installation by our team of experts.",
-  category = "Other",
-}: ProductIntroCartProps) => {
+const ProductInformation = () => {
   const { slug } = useParams();
 
   const product = findProductById(Number(slug));

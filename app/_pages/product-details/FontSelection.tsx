@@ -9,53 +9,53 @@ import { ProductLN } from "@/types/product";
 import Image from "next/image";
 import { useState } from "react";
 
-const fonts = [
-  {
-    id: 1,
-    image: "/images/products/fonts/f1.avif",
-    name: "Font 1",
-  },
-  {
-    id: 2,
-    image: "/images/products/fonts/f2.avif",
-    name: "Font 2",
-  },
-  {
-    id: 3,
-    image: "/images/products/fonts/f3.avif",
-    name: "Font 3",
-  },
-  {
-    id: 4,
-    image: "/images/products/fonts/f4.avif",
-    name: "Font 4",
-  },
-  {
-    id: 5,
-    image: "/images/products/fonts/f5.avif",
-    name: "Font 5",
-  },
-  {
-    id: 6,
-    image: "/images/products/fonts/f6.avif",
-    name: "Font 6",
-  },
-  {
-    id: 7,
-    image: "/images/products/fonts/f7.avif",
-    name: "Font 7",
-  },
-  {
-    id: 8,
-    image: "/images/products/fonts/f8.avif",
-    name: "Font 8",
-  },
-  {
-    id: 9,
-    image: "/images/products/fonts/f9.avif",
-    name: "Font 9",
-  },
-];
+// const fonts = [
+//   {
+//     id: 1,
+//     image: "/images/products/fonts/f1.avif",
+//     name: "Font 1",
+//   },
+//   {
+//     id: 2,
+//     image: "/images/products/fonts/f2.avif",
+//     name: "Font 2",
+//   },
+//   {
+//     id: 3,
+//     image: "/images/products/fonts/f3.avif",
+//     name: "Font 3",
+//   },
+//   {
+//     id: 4,
+//     image: "/images/products/fonts/f4.avif",
+//     name: "Font 4",
+//   },
+//   {
+//     id: 5,
+//     image: "/images/products/fonts/f5.avif",
+//     name: "Font 5",
+//   },
+//   {
+//     id: 6,
+//     image: "/images/products/fonts/f6.avif",
+//     name: "Font 6",
+//   },
+//   {
+//     id: 7,
+//     image: "/images/products/fonts/f7.avif",
+//     name: "Font 7",
+//   },
+//   {
+//     id: 8,
+//     image: "/images/products/fonts/f8.avif",
+//     name: "Font 8",
+//   },
+//   {
+//     id: 9,
+//     image: "/images/products/fonts/f9.avif",
+//     name: "Font 9",
+//   },
+// ];
 
 const FontSelection = ({ product }: { product: ProductLN }) => {
   const [selectedFont, setSelectedFont] = useState<number | null>(null);

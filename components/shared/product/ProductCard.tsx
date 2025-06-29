@@ -5,7 +5,6 @@ import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useLocale } from "next-intl";
 import { FinalProduct } from "@/types/product";
 import { useGetLocale } from "@/hooks/useGetLocale";
 

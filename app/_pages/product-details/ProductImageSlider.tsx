@@ -12,7 +12,6 @@ import { Swiper as SwiperType } from "swiper/types";
 // import { ProductDetails } from "@/types/product";
 import { ImageOff } from "lucide-react";
 import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
-import { Product } from "@/types/product";
 // import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
@@ -37,9 +36,9 @@ const TfiAngleRight = dynamic(() =>
 //   TOUCH_ACTIVATION,
 // } from "react-image-magnifiers";
 
-interface ProductImageSliderProps {
-  product: Product | null;
-}
+// interface ProductImageSliderProps {
+//   product: Product | null;
+// }
 
 const ProductImageSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);

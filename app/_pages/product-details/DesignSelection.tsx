@@ -9,33 +9,33 @@ import { ProductLN } from "@/types/product";
 import Image from "next/image";
 import { useState } from "react";
 
-const designs = [
-  {
-    id: 1,
-    image: "/images/products/design/design1.avif",
-    name: "Design 1",
-  },
-  {
-    id: 2,
-    image: "/images/products/design/design2.avif",
-    name: "Design 2",
-  },
-  {
-    id: 3,
-    image: "/images/products/design/design3.avif",
-    name: "Design 1",
-  },
-  {
-    id: 4,
-    image: "/images/products/design/design4.avif",
-    name: "Design 2",
-  },
-  {
-    id: 5,
-    image: "/images/products/design/design5.webp",
-    name: "Design 2",
-  },
-];
+// const designs = [
+//   {
+//     id: 1,
+//     image: "/images/products/design/design1.avif",
+//     name: "Design 1",
+//   },
+//   {
+//     id: 2,
+//     image: "/images/products/design/design2.avif",
+//     name: "Design 2",
+//   },
+//   {
+//     id: 3,
+//     image: "/images/products/design/design3.avif",
+//     name: "Design 1",
+//   },
+//   {
+//     id: 4,
+//     image: "/images/products/design/design4.avif",
+//     name: "Design 2",
+//   },
+//   {
+//     id: 5,
+//     image: "/images/products/design/design5.webp",
+//     name: "Design 2",
+//   },
+// ];
 
 const DesignSelection = ({ product }: { product: ProductLN }) => {
   const [selectedDesign, setSelectedDesign] = useState<number | null>(null);
