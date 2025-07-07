@@ -3,8 +3,9 @@
 import ProductCard from "@/components/shared/product/ProductCard";
 import React from "react";
 import { motion } from "framer-motion";
-import { products } from "@/data/products";
+// import { products } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { products } from "@/data/research-product";
 
 const RelatedProducts = () => {
   const locale = useGetLocale();

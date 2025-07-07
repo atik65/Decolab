@@ -43,7 +43,7 @@ type Font = {
 };
 
 export interface ProductLN {
-  id: number;
+  // id: number;
   title: string;
   images: string[];
   mainImage: string;

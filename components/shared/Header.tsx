@@ -9,6 +9,7 @@ import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import Image from "next/image";
 
 gsap.registerPlugin(useGSAP);
 
@@ -89,16 +90,28 @@ const Header: React.FC = () => {
           </button>
 
           {/* Logo */}
-          <Link
-            ref={logoRef}
-            href="/"
-            className="text-2xl font-bold tracking-tight hidden md:block"
-          >
-            {locale === "en" ? "One Direction" : "اتجاه واحد"}
-          </Link>
+          <div className="w-[15%] h-full flex items-center">
+            <Link
+              ref={logoRef}
+              href="/"
+              className="text-2xl font-bold tracking-tight hidden md:block "
+            >
+              {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
+              <Image
+                src="/images/logo.svg"
+                alt="One Direction"
+                className="w-full"
+                width={100}
+                height={100}
+              />
+            </Link>
+          </div>
 
           {/* Navigation */}
-          <nav ref={linksRef} className="hidden md:flex space-x-8">
+          <nav
+            ref={linksRef}
+            className="hidden md:flex justify-center space-x-8 w-[70%]"
+          >
             {navLinks.map((link) => (
               <Link
                 key={link.label}
@@ -111,7 +124,10 @@ const Header: React.FC = () => {
           </nav>
 
           {/* User Actions */}
-          <div ref={actionRef} className="flex items-center space-x-4 ">
+          <div
+            ref={actionRef}
+            className="flex justify-end items-center space-x-4 w-auto md:w-[15%] "
+          >
             {/* <Link
               href="/login"
               className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"

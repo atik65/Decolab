@@ -5,7 +5,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { ProductLN } from "@/types/product";
+import { ProductLN } from "@/data/research-product";
 import Image from "next/image";
 import { useState } from "react";
 

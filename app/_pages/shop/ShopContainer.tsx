@@ -2,7 +2,8 @@ import React from "react";
 import ProductCard from "@/components/shared/product/ProductCard";
 
 import ShopTopSection from "./ShopTopSection";
-import { products } from "@/data/products";
+import { products } from "@/data/research-product";
+// import { products } from "@/data/products";
 
 const ShopContainer = () => {
   // Mock data for products

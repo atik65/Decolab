@@ -4,7 +4,7 @@ export const products: FinalProduct[] = [
   {
     id: 1,
     ar: {
-      id: 1,
+      // id: 1,
       title: "لوحة أرقام منزلية كلاسيكية",
       images: [
         "/images/home/banner9.jpg",
@@ -118,7 +118,7 @@ export const products: FinalProduct[] = [
       ],
     },
     en: {
-      id: 1,
+      // id: 1,
       title: "Classic House Number Plaque",
       images: [
         "/images/home/banner9.jpg",

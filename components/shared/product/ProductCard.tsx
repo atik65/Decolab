@@ -5,8 +5,9 @@ import Link from "next/link";
 import React, { useRef, useState } from "react";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
-import { FinalProduct } from "@/types/product";
+// import { FinalProduct } from "@/types/product";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { FinalProduct } from "@/data/research-product";
 
 gsap.registerPlugin(useGSAP);
 
@@ -22,7 +23,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
     imageUrl: currentProduct.mainImage,
     title: currentProduct.title,
     subtitle: currentProduct.category,
-    price: currentProduct.price,
+    // price: currentProduct.price,
+    minPrice: currentProduct.minPrice,
+    maxPrice: currentProduct.maxPrice,
   });
 
   const [hoveredImage] = useState(currentProduct.hoveredImage);
@@ -107,7 +110,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
       <div className="h-6 mt-1  overflow-hidden">
         <div className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
           <span className="inline-block font-bold text-[#99b998]  text-sm  ">
-            {product[locale].price}
+            {/* {product[locale].price} */}
+            10 KD - 100 KD
           </span>
         </div>
 

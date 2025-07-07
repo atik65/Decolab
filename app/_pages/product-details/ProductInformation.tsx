@@ -54,9 +54,9 @@ import {
 } from "@/components/ui/select";
 import { useRouter } from "@bprogress/next";
 import { useParams } from "next/navigation";
-import { findProductById } from "@/data/products";
+// import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { ProductLN } from "@/types/product";
+import { findProductById, ProductLN } from "@/data/research-product";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -141,7 +141,8 @@ const ProductInformation = () => {
 
       {/* Product Price */}
       <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
-        ${currentProduct.price}
+        {/* ${currentProduct.price} */}
+        10000 KD
       </p>
 
       {/* Product Description */}
@@ -256,7 +257,7 @@ const ProductOptions = ({ product }: { product: ProductLN }) => {
       )}
 
       {/* How Many Digits dropdown */}
-      {product.digits.length > 0 && (
+      {product?.digits && product.digits.length > 0 && (
         <div>
           <label
             htmlFor="how-many-digits"

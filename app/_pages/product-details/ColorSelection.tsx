@@ -1,5 +1,5 @@
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { ProductLN } from "@/types/product";
+import { ProductLN } from "@/data/research-product";
 import { useState } from "react";
 
 interface Color {

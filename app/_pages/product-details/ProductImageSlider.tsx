@@ -15,8 +15,9 @@ import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 // import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
-import { findProductById } from "@/data/products";
+// import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { findProductById } from "@/data/research-product";
 
 const TfiAngleLeft = dynamic(() =>
   import("react-icons/tfi").then((mod) => mod.TfiAngleLeft)
