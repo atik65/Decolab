@@ -8,7 +8,7 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
-import { useGetLocale } from "@/hooks/useGetLocale";
+// import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
 
 gsap.registerPlugin(useGSAP);
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
   });
 
   const t = useTranslations("NavLinks");
-  const locale = useGetLocale();
+  // const locale = useGetLocale();
 
   return (
     <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">

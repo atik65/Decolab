@@ -57,6 +57,7 @@ import { useParams } from "next/navigation";
 // import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { findProductById, ProductLN } from "@/data/research-product";
+import { getProductPrice } from "@/utils/getProductPrice";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -67,6 +68,40 @@ const ProductInformation = () => {
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
+  const [size, setSize] = useState<string | null>(null);
+  const [digitCount, setDigitCount] = useState<number | null>(null);
+  const [color, setColor] = useState<string | null>(null);
+  const [lightColor, setLightColor] = useState<string | null>(null);
+  const [design, setDesign] = useState<string | null>(null);
+  const [font, setFont] = useState<string | null>(null);
+
+  const handleVariantChange = (
+    variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
+    value: string
+  ) => {
+    switch (variant) {
+      case "size":
+        setSize(value);
+        break;
+      case "digitCount":
+        setDigitCount(Number(value));
+        break;
+      case "color":
+        setColor(value);
+        break;
+      case "lightColor":
+        setLightColor(value);
+        break;
+      case "design":
+        setDesign(value);
+        break;
+      case "font":
+        setFont(value);
+        break;
+      default:
+        break;
+    }
+  };
 
   // Function to handle quantity change
   const handleQuantityChange = (type: "increase" | "decrease") => {
@@ -76,6 +111,8 @@ const ProductInformation = () => {
       setQuantity((prev) => prev - 1);
     }
   };
+
+  // console.log("size = ", size);
 
   const router = useRouter();
 
@@ -139,19 +176,43 @@ const ProductInformation = () => {
         </span>
       </div>
 
-      {/* Product Price */}
-      <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
-        {/* ${currentProduct.price} */}
-        10000 KD
-      </p>
-
       {/* Product Description */}
       <p className="mt-4 text-base text-gray-600">
         {currentProduct.description}
       </p>
 
+      {/* Product Price */}
+      {getProductPrice(
+        currentProduct,
+        size ? Number(size) : undefined,
+        digitCount ? Number(digitCount) : undefined
+      ) ? (
+        <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
+          {getProductPrice(
+            currentProduct,
+            size ? Number(size) : undefined,
+            digitCount ? Number(digitCount) : undefined
+          ) + " KD"}
+        </p>
+      ) : (
+        <p className="animate-pulse font-bold mt-4 text-base text-gray-900">
+          {locale === "en"
+            ? "Please select a size and digit count to see the price"
+            : "الرجاء اختيار حجم وعدد الأرقام لعرض السعر"}
+        </p>
+      )}
+
       {/* Product options */}
-      <ProductOptions product={currentProduct} />
+      <ProductOptions
+        handleVariantChange={handleVariantChange}
+        size={size}
+        digitCount={digitCount}
+        color={color}
+        lightColor={lightColor}
+        design={design}
+        font={font}
+        product={currentProduct}
+      />
 
       {/* Quantity Selector and place order */}
       <div className="mt-6 flex items-center space-x-3">
@@ -181,7 +242,7 @@ const ProductInformation = () => {
           onClick={handleOrderNow}
           className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center"
         >
-          <span>Order Now </span>
+          <span>{locale === "en" ? "Order Now" : "الآن تأكد"}</span>
           <BaggageClaim size={16} />
         </button>
       </div>
@@ -220,7 +281,28 @@ const ProductInformation = () => {
 
 export default ProductInformation;
 
-const ProductOptions = ({ product }: { product: ProductLN }) => {
+const ProductOptions = ({
+  product,
+  handleVariantChange,
+  // size,
+  // digitCount,
+  // color,
+  // lightColor,
+  // design,
+  // font,
+}: {
+  product: ProductLN;
+  handleVariantChange: (
+    variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
+    value: string
+  ) => void;
+  size: string | null;
+  digitCount: number | null;
+  color: string | null;
+  lightColor: string | null;
+  design: string | null;
+  font: string | null;
+}) => {
   const locale = useGetLocale();
 
   return (
@@ -237,7 +319,7 @@ const ProductOptions = ({ product }: { product: ProductLN }) => {
             <span className="text-red-500">*</span>
           </label>
 
-          <Select>
+          <Select onValueChange={(value) => handleVariantChange("size", value)}>
             <SelectTrigger className="">
               <SelectValue
                 placeholder={
@@ -247,7 +329,7 @@ const ProductOptions = ({ product }: { product: ProductLN }) => {
             </SelectTrigger>
             <SelectContent>
               {product.sizes.map((size) => (
-                <SelectItem key={size.id} value={size.value}>
+                <SelectItem key={size.id} value={size.id.toString()}>
                   {size.title}
                 </SelectItem>
               ))}
@@ -266,7 +348,9 @@ const ProductOptions = ({ product }: { product: ProductLN }) => {
             {locale === "en" ? "How Many Digits" : "عدد الأرقام"}{" "}
             <span className="text-red-500">*</span>
           </label>
-          <Select>
+          <Select
+            onValueChange={(value) => handleVariantChange("digitCount", value)}
+          >
             <SelectTrigger className="">
               <SelectValue
                 placeholder={

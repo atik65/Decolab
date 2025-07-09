@@ -157,11 +157,11 @@ export class PricingCalculator {
 
 // Complete product catalog based on the provided image
 export const products: FinalProduct[] = [
-  // 1. Car Shade (علي مظلة للسيارات)
+  // 1. On Car Awnings (حول مظلات السيارات)
   {
     id: 1,
     ar: {
-      title: "علي مظلة للسيارات",
+      title: "حول مظلات السيارات",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -235,7 +235,7 @@ export const products: FinalProduct[] = [
       availableInstallationTypes: ["outdoor"],
     },
     en: {
-      title: "Car Shade Sign",
+      title: "On Car Awnings",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -867,11 +867,11 @@ export const products: FinalProduct[] = [
     },
   },
 
-  // 3. Wall Box Sign (بوكس على الحائط)
+  // 3. Box on the wall ( صندوق على الحائط)
   {
     id: 3,
     ar: {
-      title: "بوكس على الحائط",
+      title: "صندوق على الحائط",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -968,7 +968,7 @@ export const products: FinalProduct[] = [
       availableInstallationTypes: ["wall"],
     },
     en: {
-      title: "Wall Box Sign",
+      title: "Box on the wall",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -1090,11 +1090,11 @@ export const products: FinalProduct[] = [
     },
   },
 
-  // 4. Ground Sign (على الأرض)
+  // 4. On the floor (على الارض)
   {
     id: 4,
     ar: {
-      title: "لافتة على الأرض",
+      title: "على الارض",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -1185,7 +1185,7 @@ export const products: FinalProduct[] = [
       availableInstallationTypes: ["ground"],
     },
     en: {
-      title: "Ground Sign",
+      title: "On the floor",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -1301,11 +1301,11 @@ export const products: FinalProduct[] = [
     },
   },
 
-  // 5. Custom Design (تصميم الخط)
+  // 5. Font Design (تصميم الخط)
   {
     id: 5,
     ar: {
-      title: "تصميم مخصص",
+      title: "تصميم الخط",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
@@ -1411,7 +1411,7 @@ export const products: FinalProduct[] = [
       availableInstallationTypes: ["wall", "ground", "door"],
     },
     en: {
-      title: "Custom Design",
+      title: "Font Design",
       images: [
         "/images/home/banner9.jpg",
         "/images/home/banner8.jpg",
