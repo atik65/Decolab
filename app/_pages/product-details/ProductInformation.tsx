@@ -58,6 +58,10 @@ import { useParams } from "next/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { findProductById, ProductLN } from "@/data/research-product";
 import { getProductPrice } from "@/utils/getProductPrice";
+import { useFormik } from "formik";
+// import { productValidation } from "./productValidation";
+import { enqueueSnackbar } from "notistack";
+import * as Yup from "yup";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -103,15 +107,6 @@ const ProductInformation = () => {
     }
   };
 
-  // Function to handle quantity change
-  const handleQuantityChange = (type: "increase" | "decrease") => {
-    if (type === "increase") {
-      setQuantity((prev) => prev + 1);
-    } else if (type === "decrease" && quantity > 1) {
-      setQuantity((prev) => prev - 1);
-    }
-  };
-
   // console.log("size = ", size);
 
   const router = useRouter();
@@ -119,6 +114,78 @@ const ProductInformation = () => {
   const handleOrderNow = () => {
     router.push("/checkout");
   };
+
+  const productValidation = Yup.object().shape({
+    ...(currentProduct?.sizes?.length ?? 0 > 0
+      ? { size: Yup.string().required("Size is required") }
+      : {}),
+
+    ...(currentProduct?.digits?.length ?? 0 > 0
+      ? { digitCount: Yup.number().required("Digit count is required") }
+      : {}),
+    ...(currentProduct?.colors?.length ?? 0 > 0
+      ? { color: Yup.string().required("Color is required") }
+      : {}),
+    ...(currentProduct?.lightColors?.length ?? 0 > 0
+      ? { lightColor: Yup.string().required("Light color is required") }
+      : {}),
+    houseNumber: Yup.string().required("House number is required"),
+    text: Yup.string().required("Text is required"),
+    ...(currentProduct?.designs?.length ?? 0 > 0
+      ? { design: Yup.string().required("Design is required") }
+      : {}),
+    ...(currentProduct?.fonts?.length ?? 0 > 0
+      ? { font: Yup.string().required("Font is required") }
+      : {}),
+    quantity: Yup.number().required("Quantity is required"),
+  });
+
+  const {
+    values,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+    errors,
+    touched,
+    resetForm,
+  } = useFormik({
+    initialValues: {
+      size: "",
+      digitCount: "",
+      color: "",
+      lightColor: "",
+      houseNumber: "",
+      text: "",
+      design: "",
+      font: "",
+      quantity: 1,
+    },
+    validationSchema: productValidation,
+    onSubmit: (values) => {
+      console.log(values);
+      enqueueSnackbar("Checkout is Initiating.", {
+        variant: "success",
+        style: {
+          backgroundColor: "#87A786",
+          color: "white",
+        },
+      });
+      router.push("/checkout");
+    },
+  });
+
+  // Function to handle quantity change
+  const handleQuantityChange = (type: "increase" | "decrease") => {
+    if (type === "increase") {
+      setQuantity((prev) => prev + 1);
+      setFieldValue("quantity", values.quantity + 1);
+    } else if (type === "decrease" && quantity > 1) {
+      setQuantity((prev) => prev - 1);
+      setFieldValue("quantity", values.quantity - 1);
+    }
+  };
+
+  console.log(errors);
 
   if (!currentProduct) {
     return <div>Product not found</div>;
@@ -184,14 +251,14 @@ const ProductInformation = () => {
       {/* Product Price */}
       {getProductPrice(
         currentProduct,
-        size ? Number(size) : undefined,
-        digitCount ? Number(digitCount) : undefined
+        values.size ? Number(values.size) : undefined,
+        values.digitCount ? Number(values.digitCount) : undefined
       ) ? (
         <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
           {getProductPrice(
             currentProduct,
-            size ? Number(size) : undefined,
-            digitCount ? Number(digitCount) : undefined
+            values.size ? Number(values.size) : undefined,
+            values.digitCount ? Number(values.digitCount) : undefined
           ) + " KD"}
         </p>
       ) : (
@@ -202,50 +269,58 @@ const ProductInformation = () => {
         </p>
       )}
 
-      {/* Product options */}
-      <ProductOptions
-        handleVariantChange={handleVariantChange}
-        size={size}
-        digitCount={digitCount}
-        color={color}
-        lightColor={lightColor}
-        design={design}
-        font={font}
-        product={currentProduct}
-      />
+      <form onSubmit={handleSubmit}>
+        {/* Product options */}
+        <ProductOptions
+          // handleVariantChange={handleVariantChange}
+          size={values.size}
+          digitCount={Number(values.digitCount)}
+          color={values.color}
+          lightColor={values.lightColor}
+          design={values.design}
+          font={values.font}
+          product={currentProduct}
+          values={values}
+          errors={errors}
+          touched={touched}
+          setFieldValue={setFieldValue}
+          handleChange={handleChange}
+        />
 
-      {/* Quantity Selector and place order */}
-      <div className="mt-6 flex items-center space-x-3">
-        {/* Quantity Selector */}
-        <div className="flex items-center space-x-1">
+        {/* Quantity Selector and place order */}
+        <div className="mt-6 flex items-center space-x-3">
+          {/* Quantity Selector */}
+          <div className="flex items-center space-x-1">
+            <button
+              type="button"
+              onClick={() => handleQuantityChange("decrease")}
+              className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none  "
+            >
+              -
+            </button>
+            <span className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white">
+              {values.quantity}
+            </span>
+            <button
+              type="button"
+              onClick={() => handleQuantityChange("increase")}
+              className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
+            >
+              +
+            </button>
+          </div>
+
+          {/* order now Button */}
           <button
-            type="button"
-            onClick={() => handleQuantityChange("decrease")}
-            className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none  "
+            type="submit"
+            // onClick={handleOrderNow}
+            className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center"
           >
-            -
-          </button>
-          <span className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white">
-            {quantity}
-          </span>
-          <button
-            type="button"
-            onClick={() => handleQuantityChange("increase")}
-            className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
-          >
-            +
+            <span>{locale === "en" ? "Order Now" : "الآن تأكد"}</span>
+            <BaggageClaim size={16} />
           </button>
         </div>
-
-        {/* order now Button */}
-        <button
-          onClick={handleOrderNow}
-          className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center"
-        >
-          <span>{locale === "en" ? "Order Now" : "الآن تأكد"}</span>
-          <BaggageClaim size={16} />
-        </button>
-      </div>
+      </form>
 
       {/* Additional Actions  */}
       {/* <div className="mt-4 flex items-center space-x-4">
@@ -283,25 +358,65 @@ export default ProductInformation;
 
 const ProductOptions = ({
   product,
-  handleVariantChange,
-  // size,
-  // digitCount,
-  // color,
-  // lightColor,
-  // design,
-  // font,
-}: {
+  // handleVariantChange,
+  values,
+  errors,
+  touched,
+  setFieldValue,
+  handleChange,
+}: // size,
+// digitCount,
+// color,
+// lightColor,
+// design,
+// font,
+{
   product: ProductLN;
-  handleVariantChange: (
-    variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
-    value: string
-  ) => void;
+  // handleVariantChange: (
+  //   variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
+  //   value: string
+  // ) => void;
   size: string | null;
   digitCount: number | null;
   color: string | null;
   lightColor: string | null;
   design: string | null;
   font: string | null;
+  values: {
+    size: string;
+    digitCount: string;
+    color: string;
+    lightColor: string;
+    design: string;
+    font: string;
+    houseNumber: string;
+    text: string;
+    quantity: number;
+  };
+  errors: {
+    size?: string;
+    digitCount?: string;
+    color?: string;
+    lightColor?: string;
+    design?: string;
+    font?: string;
+    houseNumber?: string;
+    text?: string;
+    quantity?: string;
+  };
+  touched: {
+    size?: boolean;
+    digitCount?: boolean;
+    color?: boolean;
+    lightColor?: boolean;
+    design?: boolean;
+    font?: boolean;
+    houseNumber?: boolean;
+    text?: boolean;
+    quantity?: boolean;
+  };
+  setFieldValue: (field: string, value: unknown) => void;
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const locale = useGetLocale();
 
@@ -319,7 +434,11 @@ const ProductOptions = ({
             <span className="text-red-500">*</span>
           </label>
 
-          <Select onValueChange={(value) => handleVariantChange("size", value)}>
+          <Select
+            value={values.size}
+            onValueChange={(value) => setFieldValue("size", value)}
+          >
+            {/* <Select onValueChange={(value) => handleVariantChange("size", value)}> */}
             <SelectTrigger className="">
               <SelectValue
                 placeholder={
@@ -335,6 +454,13 @@ const ProductOptions = ({
               ))}
             </SelectContent>
           </Select>
+
+          {/* Error Message */}
+          {errors?.size && touched?.size && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors?.size as string}
+            </p>
+          )}
         </div>
       )}
 
@@ -349,7 +475,8 @@ const ProductOptions = ({
             <span className="text-red-500">*</span>
           </label>
           <Select
-            onValueChange={(value) => handleVariantChange("digitCount", value)}
+            value={values.digitCount.toString()}
+            onValueChange={(value) => setFieldValue("digitCount", value)}
           >
             <SelectTrigger className="">
               <SelectValue
@@ -360,41 +487,100 @@ const ProductOptions = ({
             </SelectTrigger>
             <SelectContent>
               {product.digits.map((digit) => (
-                <SelectItem key={digit.id} value={digit.value.toString()}>
+                <SelectItem key={digit.id} value={digit.id.toString()}>
                   {digit.title}
                 </SelectItem>
               ))}
             </SelectContent>
           </Select>
+
+          {/* Error Message */}
+          {errors?.digitCount && touched?.digitCount && (
+            <p className="text-red-500 text-sm mt-1">
+              {errors?.digitCount as string}
+            </p>
+          )}
         </div>
       )}
 
       {/* Color Options */}
-      {product.colors.length > 0 && <ColorOptions product={product} />}
+      {product.colors.length > 0 && (
+        <ColorOptions
+          values={values}
+          setFieldValue={setFieldValue}
+          errors={errors}
+          touched={touched}
+          product={product}
+        />
+      )}
       {/*Light Color Options */}
       {product.lightColors.length > 0 && (
-        <LightColorOptions product={product} />
+        <LightColorOptions
+          values={values}
+          setFieldValue={setFieldValue}
+          errors={errors}
+          touched={touched}
+          product={product}
+        />
       )}
       {/* House Number Input */}
 
-      <Input
-        label={locale === "en" ? "House Number" : "رقم المنزل"}
-        type="number"
-        name="house-number"
-        id="house-number"
-      />
+      <div>
+        <Input
+          label={locale === "en" ? "House Number" : "رقم المنزل"}
+          type="number"
+          name="houseNumber"
+          id="house-number"
+          value={values.houseNumber}
+          onChange={handleChange}
+        />
+        {/* Error Message */}
+        {errors?.houseNumber && touched?.houseNumber && (
+          <p className="text-red-500 text-sm mt-1">
+            {errors?.houseNumber as string}
+          </p>
+        )}
+      </div>
+
       {/* Text Area */}
-      <TextArea
-        label={locale === "en" ? "Text" : "النص"}
-        name="text"
-        id="text"
-        rows={4}
-      />
+      <div>
+        <TextArea
+          label={locale === "en" ? "Text" : "النص"}
+          name="text"
+          id="text"
+          rows={4}
+          value={values.text}
+          onChange={(e) => {
+            setFieldValue("text", e.target.value);
+            // handleChange(e);
+          }}
+        />
+        {/* Error Message */}
+        {errors?.text && touched?.text && (
+          <p className="text-red-500 text-sm mt-1">{errors?.text as string}</p>
+        )}
+      </div>
 
       {/* design selection */}
-      {product.designs.length > 0 && <DesignSelection product={product} />}
+      {product.designs.length > 0 && (
+        <DesignSelection
+          values={values}
+          setFieldValue={setFieldValue}
+          errors={errors}
+          touched={touched}
+          product={product}
+        />
+      )}
       {/* Font selection */}
-      {product.fonts.length > 0 && <FontSelection product={product} />}
+      {product.fonts.length > 0 && (
+        <FontSelection
+          values={values}
+          setFieldValue={setFieldValue}
+          errors={errors}
+          touched={touched}
+          product={product}
+        />
+      )}
     </div>
   );
 };

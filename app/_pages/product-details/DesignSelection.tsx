@@ -37,7 +37,19 @@ import { useState } from "react";
 //   },
 // ];
 
-const DesignSelection = ({ product }: { product: ProductLN }) => {
+const DesignSelection = ({
+  product,
+  values,
+  setFieldValue,
+  errors,
+  touched,
+}: {
+  product: ProductLN;
+  values: { design: string };
+  setFieldValue: (field: string, value: unknown) => void;
+  errors: { design?: string };
+  touched: { design?: boolean };
+}) => {
   const [selectedDesign, setSelectedDesign] = useState<number | null>(null);
   const locale = useGetLocale();
 
@@ -56,7 +68,8 @@ const DesignSelection = ({ product }: { product: ProductLN }) => {
               htmlFor="size"
               className="block text-sm font-bold text-gray-700"
             >
-              {locale === "en" ? "Select Design" : "اختر التصميم"} <span className="text-red-500">*</span>
+              {locale === "en" ? "Select Design" : "اختر التصميم"}{" "}
+              <span className="text-red-500">*</span>
             </label>
           </AccordionTrigger>
           <AccordionContent>
@@ -66,7 +79,10 @@ const DesignSelection = ({ product }: { product: ProductLN }) => {
                 return (
                   <div
                     key={design.id}
-                    onClick={() => handleDesignSelect(design.id)}
+                    onClick={() => {
+                      setFieldValue("design", design.id.toString());
+                      handleDesignSelect(design.id);
+                    }}
                     className={`relative cursor-pointer transition-all duration-200 ${
                       isSelected
                         ? "ring-2 ring-[#87A786] ring-offset-2 scale-100"
@@ -86,6 +102,13 @@ const DesignSelection = ({ product }: { product: ProductLN }) => {
                 );
               })}
             </div>
+
+            {/* Error Message */}
+            {errors?.design && touched?.design && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors?.design as string}
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

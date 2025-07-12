@@ -57,7 +57,19 @@ import { useState } from "react";
 //   },
 // ];
 
-const FontSelection = ({ product }: { product: ProductLN }) => {
+const FontSelection = ({
+  product,
+  values,
+  setFieldValue,
+  errors,
+  touched,
+}: {
+  product: ProductLN;
+  values: { font: string };
+  setFieldValue: (field: string, value: unknown) => void;
+  errors: { font?: string };
+  touched: { font?: boolean };
+}) => {
   const [selectedFont, setSelectedFont] = useState<number | null>(null);
   const locale = useGetLocale();
 
@@ -87,7 +99,10 @@ const FontSelection = ({ product }: { product: ProductLN }) => {
                 return (
                   <div
                     key={font.id}
-                    onClick={() => handleFontSelect(font.id)}
+                    onClick={() => {
+                      handleFontSelect(font.id);
+                      setFieldValue("font", font.id.toString());
+                    }}
                     className={`relative cursor-pointer transition-all duration-200 ${
                       isSelected
                         ? "ring-2 ring-[#87A786] ring-offset-2 scale-100"
@@ -107,6 +122,13 @@ const FontSelection = ({ product }: { product: ProductLN }) => {
                 );
               })}
             </div>
+
+            {/* Error Message */}
+            {errors?.font && touched?.font && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors?.font as string}
+              </p>
+            )}
           </AccordionContent>
         </AccordionItem>
       </Accordion>

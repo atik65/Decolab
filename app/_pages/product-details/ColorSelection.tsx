@@ -19,7 +19,19 @@ interface Color {
 // ];
 
 // Color selection
-export const ColorOptions = ({ product }: { product: ProductLN }) => {
+export const ColorOptions = ({
+  product,
+  values,
+  setFieldValue,
+  errors,
+  touched,
+}: {
+  product: ProductLN;
+  values: { color: string };
+  setFieldValue: (field: string, value: unknown) => void;
+  errors: { color?: string };
+  touched: { color?: boolean };
+}) => {
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const locale = useGetLocale();
 
@@ -35,15 +47,19 @@ export const ColorOptions = ({ product }: { product: ProductLN }) => {
       <div className="flex flex-wrap gap-2">
         {product.colors.map((color) => (
           <button
-            key={color.name}
-            onClick={() => handleColorSelect(color)}
+            key={color.id}
+            // onClick={() => handleColorSelect(color)}
+            onClick={() => {
+              setFieldValue("color", color.id);
+              setSelectedColor(color);
+            }}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full border hover:border-[#87A786] transition-colors ${
-              selectedColor?.name === color.name
+              values.color == color.id.toString()
                 ? "border-[#87A786]"
                 : "border-gray-200"
             }`}
           >
-            {selectedColor?.name === color.name ? (
+            {values.color == color.id.toString() ? (
               <svg
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
@@ -68,6 +84,10 @@ export const ColorOptions = ({ product }: { product: ProductLN }) => {
           </button>
         ))}
       </div>
+
+      {errors.color && touched.color && (
+        <div className="text-red-500 text-xs mt-1">{errors.color}</div>
+      )}
 
       {/* Selected Color Chip */}
       {selectedColor && (
@@ -106,7 +126,19 @@ export const ColorOptions = ({ product }: { product: ProductLN }) => {
 
 // Light Color selection
 
-export const LightColorOptions = ({ product }: { product: ProductLN }) => {
+export const LightColorOptions = ({
+  product,
+  values,
+  setFieldValue,
+  errors,
+  touched,
+}: {
+  product: ProductLN;
+  values: { lightColor: string };
+  setFieldValue: (field: string, value: unknown) => void;
+  errors: { lightColor?: string };
+  touched: { lightColor?: boolean };
+}) => {
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const locale = useGetLocale();
 
@@ -122,15 +154,18 @@ export const LightColorOptions = ({ product }: { product: ProductLN }) => {
       <div className="flex flex-wrap gap-2">
         {product.lightColors.map((color) => (
           <button
-            key={color.name}
-            onClick={() => handleColorSelect(color)}
+            key={color.id}
+            onClick={() => {
+              setFieldValue("lightColor", color.id);
+              setSelectedColor(color);
+            }}
             className={`flex items-center gap-2 px-4 py-1.5 rounded-full border hover:border-[#87A786] transition-colors ${
-              selectedColor?.name === color.name
+              values.lightColor == color.id.toString()
                 ? "border-[#87A786]"
                 : "border-gray-200"
             }`}
           >
-            {selectedColor?.name === color.name ? (
+            {values.lightColor == color.id.toString() ? (
               <svg
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
@@ -157,6 +192,11 @@ export const LightColorOptions = ({ product }: { product: ProductLN }) => {
           </button>
         ))}
       </div>
+
+      {/* error message */}
+      {errors.lightColor && touched.lightColor && (
+        <div className="text-red-500 text-xs mt-1">{errors.lightColor}</div>
+      )}
 
       {/* Selected Color Chip */}
       {selectedColor && (
