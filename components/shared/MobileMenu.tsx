@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import logo from "/images/logo.svg";
+// import logo from "/images/logo.svg";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
 import {
@@ -68,7 +68,7 @@ const MobileMenu = ({
       {/* Navigation Links */}
       <div className="flex-1 py-6">
         <nav className="space-y-2 px-0">
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <Link
               onClick={() => onOpenChange(false)}
               key={link.label}

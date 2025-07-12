@@ -72,48 +72,48 @@ const ProductInformation = () => {
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
-  const [size, setSize] = useState<string | null>(null);
-  const [digitCount, setDigitCount] = useState<number | null>(null);
-  const [color, setColor] = useState<string | null>(null);
-  const [lightColor, setLightColor] = useState<string | null>(null);
-  const [design, setDesign] = useState<string | null>(null);
-  const [font, setFont] = useState<string | null>(null);
+  // const [size, setSize] = useState<string | null>(null);
+  // const [digitCount, setDigitCount] = useState<number | null>(null);
+  // const [color, setColor] = useState<string | null>(null);
+  // const [lightColor, setLightColor] = useState<string | null>(null);
+  // const [design, setDesign] = useState<string | null>(null);
+  // const [font, setFont] = useState<string | null>(null);
 
-  const handleVariantChange = (
-    variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
-    value: string
-  ) => {
-    switch (variant) {
-      case "size":
-        setSize(value);
-        break;
-      case "digitCount":
-        setDigitCount(Number(value));
-        break;
-      case "color":
-        setColor(value);
-        break;
-      case "lightColor":
-        setLightColor(value);
-        break;
-      case "design":
-        setDesign(value);
-        break;
-      case "font":
-        setFont(value);
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleVariantChange = (
+  //   variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
+  //   value: string
+  // ) => {
+  //   switch (variant) {
+  //     case "size":
+  //       setSize(value);
+  //       break;
+  //     case "digitCount":
+  //       setDigitCount(Number(value));
+  //       break;
+  //     case "color":
+  //       setColor(value);
+  //       break;
+  //     case "lightColor":
+  //       setLightColor(value);
+  //       break;
+  //     case "design":
+  //       setDesign(value);
+  //       break;
+  //     case "font":
+  //       setFont(value);
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   // console.log("size = ", size);
 
   const router = useRouter();
 
-  const handleOrderNow = () => {
-    router.push("/checkout");
-  };
+  // const handleOrderNow = () => {
+  //   router.push("/checkout");
+  // };
 
   const productValidation = Yup.object().shape({
     ...(currentProduct?.sizes?.length ?? 0 > 0
@@ -147,7 +147,7 @@ const ProductInformation = () => {
     setFieldValue,
     errors,
     touched,
-    resetForm,
+    // resetForm,
   } = useFormik({
     initialValues: {
       size: "",

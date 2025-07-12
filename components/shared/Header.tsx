@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import { Menu, X } from "lucide-react";
+import {   X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";

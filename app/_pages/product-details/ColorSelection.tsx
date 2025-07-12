@@ -35,9 +35,9 @@ export const ColorOptions = ({
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const locale = useGetLocale();
 
-  const handleColorSelect = (color: Color) => {
-    setSelectedColor(color);
-  };
+  // const handleColorSelect = (color: Color) => {
+  //   setSelectedColor(color);
+  // };
 
   return (
     <div className="">
@@ -142,9 +142,9 @@ export const LightColorOptions = ({
   const [selectedColor, setSelectedColor] = useState<Color | null>(null);
   const locale = useGetLocale();
 
-  const handleColorSelect = (color: Color) => {
-    setSelectedColor(color);
-  };
+  // const handleColorSelect = (color: Color) => {
+  //   setSelectedColor(color);
+  // };
 
   return (
     <div className="">

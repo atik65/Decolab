@@ -59,7 +59,7 @@ import { useState } from "react";
 
 const FontSelection = ({
   product,
-  values,
+  // values,
   setFieldValue,
   errors,
   touched,

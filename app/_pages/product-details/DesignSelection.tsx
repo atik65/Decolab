@@ -39,7 +39,7 @@ import { useState } from "react";
 
 const DesignSelection = ({
   product,
-  values,
+  // values,
   setFieldValue,
   errors,
   touched,
