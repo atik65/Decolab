@@ -10,6 +10,7 @@ import { useTranslations } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 // import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
+import MobileMenuSidebar from "./MobileMenuSidebar";
 
 gsap.registerPlugin(useGSAP);
 
@@ -18,7 +19,7 @@ interface NavLink {
   label: string;
 }
 
-const navLinks: NavLink[] = [
+export const navLinks: NavLink[] = [
   { href: "/", label: "houseNumbers" },
   { href: "/", label: "diwaniya" },
   { href: "/", label: "islamicPhrases" },
@@ -81,13 +82,17 @@ const Header: React.FC = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Mobile Menu Button */}
-          <button
+          {/* <button
             className="md:hidden text-gray-700 hover:text-black transition-colors"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle mobile menu"
           >
             <Menu size={24} />
-          </button>
+          </button> */}
+          <MobileMenuSidebar
+            isOpen={isMobileMenuOpen}
+            onOpenChange={setIsMobileMenuOpen}
+          />
 
           {/* Logo */}
           <div className="w-[15%] h-full flex items-center">
@@ -193,7 +198,7 @@ const Header: React.FC = () => {
         )}
 
         {/* Mobile Menu */}
-        <div
+        {/* <div
           className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${
             isMobileMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
           }`}
@@ -216,16 +221,9 @@ const Header: React.FC = () => {
                   {link.label}
                 </Link>
               ))}
-              {/* <Link
-                href="/login"
-                className="py-2 text-gray-700 hover:text-black transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                LOGIN / REGISTER
-              </Link> */}
             </nav>
           </div>
-        </div>
+        </div> */}
       </div>
     </header>
   );
