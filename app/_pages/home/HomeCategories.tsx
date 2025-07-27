@@ -21,7 +21,7 @@ const categories = [
   },
   {
     id: 2,
-    image: "/images/home/banner9.jpg",
+    image: "/products/font-design/14.jpeg",
 
     en: {
       title: "Banner & Stickers",
@@ -34,7 +34,7 @@ const categories = [
   },
   {
     id: 3,
-    image: "/images/home/banner9.jpg",
+    image: "/products/house-numbers/6.jpeg",
 
     en: {
       title: "House Numbers",
@@ -113,7 +113,7 @@ function CategoryCard({ data }: { data?: Category }) {
           alt=""
           width={500}
           height={500}
-          className="w-full object-contain group-hover:scale-110 group-hover:translate-x-3  duration-500"
+          className="w-full  group-hover:scale-110 group-hover:translate-x-3 h-20 sm:h-32 md:h-20 lg:h-20 xl:h-32 2xl:h-40 object-cover  duration-500"
         />
       </div>
     </div>
