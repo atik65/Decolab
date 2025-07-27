@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 interface ProductInfo {
-  productId: string;
+  productId?: string;
   sizeId: string;
   digitId?: string;
   colorId: string;
@@ -11,6 +11,7 @@ interface ProductInfo {
   designId: string;
   fontId: string;
   quantity: number;
+  price: number;
 }
 
 interface OrderStore {
@@ -21,16 +22,17 @@ interface OrderStore {
 
 export const useOrderStore = create<OrderStore>((set) => ({
   productInfo: {
-    productId: "",
-    sizeId: "",
-    digitId: "",
-    colorId: "",
-    lightColorId: "",
-    houseNumber: "",
-    text: "",
-    designId: "",
-    fontId: "",
+    productId: "2",
+    sizeId: "1",
+    digitId: "2",
+    colorId: "1",
+    lightColorId: "1",
+    houseNumber: "1",
+    text: "xxx",
+    designId: "1",
+    fontId: "1",
     quantity: 1,
+    price: 0,
   },
 
   // set product info
@@ -53,6 +55,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
         designId: "",
         fontId: "",
         quantity: 1,
+        price: 0,
       },
     })),
 }));

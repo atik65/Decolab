@@ -46,7 +46,11 @@ const MobileMenu = ({
   return (
     <div className="flex flex-col h-full">
       {/* Header with Logo */}
-      <div className="flex items-center justify-start py-2 px-3 border-b border-gray-100">
+      <Link
+        onClick={() => onOpenChange(false)}
+        href="/"
+        className="flex items-center justify-start py-2 px-3 border-b border-gray-100"
+      >
         {/* <div className="flex items-center space-x-3">
           <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
             <div className="w-6 h-6 bg-white rounded-md"></div>
@@ -63,7 +67,7 @@ const MobileMenu = ({
           height={100}
           className="w-40 "
         />
-      </div>
+      </Link>
 
       {/* Navigation Links */}
       <div className="flex-1 py-6">

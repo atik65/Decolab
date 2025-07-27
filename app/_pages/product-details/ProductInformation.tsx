@@ -62,6 +62,7 @@ import { useFormik } from "formik";
 // import { productValidation } from "./productValidation";
 import { enqueueSnackbar } from "notistack";
 import * as Yup from "yup";
+import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -110,6 +111,7 @@ const ProductInformation = () => {
   // console.log("size = ", size);
 
   const router = useRouter();
+  const { setProductInfo } = useOrderStore();
 
   // const handleOrderNow = () => {
   //   router.push("/checkout");
@@ -170,6 +172,32 @@ const ProductInformation = () => {
           color: "white",
         },
       });
+
+      const orderStorePayload = {
+        productId: Array.isArray(slug) ? slug[0] : slug?.toString(),
+        sizeId: values.size?.toString(),
+        ...(currentProduct?.digits?.length ?? 0 > 0
+          ? { digitId: values.digitCount?.toString() }
+          : {}),
+
+        colorId: values.color?.toString(),
+        lightColorId: values.lightColor?.toString(),
+        houseNumber: values.houseNumber,
+        text: values.text,
+        designId: values.design?.toString(),
+        fontId: values.font?.toString(),
+        quantity: values.quantity,
+        price:
+          getProductPrice(
+            currentProduct!,
+            values.size ? Number(values.size) : undefined,
+            values.digitCount ? Number(values.digitCount) : undefined
+          ) || 0,
+      };
+
+      // set product order - info to global state
+      setProductInfo(orderStorePayload);
+
       router.push("/checkout");
     },
   });
@@ -185,7 +213,7 @@ const ProductInformation = () => {
     }
   };
 
-  console.log(errors);
+  // console.log(errors);
 
   if (!currentProduct) {
     return <div>Product not found</div>;
