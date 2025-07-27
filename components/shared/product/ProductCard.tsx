@@ -88,13 +88,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       href={`/products/${product.id}`}
       className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer"
     >
-      <div className="overflow-hidden">
+      <div className="overflow-hidden  ">
         <Image
           ref={imageRef}
           height={500}
           width={500}
           // className="w-full mx-auto object-contain mt-0 pt-0 group-hover:scale-105 duration-300 "
-          className="w-full mx-auto object-contain mt-0 pt-0 "
+          className="w-full mx-auto object-cover h-48 mt-0 pt-0 "
           src={currentImage}
           alt={"Product"}
         />

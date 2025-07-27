@@ -177,7 +177,7 @@ const ThumbsComponent = ({
         alt="product image"
         // src={"/images/home/bed.png"}
         src={imgURI}
-        className={` border-[5px] h-16 w-20 md:h-auto xl:h-[80px] md:w-40 object-cover ${
+        className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
           index === activeIndex ? "border-[#99b998]" : "border-transparent "
         }`}
       />
@@ -196,7 +196,10 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
         width={500}
         className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
       /> */}
-      <ImageZoomViewModal imgURI={imgURI} className="mx-auto" />
+      <ImageZoomViewModal
+        imgURI={imgURI}
+        className="mx-auto h-[300px] sm:h-[402px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[550px] object-contain items-center"
+      />
     </div>
   );
 };
