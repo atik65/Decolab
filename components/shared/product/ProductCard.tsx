@@ -7,7 +7,6 @@ import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
 // import { FinalProduct } from "@/types/product";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { FinalProduct } from "@/data/research-product";
 import { Product } from "@/types/api/products";
 
 gsap.registerPlugin(useGSAP);

@@ -114,6 +114,7 @@ const CheckoutForm = () => {
 
         try {
           const response = await mutateAsync(payload);
+          console.log(response);
 
           enqueueSnackbar("Order placed successfully", {
             variant: "success",

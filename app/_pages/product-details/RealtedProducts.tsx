@@ -5,10 +5,15 @@ import React from "react";
 import { motion } from "framer-motion";
 // import { products } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { products } from "@/data/research-product";
+import { useGetProducts } from "@/hooks/tanstack/useProducts";
 
 const RelatedProducts = () => {
   const locale = useGetLocale();
+
+  const { data } = useGetProducts();
+
+  const products = data?.results || [];
+
   return (
     <div className="container mx-auto px-4 py-8 mt-5 sm:mt-10 md:mt-12">
       {/* header part */}

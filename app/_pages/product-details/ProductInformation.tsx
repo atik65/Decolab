@@ -56,7 +56,6 @@ import { useRouter } from "@bprogress/next";
 import { useParams } from "next/navigation";
 // import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { findProductById, ProductLN } from "@/data/research-product";
 import { getProductPrice } from "@/utils/getProductPrice";
 import { useFormik } from "formik";
 // import { productValidation } from "./productValidation";

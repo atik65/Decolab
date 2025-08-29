@@ -5,7 +5,6 @@ import React from "react";
 import { motion } from "framer-motion";
 // import { products } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { products } from "@/data/research-product";
 import { useGetProducts } from "@/hooks/tanstack/useProducts";
 import { FeaturedProductsSkeleton } from "@/components/shared/loading-skeletons/loading-skeleton";
 
@@ -14,7 +13,7 @@ const FeaturedProducts = () => {
 
   const { data, isLoading } = useGetProducts();
 
-  let products = data?.results || [];
+  const products = data?.results || [];
 
   if (isLoading) {
     return <FeaturedProductsSkeleton />;

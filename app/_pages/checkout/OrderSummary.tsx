@@ -2,13 +2,11 @@
 
 import Image from "next/image";
 // import { enqueueSnackbar } from "notistack";
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import { GiPayMoney } from "react-icons/gi";
 // import dynamic from "next/dynamic";
 import { useOrderStore } from "@/hooks/zustand/useOrderStore";
-import { ProductLN, products } from "@/data/research-product";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { ProductDetails } from "@/types/api/products";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 
 // const GiPayMoney = dynamic(() =>

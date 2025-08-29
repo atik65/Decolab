@@ -17,7 +17,6 @@ import dynamic from "next/dynamic";
 import { useParams } from "next/navigation";
 // import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { findProductById } from "@/data/research-product";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 
 const TfiAngleLeft = dynamic(() =>
