@@ -169,13 +169,29 @@ const ProductInformation = () => {
         designId: values.design?.toString(),
         fontId: values.font?.toString(),
         quantity: values.quantity,
+        digitCount: values.digitCount,
         price:
           getProductPrice(
-            currentProduct!,
+            currentProduct,
             values.size ? Number(values.size) : undefined,
             values.digitCount ? Number(values.digitCount) : undefined
           ) || 0,
       };
+
+
+      // if pricing type is variant then must provide size and digitCount
+      if (currentProduct?.pricing?.type === "variant") {
+        if (!values.size || !values.digitCount) {
+          enqueueSnackbar("Please select a valid variant", {
+            variant: "error",
+            style: {
+              backgroundColor: "#c51616",
+              color: "white",
+            },
+          });
+          return;
+        }
+      }
 
       // set product order - info to global state
       setProductInfo(orderStorePayload);
@@ -283,8 +299,10 @@ const ProductInformation = () => {
           ) + " KD"}
         </p>
       ) : (
-        <p className="animate-pulse font-bold mt-4 text-base text-red-500 ">
-          {locale === "en" ? "Variant Not Available" : "الحالة غير متاحة"}
+        <p className="animate-pulse font-bold mt-4 text-sm text-red-500 ">
+          {locale === "en"
+            ? "Please select a valid variant "
+            : "الحالة غير متاحة"}
         </p>
       )}
 

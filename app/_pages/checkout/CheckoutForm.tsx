@@ -14,6 +14,10 @@ import { enqueueSnackbar } from "notistack";
 import { GiPayMoney } from "react-icons/gi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { useOrderStore } from "@/hooks/zustand/useOrderStore";
+import { useCreateOrder } from "@/hooks/tanstack/useOrder";
+import { Loader } from "lucide-react";
+import { useRouter } from "@bprogress/next";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
@@ -58,43 +62,10 @@ export interface OrderInfo {
 }
 
 const CheckoutForm = () => {
-  // const { productInfo } = useOrderStore();
+  const { productInfo } = useOrderStore();
 
-  // const sendOrderMessage = async (orderInfo: OrderInfo) => {
-  //   // console.log("orderInfo :", orderInfo);
-
-  //   const url = "http://localhost:3000/api/order-whatsapp-message";
-
-  //   try {
-  //     const response = await axios.post(url, {
-  //       data: orderInfo,
-  //     });
-
-  //     console.log(response);
-  //     enqueueSnackbar(
-  //       response.data.message || "Order message sent successfully",
-  //       {
-  //         variant: "success",
-  //         style: {
-  //           backgroundColor: "#87A786",
-  //           color: "white",
-  //         },
-  //       }
-  //     );
-  //   } catch (error: unknown) {
-  //     console.log(error);
-  //     enqueueSnackbar(
-  //       (error as { message: string })?.message || "Order message sent failed",
-  //       {
-  //         variant: "error",
-  //         style: {
-  //           backgroundColor: "#dd3024",
-  //           color: "white",
-  //         },
-  //       }
-  //     );
-  //   }
-  // };
+  const { mutateAsync, isPending } = useCreateOrder();
+  const router = useRouter();
 
   const { values, handleChange, handleSubmit, errors, touched, setFieldValue } =
     useFormik({
@@ -110,101 +81,61 @@ const CheckoutForm = () => {
         postalCode: "",
       },
       validationSchema: validationSchema,
-      onSubmit: (values) => {
-        console.log(values);
-
-        // const product = products.find(
-        //   (product) => product.id.toString() === productInfo.productId
-        // );
-
-        // const currentProduct = product?.["en"];
-
-        // const productOrderInfo = {
-        //   name: currentProduct?.title,
-        //   // size
-        //   size: currentProduct?.sizes.find(
-        //     (size) => size.id.toString() === productInfo.sizeId
-        //   )?.value,
-
-        //   // digit count
-        //   ...(currentProduct?.digits?.length ?? 0 > 0
-        //     ? {
-        //         digitCount: currentProduct?.digits?.find(
-        //           (digitCount) =>
-        //             digitCount.id.toString() === productInfo.digitId
-        //         )?.value,
-        //       }
-        //     : {}),
-
-        //   // color
-        //   color:
-        //     currentProduct?.colors.find(
-        //       (color) => color.id.toString() === productInfo.colorId
-        //     )?.name +
-        //     " - " +
-        //     currentProduct?.colors.find(
-        //       (color) => color.id.toString() === productInfo.colorId
-        //     )?.colorCode,
-
-        //   // light color
-        //   lightColor:
-        //     currentProduct?.lightColors.find(
-        //       (lightColor) =>
-        //         lightColor.id.toString() === productInfo.lightColorId
-        //     )?.name +
-        //     " - " +
-        //     currentProduct?.lightColors.find(
-        //       (lightColor) =>
-        //         lightColor.id.toString() === productInfo.lightColorId
-        //     )?.colorCode,
-
-        //   // house number
-        //   houseNumber: productInfo.houseNumber,
-
-        //   // text
-        //   text: productInfo.text,
-
-        //   // design
-        //   design: currentProduct?.designs.find(
-        //     (design) => design.id.toString() === productInfo.designId
-        //   )?.name,
-
-        //   // font
-        //   font: currentProduct?.fonts.find(
-        //     (font) => font.id.toString() === productInfo.fontId
-        //   )?.name,
-
-        //   // quantity
-        //   quantity: productInfo.quantity,
-
-        //   // individual price
-        //   price: productInfo.price,
-
-        //   // total price
-        //   totalPrice: productInfo.price * productInfo.quantity,
-        // };
-
-        enqueueSnackbar("Order placed successfully", {
-          variant: "success",
-          style: {
-            backgroundColor: "#87A786",
-            color: "white",
+      onSubmit: async (values) => {
+        const payload = {
+          productId: productInfo.productId,
+          quantity: productInfo.quantity,
+          customization: {
+            sizeId: productInfo.sizeId,
+            colorId: productInfo.colorId,
+            lightColorId: productInfo.lightColorId,
+            houseNumber: productInfo.houseNumber,
+            text: productInfo.text,
+            designId: productInfo.designId,
+            fontId: productInfo.fontId,
+            digitCount: productInfo?.digitCount || 0,
           },
-        });
+          contact: {
+            phoneNumber: values.phone,
+            email: values.email,
+          },
+          delivery: {
+            country: values.country,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            apartmentSuite: values.apartment,
+            city: values.city,
+            postalCode: values.postalCode,
+          },
+        };
 
-        // console.log({
-        //   checkoutInfo: values,
-        //   productInfo: productOrderInfo,
-        // });
+        console.log(payload);
 
-        // sendOrderMessage({
-        //   checkoutInfo: values,
-        //   productInfo: productOrderInfo,
-        // });
+        try {
+          const response = await mutateAsync(payload);
+
+          enqueueSnackbar("Order placed successfully", {
+            variant: "success",
+            style: {
+              backgroundColor: "#87A786",
+              color: "white",
+            },
+          });
+
+          router.push("/");
+        } catch (error) {
+          console.log(error);
+          enqueueSnackbar("Order placed failed", {
+            variant: "error",
+            style: {
+              backgroundColor: "#c51616",
+              color: "white",
+            },
+          });
+        }
       },
     });
-
-  console.log(values);
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8  ">
@@ -408,7 +339,12 @@ const CheckoutForm = () => {
             // }}
             className="w-full mt-4 bg-[#87A786] hover:bg-[#87a786ea] text-white py-2  font-bold flex justify-center items-center gap-2"
           >
-            <span>Place Order </span> <GiPayMoney size={20} />
+            <span>Place Order </span>{" "}
+            {!isPending ? (
+              <GiPayMoney size={20} />
+            ) : (
+              <Loader className="animate-spin" size={20} />
+            )}
           </button>
         </div>
       </div>

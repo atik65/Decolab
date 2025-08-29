@@ -8,6 +8,8 @@ import React, { useEffect, useState } from "react";
 import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { ProductLN, products } from "@/data/research-product";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { ProductDetails } from "@/types/api/products";
+import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 
 // const GiPayMoney = dynamic(() =>
 //   import("react-icons/gi").then((mod) => mod.GiPayMoney)
@@ -16,24 +18,26 @@ import { useGetLocale } from "@/hooks/useGetLocale";
 const OrderSummary = () => {
   const locale = useGetLocale();
 
-  const [selectedProduct, setSelectedProduct] = useState<ProductLN | null>(
-    null
-  );
+  // const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(
+  //   null
+  // );
 
   const { productInfo } = useOrderStore();
-  console.log("productInfo = ", productInfo);
 
   // get product by id
-  useEffect(() => {
-    if (productInfo.productId) {
-      const product = products.find(
-        (product) => product.id.toString() === productInfo.productId
-      );
-      if (product) {
-        setSelectedProduct(product[locale]);
-      }
-    }
-  }, [productInfo.productId]);
+  const { data: product } = useGetProductDetails(productInfo.productId!);
+
+  const selectedProduct = product?.[locale];
+  // useEffect(() => {
+  //   if (productInfo.productId) {
+  //     const product = products.find(
+  //       (product) => product.id.toString() === productInfo.productId
+  //     );
+  //     if (product) {
+  //       setSelectedProduct(product[locale]);
+  //     }
+  //   }
+  // }, [productInfo.productId]);
 
   // console.log(selectedProduct);
 

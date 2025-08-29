@@ -12,6 +12,7 @@ interface ProductInfo {
   fontId: string;
   quantity: number;
   price: number;
+  digitCount?: number | string;
 }
 
 interface OrderStore {
@@ -33,6 +34,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
     fontId: "1",
     quantity: 1,
     price: 0,
+    digitCount: 0,
   },
 
   // set product info
@@ -56,6 +58,7 @@ export const useOrderStore = create<OrderStore>((set) => ({
         fontId: "",
         quantity: 1,
         price: 0,
+        digitCount: 0,
       },
     })),
 }));
