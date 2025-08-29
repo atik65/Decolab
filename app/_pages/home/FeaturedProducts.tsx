@@ -6,9 +6,17 @@ import { motion } from "framer-motion";
 // import { products } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { products } from "@/data/research-product";
+import { useGetProducts } from "@/hooks/tanstack/useProducts";
+import { FeaturedProductsSkeleton } from "@/components/shared/loading-skeletons/loading-skeleton";
 
 const FeaturedProducts = () => {
   const locale = useGetLocale();
+
+  const { data, isLoading } = useGetProducts();
+
+  if (isLoading) {
+    return <FeaturedProductsSkeleton />;
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
