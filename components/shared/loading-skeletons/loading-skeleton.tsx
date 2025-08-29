@@ -52,3 +52,18 @@ export const FeaturedProductsSkeleton = () => {
     </div>
   );
 };
+
+export const ShopSkeleton = () => {
+  return (
+    <div className="w-full container mx-auto px-4 py-8">
+      {/* Section title skeleton */}
+      <div className="mb-6">
+        <Skeleton className="h-8 w-48 mb-2 bg-gray-200" />
+        <Skeleton className="h-4 w-64 bg-gray-200" />
+      </div>
+
+      {/* Products grid */}
+      <ProductGridSkeleton count={4} />
+    </div>
+  );
+};

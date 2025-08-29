@@ -1,8 +1,12 @@
+"use client";
+
 import React from "react";
 import ProductCard from "@/components/shared/product/ProductCard";
 
 import ShopTopSection from "./ShopTopSection";
 import { products } from "@/data/research-product";
+import { useGetProducts } from "@/hooks/tanstack/useProducts";
+import { ShopSkeleton } from "@/components/shared/loading-skeletons/loading-skeleton";
 // import { products } from "@/data/products";
 
 const ShopContainer = () => {
@@ -36,6 +40,14 @@ const ShopContainer = () => {
   //     rating: 5,
   //   },
   // ];
+
+  const { data, isLoading } = useGetProducts();
+
+  let products = data?.results || [];
+
+  if (isLoading) {
+    return <ShopSkeleton />;
+  }
 
   return (
     <div className="container mx-auto px-4 mt-8">
