@@ -1,6 +1,7 @@
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { ProductLN } from "@/data/research-product";
 import { useState } from "react";
+import { ProductDetails } from "@/types/api/products";
 
 interface Color {
   name: string;
@@ -26,7 +27,7 @@ export const ColorOptions = ({
   errors,
   touched,
 }: {
-  product: ProductLN;
+  product: ProductDetails;
   values: { color: string };
   setFieldValue: (field: string, value: unknown) => void;
   errors: { color?: string };
@@ -133,7 +134,7 @@ export const LightColorOptions = ({
   errors,
   touched,
 }: {
-  product: ProductLN;
+  product: ProductDetails;
   values: { lightColor: string };
   setFieldValue: (field: string, value: unknown) => void;
   errors: { lightColor?: string };

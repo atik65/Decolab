@@ -3,7 +3,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axiosInstance";
-import { ProductsResponse } from "@/types/api/products";
+import { ProductDetailsResponse, ProductsResponse } from "@/types/api/products";
 
 export const useGetProducts = () => {
   const queryClient = useQueryClient();
@@ -14,6 +14,21 @@ export const useGetProducts = () => {
     queryFn: async () =>
       await axiosInstance<ProductsResponse>({
         url: `/products/`,
+        method: "GET",
+      }),
+  });
+};
+
+// product details
+export const useGetProductDetails = (id: string) => {
+  const queryClient = useQueryClient();
+  //   const { data: session } = useSession();
+
+  return useQuery({
+    queryKey: ["product", id],
+    queryFn: async () =>
+      await axiosInstance<ProductDetailsResponse>({
+        url: `/products/${id}/`,
         method: "GET",
       }),
   });

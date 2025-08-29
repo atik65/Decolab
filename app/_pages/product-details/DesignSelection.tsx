@@ -8,6 +8,7 @@ import { useGetLocale } from "@/hooks/useGetLocale";
 import { ProductLN } from "@/data/research-product";
 import Image from "next/image";
 import { useState } from "react";
+import { ProductDetails } from "@/types/api/products";
 
 // const designs = [
 //   {
@@ -44,7 +45,7 @@ const DesignSelection = ({
   errors,
   touched,
 }: {
-  product: ProductLN;
+  product: ProductDetails;
   values: { design: string };
   setFieldValue: (field: string, value: unknown) => void;
   errors: { design?: string };

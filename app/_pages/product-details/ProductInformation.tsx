@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 // interface ProductIntroCartProps {
 //   productName?: string;
@@ -63,59 +63,41 @@ import { useFormik } from "formik";
 import { enqueueSnackbar } from "notistack";
 import * as Yup from "yup";
 import { useOrderStore } from "@/hooks/zustand/useOrderStore";
+import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
+import { ProductDetails } from "@/types/api/products";
 
 const ProductInformation = () => {
   const { slug } = useParams();
 
-  const product = findProductById(Number(slug));
+  const { data: product } = useGetProductDetails(slug?.toString() || "");
+
   const locale = useGetLocale();
   const currentProduct = product?.[locale];
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
-  // const [size, setSize] = useState<string | null>(null);
-  // const [digitCount, setDigitCount] = useState<number | null>(null);
-  // const [color, setColor] = useState<string | null>(null);
-  // const [lightColor, setLightColor] = useState<string | null>(null);
-  // const [design, setDesign] = useState<string | null>(null);
-  // const [font, setFont] = useState<string | null>(null);
+  const [digitCount, setDigitCount] = useState<number | null>(null);
 
-  // const handleVariantChange = (
-  //   variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
-  //   value: string
-  // ) => {
-  //   switch (variant) {
-  //     case "size":
-  //       setSize(value);
-  //       break;
-  //     case "digitCount":
-  //       setDigitCount(Number(value));
-  //       break;
-  //     case "color":
-  //       setColor(value);
-  //       break;
-  //     case "lightColor":
-  //       setLightColor(value);
-  //       break;
-  //     case "design":
-  //       setDesign(value);
-  //       break;
-  //     case "font":
-  //       setFont(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
+  useEffect(() => {
+    if (currentProduct?.pricing?.type === "variant") {
+      const highestVariant = currentProduct?.pricing?.variants?.sort(
+        (a, b) => b.conditions.digitCount - a.conditions.digitCount
+      )[0];
 
-  // console.log("size = ", size);
+      // console.log("highestVariant = ", highestVariant);
+
+      setDigitCount(highestVariant?.conditions.digitCount);
+    }
+
+    if (currentProduct?.pricing?.type === "base") {
+      setDigitCount(3);
+    }
+  }, [currentProduct]);
+
+  // console.log("digitCount = ", digitCount);
 
   const router = useRouter();
   const { setProductInfo } = useOrderStore();
-
-  // const handleOrderNow = () => {
-  //   router.push("/checkout");
-  // };
 
   const productValidation = Yup.object().shape({
     ...(currentProduct?.sizes?.length ?? 0 > 0
@@ -201,6 +183,17 @@ const ProductInformation = () => {
       router.push("/checkout");
     },
   });
+
+  // console.log("values = ", values);
+
+  // console.log(
+  //   "price = ",
+  //   getProductPrice(
+  //     product as any,
+  //     values.size ? Number(values.size) : undefined,
+  //     values.digitCount ? Number(values.digitCount) : undefined
+  //   )
+  // );
 
   // Function to handle quantity change
   const handleQuantityChange = (type: "increase" | "decrease") => {
@@ -290,10 +283,8 @@ const ProductInformation = () => {
           ) + " KD"}
         </p>
       ) : (
-        <p className="animate-pulse font-bold mt-4 text-base text-gray-900">
-          {locale === "en"
-            ? "Please select a size and digit count to see the price"
-            : "الرجاء اختيار حجم وعدد الأرقام لعرض السعر"}
+        <p className="animate-pulse font-bold mt-4 text-base text-red-500 ">
+          {locale === "en" ? "Variant Not Available" : "الحالة غير متاحة"}
         </p>
       )}
 
@@ -302,7 +293,7 @@ const ProductInformation = () => {
         <ProductOptions
           // handleVariantChange={handleVariantChange}
           size={values.size}
-          digitCount={Number(values.digitCount)}
+          // digitCount={Number(values.digitCount)}
           color={values.color}
           lightColor={values.lightColor}
           design={values.design}
@@ -313,6 +304,7 @@ const ProductInformation = () => {
           touched={touched}
           setFieldValue={setFieldValue}
           handleChange={handleChange}
+          digitCount={digitCount}
         />
 
         {/* Quantity Selector and place order */}
@@ -392,6 +384,7 @@ const ProductOptions = ({
   touched,
   setFieldValue,
   handleChange,
+  digitCount,
 }: // size,
 // digitCount,
 // color,
@@ -399,7 +392,7 @@ const ProductOptions = ({
 // design,
 // font,
 {
-  product: ProductLN;
+  product: ProductDetails;
   // handleVariantChange: (
   //   variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
   //   value: string
@@ -493,7 +486,8 @@ const ProductOptions = ({
       )}
 
       {/* How Many Digits dropdown */}
-      {product?.digits && product.digits.length > 0 && (
+      {/* {product?.digits && product.digits.length > 0 && ( */}
+      {digitCount && (
         <div>
           <label
             htmlFor="how-many-digits"
@@ -514,11 +508,13 @@ const ProductOptions = ({
               />
             </SelectTrigger>
             <SelectContent>
-              {product.digits.map((digit) => (
-                <SelectItem key={digit.id} value={digit.id.toString()}>
-                  {digit.title}
-                </SelectItem>
-              ))}
+              {Array.from({ length: digitCount }, (_, i) => i + 1).map(
+                (digit) => (
+                  <SelectItem key={digit} value={digit.toString()}>
+                    {digit}
+                  </SelectItem>
+                )
+              )}
             </SelectContent>
           </Select>
 

@@ -8,7 +8,10 @@ const page = () => {
     <div>
       <ProductInfoContainer />
       {/* <AdditionalInfoTabs /> */}
-      <RelatedProducts />
+
+
+      
+      {/* <RelatedProducts /> */}
     </div>
   );
 };
