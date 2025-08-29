@@ -14,6 +14,8 @@ const FeaturedProducts = () => {
 
   const { data, isLoading } = useGetProducts();
 
+  let products = data?.results || [];
+
   if (isLoading) {
     return <FeaturedProductsSkeleton />;
   }

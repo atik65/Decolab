@@ -8,29 +8,35 @@ import { useGSAP } from "@gsap/react";
 // import { FinalProduct } from "@/types/product";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { FinalProduct } from "@/data/research-product";
+import { Product } from "@/types/api/products";
 
 gsap.registerPlugin(useGSAP);
 
 interface ProductCardProps {
-  product: FinalProduct;
+  product: Product;
 }
 
 const ProductCard = ({ product }: ProductCardProps) => {
   const locale = useGetLocale();
-  const currentProduct = product[locale] || {};
 
-  console.table({
-    imageUrl: currentProduct.mainImage,
-    title: currentProduct.title,
-    subtitle: currentProduct.category,
-    // price: currentProduct.price,
-    minPrice: currentProduct.minPrice,
-    maxPrice: currentProduct.maxPrice,
-  });
+  console.log("locale = ", locale);
 
-  const [hoveredImage] = useState(currentProduct.hoveredImage);
-  const [mainImage] = useState(currentProduct.mainImage);
-  const [currentImage, setCurrentImage] = useState(currentProduct.mainImage);
+  // return;
+
+  // const currentProduct = product[locale] || {};
+
+  // console.table({
+  //   imageUrl: currentProduct.mainImage,
+  //   title: currentProduct.title,
+  //   subtitle: currentProduct.category,
+  //   // price: currentProduct.price,
+  //   minPrice: currentProduct.minPrice,
+  //   maxPrice: currentProduct.maxPrice,
+  // });
+
+  const [hoveredImage] = useState(product.hovered_image);
+  const [mainImage] = useState(product.main_image);
+  const [currentImage, setCurrentImage] = useState(product.main_image);
 
   const container = useRef<HTMLAnchorElement>(null);
   const imageRef = useRef<HTMLImageElement>(null);
@@ -101,17 +107,24 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div className="mt-2">
         <div className="font-bold text-[14px] md:text-[16px]">
-          {product[locale].title}
+          {locale == "ar" ? product.title_ar : product.title}
         </div>
         <p className="text-gray-700 text-[12px] md:text-[14px]">
-          {product[locale].category}
+          {locale == "ar" ? product.category.name_ar : product.category.name}
         </p>
       </div>
       <div className="h-6 mt-1  overflow-hidden">
         <div className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
           <span className="inline-block font-bold text-[#99b998]  text-sm  ">
             {/* {product[locale].price} */}
-            10 KD - 100 KD
+
+            {product.pricing_type === "base" ? (
+              <span>{product.base_price} KD</span>
+            ) : (
+              <span>
+                {product.min_price} KD - {product.max_price} KD
+              </span>
+            )}
           </span>
         </div>
 
