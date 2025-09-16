@@ -88,10 +88,10 @@ function CategoryCard({ data }: { data?: Category }) {
     <div className="relative grid grid-cols-12 gap-x-3 bg-[#f9f9f9] p-5 group overflow-hidden py-8">
       <div className=" flex items-start flex-col justify-center cursor-pointer  pl-5 col-span-9 xl:col-span-8 group">
         <div className="text-left md:text-left space-y-1 group-hover:-translate-y-6 duration-300">
-          <p className="text-[12px] 2xl:text-[16px]  text-gray-500">
+          <p className="text-[14px] 2xl:text-[16px]  text-gray-500">
             {data?.[locale].subtitle}
           </p>
-          <h1 className="text-[16px] lg:text-[20px] 2xl:text-[32px] font-bold text-gray-900">
+          <h1 className="text-[20px] lg:text-[20px] 2xl:text-[32px] font-bold text-gray-900">
             {data?.[locale].title}
           </h1>
         </div>

@@ -19,7 +19,7 @@ export default function MobileMenuSidebar({
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <button
-          className="md:hidden text-gray-700 hover:text-black transition-colors"
+          className="lg:hidden text-gray-700 hover:text-black transition-colors"
           //   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >

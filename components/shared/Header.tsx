@@ -95,11 +95,11 @@ const Header: React.FC = () => {
           />
 
           {/* Logo */}
-          <div className="w-[15%] h-full flex items-center">
+          <div className="w-[22%] h-full flex items-center">
             <Link
               ref={logoRef}
               href="/"
-              className="text-2xl font-bold tracking-tight hidden md:block "
+              className="text-2xl font-bold tracking-tight hidden lg:block "
             >
               {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
               <Image
@@ -115,13 +115,23 @@ const Header: React.FC = () => {
           {/* Navigation */}
           <nav
             ref={linksRef}
-            className="hidden md:flex justify-center space-x-8 w-[70%]"
+            className="hidden lg:flex justify-center space-x-8 w-[70%]"
           >
+            {/* {navLinks.map((link) => (
+              <Link
+                key={link.label}
+                href={link.href}
+                className="nav-link text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-colors"
+              >
+                {t(link.label)}
+              </Link>
+            ))} */}
+
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="nav-link text-base font-medium text-gray-700 hover:text-black transition-colors"
+                className="nav-link text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out hover:drop-shadow-sm px-1 py-1"
               >
                 {t(link.label)}
               </Link>

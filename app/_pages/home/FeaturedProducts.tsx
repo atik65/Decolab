@@ -23,7 +23,7 @@ const FeaturedProducts = () => {
     <div className="container mx-auto px-4 py-8">
       {/* header part */}
       <div className="flex flex-col items-start mb-8">
-        <h2 className="text-[20px] font-museo md:text-[24px] xl:text-[32px] font-bold text-gray-800 mb-2">
+        <h2 className="text-[24px] font-museo md:text-[24px] xl:text-[32px] font-bold text-gray-800 mb-2">
           {locale === "en" ? "Featured Products" : "منتجات مميزة"}
         </h2>
         <div className="w-16 h-0.5 bg-[#99b998]"></div>
