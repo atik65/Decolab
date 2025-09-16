@@ -3,22 +3,18 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
-import { Josefin_Sans } from "next/font/google";
+import { Montserrat } from "next/font/google";
+import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
+const museo = localFont({
+  src: "../../public/fonts/Museo300-Regular.otf",
+  variable: "--font-museo",
+});
 
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
-const josefinSans = Josefin_Sans({
-  variable: "--font-josefin-sans",
+const montserrat = Montserrat({
+  variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300"],
 });
@@ -43,10 +39,17 @@ export default async function RootLayout({
     notFound();
   }
 
+  console.log("locale", locale);
+
   return (
-    <html lang={locale}>
+    <html
+      lang={locale}
+      className={` ${museo.variable} ${montserrat.variable} `}
+    >
       <body
-        className={`${josefinSans.className} ${josefinSans.className} antialiased`}
+        // className={`${josefinSans.className} ${josefinSans.className} antialiased`}
+        // className={` ${museo.className} ${montserrat.className} antialiased`}
+        className={`font-montserrat antialiased`}
       >
         {/* <Header /> */}
         <NextIntlClientProvider>

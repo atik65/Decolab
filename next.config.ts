@@ -21,6 +21,8 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  
 };
 
 const withNextIntl = createNextIntlPlugin();

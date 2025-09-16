@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
-import {   X } from "lucide-react";
+import { X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -121,7 +121,7 @@ const Header: React.FC = () => {
               <Link
                 key={link.label}
                 href={link.href}
-                className="nav-link text-sm font-medium text-gray-700 hover:text-black transition-colors"
+                className="nav-link text-base font-medium text-gray-700 hover:text-black transition-colors"
               >
                 {t(link.label)}
               </Link>
