@@ -3,13 +3,13 @@
 import React from "react";
 import { Input, TextArea } from "@/components/ui/input";
 
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+// import {
+//   Select,
+//   SelectContent,
+//   SelectItem,
+//   SelectTrigger,
+//   SelectValue,
+// } from "@/components/ui/select";
 import { enqueueSnackbar } from "notistack";
 import { GiPayMoney } from "react-icons/gi";
 import { useFormik } from "formik";
@@ -67,91 +67,87 @@ const CheckoutForm = () => {
   const { mutateAsync, isPending } = useCreateOrder();
   const router = useRouter();
 
-  const { values, handleChange, handleSubmit, errors, touched, setFieldValue } =
-    useFormik({
-      initialValues: {
-        phone: "",
-        email: "",
-        country: "",
-        firstName: "",
-        lastName: "",
-        address: "",
-        apartment: "",
-        city: "",
-        postalCode: "",
-      },
-      validationSchema: validationSchema,
-      onSubmit: async (values) => {
-        // Check if product info exists
-        if (!productInfo.productId) {
-          enqueueSnackbar(
-            "No product selected. Please select a product first.",
-            {
-              variant: "error",
-              style: {
-                backgroundColor: "#c51616",
-                color: "white",
-              },
-            }
-          );
-          return;
-        }
-
-        const payload = {
-          productId: productInfo.productId,
-          quantity: productInfo.quantity,
-          customization: {
-            sizeId: productInfo.sizeId,
-            colorId: productInfo.colorId,
-            lightColorId: productInfo.lightColorId,
-            houseNumber: productInfo.houseNumber,
-            text: productInfo.text,
-            designId: productInfo.designId,
-            fontId: productInfo.fontId,
-            digitCount: productInfo?.digitCount || 0,
+  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+    initialValues: {
+      phone: "",
+      email: "",
+      country: "",
+      firstName: "",
+      lastName: "",
+      address: "",
+      apartment: "",
+      city: "",
+      postalCode: "",
+    },
+    validationSchema: validationSchema,
+    onSubmit: async (values) => {
+      // Check if product info exists
+      if (!productInfo.productId) {
+        enqueueSnackbar("No product selected. Please select a product first.", {
+          variant: "error",
+          style: {
+            backgroundColor: "#c51616",
+            color: "white",
           },
-          contact: {
-            phoneNumber: values.phone,
-            email: values.email,
+        });
+        return;
+      }
+
+      const payload = {
+        productId: productInfo.productId,
+        quantity: productInfo.quantity,
+        customization: {
+          sizeId: productInfo.sizeId,
+          colorId: productInfo.colorId,
+          lightColorId: productInfo.lightColorId,
+          houseNumber: productInfo.houseNumber,
+          text: productInfo.text,
+          designId: productInfo.designId,
+          fontId: productInfo.fontId,
+          digitCount: productInfo?.digitCount || 0,
+        },
+        contact: {
+          phoneNumber: values.phone,
+          email: values.email,
+        },
+        delivery: {
+          country: values.country,
+          firstName: values.firstName,
+          lastName: values.lastName,
+          address: values.address,
+          apartmentSuite: values.apartment,
+          city: values.city,
+          postalCode: values.postalCode,
+        },
+      };
+
+      console.log(payload);
+
+      try {
+        const response = await mutateAsync(payload);
+        console.log(response);
+
+        enqueueSnackbar("Order placed successfully", {
+          variant: "success",
+          style: {
+            backgroundColor: "#87A786",
+            color: "white",
           },
-          delivery: {
-            country: values.country,
-            firstName: values.firstName,
-            lastName: values.lastName,
-            address: values.address,
-            apartmentSuite: values.apartment,
-            city: values.city,
-            postalCode: values.postalCode,
+        });
+
+        router.push("/");
+      } catch (error) {
+        console.log(error);
+        enqueueSnackbar("Order placed failed", {
+          variant: "error",
+          style: {
+            backgroundColor: "#c51616",
+            color: "white",
           },
-        };
-
-        console.log(payload);
-
-        try {
-          const response = await mutateAsync(payload);
-          console.log(response);
-
-          enqueueSnackbar("Order placed successfully", {
-            variant: "success",
-            style: {
-              backgroundColor: "#87A786",
-              color: "white",
-            },
-          });
-
-          router.push("/");
-        } catch (error) {
-          console.log(error);
-          enqueueSnackbar("Order placed failed", {
-            variant: "error",
-            style: {
-              backgroundColor: "#c51616",
-              color: "white",
-            },
-          });
-        }
-      },
-    });
+        });
+      }
+    },
+  });
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">

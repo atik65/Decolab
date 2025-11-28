@@ -11,7 +11,7 @@ import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
 import { constructImageURL } from "@/lib/utils";
 import SummarySkt from "@/components/skeletons/checkout/SummarySkt";
-import { useQueryState } from "nuqs";
+// import { useQueryState } from "nuqs";
 
 // const GiPayMoney = dynamic(() =>
 //   import("react-icons/gi").then((mod) => mod.GiPayMoney)

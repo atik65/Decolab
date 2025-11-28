@@ -10,7 +10,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import { Swiper as SwiperType } from "swiper/types";
 // import { ProductDetails } from "@/types/product";
-import { ImageOff } from "lucide-react";
+// import { ImageOff } from "lucide-react";
 import ImageZoomViewModal from "@/components/shared/ImageZoomViewModal";
 // import { TfiAngleLeft, TfiAngleRight } from "react-icons/tfi";
 import dynamic from "next/dynamic";

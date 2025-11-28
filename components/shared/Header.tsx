@@ -36,7 +36,7 @@ const Header: React.FC = () => {
   };
 
   const logoRef = useRef<HTMLAnchorElement>(null);
-  const linksRef = useRef<HTMLDivElement>(null);
+  // const linksRef = useRef<HTMLDivElement>(null);
   const actionRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
