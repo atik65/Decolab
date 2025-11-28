@@ -60,12 +60,13 @@ const ShopContainer = () => {
         </div>
 
         {/* Search Results Banner */}
+        {/* Search Results Banner */}
         {search && (
-          <div className="mb-6 flex items-center justify-center">
-            <div className="inline-flex items-center gap-3 bg-[#99b998]/10 border-2 border-[#99b998]/30 rounded-full px-6 py-3 animate-in fade-in slide-in-from-top-2 duration-300">
-              <div className="flex items-center gap-2">
+          <div className="mb-6 flex items-center justify-center px-2">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-[#99b998]/10 border-2 border-[#99b998]/30 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 animate-in fade-in slide-in-from-top-2 duration-300 w-full sm:w-auto">
+              <div className="flex items-center gap-2 flex-wrap justify-center">
                 <svg
-                  className="w-5 h-5 text-[#99b998]"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-[#99b998] flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -77,24 +78,24 @@ const ShopContainer = () => {
                     d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
                   />
                 </svg>
-                <span className="text-gray-700 font-medium">
+                <span className="text-xs sm:text-sm text-gray-700 font-medium text-center">
                   Searching for:{" "}
-                  <span className="font-bold text-[#99b998]">
+                  <span className="font-bold text-[#99b998] break-all">
                     &quot;{search}&quot;
                   </span>
                 </span>
-                <span className="text-gray-500 text-sm">
+                <span className="text-xs sm:text-sm text-gray-500">
                   ({products.length}{" "}
                   {products.length === 1 ? "result" : "results"})
                 </span>
               </div>
               <button
                 onClick={() => setSearch("")}
-                className="ml-2 p-1.5 hover:bg-red-50 rounded-full transition-colors group"
+                className="p-1.5 hover:bg-red-50 rounded-full transition-colors group flex-shrink-0"
                 aria-label="Clear search"
               >
                 <svg
-                  className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400 group-hover:text-red-500 transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"

@@ -20,10 +20,9 @@ interface NavLink {
 }
 
 export const navLinks: NavLink[] = [
-  { href: "/", label: "houseNumbers" },
-  { href: "/", label: "diwaniya" },
-  { href: "/", label: "islamicPhrases" },
-  { href: "/", label: "advertisements" },
+  { href: "/shop", label: "shop" },
+  { href: "/about", label: "about" },
+  { href: "/contact", label: "contact" },
 ];
 
 const Header: React.FC = () => {
@@ -78,9 +77,9 @@ const Header: React.FC = () => {
   // const locale = useGetLocale();
 
   return (
-    <header className="w-full bg-white border-b border-gray-200  z-40 sticky top-0">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
+    <header className="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm z-40 sticky top-0 transition-all duration-300">
+      <div className="container mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Mobile Menu Button */}
           {/* <button
             className="md:hidden text-gray-700 hover:text-black transition-colors"
@@ -99,13 +98,13 @@ const Header: React.FC = () => {
             <Link
               ref={logoRef}
               href="/"
-              className="text-2xl font-bold tracking-tight hidden lg:block "
+              className="text-2xl font-bold tracking-tight hidden lg:block transition-all duration-300 hover:opacity-80 relative group"
             >
               {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
               <Image
                 src="/images/logo.svg"
                 alt="One Direction"
-                className="w-full"
+                className="w-full transition-transform duration-300 group-hover:scale-105"
                 width={100}
                 height={100}
               />
@@ -115,25 +114,16 @@ const Header: React.FC = () => {
           {/* Navigation */}
           <nav
             // ref={linksRef}
-            className="hidden lg:flex justify-center space-x-8 w-[70%]"
+            className="hidden lg:flex justify-center items-center gap-2 xl:gap-8 w-[70%]"
           >
-            {/* {navLinks.map((link) => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="nav-link text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-colors"
-              >
-                {t(link.label)}
-              </Link>
-            ))} */}
-            {/* hello */}
             {navLinks.map((link) => (
               <Link
                 key={link.label}
                 href={link.href}
-                className="nav-link text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out hover:drop-shadow-sm px-1 py-1"
+                className="nav-link relative text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out px-4 py-2 rounded-md hover:bg-gray-50 group"
               >
-                {t(link.label)}
+                <span className="relative z-10">{t(link.label)}</span>
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#99b998] transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
             ))}
           </nav>
@@ -141,64 +131,44 @@ const Header: React.FC = () => {
           {/* User Actions */}
           <div
             ref={actionRef}
-            className="flex justify-end items-center space-x-4 w-auto md:w-[15%] "
+            className="flex justify-end items-center gap-3 lg:gap-4 w-auto md:w-[15%]"
           >
-            {/* <Link
-              href="/login"
-              className="hidden md:block text-sm font-medium text-gray-700 hover:text-black transition-colors"
-            >
-              LOGIN / REGISTER
-            </Link> */}
-            {/* <button
-              className="text-gray-700 hover:text-black transition-colors relative"
-              onClick={() => setIsSearchOpen(!isSearchOpen)}
-              aria-label="Toggle search"
-            >
-              <Search size={20} />
-            </button> */}
+            <div className="p-2 rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm">
+              <SearchBar />
+            </div>
 
-            <SearchBar />
+            <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
 
-            {/* <Link
-              href="/wishlist"
-              className="text-gray-700 hover:text-black transition-colors"
-              aria-label="Wishlist"
-            >
-              <Heart size={20} />
-            </Link> */}
-            <LocaleSwitcher />
-            {/* <Link
-              href="/cart"
-              className="flex items-center text-gray-700 hover:text-black transition-colors"
-              aria-label="Shopping cart"
-            >
-              <ShoppingCart size={20} />
-              <span className="ml-2 text-sm font-medium">$0.00</span>
-            </Link> */}
+            <div className="p-2 py-0 bg-gray-100 rounded-full hover:bg-gray-50 transition-all duration-300">
+              <LocaleSwitcher />
+            </div>
           </div>
         </div>
 
         {/* Search Overlay */}
         {isSearchOpen && (
-          <div className="absolute top-full left-0 w-full bg-white border-t border-gray-200 p-4 shadow-lg z-50">
+          <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 p-6 shadow-xl z-50 animate-in slide-in-from-top-2 duration-300">
             <div className="container mx-auto relative">
-              <form className="flex items-center" onSubmit={handleSearchSubmit}>
+              <form
+                className="flex items-center gap-2"
+                onSubmit={handleSearchSubmit}
+              >
                 <input
                   type="text"
                   placeholder="Search for products..."
-                  className="w-full px-4 py-2 border border-gray-300 rounded-l focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full px-6 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#99b998] focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
                   autoFocus
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-black text-white rounded-r hover:bg-gray-800 transition-colors"
+                  className="px-8 py-3 bg-[#99b998] text-white rounded-lg hover:bg-[#88a887] transition-all duration-300 font-medium shadow-sm hover:shadow-md"
                 >
                   Search
                 </button>
               </form>
               <button
                 onClick={() => setIsSearchOpen(false)}
-                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-black transition-colors"
+                className="absolute -right-2 -top-2 p-2 text-gray-500 hover:text-black transition-colors rounded-full hover:bg-gray-100"
                 aria-label="Close search"
               >
                 <X size={20} />

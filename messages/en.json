@@ -7,7 +7,10 @@
     "houseNumbers": "House Numbers",
     "diwaniya": "Diwaniya",
     "islamicPhrases": "Islamic Phrases",
-    "advertisements": "Advertisement Signage"
+    "advertisements": "Advertisement Signage",
+    "shop": "Shop",
+    "about": "About",
+    "contact": "Contact"
   },
   "LocaleSwitcher": {
     "label": "Change language",

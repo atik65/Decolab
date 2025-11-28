@@ -7,7 +7,10 @@
     "houseNumbers": "أرقام المنازل",
     "diwaniya": "الديوانية",
     "islamicPhrases": "العبارات الإسلامية",
-    "advertisements": "الإعلانات"
+    "advertisements": "الإعلانات",
+    "shop": "المتجر",
+    "about": "حول",
+    "contact": "اتصل"
   },
   "LocaleSwitcher": {
     "label": "Change language",

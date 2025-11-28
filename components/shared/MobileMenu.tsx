@@ -16,14 +16,13 @@ import Image from "next/image";
 interface NavLink {
   href: string;
   label: string;
-  icon: React.ReactNode;
+  icon?: React.ReactNode;
 }
 
 export const navLinks: NavLink[] = [
-  { href: "/", label: "houseNumbers", icon: <Home size={20} /> },
-  { href: "/", label: "diwaniya", icon: <Users size={20} /> },
-  { href: "/", label: "islamicPhrases", icon: <MessageCircle size={20} /> },
-  { href: "/", label: "advertisements", icon: <Megaphone size={20} /> },
+  { href: "/shop", label: "shop", icon: <Home /> },
+  { href: "/about", label: "about", icon: <Users /> },
+  { href: "/contact", label: "contact", icon: <MessageCircle /> },
 ];
 
 // Fallback text mapping
@@ -109,7 +108,7 @@ const MobileMenu = ({
           </div>
         </div>
         <p className="text-xs text-gray-400 text-center mt-2">
-          © 2025 Your Brand
+          © 2025 One Direction. All rights reserved.
         </p>
       </div>
     </div>
