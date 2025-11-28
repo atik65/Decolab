@@ -19,10 +19,15 @@ const nextConfig: NextConfig = {
         pathname: "/**",
         search: "",
       },
+      {
+        protocol: "https",
+        hostname: "services.onedirectionkw.com",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
     ],
   },
-
-  
 };
 
 const withNextIntl = createNextIntlPlugin();

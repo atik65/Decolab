@@ -53,14 +53,14 @@ const Header: React.FC = () => {
       "same"
     );
 
-    tl.from(".nav-link", {
-      opacity: 0,
-      y: -100,
-      duration: 0.5,
-      ease: "power3.out",
-      stagger: 0.1,
-      scope: linksRef.current,
-    });
+    // tl.from(".nav-link", {
+    //   opacity: 0,
+    //   y: -100,
+    //   duration: 0.5,
+    //   ease: "power3.out",
+    //   stagger: 0.1,
+    //   scope: linksRef.current,
+    // });
 
     tl.from(
       actionRef.current,
@@ -114,7 +114,7 @@ const Header: React.FC = () => {
 
           {/* Navigation */}
           <nav
-            ref={linksRef}
+            // ref={linksRef}
             className="hidden lg:flex justify-center space-x-8 w-[70%]"
           >
             {/* {navLinks.map((link) => (
@@ -126,7 +126,7 @@ const Header: React.FC = () => {
                 {t(link.label)}
               </Link>
             ))} */}
-
+            {/* hello */}
             {navLinks.map((link) => (
               <Link
                 key={link.label}
