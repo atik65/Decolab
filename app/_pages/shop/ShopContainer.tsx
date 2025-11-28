@@ -2,25 +2,25 @@
 
 import React from "react";
 import ProductCard from "@/components/shared/product/ProductCard";
-
-import ShopTopSection from "./ShopTopSection";
-import { useGetProducts } from "@/hooks/tanstack/useProducts";
+import { useGetProductNSearch } from "@/hooks/tanstack/useProducts";
 import {
   ShopSkeleton,
   NoProductsFound,
 } from "@/components/shared/loading-skeletons/loading-skeleton";
 import ShopHeroBanner from "./ShopHeroBanner";
-import CategoryFilter from "./CategoryFilter";
+// import CategoryFilter from "./CategoryFilter";
 import WhyChooseUs from "./WhyChooseUs";
 import {
   TestimonialsSection,
   HowItWorksSection,
   FAQSection,
 } from "./BottomSections";
-// import { products } from "@/data/products";
+import { useQueryState } from "nuqs";
 
 const ShopContainer = () => {
-  const { data, isLoading } = useGetProducts();
+  const [search, setSearch] = useQueryState("search", { defaultValue: "" });
+
+  const { data, isLoading } = useGetProductNSearch(search ? { search } : {});
 
   const products = data?.results || [];
 
@@ -58,6 +58,58 @@ const ShopContainer = () => {
             Browse our collection of premium signage solutions
           </p>
         </div>
+
+        {/* Search Results Banner */}
+        {search && (
+          <div className="mb-6 flex items-center justify-center">
+            <div className="inline-flex items-center gap-3 bg-[#99b998]/10 border-2 border-[#99b998]/30 rounded-full px-6 py-3 animate-in fade-in slide-in-from-top-2 duration-300">
+              <div className="flex items-center gap-2">
+                <svg
+                  className="w-5 h-5 text-[#99b998]"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+                <span className="text-gray-700 font-medium">
+                  Searching for:{" "}
+                  <span className="font-bold text-[#99b998]">
+                    &quot;{search}&quot;
+                  </span>
+                </span>
+                <span className="text-gray-500 text-sm">
+                  ({products.length}{" "}
+                  {products.length === 1 ? "result" : "results"})
+                </span>
+              </div>
+              <button
+                onClick={() => setSearch("")}
+                className="ml-2 p-1.5 hover:bg-red-50 rounded-full transition-colors group"
+                aria-label="Clear search"
+              >
+                <svg
+                  className="w-5 h-5 text-gray-400 group-hover:text-red-500 transition-colors"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )}
 
         {/* Product Grid */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
