@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Input } from "@/components/ui/input";
+import { Input, TextArea } from "@/components/ui/input";
 
 import {
   Select,
@@ -24,13 +24,13 @@ import { useRouter } from "@bprogress/next";
 
 const validationSchema = Yup.object({
   phone: Yup.string().required("Phone number is required"),
-  email: Yup.string().email("Invalid email address"),
-  country: Yup.string().required("Country is required"),
+  // email: Yup.string().email("Invalid email address"),
+  // country: Yup.string().required("Country is required"),
   firstName: Yup.string().required("First name is required"),
-  lastName: Yup.string().required("Last name is required"),
+  // lastName: Yup.string().required("Last name is required"),
   address: Yup.string().required("Address is required"),
   // apartment: Yup.string().required("Apartment is required"),
-  city: Yup.string().required("City is required"),
+  // city: Yup.string().required("City is required"),
 });
 
 export interface OrderInfo {
@@ -82,6 +82,21 @@ const CheckoutForm = () => {
       },
       validationSchema: validationSchema,
       onSubmit: async (values) => {
+        // Check if product info exists
+        if (!productInfo.productId) {
+          enqueueSnackbar(
+            "No product selected. Please select a product first.",
+            {
+              variant: "error",
+              style: {
+                backgroundColor: "#c51616",
+                color: "white",
+              },
+            }
+          );
+          return;
+        }
+
         const payload = {
           productId: productInfo.productId,
           quantity: productInfo.quantity,
@@ -139,28 +154,68 @@ const CheckoutForm = () => {
     });
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-8  ">
+    <form onSubmit={handleSubmit} className="space-y-8">
       {/* Contact Section */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-4">Contact</h2>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="p-2 bg-[#87A786]/10 rounded-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-[#87A786]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800">Contact</h2>
+        </div>
 
         {/* phone number */}
         <div className="mt-4">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Phone Number <span className="text-red-500">*</span>
+          </label>
           <Input
             type="number"
-            placeholder="Phone number"
+            placeholder="Enter your phone number"
             name="phone"
             id="phone"
-            className="w-full"
+            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
             onChange={handleChange}
             value={values.phone}
           />
 
           {errors.phone && touched.phone && (
-            <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {errors.phone}
+            </p>
           )}
         </div>
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <Input
             type="email"
             placeholder="Email Address"
@@ -174,7 +229,7 @@ const CheckoutForm = () => {
           {errors.email && touched.email && (
             <p className="text-red-500 text-sm mt-1">{errors.email}</p>
           )}
-        </div>
+        </div> */}
         {/* <div className="flex items-center gap-2">
           <input type="checkbox" id="newsletter" className="rounded" />
           <label htmlFor="newsletter">Email me with news and offers</label>
@@ -182,9 +237,33 @@ const CheckoutForm = () => {
       </div>
 
       {/* Delivery Section */}
-      <div>
-        <h2 className="text-2xl font-semibold mb-3">Delivery</h2>
-        <div>
+      <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
+        <div className="flex items-center gap-3 mb-5">
+          <div className="p-2 bg-[#87A786]/10 rounded-lg">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-5 w-5 text-[#87A786]"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </div>
+          <h2 className="text-2xl font-bold text-gray-800">Delivery</h2>
+        </div>
+        {/* <div>
           <Select
             name="country"
             defaultValue="Kuwait"
@@ -205,16 +284,22 @@ const CheckoutForm = () => {
           {errors.country && touched.country && (
             <p className="text-red-500 text-sm mt-1">{errors.country}</p>
           )}
-        </div>
+        </div> */}
 
         {/* first name & last name */}
-        <div className="grid grid-cols-2 gap-4 mt-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {/* first name */}
           <div>
+            <label
+              htmlFor="firstName"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              First Name <span className="text-red-500">*</span>
+            </label>
             <Input
               type="text"
-              placeholder="First name"
-              className="w-full"
+              placeholder="Enter first name"
+              className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
               onChange={handleChange}
               name="firstName"
               id="firstName"
@@ -222,16 +307,39 @@ const CheckoutForm = () => {
             />
 
             {errors.firstName && touched.firstName && (
-              <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+              <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                {errors.firstName}
+              </p>
             )}
           </div>
 
           {/* last name */}
           <div>
+            <label
+              htmlFor="lastName"
+              className="block text-sm font-medium text-gray-700 mb-2"
+            >
+              Last Name{" "}
+              <span className="text-gray-400 text-xs">(Optional)</span>
+            </label>
             <Input
               type="text"
-              placeholder="Last name"
-              className="w-full"
+              placeholder="Enter last name"
+              className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
               onChange={handleChange}
               name="lastName"
               id="lastName"
@@ -239,34 +347,79 @@ const CheckoutForm = () => {
             />
 
             {errors.lastName && touched.lastName && (
-              <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+              <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-4 w-4"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+                {errors.lastName}
+              </p>
             )}
           </div>
         </div>
 
         {/* address */}
-        <div>
-          <Input
-            type="text"
-            placeholder="Address"
-            className="w-full mt-4"
+        <div className="mt-4">
+          <label
+            htmlFor="address"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Address <span className="text-red-500">*</span>
+          </label>
+          <TextArea
+            placeholder="e.g., Block 5, Street 50, House 25, Hawalli, Kuwait"
+            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
             onChange={handleChange}
             name="address"
             id="address"
             value={values.address}
+            rows={3}
           />
 
           {errors.address && touched.address && (
-            <p className="text-red-500 text-sm mt-1">{errors.address}</p>
+            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {errors.address}
+            </p>
           )}
         </div>
 
         {/* apartment, suite, etc. */}
-        <div>
+        <div className="mt-4">
+          <label
+            htmlFor="apartment"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            Apartment, Suite, etc.{" "}
+            <span className="text-gray-400 text-xs">(Optional)</span>
+          </label>
           <Input
             type="text"
-            placeholder="Apartment, suite, etc. (optional)"
-            className="w-full mt-4"
+            placeholder="Apt, Suite, Unit, Building, Floor, etc."
+            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
             onChange={handleChange}
             name="apartment"
             id="apartment"
@@ -274,12 +427,27 @@ const CheckoutForm = () => {
           />
 
           {errors.apartment && touched.apartment && (
-            <p className="text-red-500 text-sm mt-1">{errors.apartment}</p>
+            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {errors.apartment}
+            </p>
           )}
         </div>
 
-        <div className="grid grid-cols-2 gap-4 mt-4">
-          {/* city */}
+        {/* <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <Input
               type="text"
@@ -296,7 +464,6 @@ const CheckoutForm = () => {
             )}
           </div>
 
-          {/* postal code */}
           <div>
             <Input
               type="text"
@@ -312,7 +479,7 @@ const CheckoutForm = () => {
               <p className="text-red-500 text-sm mt-1">{errors.postalCode}</p>
             )}
           </div>
-        </div>
+        </div> */}
 
         {/* <div className="mt-4">
           <Select defaultValue="Hawalli">
@@ -325,28 +492,66 @@ const CheckoutForm = () => {
           </Select>
         </div> */}
 
-        <div className="pt-1">
+        <div className="pt-6 mt-6 border-t border-gray-200">
           {/* Place Order Button */}
           <button
             type="submit"
-            // onClick={() => {
-            //   enqueueSnackbar("Order placed successfully", {
-            //     variant: "success",
-            //     style: {
-            //       backgroundColor: "#87a786ef",
-            //       fontWeight: "bold",
-            //     },
-            //   });
-            // }}
-            className="w-full mt-4 bg-[#87A786] hover:bg-[#87a786ea] text-white py-2  font-bold flex justify-center items-center gap-2"
+            disabled={isPending}
+            className="w-full bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
           >
-            <span>Place Order </span>{" "}
             {!isPending ? (
-              <GiPayMoney size={20} />
+              <>
+                <span className="text-base">Place Order</span>
+                <GiPayMoney
+                  size={22}
+                  className="group-hover:scale-110 transition-transform"
+                />
+              </>
             ) : (
-              <Loader className="animate-spin" size={20} />
+              <>
+                <Loader className="animate-spin" size={20} />
+                <span>Processing...</span>
+              </>
             )}
           </button>
+
+          {/* Trust badges */}
+          <div className="mt-4 flex items-center justify-center gap-4 text-xs text-gray-500">
+            <div className="flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 text-[#87A786]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                />
+              </svg>
+              <span>Secure Checkout</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4 text-[#87A786]"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 13l4 4L19 7"
+                />
+              </svg>
+              <span>Fast Delivery</span>
+            </div>
+          </div>
         </div>
       </div>
     </form>

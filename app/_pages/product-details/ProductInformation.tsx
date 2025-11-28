@@ -236,26 +236,26 @@ const ProductInformation = () => {
   }
 
   return (
-    <div className="bg-white shadow-md p-6 ">
+    <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
       {/* Breadcrumb Navigation */}
-      <nav aria-label="Breadcrumb">
+      <nav aria-label="Breadcrumb" className="mb-6">
         <ol
           role="list"
-          className="flex items-center space-x-2 text-sm font-medium text-gray-500"
+          className="flex items-center space-x-2 text-sm font-medium text-gray-500 bg-gray-50 px-4 py-2 rounded-lg"
         >
           <li>
             <Link
               href="/"
-              className="text-[#87A786] hover:text-black duration-200"
+              className="text-[#87A786] hover:text-[#6d8a6c] duration-200 transition-colors"
             >
               {locale === "en" ? "Home" : "بيت"}
             </Link>
           </li>
-          <li>/</li>
+          <li className="text-gray-400">/</li>
           <li>
             <Link
               href="/shop"
-              className="text-[#87A786] hover:text-black duration-200"
+              className="text-[#87A786] hover:text-[#6d8a6c] duration-200 transition-colors"
             >
               {locale === "en" ? "Products" : "منتجات"}
             </Link>
@@ -269,26 +269,26 @@ const ProductInformation = () => {
               Other
             </a>
           </li> */}
-          <li>/</li>
-          <li className="hover:text-[#87A786] text-black duration-200">
+          <li className="text-gray-400">/</li>
+          <li className="text-gray-700 font-semibold truncate max-w-[200px]">
             {currentProduct.title}
           </li>
         </ol>
       </nav>
 
       {/* Product Title */}
-      <h1 className="mt-4 text-2xl font-bold text-gray-900">
+      <h1 className="text-3xl font-bold text-gray-900 mb-3">
         {currentProduct.title}
       </h1>
       {/* Category Information */}
-      <div className="mt-1">
-        <span className="inline-flex items-center px-2 py-[2px] rounded-full text-xs font-medium bg-[#87A786]/10 text-[#87A786] border border-[#87A786]/20">
+      <div className="mb-4">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#87A786]/20 to-[#87A786]/10 text-[#87A786] border border-[#87A786]/30 shadow-sm">
           {currentProduct.category}
         </span>
       </div>
 
       {/* Product Description */}
-      <p className="mt-4 text-base text-gray-600">
+      <p className="text-base text-gray-600 leading-relaxed mb-6">
         {currentProduct.description}
       </p>
 
@@ -298,15 +298,20 @@ const ProductInformation = () => {
         values.size ? Number(values.size) : undefined,
         values.digitCount ? Number(values.digitCount) : undefined
       ) ? (
-        <p className="mt-4 text-lg sm:text-2xl font-semibold text-gray-900">
-          {getProductPrice(
-            currentProduct,
-            values.size ? Number(values.size) : undefined,
-            values.digitCount ? Number(values.digitCount) : undefined
-          ) + " KD"}
-        </p>
+        <div className="bg-gradient-to-r from-[#87A786]/10 to-transparent p-4 rounded-lg border-l-4 border-[#87A786] mb-6">
+          <p className="text-sm text-gray-600 mb-1">
+            {locale === "en" ? "Price" : "السعر"}
+          </p>
+          <p className="text-2xl sm:text-3xl font-bold text-[#87A786]">
+            {getProductPrice(
+              currentProduct,
+              values.size ? Number(values.size) : undefined,
+              values.digitCount ? Number(values.digitCount) : undefined
+            ) + " KD"}
+          </p>
+        </div>
       ) : (
-        <p className="animate-pulse font-bold mt-4 text-sm text-red-500 ">
+        <p className="animate-pulse font-bold text-sm text-red-500 bg-red-50 p-3 rounded-lg border border-red-200 mb-6">
           {locale === "en"
             ? "Please select a valid variant "
             : "الحالة غير متاحة"}
@@ -333,37 +338,48 @@ const ProductInformation = () => {
         />
 
         {/* Quantity Selector and place order */}
-        <div className="mt-6 flex items-center space-x-3">
-          {/* Quantity Selector */}
-          <div className="flex items-center space-x-1">
+        <div className="mt-8 pt-6 border-t border-gray-200">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
+            {/* Quantity Selector */}
+            <div className="flex items-center">
+              <label className="text-sm font-medium text-gray-700 mr-3">
+                {locale === "en" ? "Quantity:" : "الكمية:"}
+              </label>
+              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+                <button
+                  type="button"
+                  onClick={() => handleQuantityChange("decrease")}
+                  className="w-10 h-10 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                >
+                  -
+                </button>
+                <span className="w-12 h-10 flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
+                  {values.quantity}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => handleQuantityChange("increase")}
+                  className="w-10 h-10 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                >
+                  +
+                </button>
+              </div>
+            </div>
+
+            {/* order now Button */}
             <button
-              type="button"
-              onClick={() => handleQuantityChange("decrease")}
-              className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none  "
+              type="submit"
+              className="flex-1 px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group"
             >
-              -
-            </button>
-            <span className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white">
-              {values.quantity}
-            </span>
-            <button
-              type="button"
-              onClick={() => handleQuantityChange("increase")}
-              className="w-10 text-center py-2 border border-gray-300  text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 "
-            >
-              +
+              <span className="text-base">
+                {locale === "en" ? "Order Now" : "الآن تأكد"}
+              </span>
+              <BaggageClaim
+                size={18}
+                className="group-hover:scale-110 transition-transform"
+              />
             </button>
           </div>
-
-          {/* order now Button */}
-          <button
-            type="submit"
-            // onClick={handleOrderNow}
-            className="px-4 py-2 border border-transparent  shadow-sm text-sm  text-white bg-[#87A786] hover:bg-[#87A786] font-bold flex gap-2 items-center w-full justify-center"
-          >
-            <span>{locale === "en" ? "Order Now" : "الآن تأكد"}</span>
-            <BaggageClaim size={16} />
-          </button>
         </div>
       </form>
 
@@ -378,20 +394,34 @@ const ProductInformation = () => {
       </div> */}
 
       {/* Sharing Options */}
-      <div className="mt-5">
-        {/* <p className="text-sm text-gray-600">Share:</p> */}
-        <div className="flex space-x-2">
-          <a href="#" className="text-gray-500 hover:text-gray-900">
-            <FaFacebookF className="w-5 h-5" />
+      <div className="mt-8 pt-6 border-t border-gray-200">
+        <p className="text-sm font-medium text-gray-700 mb-3">
+          {locale === "en" ? "Share this product:" : "شارك هذا المنتج:"}
+        </p>
+        <div className="flex gap-3">
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors shadow-sm hover:shadow-md"
+          >
+            <FaFacebookF className="w-4 h-4" />
           </a>
-          <a href="#" className="text-gray-500 hover:text-gray-900">
-            <FaTwitter className="w-5 h-5" />
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 text-sky-500 hover:bg-sky-100 transition-colors shadow-sm hover:shadow-md"
+          >
+            <FaTwitter className="w-4 h-4" />
           </a>
-          <a href="#" className="text-gray-500 hover:text-gray-900">
-            <FaInstagram className="w-5 h-5" />
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100 transition-colors shadow-sm hover:shadow-md"
+          >
+            <FaInstagram className="w-4 h-4" />
           </a>
-          <a href="#" className="text-gray-500 hover:text-gray-900">
-            <FaPinterestP className="w-5 h-5" />
+          <a
+            href="#"
+            className="w-10 h-10 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-colors shadow-sm hover:shadow-md"
+          >
+            <FaPinterestP className="w-4 h-4" />
           </a>
         </div>
       </div>

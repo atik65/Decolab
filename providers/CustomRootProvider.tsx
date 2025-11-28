@@ -13,9 +13,7 @@ import Footer from "@/components/shared/Footer";
 import Header from "@/components/shared/Header";
 import FloatingWP from "@/components/shared/FloatingWP";
 import ContactSection from "@/app/_pages/home/ContactsSection";
-// import ScrollToTopButton from "@/components/shared/ScrollToTop";
-// import FloatingCart from "@/components/shared/FloatingCart";
-// import useGetCartFromLS from "@/hooks/zustand/useGetCartFromLS";
+import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 const AppProgressProvider = dynamic(
   () => import("@bprogress/next").then((mod) => mod.AppProgressProvider),
@@ -49,29 +47,29 @@ const CustomRootProvider = ({ children }: Props) => {
     // <Suspense fallback={<div>Loading...</div>}>
     <div className="bg-white text-black">
       <QueryClientProvider client={queryClient}>
-        <SnackbarProvider>
-          {/* <SessionProvider session={session}> */}
-          <AppProgressProvider
-            height="3px"
-            color="#99b998"
-            options={{ showSpinner: false }}
-            shallowRouting
-          >
-            <Header />
+        <NuqsAdapter>
+          <SnackbarProvider>
+            {/* <SessionProvider session={session}> */}
+            <AppProgressProvider
+              height="3px"
+              color="#99b998"
+              options={{ showSpinner: false }}
+              shallowRouting
+            >
+              <Header />
 
-            {children}
+              {children}
+              <ContactSection />
+              <Footer />
+              {/* <Footer /> */}
+              {/* <FloatingCart /> */}
+              <FloatingWP />
+              <ScrollToTopButton />
+            </AppProgressProvider>
+          </SnackbarProvider>
 
-            <ContactSection />
-            <Footer />
-            {/* <Footer /> */}
-
-            {/* <FloatingCart /> */}
-            <FloatingWP />
-            <ScrollToTopButton />
-          </AppProgressProvider>
-        </SnackbarProvider>
-
-        <ReactQueryDevtools initialIsOpen={false} />
+          <ReactQueryDevtools initialIsOpen={false} />
+        </NuqsAdapter>
       </QueryClientProvider>
     </div>
     // </Suspense>

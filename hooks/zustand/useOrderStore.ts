@@ -23,7 +23,7 @@ interface OrderStore {
 
 export const useOrderStore = create<OrderStore>((set) => ({
   productInfo: {
-    productId: "2",
+    productId: "",
     sizeId: "1",
     digitId: "2",
     colorId: "1",

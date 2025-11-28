@@ -8,6 +8,10 @@ import React from "react";
 import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
+import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
+import { constructImageURL } from "@/lib/utils";
+import SummarySkt from "@/components/skeletons/checkout/SummarySkt";
+import { useQueryState } from "nuqs";
 
 // const GiPayMoney = dynamic(() =>
 //   import("react-icons/gi").then((mod) => mod.GiPayMoney)
@@ -15,6 +19,9 @@ import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 
 const OrderSummary = () => {
   const locale = useGetLocale();
+  // const [prodId, setProdId] = useQueryState("product");
+
+  // console.log("Product ID in Order Summary:", prodId);
 
   // const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(
   //   null
@@ -23,7 +30,10 @@ const OrderSummary = () => {
   const { productInfo } = useOrderStore();
 
   // get product by id
-  const { data: product } = useGetProductDetails(productInfo.productId!);
+  const { data: product, isLoading } = useGetProductDetails(
+    productInfo.productId!
+    // prodId?.toString() || ""
+  );
 
   const selectedProduct = product?.[locale];
   // useEffect(() => {
@@ -39,8 +49,13 @@ const OrderSummary = () => {
 
   // console.log(selectedProduct);
 
+  // Show loading skeleton while fetching data
+  if (isLoading) {
+    return <SummarySkt />;
+  }
+
   if (!selectedProduct) {
-    return <p className="text-center font-bold text-md">Product not found</p>;
+    return <NoDetails />;
   }
 
   return (
@@ -55,7 +70,7 @@ const OrderSummary = () => {
               <Image
                 width={80}
                 height={80}
-                src={selectedProduct?.mainImage || ""}
+                src={constructImageURL(selectedProduct.mainImage)}
                 alt="Number Front Light"
                 className="w-16 h-16 object-cover"
               />
