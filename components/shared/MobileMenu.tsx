@@ -9,7 +9,6 @@ import {
   Home,
   Users,
   MessageCircle,
-  Megaphone,
 } from "lucide-react";
 import Image from "next/image";
 

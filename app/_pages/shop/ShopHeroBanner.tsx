@@ -1,18 +1,17 @@
 "use client";
 
-import { Search } from "lucide-react";
-import { useState } from "react";
+// import { useState } from "react";
 import { useGetLocale } from "@/hooks/useGetLocale";
 
 const ShopHeroBanner = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  // const [searchQuery] = useState("");
   const locale = useGetLocale();
 
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    // Handle search logic here
-    console.log("Search:", searchQuery);
-  };
+  // const handleSearch = (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   // Handle search logic here
+  //   console.log("Search:", searchQuery);
+  // };
 
   return (
     <div className="relative bg-gradient-to-br from-[#87A786] via-[#87A786] to-[#6d8a6c] overflow-hidden">

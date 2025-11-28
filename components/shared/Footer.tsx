@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Left Section: Copyright Text */}
         <p className="text-sm font-light text-center sm:text-start">
           One Direction © {new Date().getFullYear()}{" "}
-          {locale === "en" ? "CREATED BY" : "تم إنشاء بواسطة"}{" "}
+          {locale === "en" ? "Created By" : "تم إنشاء بواسطة"}{" "}
           <Link
             href={"https://www.linkedin.com/in/atik65/"}
             target="_blank"
@@ -22,7 +22,7 @@ const Footer = () => {
             {locale === "en" ? "ATIK" : "أتك"}
           </Link>{" "}
           {locale === "en"
-            ? "PREMIUM E-COMMERCE SOLUTIONS."
+            ? "with Love and Passion for Exceptional E-commerce Solutions."
             : "حلول تجارة إلكترونية متميزة."}
         </p>
 

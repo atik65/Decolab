@@ -1,4 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
+import Link from "next/link";
 
 // ProductCard Loading Skeleton - matches your ProductCard structure
 export const ProductCardSkeleton = () => {
@@ -100,7 +101,7 @@ export const NoProductsFound = () => {
               No Products Found
             </h2>
             <p className="text-gray-600 text-lg mb-2">
-              We couldn't find any products matching your criteria.
+              We couldn&apos;t find any products matching your criteria.
             </p>
             <p className="text-gray-500 text-sm">
               Try adjusting your filters or browse our categories.
@@ -144,18 +145,18 @@ export const NoProductsFound = () => {
 
           {/* Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
-            <a
+            <Link
               href="/shop"
               className="px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
             >
               View All Products
-            </a>
-            <a
+            </Link>
+            <Link
               href="/"
               className="px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-lg transition-all duration-200"
             >
               Go to Homepage
-            </a>
+            </Link>
           </div>
         </div>
       </div>

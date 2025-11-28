@@ -79,7 +79,7 @@ export const TestimonialsSection = () => {
 
               {/* Text */}
               <p className="text-gray-700 mb-6 italic">
-                "{testimonial.text[locale]}"
+                &quot;{testimonial.text[locale]}&quot;
               </p>
 
               {/* Author */}
