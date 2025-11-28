@@ -7,9 +7,6 @@ import { ProductDetailsResponse, ProductsResponse } from "@/types/api/products";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 
 export const useGetProducts = () => {
-  const queryClient = useQueryClient();
-  //   const { data: session } = useSession();
-
   return useQuery({
     queryKey: ["products"],
     queryFn: async () =>
@@ -19,6 +16,18 @@ export const useGetProducts = () => {
       }),
   });
 };
+
+export const useGetProductNSearch = ({ search = "" }) => {
+  return useQuery({
+    queryKey: ["products"],
+    queryFn: async () =>
+      await axiosInstance<ProductsResponse>({
+        url: `/products/?search=${search}`,
+        method: "GET",
+      }),
+  });
+};
+
 
 // product details
 export const useGetProductDetails = (id: string) => {
