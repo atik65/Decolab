@@ -4,6 +4,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useQuery } from "@tanstack/react-query";
 import axiosInstance from "@/lib/axiosInstance";
 import { ProductDetailsResponse, ProductsResponse } from "@/types/api/products";
+import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 
 export const useGetProducts = () => {
   const queryClient = useQueryClient();
@@ -29,6 +30,18 @@ export const useGetProductDetails = (id: string) => {
     queryFn: async () =>
       await axiosInstance<ProductDetailsResponse>({
         url: `/products/${id}/`,
+        method: "GET",
+      }),
+  });
+};
+
+// use categories
+export const useGetCategories = <T,>() => {
+  return useQuery({
+    queryKey: ["categories"],
+    queryFn: async () =>
+      await axiosInstance<CategoresResponse>({
+        url: `/categories/`,
         method: "GET",
       }),
   });
