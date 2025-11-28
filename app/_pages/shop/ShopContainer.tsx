@@ -5,59 +5,83 @@ import ProductCard from "@/components/shared/product/ProductCard";
 
 import ShopTopSection from "./ShopTopSection";
 import { useGetProducts } from "@/hooks/tanstack/useProducts";
-import { ShopSkeleton } from "@/components/shared/loading-skeletons/loading-skeleton";
+import {
+  ShopSkeleton,
+  NoProductsFound,
+} from "@/components/shared/loading-skeletons/loading-skeleton";
+import ShopHeroBanner from "./ShopHeroBanner";
+import CategoryFilter from "./CategoryFilter";
+import WhyChooseUs from "./WhyChooseUs";
+import {
+  TestimonialsSection,
+  HowItWorksSection,
+  FAQSection,
+} from "./BottomSections";
 // import { products } from "@/data/products";
 
 const ShopContainer = () => {
-  // Mock data for products
-  // const products = [
-  //   {
-  //     id: 1,
-  //     image: "/images/watch.jpg",
-  //     title: "Smart watches wood edition",
-  //     categories: ["Accessories", "Clocks"],
-  //     price: "$359.00",
-  //     isHot: false,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 2,
-  //     image: "/images/penguin.jpg",
-  //     title: "Penatibus parturient orci morbi",
-  //     categories: ["Toys"],
-  //     price: "$444.00",
-  //     isHot: false,
-  //     rating: 0,
-  //   },
-  //   {
-  //     id: 3,
-  //     image: "/images/bowtie.jpg",
-  //     title: "Wooden bow tie man",
-  //     categories: ["Accessories"],
-  //     price: "$359.00",
-  //     isHot: true,
-  //     rating: 5,
-  //   },
-  // ];
-
   const { data, isLoading } = useGetProducts();
 
   const products = data?.results || [];
 
   if (isLoading) {
-    return <ShopSkeleton />;
+    return (
+      <>
+        <ShopHeroBanner />
+        <ShopSkeleton />
+      </>
+    );
+  }
+
+  // Show NoProductsFound when products array is empty
+  if (!products || products.length === 0) {
+    return (
+      <>
+        <ShopHeroBanner />
+        <NoProductsFound />
+      </>
+    );
   }
 
   return (
-    <div className="container mx-auto px-4 mt-8">
-      <ShopTopSection />
-      {/* Product Grid */}
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
-        {products.map((product, index) => (
-          <ProductCard key={index} product={product} />
-        ))}
+    <>
+      {/* Hero Banner */}
+      <ShopHeroBanner />
+
+      {/* Products Section */}
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 text-center">
+            Our Products
+          </h2>
+          <p className="text-gray-600 text-center">
+            Browse our collection of premium signage solutions
+          </p>
+        </div>
+
+        {/* Product Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+          {products.map((product, index) => (
+            <ProductCard key={index} product={product} />
+          ))}
+        </div>
       </div>
-    </div>
+
+      {/* Category Filter */}
+      {/* <CategoryFilter /> */}
+
+      {/* Why Choose Us */}
+      <WhyChooseUs />
+
+      {/* How It Works */}
+      <HowItWorksSection />
+
+      {/* Testimonials */}
+      <TestimonialsSection />
+
+      {/* FAQ */}
+      <FAQSection />
+    </>
   );
 };
 
