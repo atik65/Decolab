@@ -7,7 +7,7 @@ import "swiper/css/thumbs";
 
 import { Navigation, Thumbs, FreeMode } from "swiper/modules";
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Swiper as SwiperType } from "swiper/types";
 // import { ProductDetails } from "@/types/product";
 import { ImageOff } from "lucide-react";
@@ -18,6 +18,9 @@ import { useParams } from "next/navigation";
 // import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
+import { constructImageURL } from "@/lib/utils";
+import ProductImageLoadingSkt from "@/components/skeletons/productDetails/ProductImageLoadingSkt";
+import { NoImage } from "@/components/skeletons/productDetails/Not-found";
 
 const TfiAngleLeft = dynamic(() =>
   import("react-icons/tfi").then((mod) => mod.TfiAngleLeft)
@@ -26,44 +29,49 @@ const TfiAngleRight = dynamic(() =>
   import("react-icons/tfi").then((mod) => mod.TfiAngleRight)
 );
 
-// import ReactImageMagnify from "react-image-magnify";
-
-// import {
-//   Magnifier,
-//   GlassMagnifier,
-//   SideBySideMagnifier,
-//   PictureInPictureMagnifier,
-//   MOUSE_ACTIVATION,
-//   TOUCH_ACTIVATION,
-// } from "react-image-magnifiers";
-
-// interface ProductImageSliderProps {
-//   product: Product | null;
-// }
-
 const ProductImageSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0); // Track the active slide
+  const [currentImages, setCurrentImages] = useState<string[]>([]);
 
   const { slug } = useParams();
 
-  const { data: product } = useGetProductDetails(slug?.toString() || "");
+  const { data: product, isLoading } = useGetProductDetails(
+    slug?.toString() || ""
+  );
 
   const locale = useGetLocale();
   const currentProduct = product?.[locale];
+  // const currentImages = [
+  //   currentProduct?.mainImage,
+  //   currentProduct?.hoveredImage,
+  //   ...(currentProduct?.images || []),
+  // ];
 
-  if (!currentProduct?.images?.length) {
-    return (
-      <section>
-        {/* add a icons */}
-        <div className="flex justify-center gap-2">
-          {/* lucide icons of no image */}
-          <ImageOff size={96} className="text-[#430000]" />
-        </div>
-        <p className="text-center text-sm">No images available</p>
-      </section>
-    );
+  useEffect(() => {
+    const images = [];
+
+    if (currentProduct?.mainImage) {
+      images.push(currentProduct.mainImage);
+    }
+    if (currentProduct?.hoveredImage) {
+      images.push(currentProduct.hoveredImage);
+    }
+    if (currentProduct?.images && currentProduct.images.length > 0) {
+      images.push(...currentProduct.images);
+    }
+
+    setCurrentImages(images);
+  }, [currentProduct]);
+
+  // Show loading skeleton while fetching data
+  if (isLoading) {
+    return <ProductImageLoadingSkt />;
+  }
+
+  if (!currentImages?.length) {
+    return <NoImage />;
   }
 
   return (
@@ -86,7 +94,7 @@ const ProductImageSlider = () => {
                 prevEl: ".custom-swiper-button-prev-prod",
               }}
             >
-              {currentProduct?.images?.map((img, index) => (
+              {currentImages?.map((img, index) => (
                 <SwiperSlide key={index}>
                   <SlideComponent imgURI={img} />
                 </SwiperSlide>
@@ -104,7 +112,7 @@ const ProductImageSlider = () => {
               watchSlidesProgress={true}
               modules={[Navigation, Thumbs, FreeMode]}
             >
-              {currentProduct?.images.map((img, index) => (
+              {currentImages?.map((img, index) => (
                 <SwiperSlide key={index}>
                   <ThumbsComponent
                     activeIndex={activeIndex}
@@ -177,7 +185,7 @@ const ThumbsComponent = ({
         width={500}
         alt="product image"
         // src={"/images/home/bed.png"}
-        src={imgURI}
+        src={constructImageURL(imgURI)}
         className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
           index === activeIndex ? "border-[#99b998]" : "border-transparent "
         }`}
@@ -187,6 +195,8 @@ const ThumbsComponent = ({
 };
 
 const SlideComponent = ({ imgURI }: { imgURI: string }) => {
+  console.log("imgURI:", imgURI);
+
   return (
     <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0  ">
       {/* <Image
@@ -198,7 +208,7 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
         className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
       /> */}
       <ImageZoomViewModal
-        imgURI={imgURI}
+        imgURI={constructImageURL(imgURI)}
         className="mx-auto h-[300px] sm:h-[402px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[550px] object-contain items-center"
       />
     </div>

@@ -64,11 +64,15 @@ import * as Yup from "yup";
 import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { ProductDetails } from "@/types/api/products";
+import ProductInfoSkt from "@/components/skeletons/productDetails/ProductInfoSkt";
+import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
 
 const ProductInformation = () => {
   const { slug } = useParams();
 
-  const { data: product } = useGetProductDetails(slug?.toString() || "");
+  const { data: product, isLoading } = useGetProductDetails(
+    slug?.toString() || ""
+  );
 
   const locale = useGetLocale();
   const currentProduct = product?.[locale];
@@ -177,7 +181,6 @@ const ProductInformation = () => {
           ) || 0,
       };
 
-
       // if pricing type is variant then must provide size and digitCount
       if (currentProduct?.pricing?.type === "variant") {
         if (!values.size || !values.digitCount) {
@@ -223,8 +226,13 @@ const ProductInformation = () => {
 
   // console.log(errors);
 
+  // Show loading skeleton while fetching data
+  if (isLoading) {
+    return <ProductInfoSkt />;
+  }
+
   if (!currentProduct) {
-    return <div>Product not found</div>;
+    return <NoDetails />;
   }
 
   return (
