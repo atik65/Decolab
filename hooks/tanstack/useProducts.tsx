@@ -19,7 +19,7 @@ export const useGetProducts = () => {
 
 export const useGetProductNSearch = ({ search = "" }) => {
   return useQuery({
-    queryKey: ["products"],
+    queryKey: ["products", search],
     queryFn: async () =>
       await axiosInstance<ProductsResponse>({
         url: `/products/?search=${search}`,
@@ -27,7 +27,6 @@ export const useGetProductNSearch = ({ search = "" }) => {
       }),
   });
 };
-
 
 // product details
 export const useGetProductDetails = (id: string) => {

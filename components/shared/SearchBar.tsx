@@ -7,13 +7,18 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
+import { useRouter } from "@bprogress/next";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 
 const SearchBar = () => {
   const [open, setOpen] = useState(false);
+
+  const handleOpenChange = (isOpen: boolean) => {
+    setOpen(isOpen);
+  };
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={handleOpenChange}>
       <DrawerTrigger className="">
         {" "}
         <span
@@ -55,26 +60,58 @@ interface Props {
 }
 
 const SearchInput = ({ open, onOpenChange }: Props) => {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setSearchTerm(value);
+    // router.push(`/shop?search=${encodeURIComponent(value)}`);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push(`/shop?search=${encodeURIComponent(searchTerm)}`);
+    onOpenChange(false);
+  };
+
   return (
     <div className="">
-      <div className="border-b flex">
+      <form onSubmit={handleSubmit} className="border-b flex">
         <input
           type="text"
           placeholder="Search for products"
-          // value={searchTerm}
-          // onChange={handleInputChange}
+          value={searchTerm}
+          onChange={handleInputChange}
           autoFocus
           className="w-full min-h-16 lg:min-h-28 flex items-center  placeholder:text-black placeholder:text-center placeholder:font-bold placeholder:text-xl sm:placeholder:text-2xl md:placeholder:text-3xl xl:placeholder:text-5xl placeholder:pt-5  text-center outline-none text-black text-xl sm:text-2xl md:text-3xl xl:text-5xl font-bold py-10"
         />
 
-        <button
-          onClick={() => onOpenChange(!open)}
-          className="flex items-center justify-center px-5"
-        >
-          <X className="hidden md:block" size={40} />
-          <X className="block md:hidden" size={20} />
-        </button>
-      </div>
+        {/* close button */}
+        {searchTerm.trim() === "" && (
+          <button
+            type="button"
+            onClick={() => onOpenChange(false)}
+            className="flex items-center justify-center px-5"
+          >
+            <X className="hidden md:block" size={40} />
+            <X className="block md:hidden" size={20} />
+          </button>
+        )}
+
+        {/* search button */}
+
+        {searchTerm.trim() && (
+          <button
+            type="submit"
+            onClick={() => onOpenChange(false)}
+            className="flex items-center justify-center px-5"
+          >
+            <Search className="hidden md:block" size={40} />
+            <Search className="block md:hidden" size={20} />
+          </button>
+        )}
+      </form>
       {/* Start typing to see products you are looking for.
        */}
       <div className="flex mt-2 px-2">
