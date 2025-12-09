@@ -117,7 +117,7 @@ const ProductInformation = () => {
       ? { lightColor: Yup.string().required("Light color is required") }
       : {}),
     houseNumber: Yup.string().required("House number is required"),
-    text: Yup.string().required("Text is required"),
+    text: Yup.string().notRequired(),
     ...(currentProduct?.designs?.length ?? 0 > 0
       ? { design: Yup.string().required("Design is required") }
       : {}),
