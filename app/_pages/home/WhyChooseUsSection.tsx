@@ -1,70 +1,71 @@
 "use client";
 import { motion } from "framer-motion";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { Gem, Palette, Truck, Users, Wrench, Zap } from "lucide-react";
 
 const features = {
   en: [
     {
+      title: "Free Delivery",
+      description: "Competitive pricing without hidden fees",
+      icon: Truck,
+    },
+    {
+      title: "Free Installation Support",
+      description: "Always here to help with your questions and concerns",
+      icon: Wrench,
+    },
+    {
       title: "Premium Quality",
       description: "High-quality materials and craftsmanship in every product",
-      icon: "💎",
+      icon: Gem,
     },
     {
       title: "Custom Design",
       description: "Personalized solutions tailored to your unique needs",
-      icon: "🎨",
+      icon: Palette,
     },
     {
       title: "Fast Delivery",
       description: "Quick turnaround time without compromising quality",
-      icon: "🚀",
+      icon: Zap,
     },
     {
       title: "Expert Team",
       description: "15+ years of experience in signage and design",
-      icon: "👨‍💼",
-    },
-    {
-      title: "24/7 Support",
-      description: "Always here to help with your questions and concerns",
-      icon: "💬",
-    },
-    {
-      title: "Best Prices",
-      description: "Competitive pricing without hidden fees",
-      icon: "💰",
+      icon: Users,
     },
   ],
   ar: [
     {
+      title: "توصيل مجاني",
+      description: "أسعار تنافسية بدون رسوم خفية",
+      icon: Truck,
+    },
+    {
+      title: "دعم تركيب مجاني",
+      description: "دائمًا هنا للمساعدة في أسئلتك ومخاوفك",
+      icon: Wrench,
+    },
+    {
       title: "جودة ممتازة",
       description: "مواد عالية الجودة وحرفية في كل منتج",
-      icon: "💎",
+      icon: Gem,
     },
     {
       title: "تصميم مخصص",
       description: "حلول شخصية مصممة لاحتياجاتك الفريدة",
-      icon: "🎨",
+      icon: Palette,
     },
     {
       title: "توصيل سريع",
       description: "وقت تنفيذ سريع دون المساس بالجودة",
-      icon: "🚀",
+      icon: Zap,
     },
     {
       title: "فريق خبراء",
       description: "أكثر من 15 عامًا من الخبرة في اللافتات والتصميم",
-      icon: "👨‍💼",
-    },
-    {
-      title: "دعم 24/7",
-      description: "دائمًا هنا للمساعدة في أسئلتك ومخاوفك",
-      icon: "💬",
-    },
-    {
-      title: "أفضل الأسعار",
-      description: "أسعار تنافسية بدون رسوم خفية",
-      icon: "💰",
+      icon: Users,
     },
   ],
 };
@@ -190,7 +191,9 @@ const WhyChooseUsSection = () => {
                   }}
                   transition={{ duration: 0.5 }}
                 >
-                  {feature.icon}
+                  <div className="flex-shrink-0">
+                    <feature.icon className="w-8 h-8 text-[#99b998]" />
+                  </div>
                 </motion.div>
 
                 {/* Title */}
