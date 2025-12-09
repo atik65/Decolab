@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Montserrat, Roboto_Condensed, Roboto_Flex } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
@@ -17,6 +17,14 @@ const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
   weight: ["300"],
+});
+
+const roboto = Roboto_Flex({
+  variable: "--font-roboto",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  style: ["normal"],
 });
 
 export const metadata: Metadata = {
@@ -42,21 +50,29 @@ export default async function RootLayout({
   console.log("locale", locale);
 
   return (
+    // <html lang={locale} className={` ${montserrat.className}  `}>
+    //   <body
+    //   // className={`${josefinSans.className} ${josefinSans.className} antialiased`}
+    //   // className={` ${museo.className} ${montserrat.className} antialiased`}
+    //   // className={`font-montserrat antialiased`}
+    //   >
+    //     {/* <Header /> */}
+    //     <NextIntlClientProvider>
+    //       <CustomRootProvider>{children}</CustomRootProvider>
+    //     </NextIntlClientProvider>
+    //     {/* <ContactSection />
+    //     <Footer /> */}
+    //   </body>
+    // </html>
+
     <html
       lang={locale}
-      className={` ${museo.variable} ${montserrat.variable} `}
+      className={`${montserrat.variable} ${roboto.variable} ${museo.variable}`}
     >
-      <body
-        // className={`${josefinSans.className} ${josefinSans.className} antialiased`}
-        // className={` ${museo.className} ${montserrat.className} antialiased`}
-        className={`font-montserrat antialiased`}
-      >
-        {/* <Header /> */}
+      <body className={`${montserrat.className} antialiased`}>
         <NextIntlClientProvider>
           <CustomRootProvider>{children}</CustomRootProvider>
         </NextIntlClientProvider>
-        {/* <ContactSection />
-        <Footer /> */}
       </body>
     </html>
   );

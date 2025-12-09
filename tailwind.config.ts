@@ -81,6 +81,7 @@ export default {
       fontFamily: {
         museo: ["var(--font-museo)"],
         montserrat: ["var(--font-montserrat)"],
+        roboto: ["var(--font-roboto)"],
       },
     },
   },
