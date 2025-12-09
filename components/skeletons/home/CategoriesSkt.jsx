@@ -2,7 +2,7 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const CategoriesSkt = () => {
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+    <div className="flex md:grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 min-w-[200px]">
       {[...Array(3)].map((_, index) => (
         <CategoryCardSkeleton key={index} />
       ))}

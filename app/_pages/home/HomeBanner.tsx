@@ -11,6 +11,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import HomeCategories from "./HomeCategories";
 
 interface Slide {
   id: number;
@@ -121,61 +122,17 @@ const slides = [
 ];
 
 const HomeBanner = () => {
-  //   const slides = ["Slide 1", "Slide 2", "Slide 3", "Slide 4"];
-
   return (
     <div className="relative ">
       <Swiper
-        // effect={"fade"}
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
         autoplay={{ delay: 5000 }}
         spaceBetween={50}
         slidesPerView={1}
-        // onSlideChange={() => console.log("slide change")}
-        // onSwiper={(swiper) => console.log(swiper)}
-        //   infinite
         loop
-        // navigation={{
-        //   nextEl: ".custom-swiper-button-next",
-        //   prevEl: ".custom-swiper-button-prev",
-        // }}
-
-        // breakpoints={{
-        //   640: {
-        //     slidesPerView: 1,
-        //   },
-        //   768: {
-        //     slidesPerView: 1,
-        //   },
-        //   1024: {
-        //     slidesPerView: 1,
-        //   },
-        // }}
       >
         {slides.map((slide, index) => (
           <SwiperSlide key={index}>
-            {/* <div className="h-[70vh] lg:grid grid-cols-2 bg-[ABE108]">
-              <div className="hidden lg:flex flex-col items-start justify-center gap-4  h-[70vh] px-10 bg-[ABE108]">
-                <h1 className="text-[22px] md:text-[36px] font-bold">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Suscipit, nihil.
-                </h1>
-
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Sequi
-                  asperiores iure quos. Rerum, optio eius.
-                </p>
-              </div>
-
-              <Image
-                src={slide.bg}
-                alt="banner"
-                width={1920}
-                height={500}
-                className=" h-full w-full object-contain bg-gray-100 "
-              />
-            </div> */}
-
             <SlideItem slide={slide} />
           </SwiperSlide>
         ))}
@@ -183,27 +140,6 @@ const HomeBanner = () => {
         {/* Custom Pagination Component */}
         <CustomPagination slides={slides} />
       </Swiper>
-
-      {/* Custom Navigation Buttons with PNG Icons */}
-
-      {/* <div className="custom-swiper-button-prev absolute left-10 bottom-5 z-10 cursor-pointer">
-        <Image
-          height={200}
-          width={200}
-          src="/images/home/PREV.svg"
-          alt="Previous"
-          className="w-5 h-5 sm:w-8 sm:h-8"
-        />
-      </div>
-      <div className="custom-swiper-button-next absolute right-10 bottom-5 z-10 cursor-pointer">
-        <Image
-          height={200}
-          width={200}
-          src="/images/home/NEXT.svg"
-          alt="Next"
-          className="w-5 h-5 sm:w-8 sm:h-8"
-        />
-      </div> */}
     </div>
   );
 };
@@ -247,21 +183,6 @@ const CustomPagination = ({ slides }: { slides: Slide[] }) => {
           )}
         </div>
       ))}
-
-      {/* <div className="flex justify-center space-x-4 mt-8">
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500 font-medium">01</span>
-          <div className="w-6 h-0.5 bg-gray-300"></div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500 font-medium">02</span>
-          <div className="w-6 h-0.5 bg-gray-300"></div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <span className="text-gray-500 font-medium">03</span>
-          <div className="w-6 h-0.5 bg-gray-300"></div>
-        </div>
-      </div> */}
     </div>
   );
 };
@@ -271,11 +192,18 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
 
   return (
     <div className="h-auto md:h-[75vh] grid grid-cols-1 md:grid-cols-2 md:bg-[#f9f9f9]">
-      <div className="flex flex-col items-start md:justify-center gap-4 h-auto py-10 pb-16 md:py-0  md:h-[70vh] px-10 pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
+      <div className="flex flex-col items-start md:justify-center gap-4 h-auto pb-16 md:py-0  md:h-[70vh] px-5 md:px-10 md:pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
+        {/* categories for small screen */}
+        <div className="md:hidden">
+          <HomeCategories className="flex" />
+        </div>
+
+        {/* text for large screen */}
         <motion.div
           initial={{ opacity: 0, x: -400 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.4, delay: 0.4 }}
+          className="hidden md:block"
         >
           <motion.h1
             // initial={{ opacity: 0, x: -100 }}

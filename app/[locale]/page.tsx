@@ -9,7 +9,9 @@ export default function Home() {
   return (
     <>
       <HomeBanner />
-      <HomeCategories />
+      <div className="hidden md:block">
+        <HomeCategories />
+      </div>
       <FeaturedProducts />
       <StatsSection />
       <WhyChooseUsSection />

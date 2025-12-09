@@ -7,6 +7,8 @@ import Link from "next/link";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CategoriesSkt from "@/components/skeletons/home/CategoriesSkt";
 import { useRouter } from "@bprogress/next";
+import { cn } from "@/lib/utils";
+import { ChevronRight } from "lucide-react";
 
 const dummyCategoriesImages = [
   "/images/home/banner9.jpg",
@@ -71,7 +73,7 @@ export interface CategoresResponse {
   results: Category[];
 }
 
-const HomeCategories = () => {
+const HomeCategories = ({ className }: { className?: string }) => {
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
 
@@ -88,16 +90,27 @@ const HomeCategories = () => {
   }
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10">
+    <div
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 ",
+        className
+      )}
+    >
       {categoriesData?.results?.map((category, i) => (
         <motion.div
           initial={{ opacity: 0, y: 100 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3, delay: i * 0.3 }}
           key={category.id}
+          className=""
         >
-          {" "}
-          <CategoryCard imageIndex={i} data={category} />{" "}
+          <div className="hidden md:block">
+            <CategoryCard imageIndex={i} data={category} />{" "}
+          </div>
+
+          <div className="md:hidden">
+            <CategoryCardMobile imageIndex={i} data={category} />
+          </div>
         </motion.div>
       ))}
     </div>
@@ -105,20 +118,6 @@ const HomeCategories = () => {
 };
 
 export default HomeCategories;
-
-// interface Category {
-//   id: number;
-//   image: string;
-
-//   en: {
-//     title: string;
-//     subtitle: string;
-//   };
-//   ar: {
-//     title: string;
-//     subtitle: string;
-//   };
-// }
 
 function CategoryCard({
   data,
@@ -167,6 +166,51 @@ function CategoryCard({
           height={500}
           className="w-full  group-hover:scale-110 group-hover:translate-x-3 h-20 sm:h-32 md:h-20 lg:h-20 xl:h-32 2xl:h-40 object-cover  duration-500"
         />
+      </div>
+    </div>
+  );
+}
+
+function CategoryCardMobile({
+  data,
+  imageIndex,
+}: {
+  data: Category;
+  imageIndex: number;
+}) {
+  const locale = useGetLocale();
+  return (
+    <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer w-auto">
+      {/* Image */}
+      <div className="relative h-20 sm:h-40 overflow-hidden bg-gray-100 rounded-lg">
+        <img
+          src={dummyCategoriesImages[imageIndex]}
+          alt={locale === "ar" && data.name_ar ? data.name_ar : data.name}
+          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 "
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+      </div>
+
+      {/* Content */}
+      <div className="p-3 sm:p-4 space-y-2">
+        <div className="space-y-1">
+          <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wide">
+            {locale === "ar" && data.description_ar
+              ? data.description_ar
+              : data.description}
+          </p>
+          <h3 className="text-sm sm:text-base font-bold text-gray-900 line-clamp-1">
+            {locale === "ar" && data.name_ar ? data.name_ar : data.name}
+          </h3>
+        </div>
+
+        {/* Read More Link */}
+        <div className="flex items-center gap-1 text-[#99b998] group-hover:gap-2 transition-all duration-300">
+          <span className="text-[10px] sm:text-xs font-semibold">
+            {locale === "en" ? "EXPLORE" : "استكشف"}
+          </span>
+          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
+        </div>
       </div>
     </div>
   );
