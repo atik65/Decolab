@@ -105,9 +105,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
         />
       </div>
       <div className="mt-2">
-        <div className="font-bold text-[15px] md:text-[16px]">
+        <h2 className="font-bold text-[15px] md:text-[16px]">
           {locale == "ar" ? product.title_ar : product.title}
-        </div>
+        </h2>
         <p className="text-gray-700 text-[12px] md:text-[14px]">
           {locale == "ar" ? product.category.name_ar : product.category.name}
         </p>

@@ -131,6 +131,31 @@
     @apply font-museo;
   } */
 
+  /* preve start */
+
+  /* * { */
+  /* @apply font-roboto; */
+  /* @apply font-vexa; */
+  /* } */
+
+  /* h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-montserrat;
+    @apply font-geDiner;
+  } */
+
+  /* p { */
+  /* @apply font-roboto; */
+  /* @apply font-vexa; */
+  /* } */
+
+  /* prev end */
+
+  /* Default (English) fonts */
   * {
     @apply font-roboto;
   }
@@ -146,6 +171,24 @@
 
   p {
     @apply font-roboto;
+  }
+
+  /* Arabic fonts - override when locale is 'ar' */
+  html[data-locale="ar"] * {
+    @apply font-vexa;
+  }
+
+  html[data-locale="ar"] h1,
+  html[data-locale="ar"] h2,
+  html[data-locale="ar"] h3,
+  html[data-locale="ar"] h4,
+  html[data-locale="ar"] h5,
+  html[data-locale="ar"] h6 {
+    @apply font-geDiner;
+  }
+
+  html[data-locale="ar"] p {
+    @apply font-vexa;
   }
 }
 

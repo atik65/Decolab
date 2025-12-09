@@ -3,14 +3,24 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
-import { Montserrat, Roboto_Condensed, Roboto_Flex } from "next/font/google";
+import { Montserrat, Roboto_Flex } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
 
-const museo = localFont({
-  src: "../../public/fonts/Museo300-Regular.otf",
-  variable: "--font-museo",
+
+const vexa = localFont({
+  src: "../../public/fonts/ge_dinar.otf",
+  variable: "--font-vexa",
+  weight: "400",
+  style: "normal",
+});
+
+const geDiner = localFont({
+  src: "../../public/fonts/ge_dinar.otf",
+  variable: "--font-ge-diner",
+  weight: "400",
+  style: "normal",
 });
 
 const montserrat = Montserrat({
@@ -49,27 +59,11 @@ export default async function RootLayout({
 
   console.log("locale", locale);
 
-  return (
-    // <html lang={locale} className={` ${montserrat.className}  `}>
-    //   <body
-    //   // className={`${josefinSans.className} ${josefinSans.className} antialiased`}
-    //   // className={` ${museo.className} ${montserrat.className} antialiased`}
-    //   // className={`font-montserrat antialiased`}
-    //   >
-    //     {/* <Header /> */}
-    //     <NextIntlClientProvider>
-    //       <CustomRootProvider>{children}</CustomRootProvider>
-    //     </NextIntlClientProvider>
-    //     {/* <ContactSection />
-    //     <Footer /> */}
-    //   </body>
-    // </html>
+  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable}`;
 
-    <html
-      lang={locale}
-      className={`${montserrat.variable} ${roboto.variable} ${museo.variable}`}
-    >
-      <body className={`${montserrat.className} antialiased`}>
+  return (
+    <html lang={locale} className={allFonts} data-locale={locale}>
+      <body className={`antialiased`}>
         <NextIntlClientProvider>
           <CustomRootProvider>{children}</CustomRootProvider>
         </NextIntlClientProvider>

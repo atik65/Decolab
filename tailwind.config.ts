@@ -82,6 +82,8 @@ export default {
         museo: ["var(--font-museo)"],
         montserrat: ["var(--font-montserrat)"],
         roboto: ["var(--font-roboto)"],
+        geDiner: ["var(--font-ge-diner)"],
+        vexa: ["var(--font-vexa)"],
       },
     },
   },
