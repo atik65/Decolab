@@ -158,6 +158,7 @@
   /* Default (English) fonts */
   * {
     @apply font-roboto;
+    direction: ltr;
   }
 
   h1,
@@ -176,6 +177,7 @@
   /* Arabic fonts - override when locale is 'ar' */
   html[data-locale="ar"] * {
     @apply font-vexa;
+    direction: rtl;
   }
 
   html[data-locale="ar"] h1,

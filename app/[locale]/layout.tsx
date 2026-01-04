@@ -8,9 +8,8 @@ import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
 
-
 const vexa = localFont({
-  src: "../../public/fonts/ge_dinar.otf",
+  src: "../../public/fonts/vexa.otf",
   variable: "--font-vexa",
   weight: "400",
   style: "normal",
