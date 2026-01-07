@@ -35,7 +35,7 @@ const createSheetOrder = async (payload: Payload) => {
   try {
     const uri = `${process.env.NEXT_PUBLIC_API_URL_NEXT}/api/order`;
     const res = await axios.post(uri, payload);
-    console.log("Sheet order created:", res.data);
+    // console.log("Sheet order created:", res.data);
   } catch (error) {
     console.error("Error creating sheet order:", error);
   }
