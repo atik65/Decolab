@@ -25,14 +25,25 @@ export async function POST(request: Request) {
   }
 }
 
+// {
+//     "productTitle": "House Numbers",
+//     "quantity": 1,
+//     "size": "20cm",
+//     "color": "Black",
+//     "lightColor": "Light Pink",
+//     "houseNumber": 23,
+//     "design": "Design 11222",
+//     "font": "Traditional Font",
+//     "digitCount": "1",
+//     "phoneNumber": 3234234,
+//     "email": "",
+//     "customerName": "wdfsdf asdfa",
+//     "address": "dasdfsf"
+// }
+
 // app/actions/saveOrder.js
 
-export async function saveOrder(orderData: {
-  id: string;
-  customerName: string;
-  total: number;
-  items: string[];
-}) {
+export async function saveOrder(orderData: any) {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
@@ -58,11 +69,19 @@ export async function saveOrder(orderData: {
     requestBody: {
       values: [
         [
-          new Date().toISOString(),
-          body.id,
-          body.customerName,
-          body.total,
-          body.items.join(", "),
+          orderData.productTitle,
+          orderData.quantity,
+          orderData.size,
+          orderData.color,
+          orderData.lightColor,
+          orderData.houseNumber,
+          orderData.design,
+          orderData.font,
+          orderData.digitCount,
+          orderData.phoneNumber,
+          orderData.email,
+          orderData.customerName,
+          orderData.address,
         ],
       ],
     },

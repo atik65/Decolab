@@ -18,6 +18,8 @@ import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
 import { useRouter } from "@bprogress/next";
+import createSheetOrder from "@/lib/createSheetOrder";
+import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
@@ -63,9 +65,14 @@ export interface OrderInfo {
 
 const CheckoutForm = () => {
   const { productInfo } = useOrderStore();
-
+  const { data: product, isLoading } = useGetProductDetails(
+    productInfo?.productId || ""
+  );
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { mutateAsync, isPending } = useCreateOrder();
   const router = useRouter();
+
+  // console.log("product ", product);
 
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     initialValues: {
@@ -121,11 +128,62 @@ const CheckoutForm = () => {
         },
       };
 
-      console.log(payload);
+      const enProduct: any = product ? product["en"] : {};
+
+      // Helper functions to find names by ID
+      const getSizeTitle = (id: string) =>
+        enProduct.sizes?.find((s: any) => s.id == id)?.title || id;
+      const getColorName = (id: string) =>
+        enProduct.colors?.find((c: any) => c.id == id)?.name || id;
+      const getLightColorName = (id: string) =>
+        enProduct.lightColors?.find((lc: any) => lc.id == id)?.name || id;
+      const getDesignName = (id: string) =>
+        enProduct.designs?.find((d: any) => d.id == id)?.name || id;
+      const getFontName = (id: string) =>
+        enProduct.fonts?.find((f: any) => f.id == id)?.name || id;
+
+      const sheetPayload = {
+        // Product Info
+        productTitle: enProduct.title,
+        quantity: payload.quantity,
+
+        // Customization (Mapped to readable values)
+        size: getSizeTitle(payload.customization.sizeId),
+        color: getColorName(payload.customization.colorId),
+        lightColor: getLightColorName(payload.customization.lightColorId),
+        houseNumber: payload.customization.houseNumber,
+        // additionalText: payload.customization.text,
+        design: getDesignName(payload.customization.designId),
+        font: getFontName(payload.customization.fontId),
+        digitCount: payload.customization.digitCount,
+
+        // Contact Info
+        phoneNumber: payload.contact.phoneNumber,
+        email: payload.contact.email,
+
+        // Delivery Info
+        customerName:
+          `${payload.delivery.firstName} ${payload.delivery.lastName}`.trim(),
+        address: payload.delivery.address,
+        // apartmentSuite: payload.delivery.apartmentSuite,
+        // city: payload.delivery.city,
+        // country: payload.delivery.country,
+        // postalCode: payload.delivery.postalCode,
+      };
+
+      // console.log("enProduct:", enProduct);
+      // console.log("product info:", productInfo);
+      console.log("payload:", payload);
+      console.log("sheetPayload:", sheetPayload);
+      // return;
 
       try {
+        setIsSubmitting(true);
         const response = await mutateAsync(payload);
         console.log(response);
+
+        const res = await createSheetOrder(sheetPayload);
+        console.log("Sheet order created:", res);
 
         enqueueSnackbar("Order placed successfully", {
           variant: "success",
@@ -145,6 +203,8 @@ const CheckoutForm = () => {
             color: "white",
           },
         });
+      } finally {
+        setIsSubmitting(false);
       }
     },
   });
@@ -492,10 +552,10 @@ const CheckoutForm = () => {
           {/* Place Order Button */}
           <button
             type="submit"
-            disabled={isPending}
+            disabled={isPending || isSubmitting}
             className="w-full bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
           >
-            {!isPending ? (
+            {!isPending && !isSubmitting ? (
               <>
                 <span className="text-base">Place Order</span>
                 <GiPayMoney
