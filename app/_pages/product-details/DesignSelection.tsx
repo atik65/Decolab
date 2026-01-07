@@ -81,7 +81,7 @@ const DesignSelection = ({
                     key={design.id}
                     onClick={() => {
                       setFieldValue("design", design.id.toString());
-                      handleDesignSelect(design.id);
+                      handleDesignSelect(Number(design.id));
                     }}
                     className={`relative cursor-pointer transition-all duration-200 ${
                       isSelected

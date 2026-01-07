@@ -339,31 +339,31 @@ export interface Conditions {
 }
 
 export interface Size {
-  id: number;
+  id: string | number;
   title: string;
   value: string;
 }
 
 export interface Color {
-  id: number;
+  id: string | number;
   name: string;
   colorCode: string;
 }
 
 export interface LightColor {
-  id: number;
+  id: number | string;
   name: string;
   colorCode: string;
 }
 
 export interface Design {
-  id: number;
+  id: number | string;
   url: string;
   name: string;
 }
 
 export interface Font {
-  id: number;
+  id: number | string;
   url: string;
   name: string;
 }
@@ -375,6 +375,7 @@ export interface Digit {
 }
 
 export interface ProductDetails {
+  id?: string;
   title: string;
   images: string[];
   mainImage: string;

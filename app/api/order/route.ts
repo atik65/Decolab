@@ -1,3 +1,4 @@
+import { Payload } from "@/lib/createSheetOrder";
 import { google } from "googleapis";
 import { NextResponse } from "next/server";
 
@@ -43,24 +44,20 @@ export async function POST(request: Request) {
 
 // app/actions/saveOrder.js
 
-export async function saveOrder(orderData: any) {
+const rawKey = process.env.GOOGLE_PRIVATE_KEY;
+if (!rawKey) throw new Error("Missing GOOGLE_PRIVATE_KEY env var");
+const privateKey = rawKey.replace(/\\n/g, "\n");
+
+async function saveOrder(orderData: Payload) {
   const auth = new google.auth.GoogleAuth({
     credentials: {
       client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
+      private_key: privateKey,
     },
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
   const sheets = google.sheets({ version: "v4", auth });
-
-  const body = {
-    id: 1,
-    customerName: "John Doe",
-    total: 100,
-
-    items: ["Item 1", "Item 2"],
-  };
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: process.env.GOOGLE_SHEET_ID,

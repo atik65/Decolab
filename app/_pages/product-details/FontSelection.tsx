@@ -100,7 +100,7 @@ const FontSelection = ({
                   <div
                     key={font.id}
                     onClick={() => {
-                      handleFontSelect(font.id);
+                      handleFontSelect(Number(font.id));
                       setFieldValue("font", font.id.toString());
                     }}
                     className={`relative cursor-pointer transition-all duration-200 ${

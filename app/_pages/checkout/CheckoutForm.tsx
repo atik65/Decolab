@@ -18,8 +18,16 @@ import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
 import { useRouter } from "@bprogress/next";
-import createSheetOrder from "@/lib/createSheetOrder";
+import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
+import {
+  Color,
+  Design,
+  Font,
+  LightColor,
+  ProductDetails,
+  Size,
+} from "@/types/api/products";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
@@ -65,9 +73,7 @@ export interface OrderInfo {
 
 const CheckoutForm = () => {
   const { productInfo } = useOrderStore();
-  const { data: product, isLoading } = useGetProductDetails(
-    productInfo?.productId || ""
-  );
+  const { data: product } = useGetProductDetails(productInfo?.productId || "");
   const [isSubmitting, setIsSubmitting] = React.useState(false);
   const { mutateAsync, isPending } = useCreateOrder();
   const router = useRouter();
@@ -128,21 +134,23 @@ const CheckoutForm = () => {
         },
       };
 
-      const enProduct: any = product ? product["en"] : {};
+      const enProduct: ProductDetails = product
+        ? product["en"]
+        : ({} as ProductDetails);
 
       // Helper functions to find names by ID
       const getSizeTitle = (id: string) =>
-        enProduct.sizes?.find((s: any) => s.id == id)?.title || id;
+        enProduct.sizes?.find((s: Size) => s.id == id)?.title || id;
       const getColorName = (id: string) =>
-        enProduct.colors?.find((c: any) => c.id == id)?.name || id;
+        enProduct.colors?.find((c: Color) => c.id == id)?.name || id;
       const getLightColorName = (id: string) =>
-        enProduct.lightColors?.find((lc: any) => lc.id == id)?.name || id;
+        enProduct.lightColors?.find((lc: LightColor) => lc.id == id)?.name ||
+        id;
       const getDesignName = (id: string) =>
-        enProduct.designs?.find((d: any) => d.id == id)?.name || id;
+        enProduct.designs?.find((d: Design) => d.id == id)?.name || id;
       const getFontName = (id: string) =>
-        enProduct.fonts?.find((f: any) => f.id == id)?.name || id;
-
-      const sheetPayload = {
+        enProduct.fonts?.find((f: Font) => f.id == id)?.name || id;
+      const sheetPayload: Payload = {
         // Product Info
         productTitle: enProduct.title,
         quantity: payload.quantity,
@@ -151,11 +159,15 @@ const CheckoutForm = () => {
         size: getSizeTitle(payload.customization.sizeId),
         color: getColorName(payload.customization.colorId),
         lightColor: getLightColorName(payload.customization.lightColorId),
-        houseNumber: payload.customization.houseNumber,
+        houseNumber: payload.customization.houseNumber
+          ? Number(payload.customization.houseNumber)
+          : undefined,
         // additionalText: payload.customization.text,
         design: getDesignName(payload.customization.designId),
         font: getFontName(payload.customization.fontId),
-        digitCount: payload.customization.digitCount,
+        digitCount: payload.customization.digitCount
+          ? String(payload.customization.digitCount)
+          : undefined,
 
         // Contact Info
         phoneNumber: payload.contact.phoneNumber,

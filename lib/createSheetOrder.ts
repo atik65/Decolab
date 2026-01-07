@@ -16,22 +16,22 @@ import axios from "axios";
 //     "address": "dasdfsf"
 // }
 export type Payload = {
-  productTitle: string;
-  quantity: number;
-  size: string;
-  color: string;
-  lightColor: string;
-  houseNumber: number;
-  design: string;
-  font: string;
-  digitCount: string;
-  phoneNumber: number;
-  email: string;
-  customerName: string;
-  address: string;
+  productTitle?: string;
+  quantity?: number;
+  size?: string;
+  color?: string;
+  lightColor?: string;
+  houseNumber?: number;
+  design?: string;
+  font?: string;
+  digitCount?: string;
+  phoneNumber?: string;
+  email?: string;
+  customerName?: string;
+  address?: string;
 };
 
-const createSheetOrder = async (payload: any) => {
+const createSheetOrder = async (payload: Payload) => {
   try {
     const uri = `${process.env.NEXT_PUBLIC_API_URL_NEXT}/api/order`;
     const res = await axios.post(uri, payload);
