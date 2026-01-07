@@ -11,6 +11,7 @@ import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 // import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
 import MobileMenuSidebar from "./MobileMenuSidebar";
+import CreateSheetOrder from "./CreateSheetOrder";
 
 gsap.registerPlugin(useGSAP);
 
@@ -136,6 +137,7 @@ const Header: React.FC = () => {
             <div className="p-2 rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm">
               <SearchBar />
             </div>
+            <CreateSheetOrder />
 
             <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
 
