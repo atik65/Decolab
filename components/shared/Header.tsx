@@ -11,6 +11,7 @@ import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 // import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
 import MobileMenuSidebar from "./MobileMenuSidebar";
+import AnnounceBar from "./AnnounceBar";
 // import CreateSheetOrder from "./CreateSheetOrder";
 
 gsap.registerPlugin(useGSAP);
@@ -79,6 +80,8 @@ const Header: React.FC = () => {
 
   return (
     <header className="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm z-40 sticky top-0 transition-all duration-300">
+      <AnnounceBar />
+
       <div className="container mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-20 lg:h-24">
           {/* Mobile Menu Button */}
