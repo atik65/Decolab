@@ -29,6 +29,7 @@ export type Payload = {
   email?: string;
   customerName?: string;
   address?: string;
+  googleMapsLink?: string;
 };
 
 const createSheetOrder = async (payload: Payload) => {

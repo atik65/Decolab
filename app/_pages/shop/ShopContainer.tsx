@@ -16,11 +16,13 @@ import {
   FAQSection,
 } from "./BottomSections";
 import { useQueryState } from "nuqs";
+import { useLocale } from "next-intl";
 
 const ShopContainer = () => {
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
 
   const { data, isLoading } = useGetProductNSearch(search ? { search } : {});
+  const locale = useLocale();
 
   const products = data?.results || [];
 
@@ -52,10 +54,12 @@ const ShopContainer = () => {
       <div className="container mx-auto px-4 py-8">
         <div className="mb-6">
           <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 text-center">
-            Our Products
+            {locale === "en" ? "Explore Our Products" : "استكشف منتجاتنا"}
           </h2>
           <p className="text-gray-600 text-center">
-            Browse our collection of premium signage solutions
+            {locale === "en"
+              ? "Discover a variety of high-quality items tailored to your needs."
+              : "اكتشف مجموعة متنوعة من العناصر عالية الجودة المصممة لتلبية احتياجاتك."}
           </p>
         </div>
 

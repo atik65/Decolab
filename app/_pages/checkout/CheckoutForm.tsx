@@ -28,6 +28,7 @@ import {
   ProductDetails,
   Size,
 } from "@/types/api/products";
+import { useLocale } from "next-intl";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
@@ -39,7 +40,7 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
   // lastName: Yup.string().required("Last name is required"),
   address: Yup.string().required("Address is required"),
-  // apartment: Yup.string().required("Apartment is required"),
+  googleMapsLink: Yup.string().required("Google Maps Link is required"),
   // city: Yup.string().required("City is required"),
 });
 
@@ -54,6 +55,7 @@ export interface OrderInfo {
     apartment?: string;
     city?: string;
     postalCode?: string;
+    googleMapsLink?: string;
   };
   productInfo: {
     name?: string;
@@ -91,6 +93,7 @@ const CheckoutForm = () => {
       apartment: "",
       city: "",
       postalCode: "",
+      googleMapsLink: "",
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
@@ -131,6 +134,7 @@ const CheckoutForm = () => {
           apartmentSuite: values.apartment,
           city: values.city,
           postalCode: values.postalCode,
+          googleMapsLink: values.googleMapsLink,
         },
       };
 
@@ -181,6 +185,7 @@ const CheckoutForm = () => {
         // city: payload.delivery.city,
         // country: payload.delivery.country,
         // postalCode: payload.delivery.postalCode,
+        googleMapsLink: payload.delivery.googleMapsLink,
       };
 
       // console.log("enProduct:", enProduct);
@@ -221,6 +226,8 @@ const CheckoutForm = () => {
     },
   });
 
+  const locale = useLocale();
+
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Contact Section */}
@@ -242,7 +249,9 @@ const CheckoutForm = () => {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">Contact</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            {locale === "ar" ? "معلومات الاتصال" : "Contact Information"}
+          </h2>
         </div>
 
         {/* phone number */}
@@ -251,7 +260,8 @@ const CheckoutForm = () => {
             htmlFor="phone"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Phone Number <span className="text-red-500">*</span>
+            {locale === "ar" ? "رقم الهاتف" : "Phone Number"}
+            <span className="text-red-500">*</span>
           </label>
           <Input
             type="number"
@@ -329,7 +339,9 @@ const CheckoutForm = () => {
               />
             </svg>
           </div>
-          <h2 className="text-2xl font-bold text-gray-800">Delivery</h2>
+          <h2 className="text-2xl font-bold text-gray-800">
+            {locale === "ar" ? "معلومات التوصيل" : "Delivery Information"}
+          </h2>
         </div>
         {/* <div>
           <Select
@@ -362,11 +374,14 @@ const CheckoutForm = () => {
               htmlFor="firstName"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              First Name <span className="text-red-500">*</span>
+              {locale === "ar" ? "الاسم الأول" : "First Name"}{" "}
+              <span className="text-red-500">*</span>
             </label>
             <Input
               type="text"
-              placeholder="Enter first name"
+              placeholder={
+                locale === "ar" ? "أدخل الاسم الأول" : "Enter first name"
+              }
               className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
               onChange={handleChange}
               name="firstName"
@@ -401,12 +416,16 @@ const CheckoutForm = () => {
               htmlFor="lastName"
               className="block text-sm font-medium text-gray-700 mb-2"
             >
-              Last Name{" "}
-              <span className="text-gray-400 text-xs">(Optional)</span>
+              {locale === "ar" ? "الاسم الأخير" : "Last Name"}{" "}
+              <span className="text-gray-400 text-xs">
+                ({locale === "ar" ? "اختياري" : "Optional"})
+              </span>
             </label>
             <Input
               type="text"
-              placeholder="Enter last name"
+              placeholder={
+                locale === "ar" ? "أدخل الاسم الأخير" : "Enter last name"
+              }
               className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
               onChange={handleChange}
               name="lastName"
@@ -442,10 +461,15 @@ const CheckoutForm = () => {
             htmlFor="address"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Address <span className="text-red-500">*</span>
+            {locale === "ar" ? "العنوان" : "Address"}{" "}
+            <span className="text-red-500">*</span>
           </label>
           <TextArea
-            placeholder="e.g., Block 5, Street 50, House 25, Hawalli, Kuwait"
+            placeholder={
+              locale === "ar"
+                ? "مثال: بلوك 5، شارع 50، منزل 25، حولي، الكويت"
+                : "e.g., Block 5, Street 50, House 25, Hawalli, Kuwait"
+            }
             className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
             onChange={handleChange}
             name="address"
@@ -481,12 +505,18 @@ const CheckoutForm = () => {
             htmlFor="apartment"
             className="block text-sm font-medium text-gray-700 mb-2"
           >
-            Apartment, Suite, etc.{" "}
-            <span className="text-gray-400 text-xs">(Optional)</span>
+            {locale === "ar" ? "الشقة، الجناح، إلخ." : "Apartment, Suite, etc."}{" "}
+            <span className="text-gray-400 text-xs">
+              ({locale === "ar" ? "اختياري" : "Optional"})
+            </span>
           </label>
           <Input
             type="text"
-            placeholder="Apt, Suite, Unit, Building, Floor, etc."
+            placeholder={
+              locale === "ar"
+                ? "شقة، جناح، وحدة، مبنى، طابق، إلخ."
+                : "Apt, Suite, Unit, Building, Floor, etc."
+            }
             className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
             onChange={handleChange}
             name="apartment"
@@ -515,11 +545,55 @@ const CheckoutForm = () => {
           )}
         </div>
 
+        {/* google maps link */}
+        <div className="mt-4">
+          <label
+            htmlFor="googleMapsLink"
+            className="block text-sm font-medium text-gray-700 mb-2"
+          >
+            {locale === "ar" ? "رابط خرائط جوجل" : "Google Maps Link"}{" "}
+            <span className="text-gray-400 text-xs">
+              ({locale === "ar" ? "اختياري" : "Optional"})
+            </span>
+          </label>
+          <Input
+            type="text"
+            placeholder={
+              locale === "ar" ? "رابط خرائط جوجل" : "Google Maps Link"
+            }
+            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+            onChange={handleChange}
+            name="googleMapsLink"
+            id="googleMapsLink"
+            value={values.googleMapsLink}
+          />
+
+          {errors.googleMapsLink && touched.googleMapsLink && (
+            <p className="text-red-500 text-sm mt-1 flex items-center gap-1">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-4 w-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+              {errors.googleMapsLink}
+            </p>
+          )}
+        </div>
+
         {/* <div className="grid grid-cols-2 gap-4 mt-4">
           <div>
             <Input
               type="text"
-              placeholder="City"
+              placeholder={locale === "ar" ? "المدينة" : "City"}
               className="w-full"
               onChange={handleChange}
               name="city"
@@ -569,7 +643,9 @@ const CheckoutForm = () => {
           >
             {!isPending && !isSubmitting ? (
               <>
-                <span className="text-base">Place Order</span>
+                <span className="text-base">
+                  {locale === "ar" ? "إتمام الطلب" : "Place Order"}
+                </span>
                 <GiPayMoney
                   size={22}
                   className="group-hover:scale-110 transition-transform"
@@ -578,7 +654,9 @@ const CheckoutForm = () => {
             ) : (
               <>
                 <Loader className="animate-spin" size={20} />
-                <span>Processing...</span>
+                <span>
+                  {locale === "ar" ? "جارٍ المعالجة..." : "Processing..."}
+                </span>
               </>
             )}
           </button>
@@ -600,7 +678,7 @@ const CheckoutForm = () => {
                   d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
                 />
               </svg>
-              <span>Secure Checkout</span>
+              <span>{locale === "ar" ? "الدفع الآمن" : "Secure Checkout"}</span>
             </div>
             <div className="flex items-center gap-1">
               <svg
@@ -617,7 +695,9 @@ const CheckoutForm = () => {
                   d="M5 13l4 4L19 7"
                 />
               </svg>
-              <span>Fast Delivery</span>
+              <span>
+                {locale === "ar" ? "التوصيل السريع" : "Fast Delivery"}{" "}
+              </span>
             </div>
           </div>
         </div>

@@ -60,7 +60,9 @@ const OrderSummary = () => {
 
   return (
     <div className="rounded-lg ">
-      <h2 className="text-2xl font-semibold mb-4">Order Summary</h2>
+      <h2 className="text-2xl font-semibold mb-4">
+        {locale === "en" ? "Order Summary" : "ملخص الطلب"}
+      </h2>
 
       <div className="space-y-4">
         {/* Product image + name + description */}
@@ -251,7 +253,10 @@ const OrderSummary = () => {
         {/* Order Summary */}
         <div className="space-y-2 ">
           <div className="flex justify-between">
-            <span>Subtotal · {productInfo.quantity} items</span>
+            <span>
+              {locale === "en" ? "Subtotal" : "المجموع الفرعي"} ·{" "}
+              {productInfo.quantity} {locale === "en" ? "items" : "عناصر"}
+            </span>
             <span>KD {productInfo.price}</span>
           </div>
           {/* <div className="flex justify-between">
@@ -259,7 +264,7 @@ const OrderSummary = () => {
             <span className="text-green-600">Upcoming</span>
           </div> */}
           <div className="flex justify-between text-lg font-semibold pt-2 border-t">
-            <span>Total</span>
+            <span>{locale === "en" ? "Total" : "الإجمالي"}</span>
             <span>KD {productInfo.price * productInfo.quantity}</span>
           </div>
         </div>

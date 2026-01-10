@@ -309,7 +309,7 @@ export const FAQSection = () => {
           </div>
 
           {/* Contact CTA */}
-          <div className="mt-12 text-center bg-gradient-to-r from-[#87A786]/10 to-transparent p-6 rounded-xl border border-[#87A786]/20">
+          {/* <div className="mt-12 text-center bg-gradient-to-r from-[#87A786]/10 to-transparent p-6 rounded-xl border border-[#87A786]/20">
             <p className="text-gray-700 mb-4">
               {locale === "en"
                 ? "Still have questions? We're here to help!"
@@ -335,7 +335,7 @@ export const FAQSection = () => {
               </svg>
               {locale === "en" ? "Contact Us" : "اتصل بنا"}
             </a>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
