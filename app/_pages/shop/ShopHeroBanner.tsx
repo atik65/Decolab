@@ -7,12 +7,6 @@ const ShopHeroBanner = () => {
   // const [searchQuery] = useState("");
   const locale = useGetLocale();
 
-  // const handleSearch = (e: React.FormEvent) => {
-  //   e.preventDefault();
-  //   // Handle search logic here
-  //   console.log("Search:", searchQuery);
-  // };
-
   return (
     <div className="relative bg-gradient-to-br from-[#87A786] via-[#87A786] to-[#6d8a6c] overflow-hidden">
       {/* Background Pattern */}
@@ -40,49 +34,6 @@ const ShopHeroBanner = () => {
               ? "Custom house numbers, banners, and professional signage for your home and business"
               : "أرقام منازل مخصصة ولافتات وحلول احترافية لمنزلك وعملك"}
           </p>
-
-          {/* Search Bar */}
-          {/* <form onSubmit={handleSearch} className="relative max-w-2xl mx-auto">
-            <div className="relative flex items-center bg-white rounded-full shadow-lg overflow-hidden">
-              <input
-                type="text"
-                placeholder={
-                  locale === "en"
-                    ? "Search for products..."
-                    : "ابحث عن المنتجات..."
-                }
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 px-6 py-4 text-gray-800 placeholder-gray-400 focus:outline-none"
-              />
-              <button
-                type="submit"
-                className="px-8 py-4 bg-[#87A786] hover:bg-[#6d8a6c] text-white font-semibold transition-colors flex items-center gap-2"
-              >
-                <Search size={20} />
-                <span className="hidden sm:inline">
-                  {locale === "en" ? "Search" : "بحث"}
-                </span>
-              </button>
-            </div>
-          </form> */}
-
-          {/* Quick Categories */}
-          {/* <div className="mt-6 flex flex-wrap justify-center gap-3">
-            <span className="text-white/80 text-sm">
-              {locale === "en" ? "Popular:" : "شائع:"}
-            </span>
-            {["House Numbers", "Banners", "Stickers", "Signage"].map(
-              (category) => (
-                <button
-                  key={category}
-                  className="px-4 py-1.5 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white text-sm rounded-full transition-colors border border-white/30"
-                >
-                  {category}
-                </button>
-              )
-            )}
-          </div> */}
         </div>
       </div>
 

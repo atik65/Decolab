@@ -79,16 +79,10 @@ const StatsSection = () => {
   };
 
   return (
-    <section className="relative py-16 bg-gradient-to-br from-[#87A786] to-[#6d8a6c] overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        />
-      </div>
+    <section className="relative py-16 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+      {/* Subtle Decorative Elements */}
+      <div className="absolute top-0 left-0 w-64 h-64 bg-blue-100/30 rounded-full blur-3xl"></div>
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-indigo-100/30 rounded-full blur-3xl"></div>
 
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
@@ -98,10 +92,10 @@ const StatsSection = () => {
           transition={{ duration: 0.6 }}
           className="text-center mb-8 md:mb-12"
         >
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold text-slate-800 mb-3">
             {locale === "en" ? "Our Impact in Numbers" : "تأثيرنا بالأرقام"}
           </h2>
-          <div className="w-16 h-0.5 bg-white/80 mx-auto"></div>
+          <div className="w-16 h-1 bg-gradient-to-r from-blue-500 to-indigo-500 mx-auto rounded-full"></div>
         </motion.div>
 
         <motion.div
@@ -117,14 +111,14 @@ const StatsSection = () => {
               variants={itemVariants}
               className="text-center"
             >
-              <div className="bg-white/10 backdrop-blur-sm rounded-lg p-4 md:p-6 lg:p-8 border border-white/20 hover:bg-white/15 transition-all duration-300">
+              <div className="bg-white rounded-xl p-4 md:p-6 lg:p-8 shadow-sm hover:shadow-md transition-all duration-300 border border-slate-200">
                 {/* Counter */}
-                <div className="text-white mb-1 md:mb-2">
+                <div className="text-slate-800 mb-1 md:mb-2">
                   <Counter target={stat.number} suffix={stat.suffix} />
                 </div>
 
                 {/* Label */}
-                <p className="text-white/90 text-xs md:text-sm lg:text-base font-medium">
+                <p className="text-slate-600 text-xs md:text-sm lg:text-base font-medium">
                   {stat.label}
                 </p>
               </div>

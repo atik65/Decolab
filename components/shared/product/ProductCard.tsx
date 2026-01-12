@@ -20,19 +20,6 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   console.log("locale = ", locale);
 
-  // return;
-
-  // const currentProduct = product[locale] || {};
-
-  // console.table({
-  //   imageUrl: currentProduct.mainImage,
-  //   title: currentProduct.title,
-  //   subtitle: currentProduct.category,
-  //   // price: currentProduct.price,
-  //   minPrice: currentProduct.minPrice,
-  //   maxPrice: currentProduct.maxPrice,
-  // });
-
   const [hoveredImage] = useState(product.hovered_image);
   const [mainImage] = useState(product.main_image);
   const [currentImage, setCurrentImage] = useState(product.main_image);
@@ -93,7 +80,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
       href={`/products/${product.id}`}
       className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer"
     >
-      <div className="overflow-hidden  ">
+      <div className="overflow-hidden relative">
         <Image
           ref={imageRef}
           height={500}
@@ -103,14 +90,18 @@ const ProductCard = ({ product }: ProductCardProps) => {
           src={currentImage}
           alt={"Product"}
         />
+
+        <p className="absolute bottom-2 right-2 text-gray-900 font-bold text-[12px] md:text-[14px] bg-gray-200 w-fit px-2 py-1 text-xs rounded-full">
+          {locale == "ar" ? product.category.name_ar : product.category.name}
+        </p>
       </div>
       <div className="mt-2">
         <h2 className="font-bold text-[15px] md:text-[16px]">
           {locale == "ar" ? product.title_ar : product.title}
         </h2>
-        <p className="text-gray-700 text-[12px] md:text-[14px]">
+        {/* <p className="text-gray-900 font-bold text-[12px] md:text-[14px] bg-gray-100 w-fit px-2 py-1 mt-1 rounded-full">
           {locale == "ar" ? product.category.name_ar : product.category.name}
-        </p>
+        </p> */}
       </div>
       <p className="h-6 mt-1  overflow-hidden">
         <span className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">

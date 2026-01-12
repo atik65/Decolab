@@ -63,7 +63,7 @@ const AnnounceBar: React.FC = () => {
       aria-live="polite"
     >
       <div className="container mx-auto px-4 sm:px-6 flex items-center justify-center">
-        {locale === "ar" ? (
+        {/* {locale === "ar" ? (
           <button
             onClick={next}
             aria-label="Next announcement"
@@ -79,7 +79,15 @@ const AnnounceBar: React.FC = () => {
           >
             <ChevronLeftIcon className="h-4 w-4" />
           </button>
-        )}
+        )} */}
+
+        <button
+          onClick={prev}
+          aria-label="Previous announcement"
+          className="text-white/90 hover:text-white p-2 rounded-full mr-3"
+        >
+          <ChevronLeftIcon className="h-4 w-4" />
+        </button>
 
         <div className="flex-1 max-w-2xl overflow-hidden relative h-8 flex items-center">
           <AnimatePresence initial={false} mode="wait" custom={direction}>
@@ -99,7 +107,7 @@ const AnnounceBar: React.FC = () => {
           </AnimatePresence>
         </div>
 
-        {locale === "ar" ? (
+        {/* {locale === "ar" ? (
           <button
             onClick={prev}
             aria-label="Previous announcement"
@@ -115,7 +123,15 @@ const AnnounceBar: React.FC = () => {
           >
             <ChevronRightIcon className="h-4 w-4" />
           </button>
-        )}
+        )} */}
+
+        <button
+          onClick={next}
+          aria-label="Next announcement"
+          className="text-white/90 hover:text-white p-2 rounded-full ml-3"
+        >
+          <ChevronRightIcon className="h-4 w-4" />
+        </button>
       </div>
     </div>
   );
