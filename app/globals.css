@@ -113,51 +113,12 @@
     @apply bg-background text-foreground;
   }
 
-  /* p,
-  span,
-  a,
-  button,
-  input,
-  textarea {
-    @apply font-montserrat;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-museo;
-  } */
-
-  /* preve start */
-
-  /* * { */
-  /* @apply font-roboto; */
-  /* @apply font-vexa; */
-  /* } */
-
-  /* h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-montserrat;
-    @apply font-geDiner;
-  } */
-
-  /* p { */
-  /* @apply font-roboto; */
-  /* @apply font-vexa; */
-  /* } */
-
-  /* prev end */
-
   /* Default (English) fonts */
   * {
     @apply font-roboto;
+  }
+
+  * {
     direction: ltr;
   }
 
@@ -174,12 +135,6 @@
     @apply font-roboto;
   }
 
-  /* Arabic fonts - override when locale is 'ar' */
-  html[data-locale="ar"] * {
-    @apply font-vexa;
-    direction: rtl;
-  }
-
   html[data-locale="ar"] h1,
   html[data-locale="ar"] h2,
   html[data-locale="ar"] h3,
@@ -191,6 +146,23 @@
 
   html[data-locale="ar"] p {
     @apply font-vexa;
+  }
+
+  /* Arabic fonts - override when locale is 'ar' */
+  html[data-locale="ar"] p,
+  html[data-locale="ar"] h1,
+  html[data-locale="ar"] h2,
+  html[data-locale="ar"] h3,
+  html[data-locale="ar"] h4,
+  html[data-locale="ar"] h5,
+  html[data-locale="ar"] h6,
+  html[data-locale="ar"] span,
+  html[data-locale="ar"] a,
+  html[data-locale="ar"] button,
+  html[data-locale="ar"] input,
+  html[data-locale="ar"] textarea,
+  html[data-locale="ar"] span {
+    direction: rtl;
   }
 }
 
@@ -207,7 +179,7 @@
 } */
 
 ::-webkit-scrollbar-thumb {
-  background-color: #99b998;
+  background-color: #189cd9;
   border-radius: 10px;
   cursor: grabbing;
   height: 50px;
@@ -218,7 +190,7 @@
   position: fixed;
   left: 30px;
   bottom: 50px;
-  background-color: #99b998;
+  background-color: #189cd9;
   color: #fff;
   border-radius: 50%;
   z-index: 1000;

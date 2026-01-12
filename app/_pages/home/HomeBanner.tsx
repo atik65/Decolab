@@ -205,23 +205,23 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
           transition={{ duration: 0.4, delay: 0.4 }}
           className="hidden md:block"
         >
-          <motion.h1
+          <motion.p
             // initial={{ opacity: 0, x: -100 }}
             // whileInView={{ opacity: 1, x: 0 }}
             // transition={{ duration: 0.5, delay: 0.4 }}
             className="text-[22px] md:text-[28px] lg:text-[32px] xl:text-[36px] 2xl:text-[46px] font-bold text-center md:text-start leading-[1.2] md:leading-[1.4] lg:leading-[1.5] 2xl:leading-[1.6] "
           >
             {slide[locale].title}
-          </motion.h1>
+          </motion.p>
 
-          <motion.p
+          <motion.h4
             initial={{ opacity: 0, x: 400 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: 0.7 }}
             className="mt-5 md:mt-10 text-center md:text-start leading-6 md:leading-7 lg:leading-8 2xl:leading-10 text-[14px] md:text-[16px] "
           >
             {slide[locale].description}
-          </motion.p>
+          </motion.h4>
 
           {/* shop now */}
           <motion.div

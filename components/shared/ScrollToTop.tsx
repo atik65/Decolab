@@ -32,11 +32,11 @@ export default function ScrollToTopButton() {
 
     <button
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      className={`z-50 fixed bottom-[50px] right-[50px] h-[40px] w-[40px] bg-[#e1fae0] border-2 border-[#99b998] rounded-full  transform grid place-items-center shadow-lg  ${
+      className={`z-50 fixed bottom-[50px] right-[50px] h-[40px] w-[40px] bg-[#e1fae0] border-2 border-[#189CD9] rounded-full  transform grid place-items-center shadow-lg  ${
         isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-80"
       } duration-200 ease-in-out`}
     >
-      <MdArrowUpward fill="#99b998" className="h-6 w-6" />
+      <MdArrowUpward fill="#189CD9" className="h-6 w-6" />
     </button>
   );
 }

@@ -67,10 +67,10 @@ const ShopContainer = () => {
         {/* Search Results Banner */}
         {search && (
           <div className="mb-6 flex items-center justify-center px-2">
-            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-[#99b998]/10 border-2 border-[#99b998]/30 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 animate-in fade-in slide-in-from-top-2 duration-300 w-full sm:w-auto">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 sm:gap-3 bg-[#189CD9]/10 border-2 border-[#189CD9]/30 rounded-2xl sm:rounded-full px-4 sm:px-6 py-3 animate-in fade-in slide-in-from-top-2 duration-300 w-full sm:w-auto">
               <div className="flex items-center gap-2 flex-wrap justify-center">
                 <svg
-                  className="w-4 h-4 sm:w-5 sm:h-5 text-[#99b998] flex-shrink-0"
+                  className="w-4 h-4 sm:w-5 sm:h-5 text-[#189CD9] flex-shrink-0"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -84,7 +84,7 @@ const ShopContainer = () => {
                 </svg>
                 <span className="text-xs sm:text-sm text-gray-700 font-medium text-center">
                   Searching for:{" "}
-                  <span className="font-bold text-[#99b998] break-all">
+                  <span className="font-bold text-[#189CD9] break-all">
                     &quot;{search}&quot;
                   </span>
                 </span>

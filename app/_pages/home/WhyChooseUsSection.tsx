@@ -109,7 +109,7 @@ const WhyChooseUsSection = () => {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2399b998' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23189CD9' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
         />
       </div>
@@ -132,17 +132,17 @@ const WhyChooseUsSection = () => {
           >
             {locale === "en" ? (
               <>
-                Why Choose <span className="text-[#99b998]">One Direction</span>
+                Why Choose <span className="text-[#189CD9]">One Direction</span>
               </>
             ) : (
               <>
-                لماذا تختار <span className="text-[#99b998]">ون دايركشن</span>
+                لماذا تختار <span className="text-[#189CD9]">ون دايركشن</span>
               </>
             )}
           </motion.h2>
 
           <motion.div
-            className="w-16 h-0.5 bg-[#99b998] mx-auto mb-4"
+            className="w-16 h-0.5 bg-[#189CD9] mx-auto mb-4"
             initial={{ width: 0 }}
             whileInView={{ width: 64 }}
             viewport={{ once: true }}
@@ -182,22 +182,22 @@ const WhyChooseUsSection = () => {
               className="group relative"
             >
               {/* Card */}
-              <div className="relative bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-100 group-hover:border-[#99b998] transition-all duration-300 h-full">
+              <div className="relative bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-100 group-hover:border-[#189CD9] transition-all duration-300 h-full">
                 {/* Icon Container */}
                 <motion.div
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-[#99b998]/10 group-hover:bg-[#99b998]/20 flex items-center justify-center text-3xl md:text-4xl mb-5 transition-colors duration-300"
+                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-[#189CD9]/10 group-hover:bg-[#189CD9]/20 flex items-center justify-center text-3xl md:text-4xl mb-5 transition-colors duration-300"
                   whileHover={{
                     rotate: [0, -5, 5, -5, 0],
                   }}
                   transition={{ duration: 0.5 }}
                 >
                   <div className="flex-shrink-0">
-                    <feature.icon className="w-8 h-8 text-[#99b998]" />
+                    <feature.icon className="w-8 h-8 text-[#189CD9]" />
                   </div>
                 </motion.div>
 
                 {/* Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#99b998] transition-colors duration-300">
+                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#189CD9] transition-colors duration-300">
                   {feature.title}
                 </h3>
 
@@ -208,7 +208,7 @@ const WhyChooseUsSection = () => {
 
                 {/* Hover indicator line */}
                 <motion.div
-                  className="absolute bottom-0 left-0 h-1 bg-[#99b998] rounded-b-2xl"
+                  className="absolute bottom-0 left-0 h-1 bg-[#189CD9] rounded-b-2xl"
                   initial={{ width: 0 }}
                   whileHover={{ width: "100%" }}
                   transition={{ duration: 0.3 }}

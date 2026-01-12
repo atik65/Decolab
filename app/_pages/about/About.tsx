@@ -311,7 +311,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#99b998] mx-auto mb-12"
+              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
             />
 
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -355,7 +355,7 @@ const About = () => {
           >
             <motion.div
               variants={fadeInUp}
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#99b998]"
+              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#189CD9]"
             >
               <div className="text-4xl mb-4">🎯</div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
@@ -368,7 +368,7 @@ const About = () => {
 
             <motion.div
               variants={fadeInUp}
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#99b998]"
+              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#189CD9]"
             >
               <div className="text-4xl mb-4">🔭</div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
@@ -427,7 +427,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#99b998] mx-auto mb-12"
+              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
@@ -436,7 +436,7 @@ const About = () => {
                   key={index}
                   variants={fadeInUp}
                   whileHover={{ y: -8, scale: 1.02 }}
-                  className="bg-gray-50 p-6 md:p-8 rounded-2xl border-2 border-gray-100 hover:border-[#99b998] transition-all duration-300"
+                  className="bg-gray-50 p-6 md:p-8 rounded-2xl border-2 border-gray-100 hover:border-[#189CD9] transition-all duration-300"
                 >
                   <div className="text-4xl mb-4">{value.icon}</div>
                   <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
@@ -469,7 +469,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#99b998] mx-auto mb-12"
+              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -520,7 +520,7 @@ const About = () => {
                 href={`/${locale}/contact`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block bg-white text-[#99b998] px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
+                className="inline-block bg-white text-[#189CD9] px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
               >
                 {currentContent.cta.button}
               </motion.a>

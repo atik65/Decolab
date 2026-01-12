@@ -21,7 +21,7 @@ const RelatedProducts = () => {
         <h2 className="text-[20px] md:text-[24px] xl:text-[32px] font-bold text-gray-800 mb-2">
           {locale === "en" ? "You may also like" : "قد يعجبك أيضاً"}
         </h2>
-        <div className="w-16 h-0.5 bg-[#99b998]"></div>
+        <div className="w-16 h-0.5 bg-[#189CD9]"></div>
       </div>
 
       {/* products container */}

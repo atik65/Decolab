@@ -36,11 +36,11 @@ const ContactSection = () => {
               placeholder={
                 locale === "en" ? "Your email address" : "بريدك الإلكتروني"
               }
-              className="px-4 py-2 w-full   mr-4  focus:outline-none  border-b border-[#99b998]"
+              className="px-4 py-2 w-full   mr-4  focus:outline-none  border-b border-[#189CD9]"
             />
             <button
               type="submit"
-              className="bg-[#99b998] text-white px-4  hover:bg-[#99b998] hover:text-black transition duration-300 w-40"
+              className="bg-[#189CD9] text-white px-4  hover:bg-[#189CD9] hover:text-black transition duration-300 w-40"
             >
               {locale === "en" ? "SIGN UP" : "اشترك"}
             </button>
@@ -66,7 +66,7 @@ const ContactSection = () => {
             {/* facebook */}
             <a
               href="#"
-              className="text-gray-500 hover:text-[#99b998] transition duration-300"
+              className="text-gray-500 hover:text-[#189CD9] transition duration-300"
             >
               <Facebook className="h-6 w-6" />
             </a>
@@ -74,7 +74,7 @@ const ContactSection = () => {
             {/* x */}
             <a
               href="#"
-              className="text-gray-500 hover:text-[#99b998] transition duration-300"
+              className="text-gray-500 hover:text-[#189CD9] transition duration-300"
             >
               <TwitterIcon className="h-6 w-6" />
             </a>
@@ -82,7 +82,7 @@ const ContactSection = () => {
             {/* instagram */}
             <a
               href="#"
-              className="text-gray-500 hover:text-[#99b998] transition duration-300"
+              className="text-gray-500 hover:text-[#189CD9] transition duration-300"
             >
               <InstagramIcon className="h-6 w-6" />
             </a>
@@ -90,7 +90,7 @@ const ContactSection = () => {
             {/* youtube */}
             <a
               href="#"
-              className="text-gray-500 hover:text-[#99b998] transition duration-300"
+              className="text-gray-500 hover:text-[#189CD9] transition duration-300"
             >
               <YoutubeIcon className="h-6 w-6" />
             </a>
@@ -98,7 +98,7 @@ const ContactSection = () => {
             {/* linkedin */}
             <a
               href="#"
-              className="text-gray-500 hover:text-[#99b998] transition duration-300"
+              className="text-gray-500 hover:text-[#189CD9] transition duration-300"
             >
               <LucideLinkedin className="h-6 w-6" />
             </a>

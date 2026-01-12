@@ -147,13 +147,13 @@ function CategoryCard({
           </h1>
         </div>
         {/* 
-        <p className="group-hover:text-black -translate-y-5 opacity-0 group-hover:opacity-100 group-hover:-translate-y-5  border-b-2 border-[#99b998] duration-400 text-[12px]  font-bold text-gray-500"> */}
+        <p className="group-hover:text-black -translate-y-5 opacity-0 group-hover:opacity-100 group-hover:-translate-y-5  border-b-2 border-[#189CD9] duration-400 text-[12px]  font-bold text-gray-500"> */}
         <Link
           href={"/shop"}
           style={{
             transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
-          className="group-hover:text-black opacity-0 translate-y-4 group-hover:-translate-y-5 group-hover:opacity-100  border-b-2 border-[#99b998] font-bold text-gray-500 text-[10px] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
+          className="group-hover:text-black opacity-0 translate-y-4 group-hover:-translate-y-5 group-hover:opacity-100  border-b-2 border-[#189CD9] font-bold text-gray-500 text-[10px] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
         >
           {locale === "en" ? "READ MORE" : "اقرأ المزيد"}
         </Link>
@@ -205,7 +205,7 @@ function CategoryCardMobile({
         </div>
 
         {/* Read More Link */}
-        <div className="flex items-center gap-1 text-[#99b998] group-hover:gap-2 transition-all duration-300">
+        <div className="flex items-center gap-1 text-[#189CD9] group-hover:gap-2 transition-all duration-300">
           <span className="text-[10px] sm:text-xs font-semibold">
             {locale === "en" ? "EXPLORE" : "استكشف"}
           </span>

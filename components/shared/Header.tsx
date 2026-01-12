@@ -127,7 +127,7 @@ const Header: React.FC = () => {
                 className="nav-link relative text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out px-4 py-2 rounded-md hover:bg-gray-50 group"
               >
                 <span className="relative z-10">{t(link.label)}</span>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#99b998] transition-all duration-300 group-hover:w-3/4"></span>
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#189CD9] transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
             ))}
           </nav>
@@ -161,12 +161,12 @@ const Header: React.FC = () => {
                 <input
                   type="text"
                   placeholder="Search for products..."
-                  className="w-full px-6 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#99b998] focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
+                  className="w-full px-6 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#189CD9] focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
                   autoFocus
                 />
                 <button
                   type="submit"
-                  className="px-8 py-3 bg-[#99b998] text-white rounded-lg hover:bg-[#88a887] transition-all duration-300 font-medium shadow-sm hover:shadow-md"
+                  className="px-8 py-3 bg-[#189CD9] text-white rounded-lg hover:bg-[#88a887] transition-all duration-300 font-medium shadow-sm hover:shadow-md"
                 >
                   Search
                 </button>

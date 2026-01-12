@@ -187,7 +187,7 @@ const ThumbsComponent = ({
         // src={"/images/home/bed.png"}
         src={constructImageURL(imgURI)}
         className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
-          index === activeIndex ? "border-[#99b998]" : "border-transparent "
+          index === activeIndex ? "border-[#189CD9]" : "border-transparent "
         }`}
       />
     </div>

@@ -112,9 +112,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           {locale == "ar" ? product.category.name_ar : product.category.name}
         </p>
       </div>
-      <div className="h-6 mt-1  overflow-hidden">
-        <div className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
-          <span className="inline-block font-bold text-[#99b998]  text-sm  ">
+      <p className="h-6 mt-1  overflow-hidden">
+        <span className=" pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
+          <span className="inline-block font-bold text-[#189CD9]  text-sm  ">
             {/* {product[locale].price} */}
 
             {product.pricing_type === "base" ? (
@@ -125,10 +125,10 @@ const ProductCard = ({ product }: ProductCardProps) => {
               </span>
             )}
           </span>
-        </div>
+        </span>
 
         {/* add to cart */}
-        <div
+        <span
           style={{
             transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
           }}
@@ -137,9 +137,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
           <h2 className="text-[12px] font-bold">
             {locale === "en" ? "Explore Details" : "تفاصيل التفاصيل"}
           </h2>
-          <div className="w-16 h-[2px] bg-[#99b998]"></div>
-        </div>
-      </div>
+          <div className="w-16 h-[2px] bg-[#189CD9]"></div>
+        </span>
+      </p>
     </Link>
   );
 };

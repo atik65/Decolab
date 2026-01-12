@@ -57,7 +57,7 @@ const AnnounceBar: React.FC = () => {
   return (
     <div
       id="announce-bar"
-      className="w-full  direction-ltr bg-[#99b998] text-white text-center py-0 text-sm md:text-base relative"
+      className="w-full  direction-ltr bg-[#189CD9] text-white text-center py-0 text-sm md:text-base relative"
       onMouseEnter={() => (hovering.current = true)}
       onMouseLeave={() => (hovering.current = false)}
       aria-live="polite"
