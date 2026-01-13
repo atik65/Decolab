@@ -3,9 +3,9 @@ import { routing } from "./i18n/routing";
 
 export default createMiddleware({
   ...routing,
-  localePrefix: "always",
-  defaultLocale: "ar",
-  localeDetection: false,
+  // localePrefix: "always",
+  // defaultLocale: "ar",
+  // localeDetection: false,
   // save to session
   // localeDetection: true,
 });
