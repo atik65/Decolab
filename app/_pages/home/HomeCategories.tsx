@@ -9,7 +9,6 @@ import CategoriesSkt from "@/components/skeletons/home/CategoriesSkt";
 import { useRouter } from "@bprogress/next";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
-import { encode } from "punycode";
 
 const dummyCategoriesImages = [
   "/images/home/banner9.jpg",

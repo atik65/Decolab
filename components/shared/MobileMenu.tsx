@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 // import logo from "/images/logo.svg";
 import Link from "next/link";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import { ChevronRight, Home, Users, MessageCircle } from "lucide-react";
 import Image from "next/image";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
@@ -28,12 +28,12 @@ export const staticNavLinks: NavLink[] = [
 ];
 
 // Fallback text mapping
-const fallbackText: Record<string, string> = {
-  houseNumbers: "House Numbers",
-  diwaniya: "Diwaniya",
-  islamicPhrases: "Islamic Phrases",
-  advertisements: "Advertisements",
-};
+// const fallbackText: Record<string, string> = {
+//   houseNumbers: "House Numbers",
+//   diwaniya: "Diwaniya",
+//   islamicPhrases: "Islamic Phrases",
+//   advertisements: "Advertisements",
+// };
 
 const MobileMenu = ({
   //   isOpen,
@@ -59,7 +59,7 @@ const MobileMenu = ({
     }
   }, [isLoading, categoriesData]);
 
-  const t = useTranslations("NavLinks");
+  // const t = useTranslations("NavLinks");
   const locale = useLocale();
 
   return (

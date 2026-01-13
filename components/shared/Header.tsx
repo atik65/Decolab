@@ -6,7 +6,7 @@ import { X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useLocale, useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 // import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
@@ -94,7 +94,7 @@ const Header: React.FC = () => {
     );
   });
 
-  const t = useTranslations("NavLinks");
+  // const t = useTranslations("NavLinks");
   const locale = useLocale();
   // const locale = useGetLocale();
 

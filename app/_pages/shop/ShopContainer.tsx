@@ -7,7 +7,6 @@ import {
   ShopSkeleton,
   NoProductsFound,
 } from "@/components/shared/loading-skeletons/loading-skeleton";
-import ShopHeroBanner from "./ShopHeroBanner";
 // import CategoryFilter from "./CategoryFilter";
 import WhyChooseUs from "./WhyChooseUs";
 import {
