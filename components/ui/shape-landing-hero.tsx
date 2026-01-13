@@ -104,7 +104,7 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
   return (
     <div
       className={cn(
-        "relative min-h-[300px] sm:min-h-auto sm:py-32 w-full flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-200 via-white to-blue-50/30",
+        "relative min-h-[300px] sm:min-h-auto sm:py-16 w-full flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-200 via-white to-blue-50/30",
         className
       )}
     >
@@ -233,7 +233,7 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
           repeat: Infinity,
           repeatType: "mirror",
         }}
-        className="absolute bottom-14  left-1/2 -translate-x-1/2 "
+        className="absolute bottom-5  left-1/2 -translate-x-1/2 "
       >
         {/* <div class="flex justify-center animate-bounce duration-800"> */}
         <div className="flex justify-center ">

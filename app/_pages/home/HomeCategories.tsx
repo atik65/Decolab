@@ -9,6 +9,7 @@ import CategoriesSkt from "@/components/skeletons/home/CategoriesSkt";
 import { useRouter } from "@bprogress/next";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
+import { encode } from "punycode";
 
 const dummyCategoriesImages = [
   "/images/home/banner9.jpg",
@@ -132,7 +133,9 @@ function CategoryCard({
 
   return (
     <div
-      onClick={() => router.push("/shop")}
+      onClick={() =>
+        router.push(`/shop?category=${encodeURIComponent(data?.name || "")}`)
+      }
       className="relative grid grid-cols-12 gap-x-3 bg-[#f9f9f9] p-5 group overflow-hidden py-8"
     >
       <div className=" flex items-start flex-col justify-center cursor-pointer  pl-5 col-span-9 xl:col-span-8 group">

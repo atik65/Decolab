@@ -18,11 +18,20 @@ import {
 import { useQueryState } from "nuqs";
 import { useLocale } from "next-intl";
 import { ShapeHero } from "@/components/shared/ShapeHero";
+import { useSearchParams } from "next/navigation";
 
 const ShopContainer = () => {
+  const params = useSearchParams();
+  const category = params.get("category") || "";
+
+  console.log("Category from params:", encodeURIComponent(category));
+
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
 
-  const { data, isLoading } = useGetProductNSearch(search ? { search } : {});
+  const { data, isLoading } = useGetProductNSearch({
+    search,
+    category: encodeURIComponent(category),
+  });
   const locale = useLocale();
 
   const products = data?.results || [];

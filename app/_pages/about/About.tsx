@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { ShapeHero } from "@/components/shared/ShapeHero";
 
 const About = () => {
   const locale = useGetLocale();
@@ -250,7 +251,7 @@ const About = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-br from-[#87A786] to-[#6d8a6c] text-white py-20 md:py-32 overflow-hidden">
+      {/* <section className="relative bg-gradient-to-br from-[#87A786] to-[#6d8a6c] text-white py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -291,7 +292,14 @@ const About = () => {
             </motion.p>
           </motion.div>
         </div>
-      </section>
+      </section> */}
+
+      <ShapeHero
+        badge="ONE DIRECTION"
+        title1={currentContent.hero.title}
+        // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+        description={currentContent.hero.description}
+      />
 
       {/* Our Story Section */}
       <section className="py-16 md:py-24">

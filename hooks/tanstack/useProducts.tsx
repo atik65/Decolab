@@ -17,12 +17,12 @@ export const useGetProducts = () => {
   });
 };
 
-export const useGetProductNSearch = ({ search = "" }) => {
+export const useGetProductNSearch = ({ search = "", category = "" }) => {
   return useQuery({
-    queryKey: ["products", search],
+    queryKey: ["products", search, category],
     queryFn: async () =>
       await axiosInstance<ProductsResponse>({
-        url: `/products/?search=${search}`,
+        url: `/products/?search=${search}&category=${category}`,
         method: "GET",
       }),
   });
