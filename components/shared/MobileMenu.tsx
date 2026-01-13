@@ -1,27 +1,30 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 // import logo from "/images/logo.svg";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
-import {
-  ChevronRight,
-  Home,
-  Users,
-  MessageCircle,
-} from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
+import { ChevronRight, Home, Users, MessageCircle } from "lucide-react";
 import Image from "next/image";
+import { useGetCategories } from "@/hooks/tanstack/useProducts";
+import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 
 interface NavLink {
   href: string;
   label: string;
+  labelAr?: string;
   icon?: React.ReactNode;
 }
 
-export const navLinks: NavLink[] = [
-  { href: "/shop", label: "shop", icon: <Home /> },
-  { href: "/about", label: "about", icon: <Users /> },
-  { href: "/contact", label: "contact", icon: <MessageCircle /> },
+export const staticNavLinks: NavLink[] = [
+  { href: "/shop", label: "shop", labelAr: "تسوق", icon: <Home /> },
+  { href: "/about", label: "about", labelAr: "حول", icon: <Users /> },
+  {
+    href: "/contact",
+    label: "contact",
+    labelAr: "اتصل",
+    icon: <MessageCircle />,
+  },
 ];
 
 // Fallback text mapping
@@ -39,7 +42,25 @@ const MobileMenu = ({
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }) => {
+  const [navLinks, setNavLinks] = useState<NavLink[]>(staticNavLinks);
+
+  const { data: categoriesData, isLoading } =
+    useGetCategories<CategoresResponse>();
+
+  React.useEffect(() => {
+    if (!isLoading && categoriesData) {
+      const categoryLinks = categoriesData.results.map((category) => ({
+        href: `/shop?category=${encodeURIComponent(category.name)}`,
+        label: category.name,
+        labelAr: category.name_ar,
+        icon: <ChevronRight />,
+      }));
+      setNavLinks([...categoryLinks, ...staticNavLinks]);
+    }
+  }, [isLoading, categoriesData]);
+
   const t = useTranslations("NavLinks");
+  const locale = useLocale();
 
   return (
     <div className="flex flex-col h-full">
@@ -78,11 +99,11 @@ const MobileMenu = ({
               className="nav-item group flex items-center justify-between p-4 rounded-xl hover:bg-gray-50 transition-all duration-200 border border-transparent hover:border-gray-200"
             >
               <div className="flex items-center space-x-4">
-                <div className="nav-icon text-gray-600 group-hover:text-blue-600 transition-colors transform group-hover:scale-110">
+                {/* <div className="nav-icon text-gray-600 group-hover:text-blue-600 transition-colors transform group-hover:scale-110">
                   {link.icon}
-                </div>
+                </div> */}
                 <span className="text-base font-medium text-gray-900 group-hover:text-blue-600 transition-colors">
-                  {t(link.label) || fallbackText[link.label] || link.label}
+                  {locale === "ar" && link.labelAr ? link.labelAr : link.label}
                 </span>
               </div>
               <ChevronRight className="nav-chevron w-5 h-5 text-gray-400 group-hover:text-blue-600 transition-all duration-200 transform group-hover:translate-x-1" />

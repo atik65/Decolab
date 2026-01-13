@@ -6,12 +6,14 @@ import { X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 // import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
 import MobileMenuSidebar from "./MobileMenuSidebar";
 import AnnounceBar from "./AnnounceBar";
+import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
+import { useGetCategories } from "@/hooks/tanstack/useProducts";
 // import CreateSheetOrder from "./CreateSheetOrder";
 
 gsap.registerPlugin(useGSAP);
@@ -19,17 +21,34 @@ gsap.registerPlugin(useGSAP);
 interface NavLink {
   href: string;
   label: string;
+  labelAr?: string;
 }
 
-export const navLinks: NavLink[] = [
-  { href: "/shop", label: "shop" },
-  { href: "/about", label: "about" },
-  { href: "/contact", label: "contact" },
+export const staticNavLinks: NavLink[] = [
+  // { href: "/shop", label: "shop", labelAr: "المتجر" },
+  { href: "/about", label: "about", labelAr: "من نحن" },
+  // { href: "/contact", label: "contact", labelAr: "اتصل بنا" },
 ];
 
 const Header: React.FC = () => {
   const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
+
+  const [navLinks, setNavLinks] = useState<NavLink[]>(staticNavLinks);
+
+  const { data: categoriesData, isLoading } =
+    useGetCategories<CategoresResponse>();
+
+  React.useEffect(() => {
+    if (!isLoading && categoriesData) {
+      const categoryLinks = categoriesData.results.map((category) => ({
+        href: `/shop?category=${encodeURIComponent(category.name)}`,
+        label: category.name,
+        labelAr: category.name_ar,
+      }));
+      setNavLinks([...categoryLinks, ...staticNavLinks]);
+    }
+  }, [isLoading, categoriesData]);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -76,6 +95,7 @@ const Header: React.FC = () => {
   });
 
   const t = useTranslations("NavLinks");
+  const locale = useLocale();
   // const locale = useGetLocale();
 
   return (
@@ -126,7 +146,10 @@ const Header: React.FC = () => {
                 href={link.href}
                 className="nav-link relative text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out px-4 py-2 rounded-md hover:bg-gray-50 group"
               >
-                <span className="relative z-10">{t(link.label)}</span>
+                {/* <span className="relative z-10">{t(link.label)}</span> */}
+                <span className="relative z-10 uppercase">
+                  {locale === "ar" && link.labelAr ? link.labelAr : link.label}
+                </span>
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#189CD9] transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
             ))}

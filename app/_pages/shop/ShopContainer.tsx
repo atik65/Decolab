@@ -24,7 +24,7 @@ const ShopContainer = () => {
   const params = useSearchParams();
   const category = params.get("category") || "";
 
-  console.log("Category from params:", encodeURIComponent(category));
+  // console.log("Category from params:", encodeURIComponent(category));
 
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
 
@@ -43,10 +43,12 @@ const ShopContainer = () => {
           badge="About Us"
           title1={
             locale === "en"
-              ? "Discover Premium Signage Solutions"
+              ? `Discover Premium ${
+                  category && decodeURIComponent(category)
+                } Solutions`
               : "اكتشف حلول اللافتات المميزة"
           }
-          title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+          // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
           description={
             locale === "en"
               ? "Learn more about our history, mission, and values."
@@ -66,10 +68,12 @@ const ShopContainer = () => {
           badge="ONE DIRECTION"
           title1={
             locale === "en"
-              ? "Discover Premium Signage Solutions"
+              ? `Discover Premium ${
+                  category && decodeURIComponent(category)
+                } Solutions`
               : "اكتشف حلول اللافتات المميزة"
           }
-          title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+          // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
           description={
             locale === "en"
               ? "Learn more about our history, mission, and values."
@@ -90,10 +94,12 @@ const ShopContainer = () => {
         badge="ONE DIRECTION"
         title1={
           locale === "en"
-            ? "Discover Premium Signage Solutions"
+            ? `Discover Premium ${
+                category && decodeURIComponent(category)
+              } Solutions`
             : "اكتشف حلول اللافتات المميزة"
         }
-        title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+        // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
         description={
           locale === "en"
             ? "Learn more about our history, mission, and values."
