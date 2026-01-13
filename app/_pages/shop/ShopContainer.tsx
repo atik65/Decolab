@@ -17,6 +17,7 @@ import {
 } from "./BottomSections";
 import { useQueryState } from "nuqs";
 import { useLocale } from "next-intl";
+import { ShapeHero } from "@/components/shared/ShapeHero";
 
 const ShopContainer = () => {
   const [search, setSearch] = useQueryState("search", { defaultValue: "" });
@@ -29,7 +30,20 @@ const ShopContainer = () => {
   if (isLoading) {
     return (
       <>
-        <ShopHeroBanner />
+        <ShapeHero
+          badge="About Us"
+          title1={
+            locale === "en"
+              ? "Discover Premium Signage Solutions"
+              : "اكتشف حلول اللافتات المميزة"
+          }
+          title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+          description={
+            locale === "en"
+              ? "Learn more about our history, mission, and values."
+              : "تعرف على تاريخنا ومهمتنا وقيمنا."
+          }
+        />
         <ShopSkeleton />
       </>
     );
@@ -39,7 +53,20 @@ const ShopContainer = () => {
   if (!products || products.length === 0) {
     return (
       <>
-        <ShopHeroBanner />
+        <ShapeHero
+          badge="ONE DIRECTION"
+          title1={
+            locale === "en"
+              ? "Discover Premium Signage Solutions"
+              : "اكتشف حلول اللافتات المميزة"
+          }
+          title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+          description={
+            locale === "en"
+              ? "Learn more about our history, mission, and values."
+              : "تعرف على تاريخنا ومهمتنا وقيمنا."
+          }
+        />
         <NoProductsFound />
       </>
     );
@@ -48,7 +75,22 @@ const ShopContainer = () => {
   return (
     <>
       {/* Hero Banner */}
-      <ShopHeroBanner />
+      {/* <ShopHeroBanner /> */}
+
+      <ShapeHero
+        badge="ONE DIRECTION"
+        title1={
+          locale === "en"
+            ? "Discover Premium Signage Solutions"
+            : "اكتشف حلول اللافتات المميزة"
+        }
+        title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
+        description={
+          locale === "en"
+            ? "Learn more about our history, mission, and values."
+            : "تعرف على تاريخنا ومهمتنا وقيمنا."
+        }
+      />
 
       {/* Products Section */}
       <div className="container mx-auto px-4 py-8">
