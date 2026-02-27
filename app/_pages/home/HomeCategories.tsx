@@ -10,11 +10,11 @@ import { useRouter } from "@bprogress/next";
 import { cn } from "@/lib/utils";
 import { ChevronRight } from "lucide-react";
 
-const dummyCategoriesImages = [
-  "/images/home/banner9.jpg",
-  "/products/font-design/14.jpeg",
-  "/products/house-numbers/6.jpeg",
-];
+// const dummyCategoriesImages = [
+//   "/images/home/banner9.jpg",
+//   "/products/font-design/14.jpeg",
+//   "/products/house-numbers/6.jpeg",
+// ];
 
 // const categories = [
 //   {
@@ -188,7 +188,8 @@ function CategoryCardMobile({
       {/* Image */}
       <div className="relative h-20 sm:h-40 overflow-hidden bg-gray-100 rounded-lg">
         <img
-          src={dummyCategoriesImages[imageIndex]}
+          // src={dummyCategoriesImages[imageIndex]}
+          src={data?.image || ""}
           alt={locale === "ar" && data.name_ar ? data.name_ar : data.name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 "
         />
