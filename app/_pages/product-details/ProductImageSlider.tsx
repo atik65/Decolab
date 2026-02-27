@@ -7,7 +7,7 @@ import "swiper/css/thumbs";
 
 import { Navigation, Thumbs, FreeMode } from "swiper/modules";
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { Swiper as SwiperType } from "swiper/types";
 // import { ProductDetails } from "@/types/product";
 // import { ImageOff } from "lucide-react";
@@ -33,7 +33,7 @@ const ProductImageSlider = () => {
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperType | null>(null);
 
   const [activeIndex, setActiveIndex] = useState(0); // Track the active slide
-  const [currentImages, setCurrentImages] = useState<string[]>([]);
+  // const [currentImages, setCurrentImages] = useState<string[]>([]);
 
   const { slug } = useParams();
 
@@ -49,7 +49,23 @@ const ProductImageSlider = () => {
   //   ...(currentProduct?.images || []),
   // ];
 
-  useEffect(() => {
+  // useEffect(() => {
+  //   const images = [];
+
+  //   if (currentProduct?.mainImage) {
+  //     images.push(currentProduct.mainImage);
+  //   }
+  //   if (currentProduct?.hoveredImage) {
+  //     images.push(currentProduct.hoveredImage);
+  //   }
+  //   if (currentProduct?.images && currentProduct.images.length > 0) {
+  //     images.push(...currentProduct.images);
+  //   }
+
+  //   setCurrentImages(images);
+  // }, [currentProduct]);
+
+  const currentImages = useMemo(() => {
     const images = [];
 
     if (currentProduct?.mainImage) {
@@ -62,7 +78,7 @@ const ProductImageSlider = () => {
       images.push(...currentProduct.images);
     }
 
-    setCurrentImages(images);
+    return images;
   }, [currentProduct]);
 
   // Show loading skeleton while fetching data
@@ -70,7 +86,7 @@ const ProductImageSlider = () => {
     return <ProductImageLoadingSkt />;
   }
 
-  if (!currentImages?.length) {
+  if (!currentImages?.length && !isLoading) {
     return <NoImage />;
   }
 
@@ -185,7 +201,8 @@ const ThumbsComponent = ({
         width={500}
         alt="product image"
         // src={"/images/home/bed.png"}
-        src={constructImageURL(imgURI) || "/images/home/bed.png"}
+        // src={constructImageURL(imgURI) || "/images/home/bed.png"}
+        src={imgURI ? imgURI : ""}
         className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
           index === activeIndex ? "border-[#189CD9]" : "border-transparent "
         }`}
@@ -199,16 +216,8 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
 
   return (
     <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0  ">
-      {/* <Image
-        // src={"/images/home/bed.png"}
-        src={imgURI}
-        alt="Product Image"
-        height={500}
-        width={500}
-        className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
-      /> */}
       <ImageZoomViewModal
-        imgURI={constructImageURL(imgURI) || "/images/home/bed.png"}
+        imgURI={imgURI ? imgURI : ""}
         className="mx-auto h-[300px] sm:h-[402px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[550px] object-contain items-center"
       />
     </div>

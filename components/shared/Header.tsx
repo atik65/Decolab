@@ -70,7 +70,7 @@ const Header: React.FC = () => {
         duration: 0.5,
         ease: "power3.out",
       },
-      "same"
+      "same",
     );
 
     // tl.from(".nav-link", {
@@ -90,7 +90,7 @@ const Header: React.FC = () => {
         duration: 0.5,
         ease: "power3.out",
       },
-      "same"
+      "same",
     );
   });
 
@@ -147,8 +147,12 @@ const Header: React.FC = () => {
                 className="nav-link relative text-[15px] xl:text-base font-semibold text-gray-700 hover:text-black transition-all duration-300 ease-out px-4 py-2 rounded-md hover:bg-gray-50 group"
               >
                 {/* <span className="relative z-10">{t(link.label)}</span> */}
-                <span className="relative z-10 uppercase">
-                  {locale === "ar" && link.labelAr ? link.labelAr : link.label}
+                <span
+                  className={`relative z-10 uppercase ${locale === "en" ? "text-sm" : ""}`}
+                >
+                  {locale === "ar" && link.labelAr
+                    ? link.labelAr
+                    : link?.label?.split("_")?.join(" ")}
                 </span>
                 <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#189CD9] transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
