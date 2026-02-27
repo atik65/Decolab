@@ -72,9 +72,12 @@ const OrderSummary = () => {
               <Image
                 width={80}
                 height={80}
-                src={constructImageURL(selectedProduct.mainImage) || ""}
+                // src={constructImageURL(selectedProduct.mainImage) || ""}
+                src={
+                  selectedProduct?.mainImage ? selectedProduct.mainImage : ""
+                }
                 alt="Number Front Light"
-                className="w-16 h-16 object-cover"
+                className="w-16 h-16 object-cover rounded-md"
               />
             ) : (
               <div className="w-16 h-16 bg-gray-200 rounded-md"></div>

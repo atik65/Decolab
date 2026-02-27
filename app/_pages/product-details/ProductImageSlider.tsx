@@ -212,8 +212,6 @@ const ThumbsComponent = ({
 };
 
 const SlideComponent = ({ imgURI }: { imgURI: string }) => {
-  console.log("imgURI:", imgURI);
-
   return (
     <div className="w-full flex justify-center mb-5 lg:mb-0 lg:p-5 lg:pb-4 lg:pt-0  ">
       <ImageZoomViewModal
