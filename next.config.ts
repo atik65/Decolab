@@ -35,6 +35,13 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "buildlab.live",
+        port: "",
+        pathname: "/**",
+        search: "",
+      },
+      {
+        protocol: "https",
         hostname: "images.unsplash.com",
         port: "",
         pathname: "/**",
