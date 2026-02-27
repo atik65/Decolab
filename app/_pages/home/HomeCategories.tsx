@@ -78,7 +78,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
 
-  console.log("Categories Data:", categoriesData);
+  // console.log("Categories Data:", categoriesData);
 
   // Show loading skeleton while fetching
   if (isLoading) {
@@ -122,7 +122,7 @@ export default HomeCategories;
 
 function CategoryCard({
   data,
-  imageIndex,
+  // imageIndex,
 }: {
   data?: Category;
   imageIndex: number;
@@ -177,7 +177,7 @@ function CategoryCard({
 
 function CategoryCardMobile({
   data,
-  imageIndex,
+  // imageIndex,
 }: {
   data: Category;
   imageIndex: number;

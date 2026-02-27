@@ -9,7 +9,7 @@ import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
-import { constructImageURL } from "@/lib/utils";
+// import { constructImageURL } from "@/lib/utils";
 import SummarySkt from "@/components/skeletons/checkout/SummarySkt";
 // import { useQueryState } from "nuqs";
 

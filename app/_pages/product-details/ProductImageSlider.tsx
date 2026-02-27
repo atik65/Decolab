@@ -7,7 +7,7 @@ import "swiper/css/thumbs";
 
 import { Navigation, Thumbs, FreeMode } from "swiper/modules";
 import Image from "next/image";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Swiper as SwiperType } from "swiper/types";
 // import { ProductDetails } from "@/types/product";
 // import { ImageOff } from "lucide-react";
@@ -18,7 +18,6 @@ import { useParams } from "next/navigation";
 // import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
-import { constructImageURL } from "@/lib/utils";
 import ProductImageLoadingSkt from "@/components/skeletons/productDetails/ProductImageLoadingSkt";
 import { NoImage } from "@/components/skeletons/productDetails/Not-found";
 
