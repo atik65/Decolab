@@ -31,7 +31,7 @@ const OrderSummary = () => {
 
   // get product by id
   const { data: product, isLoading } = useGetProductDetails(
-    productInfo.productId!
+    productInfo.productId!,
     // prodId?.toString() || ""
   );
 
@@ -72,7 +72,7 @@ const OrderSummary = () => {
               <Image
                 width={80}
                 height={80}
-                src={constructImageURL(selectedProduct.mainImage)}
+                src={constructImageURL(selectedProduct.mainImage) || ""}
                 alt="Number Front Light"
                 className="w-16 h-16 object-cover"
               />
@@ -122,7 +122,7 @@ const OrderSummary = () => {
               <span>
                 {
                   selectedProduct?.digits?.find(
-                    (digit) => digit.id.toString() === productInfo.digitId
+                    (digit) => digit.id.toString() === productInfo.digitId,
                   )?.value
                 }
               </span>
@@ -137,7 +137,7 @@ const OrderSummary = () => {
                 {" "}
                 {
                   selectedProduct?.sizes?.find(
-                    (size) => size.id.toString() === productInfo.sizeId
+                    (size) => size.id.toString() === productInfo.sizeId,
                   )?.value
                 }
               </span>
@@ -151,7 +151,7 @@ const OrderSummary = () => {
 
               <ColorCapsule
                 color={selectedProduct?.colors?.find(
-                  (color) => color.id.toString() === productInfo.colorId
+                  (color) => color.id.toString() === productInfo.colorId,
                 )}
               />
             </div>
@@ -165,7 +165,7 @@ const OrderSummary = () => {
                 <ColorCapsule
                   color={selectedProduct?.lightColors?.find(
                     (lightColor) =>
-                      lightColor.id.toString() === productInfo.lightColorId
+                      lightColor.id.toString() === productInfo.lightColorId,
                   )}
                 />
               </span>
@@ -198,7 +198,7 @@ const OrderSummary = () => {
                   height={200}
                   src={
                     selectedProduct?.designs?.find(
-                      (design) => design.id.toString() === productInfo.designId
+                      (design) => design.id.toString() === productInfo.designId,
                     )?.url || ""
                   }
                   alt="Design"
@@ -216,19 +216,19 @@ const OrderSummary = () => {
                 <Image
                   title={
                     selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId
+                      (font) => font.id.toString() === productInfo.fontId,
                     )?.name
                   }
                   width={200}
                   height={200}
                   src={
                     selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId
+                      (font) => font.id.toString() === productInfo.fontId,
                     )?.url || ""
                   }
                   alt={
                     selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId
+                      (font) => font.id.toString() === productInfo.fontId,
                     )?.name || "Font"
                   }
                   className="w-auto max-h-12 object-cover"

@@ -244,7 +244,7 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
       </div>
 
       <Image
-        src={slide.bg}
+        src={slide?.bg || "/images/home/banner1.jpg"}
         alt="banner"
         width={1920}
         height={500}

@@ -162,7 +162,7 @@ function CategoryCard({
       </div>
       <div className="col-span-3 xl:col-span-4 cursor-pointer">
         <Image
-          src={dummyCategoriesImages[imageIndex]}
+          src={dummyCategoriesImages[imageIndex] || "/images/home/banner9.jpg"}
           alt=""
           width={500}
           height={500}

@@ -93,7 +93,9 @@ const DesignSelection = ({
                       height={300}
                       width={300}
                       alt={design.name}
-                      src={design?.url}
+                      src={
+                        design?.url || "/images/products/design/design1.avif"
+                      }
                     />
                     {isSelected && (
                       <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />

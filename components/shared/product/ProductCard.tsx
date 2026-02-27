@@ -87,7 +87,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           width={500}
           // className="w-full mx-auto object-contain mt-0 pt-0 group-hover:scale-105 duration-300 "
           className="w-full mx-auto object-cover h-48 mt-0 pt-0 "
-          src={currentImage}
+          src={currentImage || "/images/home/bed.png"}
           alt={"Product"}
         />
 

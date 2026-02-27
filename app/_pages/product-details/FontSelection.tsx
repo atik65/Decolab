@@ -113,7 +113,7 @@ const FontSelection = ({
                       height={300}
                       width={300}
                       alt={font.name}
-                      src={font?.url}
+                      src={font?.url || "/images/products/fonts/f1.avif"}
                     />
                     {isSelected && (
                       <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />

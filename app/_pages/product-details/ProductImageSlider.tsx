@@ -23,10 +23,10 @@ import ProductImageLoadingSkt from "@/components/skeletons/productDetails/Produc
 import { NoImage } from "@/components/skeletons/productDetails/Not-found";
 
 const TfiAngleLeft = dynamic(() =>
-  import("react-icons/tfi").then((mod) => mod.TfiAngleLeft)
+  import("react-icons/tfi").then((mod) => mod.TfiAngleLeft),
 );
 const TfiAngleRight = dynamic(() =>
-  import("react-icons/tfi").then((mod) => mod.TfiAngleRight)
+  import("react-icons/tfi").then((mod) => mod.TfiAngleRight),
 );
 
 const ProductImageSlider = () => {
@@ -38,7 +38,7 @@ const ProductImageSlider = () => {
   const { slug } = useParams();
 
   const { data: product, isLoading } = useGetProductDetails(
-    slug?.toString() || ""
+    slug?.toString() || "",
   );
 
   const locale = useGetLocale();
@@ -185,7 +185,7 @@ const ThumbsComponent = ({
         width={500}
         alt="product image"
         // src={"/images/home/bed.png"}
-        src={constructImageURL(imgURI)}
+        src={constructImageURL(imgURI) || "/images/home/bed.png"}
         className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
           index === activeIndex ? "border-[#189CD9]" : "border-transparent "
         }`}
@@ -208,7 +208,7 @@ const SlideComponent = ({ imgURI }: { imgURI: string }) => {
         className=" w-[90%] lg:w-[90%] object-contain   rounded-[15px]  mx-auto  md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[500px]  "
       /> */}
       <ImageZoomViewModal
-        imgURI={constructImageURL(imgURI)}
+        imgURI={constructImageURL(imgURI) || "/images/home/bed.png"}
         className="mx-auto h-[300px] sm:h-[402px] md:h-[402px] lg:h-[425px] xl:h-[430px] 2xl:h-[550px] object-contain items-center"
       />
     </div>

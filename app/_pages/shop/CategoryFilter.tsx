@@ -86,7 +86,7 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
             {/* Background Image */}
             <div className="relative h-32 md:h-40 overflow-hidden bg-gray-100">
               <Image
-                src={category.image}
+                src={category?.image || "/images/home/banner9.jpg"}
                 alt={category.name[locale]}
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-300"

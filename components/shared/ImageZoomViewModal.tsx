@@ -96,7 +96,7 @@ const ImageZoomViewModal = ({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger className="w-full border-none outline-none">
           <Image
-            src={imgURI}
+            src={imgURI || "/images/home/bed.png"}
             alt="Product Image"
             height={500}
             width={500}
@@ -125,7 +125,7 @@ const ImageZoomViewModal = ({
             <div className="w-full h-full lg:w-[100%] overflow-y-auto ">
               {/* show the image  */}
               <Image
-                src={imgURI}
+                src={imgURI || "/images/home/bed.png"}
                 alt="Product Image"
                 height={500}
                 width={500}
