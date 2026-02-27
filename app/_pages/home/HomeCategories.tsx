@@ -64,6 +64,7 @@ export interface Category {
   name_ar: string;
   description: string;
   description_ar: string;
+  image?: string;
 }
 
 export interface CategoresResponse {
@@ -93,7 +94,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
     <div
       className={cn(
         "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 ",
-        className
+        className,
       )}
     >
       {categoriesData?.results?.map((category, i) => (
@@ -162,7 +163,8 @@ function CategoryCard({
       </div>
       <div className="col-span-3 xl:col-span-4 cursor-pointer">
         <Image
-          src={dummyCategoriesImages[imageIndex] || "/images/home/banner9.jpg"}
+          // src={dummyCategoriesImages[imageIndex] || "/images/home/banner9.jpg"}
+          src={data?.image || ""}
           alt=""
           width={500}
           height={500}
