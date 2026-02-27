@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
   firstName: Yup.string().required("First name is required"),
   // lastName: Yup.string().required("Last name is required"),
   address: Yup.string().required("Address is required"),
-  googleMapsLink: Yup.string().required("Google Maps Link is required"),
+  googleMapsLink: Yup.string().notRequired(),
   // city: Yup.string().required("City is required"),
 });
 

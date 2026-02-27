@@ -35,21 +35,11 @@ const OrderSummary = () => {
     // prodId?.toString() || ""
   );
 
+  console.log("Product details in Order Summary:", product);
+  console.log("Product info from store in Order Summary:", productInfo);
+
   const selectedProduct = product?.[locale];
-  // useEffect(() => {
-  //   if (productInfo.productId) {
-  //     const product = products.find(
-  //       (product) => product.id.toString() === productInfo.productId
-  //     );
-  //     if (product) {
-  //       setSelectedProduct(product[locale]);
-  //     }
-  //   }
-  // }, [productInfo.productId]);
 
-  // console.log(selectedProduct);
-
-  // Show loading skeleton while fetching data
   if (isLoading) {
     return <SummarySkt />;
   }
@@ -298,19 +288,31 @@ export default OrderSummary;
 const ColorCapsule = ({
   color,
 }: {
-  color?: { name: string; colorCode: string };
+  color?: { name: string; colorCode: string; image?: string };
 }) => {
+  // console.log("ColorCapsule color:", color);
+
   return (
     <div
       title={color?.colorCode}
       className={`flex items-center gap-2 px-2 py-1 rounded-full border hover:border-[#87A786] transition-colors border-[#87A786] `}
     >
-      <div
-        className="w-3 h-3 rounded-full"
-        style={{
-          backgroundColor: color?.colorCode,
-        }}
-      />
+      {color?.image ? (
+        <Image
+          src={color.image}
+          alt={color.name}
+          width={20}
+          height={20}
+          className="w-5 h-5 rounded-full object-cover"
+        />
+      ) : (
+        <div
+          className="w-3 h-3 rounded-full"
+          style={{
+            backgroundColor: color?.colorCode,
+          }}
+        />
+      )}
 
       <span className="text-xs">{color?.name}</span>
     </div>
