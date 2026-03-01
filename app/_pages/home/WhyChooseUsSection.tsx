@@ -8,11 +8,10 @@ import {
   Users,
   Wrench,
   Zap,
-  ShieldCheck,
-  Clock,
-  Star,
-  HeartHandshake,
-  BadgeCheck,
+  // ShieldCheck,
+  // Star,
+  // HeartHandshake,
+  // BadgeCheck,
   Sparkles,
 } from "lucide-react";
 
@@ -113,25 +112,25 @@ const features = {
   ],
 };
 
-const trusts = {
-  en: [
-    { icon: ShieldCheck, label: "100% Satisfaction Guaranteed" },
-    { icon: BadgeCheck, label: "ISO Certified Processes" },
-    { icon: HeartHandshake, label: "Trusted by 2,500+ Clients" },
-    { icon: Star, label: "5-Star Rated Service" },
-  ],
-  ar: [
-    { icon: ShieldCheck, label: "ضمان 100% رضا العملاء" },
-    { icon: BadgeCheck, label: "عمليات معتمدة بشهادة ISO" },
-    { icon: HeartHandshake, label: "موثوق به من قِبل 2500+ عميل" },
-    { icon: Star, label: "خدمة مصنفة 5 نجوم" },
-  ],
-};
+// const trusts = {
+//   en: [
+//     { icon: ShieldCheck, label: "100% Satisfaction Guaranteed" },
+//     { icon: BadgeCheck, label: "ISO Certified Processes" },
+//     { icon: HeartHandshake, label: "Trusted by 2,500+ Clients" },
+//     { icon: Star, label: "5-Star Rated Service" },
+//   ],
+//   ar: [
+//     { icon: ShieldCheck, label: "ضمان 100% رضا العملاء" },
+//     { icon: BadgeCheck, label: "عمليات معتمدة بشهادة ISO" },
+//     { icon: HeartHandshake, label: "موثوق به من قِبل 2500+ عميل" },
+//     { icon: Star, label: "خدمة مصنفة 5 نجوم" },
+//   ],
+// };
 
 const WhyChooseUsSection = () => {
   const locale = useGetLocale();
   const currentFeatures = features[locale];
-  const currentTrusts = trusts[locale];
+  // const currentTrusts = trusts[locale];
 
   const containerVariants = {
     hidden: { opacity: 0 },
