@@ -1,221 +1,369 @@
 "use client";
 import { motion } from "framer-motion";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { Gem, Palette, Truck, Users, Wrench, Zap } from "lucide-react";
+import {
+  Gem,
+  Palette,
+  Truck,
+  Users,
+  Wrench,
+  Zap,
+  ShieldCheck,
+  Clock,
+  Star,
+  HeartHandshake,
+  BadgeCheck,
+  Sparkles,
+} from "lucide-react";
 
 const features = {
   en: [
     {
       title: "Free Delivery",
-      description: "Competitive pricing without hidden fees",
+      description:
+        "Your order arrives at your doorstep at zero extra cost — always.",
       icon: Truck,
+      color: "#189CD9",
+      bg: "rgba(24,156,217,0.08)",
     },
     {
       title: "Free Installation Support",
-      description: "Always here to help with your questions and concerns",
+      description:
+        "Our experts walk you through every installation step, hassle-free.",
       icon: Wrench,
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.08)",
     },
     {
       title: "Premium Quality",
-      description: "High-quality materials and craftsmanship in every product",
+      description:
+        "Best-in-class materials and meticulous craftsmanship in every product.",
       icon: Gem,
+      color: "#f59e0b",
+      bg: "rgba(245,158,11,0.08)",
     },
     {
       title: "Custom Design",
-      description: "Personalized solutions tailored to your unique needs",
+      description:
+        "Bespoke solutions crafted to reflect your unique brand identity perfectly.",
       icon: Palette,
+      color: "#8b5cf6",
+      bg: "rgba(139,92,246,0.08)",
     },
     {
-      title: "Fast Delivery",
-      description: "Quick turnaround time without compromising quality",
+      title: "Fast Turnaround",
+      description:
+        "Rapid production and delivery timelines without cutting any corners.",
       icon: Zap,
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.08)",
     },
     {
       title: "Expert Team",
-      description: "15+ years of experience in signage and design",
+      description:
+        "15+ years of proven expertise in signage, branding & creative design.",
       icon: Users,
+      color: "#189CD9",
+      bg: "rgba(24,156,217,0.08)",
     },
   ],
   ar: [
     {
       title: "توصيل مجاني",
-      description: "أسعار تنافسية بدون رسوم خفية",
+      description: "طلبك يصل إلى باب منزلك دون أي تكلفة إضافية — دائمًا.",
       icon: Truck,
+      color: "#189CD9",
+      bg: "rgba(24,156,217,0.08)",
     },
     {
       title: "دعم تركيب مجاني",
-      description: "دائمًا هنا للمساعدة في أسئلتك ومخاوفك",
+      description: "خبراؤنا يرشدونك في كل خطوة من خطوات التركيب بكل سهولة.",
       icon: Wrench,
+      color: "#10b981",
+      bg: "rgba(16,185,129,0.08)",
     },
     {
       title: "جودة ممتازة",
-      description: "مواد عالية الجودة وحرفية في كل منتج",
+      description: "أفضل المواد وحرفية دقيقة في كل منتج نصنعه.",
       icon: Gem,
+      color: "#f59e0b",
+      bg: "rgba(245,158,11,0.08)",
     },
     {
       title: "تصميم مخصص",
-      description: "حلول شخصية مصممة لاحتياجاتك الفريدة",
+      description: "حلول مصممة خصيصًا لتعكس هوية علامتك التجارية بشكل مثالي.",
       icon: Palette,
+      color: "#8b5cf6",
+      bg: "rgba(139,92,246,0.08)",
     },
     {
-      title: "توصيل سريع",
-      description: "وقت تنفيذ سريع دون المساس بالجودة",
+      title: "تسليم سريع",
+      description: "جداول إنتاج وتسليم سريعة دون التنازل عن الجودة.",
       icon: Zap,
+      color: "#f97316",
+      bg: "rgba(249,115,22,0.08)",
     },
     {
-      title: "فريق خبراء",
-      description: "أكثر من 15 عامًا من الخبرة في اللافتات والتصميم",
+      title: "فريق الخبراء",
+      description: "أكثر من 15 عامًا من الخبرة في اللافتات والعلامات التجارية.",
       icon: Users,
+      color: "#189CD9",
+      bg: "rgba(24,156,217,0.08)",
     },
+  ],
+};
+
+const trusts = {
+  en: [
+    { icon: ShieldCheck, label: "100% Satisfaction Guaranteed" },
+    { icon: BadgeCheck, label: "ISO Certified Processes" },
+    { icon: HeartHandshake, label: "Trusted by 2,500+ Clients" },
+    { icon: Star, label: "5-Star Rated Service" },
+  ],
+  ar: [
+    { icon: ShieldCheck, label: "ضمان 100% رضا العملاء" },
+    { icon: BadgeCheck, label: "عمليات معتمدة بشهادة ISO" },
+    { icon: HeartHandshake, label: "موثوق به من قِبل 2500+ عميل" },
+    { icon: Star, label: "خدمة مصنفة 5 نجوم" },
   ],
 };
 
 const WhyChooseUsSection = () => {
   const locale = useGetLocale();
   const currentFeatures = features[locale];
+  const currentTrusts = trusts[locale];
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-      },
+      transition: { staggerChildren: 0.1, delayChildren: 0.15 },
     },
   };
 
   const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.9,
-    },
+    hidden: { opacity: 0, y: 40 },
     visible: {
       opacity: 1,
       y: 0,
-      scale: 1,
-      transition: {
-        type: "spring" as const,
-        damping: 15,
-        stiffness: 100,
-      },
+      transition: { type: "spring" as const, damping: 20, stiffness: 100 },
     },
   };
 
   return (
-    <section className="relative py-16 md:py-24 bg-white overflow-hidden">
-      {/* Subtle Background Pattern */}
-      <div className="absolute inset-0 opacity-[0.03]">
+    <section className="relative py-20 md:py-28 bg-white overflow-hidden">
+      {/* ── Ambient background shapes ────────────────────────── */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        {/* top-right */}
         <div
-          className="absolute inset-0"
+          className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-40"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23189CD9' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            background:
+              "radial-gradient(circle, rgba(24,156,217,0.07) 0%, transparent 65%)",
+          }}
+        />
+        {/* bottom-left */}
+        <div
+          className="absolute -bottom-40 -left-40 w-[440px] h-[440px] rounded-full opacity-40"
+          style={{
+            background:
+              "radial-gradient(circle, rgba(24,156,217,0.06) 0%, transparent 65%)",
           }}
         />
       </div>
 
+      {/* ── Very subtle dot grid ─────────────────────────────── */}
+      <div
+        className="pointer-events-none absolute inset-0 opacity-[0.018]"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle, #94a3b8 1px, transparent 1px)",
+          backgroundSize: "26px 26px",
+        }}
+      />
+
       <div className="container mx-auto px-4 relative z-10">
-        {/* Section Header */}
+        {/* ── Section Header ───────────────────────────────── */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
+          transition={{ duration: 0.55 }}
+          className="text-center mb-16 md:mb-20"
         >
-          <motion.h2
-            className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
-            initial={{ opacity: 0, scale: 0.9 }}
+          {/* Eyebrow badge */}
+          <motion.div
+            initial={{ opacity: 0, scale: 0.85 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
+            transition={{ duration: 0.4, delay: 0.05 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
+            style={{
+              background: "rgba(24,156,217,0.08)",
+              border: "1px solid rgba(24,156,217,0.22)",
+            }}
+          >
+            <Sparkles className="w-3.5 h-3.5" style={{ color: "#189CD9" }} />
+            <span
+              className="text-xs font-semibold tracking-widest uppercase"
+              style={{ color: "#189CD9" }}
+            >
+              {locale === "en" ? "Our Advantages" : "مميزاتنا"}
+            </span>
+          </motion.div>
+
+          {/* Main heading */}
+          <motion.h2
+            className="text-3xl md:text-5xl lg:text-[56px] font-bold text-slate-900 leading-tight mb-4"
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.55, delay: 0.1 }}
           >
             {locale === "en" ? (
               <>
-                Why Choose <span className="text-[#189CD9]">One Direction</span>
+                Why Businesses Choose{" "}
+                <span
+                  className="relative whitespace-nowrap"
+                  style={{ color: "#189CD9" }}
+                >
+                  One Direction
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full"
+                    viewBox="0 0 300 10"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    preserveAspectRatio="none"
+                    style={{ height: "8px" }}
+                  >
+                    <path
+                      d="M2 7 Q75 1 150 5 Q225 9 298 4"
+                      stroke="#189CD9"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      fill="none"
+                      opacity="0.5"
+                    />
+                  </svg>
+                </span>
               </>
             ) : (
               <>
-                لماذا تختار <span className="text-[#189CD9]">ون دايركشن</span>
+                لماذا تختار الشركات{" "}
+                <span
+                  className="relative whitespace-nowrap"
+                  style={{ color: "#189CD9" }}
+                >
+                  ون دايركشن
+                  <svg
+                    className="absolute -bottom-2 left-0 w-full"
+                    viewBox="0 0 300 10"
+                    fill="none"
+                    preserveAspectRatio="none"
+                    style={{ height: "8px" }}
+                  >
+                    <path
+                      d="M2 7 Q75 1 150 5 Q225 9 298 4"
+                      stroke="#189CD9"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                      fill="none"
+                      opacity="0.5"
+                    />
+                  </svg>
+                </span>
               </>
             )}
           </motion.h2>
 
-          <motion.div
-            className="w-16 h-0.5 bg-[#189CD9] mx-auto mb-4"
-            initial={{ width: 0 }}
-            whileInView={{ width: 64 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
-
           <motion.p
-            className="text-gray-600 text-base md:text-lg max-w-2xl mx-auto"
+            className="text-slate-500 text-base md:text-lg max-w-xl mx-auto leading-relaxed"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
+            transition={{ duration: 0.6, delay: 0.22 }}
           >
             {locale === "en"
-              ? "Discover the reasons why thousands of customers trust us for their signage needs"
-              : "اكتشف الأسباب التي تجعل الآلاف من العملاء يثقون بنا لتلبية احتياجات اللافتات الخاصة بهم"}
+              ? "From custom signage to fast delivery — we've built every process around your success."
+              : "من اللافتات المخصصة إلى التسليم السريع — بنينا كل عملية حول نجاحك."}
           </motion.p>
         </motion.div>
 
-        {/* Features Grid */}
+        {/* ── Feature Cards ─────────────────────────────────── */}
         <motion.div
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-6"
         >
-          {currentFeatures.map((feature, index) => (
-            <motion.div
-              key={index}
-              variants={cardVariants}
-              whileHover={{
-                y: -8,
-                scale: 1.02,
-                transition: { duration: 0.3 },
-              }}
-              className="group relative"
-            >
-              {/* Card */}
-              <div className="relative bg-gray-50 rounded-2xl p-6 md:p-8 border-2 border-gray-100 group-hover:border-[#189CD9] transition-all duration-300 h-full">
-                {/* Icon Container */}
-                <motion.div
-                  className="w-16 h-16 md:w-20 md:h-20 rounded-xl bg-[#189CD9]/10 group-hover:bg-[#189CD9]/20 flex items-center justify-center text-3xl md:text-4xl mb-5 transition-colors duration-300"
-                  whileHover={{
-                    rotate: [0, -5, 5, -5, 0],
+          {currentFeatures.map((feature, index) => {
+            const Icon = feature.icon;
+            const num = String(index + 1).padStart(2, "0");
+            return (
+              <motion.div
+                key={index}
+                variants={cardVariants}
+                whileHover={{ y: -6, transition: { duration: 0.22 } }}
+                className="group relative"
+              >
+                <div
+                  className="relative h-full bg-white rounded-2xl p-6 md:p-7 overflow-hidden transition-all duration-300"
+                  style={{
+                    border: "1.5px solid #f1f5f9",
+                    boxShadow:
+                      "0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.04)",
                   }}
-                  transition={{ duration: 0.5 }}
                 >
-                  <div className="flex-shrink-0">
-                    <feature.icon className="w-8 h-8 text-[#189CD9]" />
+                  {/* Hover shadow upgrade */}
+                  <div
+                    className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                      boxShadow: `0 8px 32px rgba(0,0,0,0.08), 0 0 0 1.5px ${feature.color}30`,
+                    }}
+                  />
+
+                  {/* Top accent bar */}
+                  <div
+                    className="absolute top-0 left-0 h-[3px] w-0 group-hover:w-full transition-all duration-500 rounded-t-2xl"
+                    style={{ background: feature.color }}
+                  />
+
+                  {/* Faded number */}
+                  <span
+                    className="absolute top-4 right-5 text-5xl font-black leading-none select-none pointer-events-none"
+                    style={{ color: "rgba(0,0,0,0.032)" }}
+                  >
+                    {num}
+                  </span>
+
+                  {/* Icon */}
+                  <div
+                    className="w-12 h-12 md:w-14 md:h-14 rounded-xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110"
+                    style={{
+                      background: feature.bg,
+                      border: `1.5px solid ${feature.color}22`,
+                    }}
+                  >
+                    <Icon
+                      className="w-5 h-5 md:w-6 md:h-6 transition-transform duration-300"
+                      style={{ color: feature.color }}
+                    />
                   </div>
-                </motion.div>
 
-                {/* Title */}
-                <h3 className="text-xl md:text-2xl font-bold text-gray-900 mb-3 group-hover:text-[#189CD9] transition-colors duration-300">
-                  {feature.title}
-                </h3>
+                  {/* Title */}
+                  <h3 className="text-[17px] md:text-lg font-bold text-slate-800 mb-2 transition-colors duration-300 group-hover:text-slate-900">
+                    {feature.title}
+                  </h3>
 
-                {/* Description */}
-                <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                  {feature.description}
-                </p>
-
-                {/* Hover indicator line */}
-                <motion.div
-                  className="absolute bottom-0 left-0 h-1 bg-[#189CD9] rounded-b-2xl"
-                  initial={{ width: 0 }}
-                  whileHover={{ width: "100%" }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-            </motion.div>
-          ))}
+                  {/* Description */}
+                  <p className="text-slate-500 text-sm md:text-[15px] leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
         </motion.div>
       </div>
     </section>
