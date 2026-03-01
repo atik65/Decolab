@@ -56,7 +56,6 @@ export default async function RootLayout({
     notFound();
   }
 
-  console.log("locale", locale);
 
   const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable}`;
 
