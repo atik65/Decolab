@@ -39,6 +39,8 @@ const HomeCategories = ({ className }: { className?: string }) => {
   const prevRef = useRef<HTMLButtonElement>(null);
   const nextRef = useRef<HTMLButtonElement>(null);
 
+  const locale = useGetLocale();
+
   // Show loading skeleton while fetching
   if (isLoading) {
     return <CategoriesSkt />;
@@ -55,7 +57,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
       <div className="flex items-center justify-between mb-8">
         <div className="space-y-1">
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-normal">
-            Our Categories
+            {locale === "en" ? "Our Categories" : "فئاتنا"}
           </h2>
           <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
         </div>

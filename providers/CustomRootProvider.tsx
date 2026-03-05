@@ -19,14 +19,14 @@ const AppProgressProvider = dynamic(
   () => import("@bprogress/next").then((mod) => mod.AppProgressProvider),
   {
     ssr: true,
-  }
+  },
 );
 
 const SnackbarProvider = dynamic(
   () => import("notistack").then((mod) => mod.SnackbarProvider),
   {
     ssr: true,
-  }
+  },
 );
 
 // const queryClient = new QueryClient();
@@ -59,7 +59,7 @@ const CustomRootProvider = ({ children }: Props) => {
               <Header />
 
               {children}
-              <ContactSection />
+              {/* <ContactSection /> */}
               <Footer />
               {/* <Footer /> */}
               {/* <FloatingCart /> */}
