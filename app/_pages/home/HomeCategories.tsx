@@ -54,26 +54,26 @@ const HomeCategories = ({ className }: { className?: string }) => {
       {/* ─── Header & Navigation ─── */}
       <div className="flex items-center justify-between mb-8">
         <div className="space-y-1">
-          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-tight">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-tight">
             Our Categories
           </h2>
           <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 md:gap-3">
           <button
             ref={prevRef}
             aria-label="Previous Category"
-            className="p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
           >
-            <ChevronLeft className="w-5 h-5 group-active:scale-90 transition-transform" />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 group-active:scale-90 transition-transform" />
           </button>
           <button
             ref={nextRef}
             aria-label="Next Category"
-            className="p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
           >
-            <ChevronRight className="w-5 h-5 group-active:scale-90 transition-transform" />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-active:scale-90 transition-transform" />
           </button>
         </div>
       </div>
@@ -81,8 +81,9 @@ const HomeCategories = ({ className }: { className?: string }) => {
       {/* ─── Swiper Slider ─── */}
       <Swiper
         modules={[Navigation]}
-        spaceBetween={24}
-        slidesPerView={1}
+        spaceBetween={8}
+        slidesPerView={3}
+        loop={true}
         speed={600}
         navigation={{
           prevEl: prevRef.current,
@@ -98,8 +99,8 @@ const HomeCategories = ({ className }: { className?: string }) => {
         }}
         breakpoints={{
           640: {
-            slidesPerView: 2,
-            spaceBetween: 20,
+            slidesPerView: 3,
+            spaceBetween: 16,
           },
           1024: {
             slidesPerView: 3,
@@ -138,16 +139,17 @@ function CategoryCard({ data }: { data: Category }) {
   return (
     <div
       onClick={handleRedirect}
-      className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100"
+      className="group cursor-pointer bg-white rounded-lg md:rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.05)] md:shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100"
     >
       {/* Image Section */}
-      <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
+      <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden bg-gray-50">
         <Image
           src={data?.image || "/images/placeholder.jpg"}
           alt={data?.name || "Category"}
           fill
           className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+          sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 33vw"
+          quality={100}
         />
         {/* Overlay on hover */}
         <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
@@ -161,20 +163,22 @@ function CategoryCard({ data }: { data: Category }) {
       </div>
 
       {/* Content Section */}
-      <div className="p-6 flex flex-col flex-grow items-center text-center">
-        <h3 className="text-xl font-bold text-gray-900 mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1">
+      <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center">
+        <h3 className="text-[10px] sm:text-sm md:text-xl font-bold text-gray-900 mb-1 md:mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1">
           {data?.name_ar && locale === "ar" ? data.name_ar : data.name}
         </h3>
-        <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+        <p className="hidden sm:line-clamp-2 text-xs md:text-sm text-gray-500 leading-relaxed">
           {data?.description_ar && locale === "ar"
             ? data.description_ar
             : data.description}
         </p>
 
         {/* Mobile Arrow - visible only on mobile */}
-        <div className="mt-4 md:hidden flex items-center gap-1 text-[#189CD9] font-bold text-[10px] uppercase tracking-wider">
-          {locale === "en" ? "Read More" : "اقرأ المزيد"}
-          <ChevronRight className="w-3 h-3" />
+        <div className="mt-1 md:hidden flex items-center gap-0.5 text-[#189CD9] font-bold text-[8px] uppercase tracking-tighter">
+          <span className="truncate max-w-[50px]">
+            {locale === "en" ? "View" : "عرض"}
+          </span>
+          <ChevronRight className="w-2 h-2" />
         </div>
       </div>
     </div>
