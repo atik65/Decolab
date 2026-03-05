@@ -32,7 +32,7 @@ const SearchBar = () => {
       {/* <DrawerOverlay /> */}
       <DrawerContent
         overlayClassName="bg-white md:bg-transparent"
-        className="!h-[calc(60vh-70px)] md:!h-[calc(100vh-70px)] rounded-none border-none outline-none "
+        className="!h-[calc(60vh-70px)] md:!h-[calc(100vh-140px)] rounded-none border-none outline-none "
       >
         <DrawerHeader className="px-0 ">
           <DrawerTitle>

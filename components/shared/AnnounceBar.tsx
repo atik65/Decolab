@@ -34,6 +34,64 @@ const PHONE_NUMBER = "+971 50 123 4567";
 const FACEBOOK_URL = "https://facebook.com";
 const INSTAGRAM_URL = "https://instagram.com";
 
+/**
+ * WavyText Component
+ * Animates each character in a staggered vertical wave for a "flag-like" effect.
+ * Optimized for speed and smooth transitions.
+ */
+const WavyText: React.FC<{ text: string; className?: string }> = ({
+  text,
+  className,
+}) => {
+  const characters = text.split("");
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.01, // Extra fast stagger
+      },
+    },
+    exit: {
+      opacity: 0,
+    },
+  };
+
+  const charVariants = {
+    hidden: { y: 5, opacity: 0 },
+    visible: { y: 0, opacity: 1 },
+    exit: { y: -5, opacity: 0 },
+  };
+
+  return (
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className={`flex items-center justify-center whitespace-pre ${className}`}
+    >
+      {characters.map((char, i) => (
+        <motion.span key={i} variants={charVariants} className="inline-block">
+          <motion.span
+            animate={{ y: [0, -3, 0] }} // Subtle wave
+            transition={{
+              repeat: Infinity,
+              duration: 1,
+              ease: "easeInOut",
+              delay: i * 0.05, // Offset for wave effect
+            }}
+            className="inline-block"
+          >
+            {char === " " ? "\u00A0" : char}
+          </motion.span>
+        </motion.span>
+      ))}
+    </motion.div>
+  );
+};
+
 const AnnounceBar: React.FC = () => {
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
@@ -51,7 +109,7 @@ const AnnounceBar: React.FC = () => {
       if (!hovering.current) {
         setIndex((i) => (i + 1) % SLIDES.length);
       }
-    }, 3500);
+    }, 4000); // 4 seconds
   };
 
   const stop = () => {
@@ -72,92 +130,91 @@ const AnnounceBar: React.FC = () => {
   return (
     <div
       id="announce-bar"
-      className="w-full direction-ltr bg-[#189CD9] text-white py-0 text-sm relative"
+      className="w-full direction-ltr bg-[#189CD9] text-white py-0.5 text-sm relative z-[100]"
       onMouseEnter={() => (hovering.current = true)}
       onMouseLeave={() => (hovering.current = false)}
       aria-live="polite"
     >
-      <div className="container mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center">
-        {/* ─── left Zone: Phone Number ─── */}
+      <div className="container mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center min-h-[40px]">
+        {/* ─── Left Zone: Phone Number ─── */}
         <div className="flex items-center justify-start">
-          {/* Desktop: full phone number */}
           <Link
             href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
-            className="hidden md:flex items-center gap-1.5 text-white hover:scale-105 transition-transform duration-200 text-sm"
+            className="hidden md:flex items-center gap-1.5 text-white/90 hover:text-white hover:scale-105 transition-all duration-300 text-sm font-medium"
           >
-            <Phone className="h-3.5 w-3.5" />
+            <Phone className="h-3.5 w-3.5 fill-white/10" />
             <span>{PHONE_NUMBER}</span>
           </Link>
 
-          {/* Mobile: icon only */}
           <Link
             href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
             aria-label={`Call ${PHONE_NUMBER}`}
-            className="md:hidden text-white/70 hover:text-white transition-colors duration-200 p-1"
+            className="md:hidden text-white/90 hover:text-white transition-all duration-300 p-2 active:scale-95"
           >
             <Phone className="h-4 w-4" />
           </Link>
         </div>
-        {/* Empty spacer on mobile so the center stays centered */}
-        <div className="hidden" />
 
-        {/* ─── Center Zone: Sliding Announcement ─── */}
-        <div className="flex items-center justify-center">
+        {/* ─── Center Zone: Wavy Announcement ─── */}
+        <div className="flex items-center justify-center gap-1">
           <button
             onClick={prev}
             aria-label="Previous announcement"
-            className="text-white/70 hover:text-white p-2 rounded-full transition-colors duration-200 flex-shrink-0"
+            className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
           >
             <ChevronLeftIcon className="h-4 w-4" />
           </button>
 
-          <div className="overflow-hidden relative h-8 flex items-center min-w-[180px] md:min-w-[320px] justify-center">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={index}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.4, ease: "easeInOut" }}
-                className="absolute w-full text-center"
-              >
-                {/* Full text on desktop, short text on mobile */}
-                <span className="hidden md:block text-sm font-medium">
-                  {SLIDES[index].full}
-                </span>
-                <span className="block md:hidden text-xs font-medium">
-                  {SLIDES[index].short}
-                </span>
-              </motion.div>
-            </AnimatePresence>
+          <div className="relative overflow-hidden h-10 flex items-center min-w-[180px] md:min-w-[360px] justify-center">
+            {/* Desktop View */}
+            <div className="hidden md:block w-full">
+              <AnimatePresence mode="wait">
+                <WavyText
+                  key={index}
+                  text={SLIDES[index].full}
+                  className="text-sm font-semibold tracking-wide"
+                />
+              </AnimatePresence>
+            </div>
+
+            {/* Mobile View */}
+            <div className="block md:hidden w-full">
+              <AnimatePresence mode="wait">
+                <WavyText
+                  key={`${index}-mobile`}
+                  text={SLIDES[index].short}
+                  className="text-xs font-semibold tracking-wide"
+                />
+              </AnimatePresence>
+            </div>
           </div>
 
           <button
             onClick={next}
             aria-label="Next announcement"
-            className="text-white/70 hover:text-white p-2 rounded-full transition-colors duration-200 flex-shrink-0"
+            className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
           >
             <ChevronRightIcon className="h-4 w-4" />
           </button>
         </div>
 
-        {/* ─── right Zone: Social Icons (hidden on mobile) ─── */}
-        <div className="flex justify-end items-center gap-3">
+        {/* ─── Right Zone: Social Icons ─── */}
+        <div className="flex justify-end items-center gap-4">
           <Link
             href={FACEBOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="text-white hover:scale-105 transition-transform duration-200"
+            className="text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
           >
-            <Facebook className="h-4 w-4" />
+            <Facebook className="h-4 w-4 fill-white/5" />
           </Link>
           <Link
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-white hover:scale-105 transition-transform duration-200"
+            className="text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
           >
             <Instagram className="h-4 w-4" />
           </Link>

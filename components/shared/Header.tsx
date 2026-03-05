@@ -26,7 +26,7 @@ interface NavLink {
 
 export const staticNavLinks: NavLink[] = [
   // { href: "/shop", label: "shop", labelAr: "المتجر" },
-  { href: "/about", label: "about", labelAr: "من نحن" },
+  // { href: "/about", label: "about", labelAr: "من نحن" },
   // { href: "/contact", label: "contact", labelAr: "اتصل بنا" },
 ];
 
@@ -148,7 +148,7 @@ const Header: React.FC = () => {
               >
                 {/* <span className="relative z-10">{t(link.label)}</span> */}
                 <span
-                  className={`relative z-10 uppercase ${locale === "en" ? "text-sm" : ""}`}
+                  className={`relative z-10 uppercase ${locale === "en" ? "text-base" : ""}`}
                 >
                   {locale === "ar" && link.labelAr
                     ? link.labelAr
