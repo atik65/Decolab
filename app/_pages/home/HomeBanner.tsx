@@ -123,22 +123,22 @@ const slides = [
 
 const HomeBanner = () => {
   return (
-    <div className="relative ">
+    <div className="relative w-full overflow-hidden bg-white ">
       <Swiper
         modules={[Navigation, Pagination, Autoplay, EffectFade]}
-        autoplay={{ delay: 5000 }}
-        spaceBetween={50}
+        effect="fade"
+        fadeEffect={{ crossFade: true }}
+        autoplay={{ delay: 6000, disableOnInteraction: false }}
         slidesPerView={1}
         loop
+        speed={1000}
+        className="h-[60vh] md:h-[calc(100vh-140px)]"
       >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index}>
-            <SlideItem slide={slide} />
+        {slides.map((slide) => (
+          <SwiperSlide key={slide.id}>
+            {({ isActive }) => <SlideItem slide={slide} isActive={isActive} />}
           </SwiperSlide>
         ))}
-
-        {/* Custom Pagination Component */}
-        {/* <CustomPagination slides={slides} /> */}
       </Swiper>
     </div>
   );
@@ -146,109 +146,76 @@ const HomeBanner = () => {
 
 export default HomeBanner;
 
-// custom pagination component
-const CustomPagination = ({ slides }: { slides: Slide[] }) => {
-  const swiper = useSwiper(); // Get the Swiper instance
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Update the active index when the swiper changes
-  swiper.on("slideChange", () => {
-    setActiveIndex(swiper.realIndex);
-  });
-
-  return (
-    <div className="absolute bottom-5 md:bottom-5 left-1/2 md:left-10 transform -translate-x-1/2 md:translate-x-0 z-20 flex space-x-2 sm:space-x-5 justify-center  h-4 sm:h-7 items-center  select-none">
-      {slides.map((_, index) => (
-        <div key={index}>
-          {activeIndex === index ? (
-            <div
-              onClick={() => swiper.slideTo(index)}
-              className="flex items-center space-x-2 cursor-pointer"
-            >
-              <span className="text-[#ABE108] font-medium text-sm">
-                {(index + 1).toString().padStart(2, "0")}
-              </span>
-              <div className="w-5 sm:w-12 h-0.5 bg-[#ABE108]"></div>
-            </div>
-          ) : (
-            <div
-              onClick={() => swiper.slideTo(index)}
-              className="flex items-center space-x-2 cursor-pointer group"
-            >
-              <span className="text-black font-medium text-[10px]">
-                {(index + 1).toString().padStart(2, "0")}
-              </span>
-              <div className="w-2 sm:w-6 h-[2px] bg-black group-hover:w-12 duration-200"></div>
-            </div>
-          )}
-        </div>
-      ))}
-    </div>
-  );
-};
-
-const SlideItem = ({ slide }: { slide: Slide }) => {
+const SlideItem = ({
+  slide,
+  isActive,
+}: {
+  slide: Slide;
+  isActive: boolean;
+}) => {
   const locale = useGetLocale();
 
   return (
-    <div className="h-auto md:h-[75vh] grid grid-cols-1 md:grid-cols-2 md:bg-[#f9f9f9]">
-      <div className="flex flex-col items-start md:justify-center gap-4 h-auto pb-16 md:py-0  md:h-[70vh] px-5 md:px-10 md:pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
-        {/* categories for small screen */}
-        {/* <div className="md:hidden">
-          <HomeCategories className="flex" />
-        </div> */}
-
-        {/* text for large screen */}
-        <motion.div
-          initial={{ opacity: 0, x: -400 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="hidden md:block"
-        >
-          <motion.p
-            // initial={{ opacity: 0, x: -100 }}
-            // whileInView={{ opacity: 1, x: 0 }}
-            // transition={{ duration: 0.5, delay: 0.4 }}
-            className="text-[22px] md:text-[28px] lg:text-[32px] xl:text-[36px] 2xl:text-[46px] font-bold text-center md:text-start leading-[1.2] md:leading-[1.4] lg:leading-[1.5] 2xl:leading-[1.6] "
-          >
-            {slide[locale].title}
-          </motion.p>
-
-          <motion.h4
-            initial={{ opacity: 0, x: 400 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.4, delay: 0.7 }}
-            className="mt-5 md:mt-10 text-center md:text-start leading-6 md:leading-7 lg:leading-8 2xl:leading-10 text-[14px] md:text-[16px] "
-          >
-            {slide[locale].description}
-          </motion.h4>
-
-          {/* shop now */}
-          <motion.div
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.3, delay: 1 }}
-            className="pt-8 md:mt-12 flex justify-center md:justify-start"
-          >
-            <Link href="/shop">
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="bg-black text-white py-4 px-12 uppercase font-bold animate-bounce delay-900"
-              >
-                {locale === "en" ? "Shop Now" : "تسوق الآن"}
-              </motion.button>
-            </Link>
-          </motion.div>
-        </motion.div>
+    <div className="relative w-full h-full overflow-hidden group">
+      {/* ─── Background Image ─── */}
+      <div className="absolute inset-0 z-0">
+        <Image
+          src={slide.bg}
+          alt="banner"
+          fill
+          priority
+          className="lg:aspect-[16/9] object-cover object-top"
+          quality={100}
+        />
+        {/* Subtle Gradient for legibility without hiding the image */}
+        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/ to-black/10 md:bg-gradient-to-r md:from-black/60 md:to-black/40" />
       </div>
 
-      <Image
-        src={slide?.bg || "/images/home/banner1.jpg"}
-        alt="banner"
-        width={1920}
-        height={500}
-        className="h-auto sm:h-[50vh] md:h-full w-full object-contain bg-gray-100 order-1 md:order-2"
+      {/* ─── Minimal Content Layer ─── */}
+      <div className="relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-center items-start text-white pb-12 md:pb-0">
+        <div className="max-w-2xl space-y-4 md:space-y-6">
+          {/* Minimal Title */}
+          <motion.h1
+            initial={{ opacity: 0, y: 20 }}
+            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            className="text-2xl md:text-4xl lg:text-5xl font-bold font-montserrat leading-tight tracking-tight drop-shadow-md"
+          >
+            {slide[locale].title}
+          </motion.h1>
+
+          {/* Minimal Description */}
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
+            className="text-sm md:text-lg text-white/90 max-w-lg font-light leading-relaxed drop-shadow-sm"
+          >
+            {slide[locale].description}
+          </motion.p>
+
+          {/* Compact CTA Button */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+            transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            className="pt-2"
+          >
+            <Link href="/shop">
+              <button className="bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 px-8 rounded-sm transition-all duration-300 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] shadow-lg shadow-black/10">
+                {locale === "en" ? "Shop Now" : "تسوق الآن"}
+              </button>
+            </Link>
+          </motion.div>
+        </div>
+      </div>
+
+      {/* ─── Bottom Decorative Progress Bar ─── */}
+      <motion.div
+        initial={{ scaleX: 0 }}
+        animate={isActive ? { scaleX: 1 } : { scaleX: 0 }}
+        transition={{ duration: 6, ease: "linear" }}
+        className="absolute bottom-0 left-0 h-1 bg-[#189CD9] z-20 origin-left w-full opacity-60"
       />
     </div>
   );
