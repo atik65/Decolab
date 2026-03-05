@@ -1,17 +1,15 @@
 "use client";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay, EffectFade } from "swiper/modules";
 import "swiper/css/effect-fade";
 
-import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import HomeCategories from "./HomeCategories";
 
 interface Slide {
   id: number;

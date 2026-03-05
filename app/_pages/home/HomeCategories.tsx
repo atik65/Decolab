@@ -92,10 +92,10 @@ const HomeCategories = ({ className }: { className?: string }) => {
           nextEl: nextRef.current,
         }}
         onBeforeInit={(swiper) => {
-          // @ts-ignore
+          // @ts-expect-error - Swiper types are not fully compatible with TypeScript
           // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.prevEl = prevRef.current;
-          // @ts-ignore
+          // @ts-expect-error - Swiper types are not fully compatible with TypeScript
           // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.nextEl = nextRef.current;
         }}
