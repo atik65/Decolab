@@ -83,7 +83,7 @@ const AnnounceBar: React.FC = () => {
           {/* Desktop: full phone number */}
           <Link
             href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
-            className="hidden md:flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-200 text-sm"
+            className="hidden md:flex items-center gap-1.5 text-white hover:scale-105 transition-transform duration-200 text-sm"
           >
             <Phone className="h-3.5 w-3.5" />
             <span>{PHONE_NUMBER}</span>
@@ -148,7 +148,7 @@ const AnnounceBar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="text-white/70 hover:text-white transition-colors duration-200"
+            className="text-white hover:scale-105 transition-transform duration-200"
           >
             <Facebook className="h-4 w-4" />
           </Link>
@@ -157,7 +157,7 @@ const AnnounceBar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-white/70 hover:text-white transition-colors duration-200"
+            className="text-white hover:scale-105 transition-transform duration-200"
           >
             <Instagram className="h-4 w-4" />
           </Link>
