@@ -194,9 +194,9 @@ const SlideItem = ({ slide }: { slide: Slide }) => {
     <div className="h-auto md:h-[75vh] grid grid-cols-1 md:grid-cols-2 md:bg-[#f9f9f9]">
       <div className="flex flex-col items-start md:justify-center gap-4 h-auto pb-16 md:py-0  md:h-[70vh] px-5 md:px-10 md:pr-20 bg-[ABE108] overflow-hidden order-2 md:order-1">
         {/* categories for small screen */}
-        <div className="md:hidden">
+        {/* <div className="md:hidden">
           <HomeCategories className="flex" />
-        </div>
+        </div> */}
 
         {/* text for large screen */}
         <motion.div

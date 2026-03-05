@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <>
       <HomeBanner />
-      <div className="hidden md:block">
+      <div className="block">
         <HomeCategories />
       </div>
       <FeaturedProducts />

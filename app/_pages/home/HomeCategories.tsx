@@ -3,60 +3,18 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import Link from "next/link";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CategoriesSkt from "@/components/skeletons/home/CategoriesSkt";
 import { useRouter } from "@bprogress/next";
 import { cn } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper/modules";
+import { useRef } from "react";
 
-// const dummyCategoriesImages = [
-//   "/images/home/banner9.jpg",
-//   "/products/font-design/14.jpeg",
-//   "/products/house-numbers/6.jpeg",
-// ];
-
-// const categories = [
-//   {
-//     id: 1,
-//     image: "/images/home/banner9.jpg",
-
-//     en: {
-//       title: "Signage Works",
-//       subtitle: "Professional Signage Solutions",
-//     },
-//     ar: {
-//       title: "أعمال اللافتات",
-//       subtitle: "حلول اللافتات المهنية",
-//     },
-//   },
-//   {
-//     id: 2,
-//     image: "/products/font-design/14.jpeg",
-
-//     en: {
-//       title: "Banner & Stickers",
-//       subtitle: "Custom Banners and Stickers",
-//     },
-//     ar: {
-//       title: "البانر والملصقات",
-//       subtitle: "بانر وملصقات مخصصة",
-//     },
-//   },
-//   {
-//     id: 3,
-//     image: "/products/house-numbers/6.jpeg",
-
-//     en: {
-//       title: "House Numbers",
-//       subtitle: "Stylish House Number Plates",
-//     },
-//     ar: {
-//       title: "أرقام المنازل",
-//       subtitle: "لوحات أرقام المنازل الأنيقة",
-//     },
-//   },
-// ];
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/navigation";
 
 export interface Category {
   id: number;
@@ -78,7 +36,8 @@ const HomeCategories = ({ className }: { className?: string }) => {
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
 
-  // console.log("Categories Data:", categoriesData);
+  const prevRef = useRef<HTMLButtonElement>(null);
+  const nextRef = useRef<HTMLButtonElement>(null);
 
   // Show loading skeleton while fetching
   if (isLoading) {
@@ -86,135 +45,136 @@ const HomeCategories = ({ className }: { className?: string }) => {
   }
 
   // If no categories, return null
-  if (!categoriesData) {
+  if (!categoriesData || !categoriesData.results) {
     return null;
   }
 
   return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-10 ",
-        className,
-      )}
-    >
-      {categoriesData?.results?.map((category, i) => (
-        <motion.div
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3, delay: i * 0.3 }}
-          key={category.id}
-          className=""
-        >
-          <div className="hidden md:block">
-            <CategoryCard imageIndex={i} data={category} />{" "}
-          </div>
+    <div className={cn("relative mt-12 px-2 sm:px-4", className)}>
+      {/* ─── Header & Navigation ─── */}
+      <div className="flex items-center justify-between mb-8">
+        <div className="space-y-1">
+          <h2 className="text-2xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-tight">
+            Our Categories
+          </h2>
+          <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
+        </div>
 
-          <div className="md:hidden">
-            <CategoryCardMobile imageIndex={i} data={category} />
-          </div>
-        </motion.div>
-      ))}
+        <div className="flex items-center gap-3">
+          <button
+            ref={prevRef}
+            aria-label="Previous Category"
+            className="p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+          >
+            <ChevronLeft className="w-5 h-5 group-active:scale-90 transition-transform" />
+          </button>
+          <button
+            ref={nextRef}
+            aria-label="Next Category"
+            className="p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+          >
+            <ChevronRight className="w-5 h-5 group-active:scale-90 transition-transform" />
+          </button>
+        </div>
+      </div>
+
+      {/* ─── Swiper Slider ─── */}
+      <Swiper
+        modules={[Navigation]}
+        spaceBetween={24}
+        slidesPerView={1}
+        speed={600}
+        navigation={{
+          prevEl: prevRef.current,
+          nextEl: nextRef.current,
+        }}
+        onBeforeInit={(swiper) => {
+          // @ts-ignore
+          // eslint-disable-next-line no-param-reassign
+          swiper.params.navigation.prevEl = prevRef.current;
+          // @ts-ignore
+          // eslint-disable-next-line no-param-reassign
+          swiper.params.navigation.nextEl = nextRef.current;
+        }}
+        breakpoints={{
+          640: {
+            slidesPerView: 2,
+            spaceBetween: 20,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 24,
+          },
+        }}
+        className="categories-swiper !pb-10"
+      >
+        {categoriesData.results.map((category, i) => (
+          <SwiperSlide key={category.id}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <CategoryCard data={category} />
+            </motion.div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 };
 
 export default HomeCategories;
 
-function CategoryCard({
-  data,
-  // imageIndex,
-}: {
-  data?: Category;
-  imageIndex: number;
-}) {
+function CategoryCard({ data }: { data: Category }) {
   const locale = useGetLocale();
-
   const router = useRouter();
+
+  const handleRedirect = () => {
+    router.push(`/shop?category=${encodeURIComponent(data?.name || "")}`);
+  };
 
   return (
     <div
-      onClick={() =>
-        router.push(`/shop?category=${encodeURIComponent(data?.name || "")}`)
-      }
-      className="relative grid grid-cols-12 gap-x-3 bg-[#f9f9f9] p-5 group overflow-hidden py-8"
+      onClick={handleRedirect}
+      className="group cursor-pointer bg-white rounded-2xl overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100"
     >
-      <div className=" flex items-start flex-col justify-center cursor-pointer  pl-5 col-span-9 xl:col-span-8 group">
-        <div className="text-left md:text-left space-y-1 group-hover:-translate-y-6 duration-300">
-          <p className="text-[14px] 2xl:text-[16px]  text-gray-500">
-            {data?.description_ar && locale === "ar"
-              ? data?.description_ar
-              : data?.description}
-          </p>
-          <h1 className="text-[20px] lg:text-[20px] 2xl:text-[32px] font-bold text-gray-900">
-            {data?.name_ar && locale === "ar" ? data?.name_ar : data?.name}
-          </h1>
-        </div>
-        {/* 
-        <p className="group-hover:text-black -translate-y-5 opacity-0 group-hover:opacity-100 group-hover:-translate-y-5  border-b-2 border-[#189CD9] duration-400 text-[12px]  font-bold text-gray-500"> */}
-        <Link
-          href={"/shop"}
-          style={{
-            transition: "all 0.6s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
-          className="group-hover:text-black opacity-0 translate-y-4 group-hover:-translate-y-5 group-hover:opacity-100  border-b-2 border-[#189CD9] font-bold text-gray-500 text-[10px] ease-[cubic-bezier(0.22, 1, 0.36, 1)]"
-        >
-          {locale === "en" ? "READ MORE" : "اقرأ المزيد"}
-        </Link>
-      </div>
-      <div className="col-span-3 xl:col-span-4 cursor-pointer">
+      {/* Image Section */}
+      <div className="relative aspect-[4/3] overflow-hidden bg-gray-50">
         <Image
-          // src={dummyCategoriesImages[imageIndex] || "/images/home/banner9.jpg"}
-          src={data?.image || ""}
-          alt=""
-          width={500}
-          height={500}
-          className="w-full  group-hover:scale-110 group-hover:translate-x-3 h-20 sm:h-32 md:h-20 lg:h-20 xl:h-32 2xl:h-40 object-cover  duration-500"
+          src={data?.image || "/images/placeholder.jpg"}
+          alt={data?.name || "Category"}
+          fill
+          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
-      </div>
-    </div>
-  );
-}
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors duration-500" />
 
-function CategoryCardMobile({
-  data,
-  // imageIndex,
-}: {
-  data: Category;
-  imageIndex: number;
-}) {
-  const locale = useGetLocale();
-  return (
-    <div className="group relative bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 cursor-pointer w-auto">
-      {/* Image */}
-      <div className="relative h-20 sm:h-40 overflow-hidden bg-gray-100 rounded-lg">
-        <img
-          // src={dummyCategoriesImages[imageIndex]}
-          src={data?.image || ""}
-          alt={locale === "ar" && data.name_ar ? data.name_ar : data.name}
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 "
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
-      </div>
-
-      {/* Content */}
-      <div className="p-3 sm:p-4 space-y-2">
-        <div className="space-y-1">
-          <p className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-wide">
-            {locale === "ar" && data.description_ar
-              ? data.description_ar
-              : data.description}
-          </p>
-          <h3 className="text-sm sm:text-base font-bold text-gray-900 line-clamp-1">
-            {locale === "ar" && data.name_ar ? data.name_ar : data.name}
-          </h3>
-        </div>
-
-        {/* Read More Link */}
-        <div className="flex items-center gap-1 text-[#189CD9] group-hover:gap-2 transition-all duration-300">
-          <span className="text-[10px] sm:text-xs font-semibold">
-            {locale === "en" ? "EXPLORE" : "استكشف"}
+        {/* "Explre" Pill - visible on desktop hover */}
+        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 translate-y-10 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500 hidden md:block">
+          <span className="bg-white text-gray-900 px-6 py-2 rounded-full text-xs font-bold shadow-lg uppercase tracking-wider">
+            {locale === "en" ? "Explore Now" : "استكشف الآن"}
           </span>
-          <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 group-hover:translate-x-1 transition-transform duration-300" />
+        </div>
+      </div>
+
+      {/* Content Section */}
+      <div className="p-6 flex flex-col flex-grow items-center text-center">
+        <h3 className="text-xl font-bold text-gray-900 mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1">
+          {data?.name_ar && locale === "ar" ? data.name_ar : data.name}
+        </h3>
+        <p className="text-sm text-gray-500 line-clamp-2 leading-relaxed">
+          {data?.description_ar && locale === "ar"
+            ? data.description_ar
+            : data.description}
+        </p>
+
+        {/* Mobile Arrow - visible only on mobile */}
+        <div className="mt-4 md:hidden flex items-center gap-1 text-[#189CD9] font-bold text-[10px] uppercase tracking-wider">
+          {locale === "en" ? "Read More" : "اقرأ المزيد"}
+          <ChevronRight className="w-3 h-3" />
         </div>
       </div>
     </div>
