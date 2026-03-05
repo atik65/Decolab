@@ -9,6 +9,7 @@ import {
   Instagram,
   Phone,
 } from "lucide-react";
+import Link from "next/link";
 
 const SLIDES = [
   {
@@ -80,22 +81,22 @@ const AnnounceBar: React.FC = () => {
         {/* ─── left Zone: Phone Number ─── */}
         <div className="flex items-center justify-start">
           {/* Desktop: full phone number */}
-          <a
+          <Link
             href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
             className="hidden md:flex items-center gap-1.5 text-white/70 hover:text-white transition-colors duration-200 text-sm"
           >
             <Phone className="h-3.5 w-3.5" />
             <span>{PHONE_NUMBER}</span>
-          </a>
+          </Link>
 
           {/* Mobile: icon only */}
-          <a
+          <Link
             href={`tel:${PHONE_NUMBER.replace(/\s/g, "")}`}
             aria-label={`Call ${PHONE_NUMBER}`}
             className="md:hidden text-white/70 hover:text-white transition-colors duration-200 p-1"
           >
             <Phone className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
         {/* Empty spacer on mobile so the center stays centered */}
         <div className="hidden" />
@@ -142,7 +143,7 @@ const AnnounceBar: React.FC = () => {
 
         {/* ─── right Zone: Social Icons (hidden on mobile) ─── */}
         <div className="flex justify-end items-center gap-3">
-          <a
+          <Link
             href={FACEBOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -150,8 +151,8 @@ const AnnounceBar: React.FC = () => {
             className="text-white/70 hover:text-white transition-colors duration-200"
           >
             <Facebook className="h-4 w-4" />
-          </a>
-          <a
+          </Link>
+          <Link
             href={INSTAGRAM_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -159,7 +160,7 @@ const AnnounceBar: React.FC = () => {
             className="text-white/70 hover:text-white transition-colors duration-200"
           >
             <Instagram className="h-4 w-4" />
-          </a>
+          </Link>
         </div>
       </div>
     </div>
