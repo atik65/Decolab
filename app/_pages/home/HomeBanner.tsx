@@ -138,7 +138,7 @@ const HomeBanner = () => {
         ))}
 
         {/* Custom Pagination Component */}
-        <CustomPagination slides={slides} />
+        {/* <CustomPagination slides={slides} /> */}
       </Swiper>
     </div>
   );

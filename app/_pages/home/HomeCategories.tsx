@@ -54,7 +54,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
       {/* ─── Header & Navigation ─── */}
       <div className="flex items-center justify-between mb-8">
         <div className="space-y-1">
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-tight">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-normal">
             Our Categories
           </h2>
           <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
