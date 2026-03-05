@@ -194,19 +194,59 @@ const SlideItem = ({
             {slide[locale].description}
           </motion.p>
 
-          {/* Compact CTA Button */}
+          {/* Compact CTA Button with Eye-Catchy Animation */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
-            animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
+            animate={
+              isActive
+                ? {
+                    opacity: 1,
+                    y: 0,
+                    scale: [1, 1.05, 1],
+                  }
+                : { opacity: 0, y: 20 }
+            }
+            transition={{
+              opacity: { duration: 0.8, delay: 0.7 },
+              y: { duration: 0.8, delay: 0.7 },
+              scale: {
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              },
+            }}
             className="pt-2"
           >
             <Link href="/shop">
-              <button className="bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 px-8 rounded-sm transition-all duration-300 font-bold uppercase text-[10px] md:text-xs tracking-[0.2em] shadow-lg shadow-black/10">
-                {locale === "en" ? "Shop Now" : "تسوق الآن"}
+              <button className="relative group/shimmer overflow-hidden bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 sm:py-5 px-8 sm:px-12 rounded-full transition-all duration-300 font-bold uppercase text-[10px] md:text-base tracking-[0.2em] shadow-lg shadow-black/10">
+                <span className="relative z-10">
+                  {locale === "en" ? "Shop Now" : "تسوق الآن"}
+                </span>
+
+                {/* Continuous Shimmer Effect */}
+                <div className="absolute inset-0 z-0 pointer-events-none">
+                  <div
+                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full animate-shimmer"
+                    style={{
+                      width: "200%",
+                      animation: "shimmer 2.5s infinite linear",
+                    }}
+                  />
+                </div>
               </button>
             </Link>
           </motion.div>
+
+          <style jsx global>{`
+            @keyframes shimmer {
+              0% {
+                transform: translateX(-100%);
+              }
+              100% {
+                transform: translateX(100%);
+              }
+            }
+          `}</style>
         </div>
       </div>
 

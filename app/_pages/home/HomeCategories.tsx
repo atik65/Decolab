@@ -167,19 +167,19 @@ function CategoryCard({ data }: { data: Category }) {
         <h3 className="text-[10px] sm:text-sm md:text-xl font-bold text-gray-900 mb-1 md:mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1">
           {data?.name_ar && locale === "ar" ? data.name_ar : data.name}
         </h3>
-        <p className="hidden sm:line-clamp-2 text-xs md:text-sm text-gray-500 leading-relaxed">
+        {/* <p className="hidden sm:line-clamp-2 text-xs md:text-sm text-gray-500 leading-relaxed">
           {data?.description_ar && locale === "ar"
             ? data.description_ar
             : data.description}
-        </p>
+        </p> */}
 
         {/* Mobile Arrow - visible only on mobile */}
-        <div className="mt-1 md:hidden flex items-center gap-0.5 text-[#189CD9] font-bold text-[8px] uppercase tracking-tighter">
+        {/* <div className="mt-1 md:hidden flex items-center gap-0.5 text-[#189CD9] font-bold text-[8px] uppercase tracking-tighter">
           <span className="truncate max-w-[50px]">
             {locale === "en" ? "View" : "عرض"}
           </span>
           <ChevronRight className="w-2 h-2" />
-        </div>
+        </div> */}
       </div>
     </div>
   );
