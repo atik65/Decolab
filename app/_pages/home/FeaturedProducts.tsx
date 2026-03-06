@@ -47,7 +47,8 @@ const FeaturedProducts = () => {
           locale === "ar" && "[direction:rtl]",
         )}
       >
-        {[...products, ...products, ...products].map((item, index) => {
+        {/* {[...products, ...products, ...products].map((item, index) => { */}
+        {products?.map((item, index) => {
           return (
             <motion.div
               key={item.id}

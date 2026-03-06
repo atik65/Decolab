@@ -1,27 +1,41 @@
 import { Skeleton } from "@/components/ui/skeleton";
 import Link from "next/link";
+import { useGetLocale } from "@/hooks/useGetLocale";
+import { cn } from "@/lib/utils";
 
 // ProductCard Loading Skeleton - matches your ProductCard structure
 export const ProductCardSkeleton = () => {
+  const locale = useGetLocale();
+
   return (
-    <div className="w-full overflow-hidden mx-auto p-0 bg-[#f9f9f9] group cursor-pointer">
-      {/* Image skeleton - matches your 48 height */}
-      <div className="overflow-hidden">
-        <Skeleton className="w-full h-48 bg-gray-200" />
+    <div className="w-full overflow-hidden mx-auto p-0 bg-[#f9f9f9] group cursor-pointer border-transparent">
+      {/* Image skeleton - matches your h-72 md:h-[450px] height */}
+      <div className="overflow-hidden relative rounded-lg">
+        <Skeleton className="w-full h-72 md:h-[450px] bg-gray-200" />
+        {/* Category Pill Skeleton */}
+        <Skeleton
+          className={cn(
+            "absolute bottom-2 bg-gray-300 w-16 h-6 rounded-full",
+            locale === "ar" ? "left-2" : "right-2",
+          )}
+        />
       </div>
 
       {/* Content skeleton - matches your mt-2 spacing */}
-      <div className="mt-2">
-        {/* Title skeleton - matches your font-bold text-[14px] md:text-[16px] */}
+      <div className={cn("mt-2", locale === "ar" && "flex flex-col items-end")}>
+        {/* Title skeleton */}
         <Skeleton className="h-4 md:h-5 w-3/4 mb-2 bg-gray-200" />
-
-        {/* Category skeleton - matches your text-[12px] md:text-[14px] */}
-        <Skeleton className="h-3 md:h-4 w-1/2 mb-1 bg-gray-200" />
       </div>
 
       {/* Price section skeleton - matches your h-6 mt-1 */}
-      <div className="h-6 mt-1 overflow-hidden">
-        <Skeleton className="h-4 w-20 bg-gray-200" />
+      <div
+        className={cn(
+          "h-6 mt-1 overflow-hidden flex flex-col w-full text-left",
+          locale === "ar" ? "items-end text-right" : "items-start",
+        )}
+      >
+        <Skeleton className="h-4 w-20 bg-gray-200 mb-2" />
+        <Skeleton className="h-2 w-16 bg-gray-200" />
       </div>
     </div>
   );
@@ -29,8 +43,15 @@ export const ProductCardSkeleton = () => {
 
 // Product Grid Loading Skeleton
 export const ProductGridSkeleton = ({ count = 8 }: { count?: number }) => {
+  const locale = useGetLocale();
+
   return (
-    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div
+      className={cn(
+        "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 gap-x-8 px-0",
+        locale === "ar" && "[direction:rtl]",
+      )}
+    >
       {Array.from({ length: count }).map((_, index) => (
         <ProductCardSkeleton key={index} />
       ))}
@@ -40,10 +61,12 @@ export const ProductGridSkeleton = ({ count = 8 }: { count?: number }) => {
 
 // Featured Products Section Skeleton
 export const FeaturedProductsSkeleton = () => {
+  const locale = useGetLocale();
+
   return (
-    <div className="w-full container mx-auto px-4 py-8">
+    <div className="w-full container mx-auto px-4 py-8 pb-12 mb-10">
       {/* Section title skeleton */}
-      <div className="mb-6">
+      <div className={cn("mb-6", locale === "ar" && "[direction:rtl]")}>
         <Skeleton className="h-8 w-48 mb-2 bg-gray-200" />
         <Skeleton className="h-4 w-64 bg-gray-200" />
       </div>
