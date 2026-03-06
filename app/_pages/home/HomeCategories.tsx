@@ -54,7 +54,12 @@ const HomeCategories = ({ className }: { className?: string }) => {
   return (
     <div className={cn("relative mt-12 px-2 sm:px-4", className)}>
       {/* ─── Header & Navigation ─── */}
-      <div className="flex items-center justify-between mb-8">
+      <div
+        className={cn(
+          "flex items-center justify-between mb-8",
+          locale === "en" ? "flex-row" : "flex-row-reverse",
+        )}
+      >
         <div className="space-y-1">
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-normal">
             {locale === "en" ? "Our Categories" : "فئاتنا"}
