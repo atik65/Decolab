@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { Instagram } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const Footer = () => {
   const locale = useGetLocale();
@@ -59,11 +60,19 @@ const Footer = () => {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100 pt-8 pb-5 text-gray-600 font-roboto">
-      <div className="container mx-auto px-4 ">
+    <footer
+      dir={locale === "ar" ? "rtl" : "ltr"}
+      className="bg-white border-t border-gray-100 pt-8 pb-5 text-gray-600 font-roboto"
+    >
+      <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-5">
           {/* Column 1: Identity & Contact */}
-          <div className="lg:col-span-2 space-y-8">
+          <div
+            className={cn(
+              "lg:col-span-2 space-y-8 text-center md:text-left",
+              locale === "ar" && "lg:text-right lg:order-3",
+            )}
+          >
             <Link
               href="/"
               className="inline-block transition-opacity hover:opacity-80"
@@ -73,11 +82,19 @@ const Footer = () => {
                 alt="One Direction"
                 width={180}
                 height={60}
-                className="h-12 w-auto object-contain"
+                className={cn(
+                  "h-12 w-auto object-contain mx-auto md:ml-0 md:mr-auto",
+                  locale === "ar" && "lg:ml-auto lg:mr-0",
+                )}
               />
             </Link>
 
-            <div className="space-y-4 text-sm md:text-base max-w-sm">
+            <div
+              className={cn(
+                "space-y-4 text-sm md:text-base max-w-sm mx-auto md:ml-0 md:mr-auto",
+                locale === "ar" && "lg:ml-auto lg:mr-0",
+              )}
+            >
               <Link
                 href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
                 className="block hover:text-[#189CD9] transition-colors duration-300"
@@ -97,13 +114,18 @@ const Footer = () => {
           </div>
 
           {/* Column 2: About Us */}
-          <div className="space-y-6">
+          <div
+            className={cn(
+              "space-y-6 text-center md:text-left",
+              locale === "ar" && "lg:text-right lg:order-2",
+            )}
+          >
             <h4 className="font-montserrat font-bold text-gray-900 border-b border-gray-100 pb-2 inline-block">
               {locale === "en" ? "About Us" : "من نحن"}
             </h4>
             <ul className="space-y-3">
               {footerLinks.about.map((link) => (
-                <li key={link.href}>
+                <li key={link.name}>
                   <Link
                     href={link.href}
                     className="text-sm hover:text-[#189CD9] transition-colors duration-300"
@@ -116,13 +138,18 @@ const Footer = () => {
           </div>
 
           {/* Column 3: Support */}
-          <div className="space-y-6">
+          <div
+            className={cn(
+              "space-y-6 text-center md:text-left",
+              locale === "ar" && "lg:text-right lg:order-1",
+            )}
+          >
             <h4 className="font-montserrat font-bold text-gray-900 border-b border-gray-100 pb-2 inline-block">
               {locale === "en" ? "Support" : "الدعم"}
             </h4>
             <ul className="space-y-3">
               {footerLinks.support.map((link) => (
-                <li key={link.href}>
+                <li key={link.name}>
                   <Link
                     href={link.href}
                     className="text-sm hover:text-[#189CD9] transition-colors duration-300"
@@ -137,8 +164,8 @@ const Footer = () => {
 
         {/* Payment & Attribution Section */}
         <div className="border-t border-gray-100 pt-5">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-6">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-start">
+            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
               <span className="text-xs uppercase tracking-[0.2em] text-gray-400 font-bold">
                 {locale === "en" ? "Payment Available" : "الدفع متاح"}
               </span>
@@ -151,11 +178,15 @@ const Footer = () => {
               />
             </div>
 
-            <div className="flex items-center gap-8 text-[11px] uppercase tracking-widest text-gray-400">
+            <div
+              className={`flex items-center gap-8 text-[11px] uppercase tracking-widest text-gray-400 ${locale === "ar" ? "md:flex-row-reverse" : ""}`}
+            >
               <p>
                 © {new Date().getFullYear()}{" "}
                 {locale === "en" ? "One Direction" : "وان دايركشن"}.
-                <span className="ml-1 opacity-60">Powered by Atik</span>
+                <span className="ms-1 opacity-60">
+                  {locale === "en" ? "Powered by Atik" : "بواسطة Atik"}
+                </span>
               </p>
               <Link
                 href="https://instagram.com"
