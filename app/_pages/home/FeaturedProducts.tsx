@@ -43,11 +43,11 @@ const FeaturedProducts = () => {
       {/* products container */}
       <section
         className={cn(
-          "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 gap-x-8  px-0",
-          // locale === "ar" && "justify-items-end",
+          "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 gap-3 gap-x-8 px-0",
+          locale === "ar" && "[direction:rtl]",
         )}
       >
-        {products.map((item, index) => {
+        {[...products, ...products, ...products].map((item, index) => {
           return (
             <motion.div
               key={item.id}
