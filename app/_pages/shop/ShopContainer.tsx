@@ -18,10 +18,16 @@ import { useQueryState } from "nuqs";
 import { useLocale } from "next-intl";
 import { ShapeHero } from "@/components/shared/ShapeHero";
 import { useSearchParams } from "next/navigation";
+import CategoryFilter from "./CategoryFilter";
+import Filters from "./Filters";
+import { useState } from "react";
 
 const ShopContainer = () => {
   const params = useSearchParams();
   const category = params.get("category") || "";
+  const [layout, setLayout] = useState<"grid-2" | "grid-3" | "grid-4">(
+    "grid-4",
+  );
 
   // console.log("Category from params:", encodeURIComponent(category));
 
@@ -38,22 +44,14 @@ const ShopContainer = () => {
   if (isLoading) {
     return (
       <>
-        <ShapeHero
-          badge="About Us"
-          title1={
-            locale === "en"
-              ? `Discover Premium ${
-                  category && decodeURIComponent(category)
-                } Solutions`
-              : "اكتشف حلول اللافتات المميزة"
-          }
-          // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
-          description={
-            locale === "en"
-              ? "Learn more about our history, mission, and values."
-              : "تعرف على تاريخنا ومهمتنا وقيمنا."
-          }
+        {/* shop header component for customize the filter and layouts */}
+        <Filters
+          categoryName={category}
+          totalItems={products?.length || 0}
+          layout={layout}
+          setLayout={setLayout}
         />
+
         <ShopSkeleton />
       </>
     );
@@ -63,22 +61,14 @@ const ShopContainer = () => {
   if (!products || products.length === 0) {
     return (
       <>
-        <ShapeHero
-          badge="ONE DIRECTION"
-          title1={
-            locale === "en"
-              ? `Discover Premium ${
-                  category && decodeURIComponent(category)
-                } Solutions`
-              : "اكتشف حلول اللافتات المميزة"
-          }
-          // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
-          description={
-            locale === "en"
-              ? "Learn more about our history, mission, and values."
-              : "تعرف على تاريخنا ومهمتنا وقيمنا."
-          }
+        {/* shop header component for customize the filter and layouts */}
+        <Filters
+          categoryName={category}
+          totalItems={products?.length || 0}
+          layout={layout}
+          setLayout={setLayout}
         />
+
         <NoProductsFound />
       </>
     );
@@ -89,7 +79,7 @@ const ShopContainer = () => {
       {/* Hero Banner */}
       {/* <ShopHeroBanner /> */}
 
-      <ShapeHero
+      {/* <ShapeHero
         badge="ONE DIRECTION"
         title1={
           locale === "en"
@@ -104,21 +94,18 @@ const ShopContainer = () => {
             ? "Learn more about our history, mission, and values."
             : "تعرف على تاريخنا ومهمتنا وقيمنا."
         }
+      /> */}
+
+      {/* shop header component for customize the filter and layouts */}
+      <Filters
+        categoryName={category}
+        totalItems={products.length}
+        layout={layout}
+        setLayout={setLayout}
       />
 
       {/* Products Section */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-6">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2 text-center">
-            {locale === "en" ? "Explore Our Products" : "استكشف منتجاتنا"}
-          </h2>
-          <p className="text-gray-600 text-center">
-            {locale === "en"
-              ? "Discover a variety of high-quality items tailored to your needs."
-              : "اكتشف مجموعة متنوعة من العناصر عالية الجودة المصممة لتلبية احتياجاتك."}
-          </p>
-        </div>
-
+      <div className="container mx-auto px-4 pt-2 pb-8">
         {/* Search Results Banner */}
         {/* Search Results Banner */}
         {search && (
@@ -173,7 +160,9 @@ const ShopContainer = () => {
         )}
 
         {/* Product Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5 gap-4">
+        <div
+          className={`grid grid-cols-2 md:grid-cols-3 ${layout === "grid-3" ? "lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3" : "lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4"} gap-4`}
+        >
           {products.map((product, index) => (
             <ProductCard key={index} product={product} />
           ))}
