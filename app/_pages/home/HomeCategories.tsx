@@ -166,7 +166,12 @@ function CategoryCard({ data }: { data: Category }) {
 
       {/* Content Section */}
       <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center">
-        <h3 className="text-[10px] sm:text-sm md:text-xl font-bold text-gray-900 mb-1 md:mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1">
+        <h3
+          className={cn(
+            "text-[15px] sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1",
+            locale === "en" && "text-[10px] sm:text-base md:text-xl",
+          )}
+        >
           {data?.name_ar && locale === "ar" ? data.name_ar : data.name}
         </h3>
         {/* <p className="hidden sm:line-clamp-2 text-xs md:text-sm text-gray-500 leading-relaxed">
