@@ -10,6 +10,7 @@ import Image from "next/image";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { cn } from "@/lib/utils";
 
 interface Slide {
   id: number;
@@ -170,14 +171,27 @@ const SlideItem = ({
       </div>
 
       {/* ─── Minimal Content Layer ─── */}
-      <div className="relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-center items-start text-white pb-12 md:pb-0">
-        <div className="max-w-2xl space-y-4 md:space-y-6">
+      <div
+        className={cn(
+          "relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-center items-start text-white pb-12 md:pb-0",
+          locale === "ar" && "items-end text-right",
+        )}
+      >
+        <div
+          className={cn(
+            "max-w-2xl space-y-4 md:space-y-6",
+            locale === "ar" && "text-right flex flex-col items-end",
+          )}
+        >
           {/* Minimal Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-            className="text-2xl md:text-4xl lg:text-5xl font-bold font-montserrat leading-tight tracking-tight drop-shadow-md"
+            className={cn(
+              "text-2xl md:text-4xl lg:text-5xl font-bold font-montserrat leading-tight tracking-tight drop-shadow-md",
+              locale === "ar" && "text-right",
+            )}
           >
             {slide[locale].title}
           </motion.h1>
@@ -187,7 +201,10 @@ const SlideItem = ({
             initial={{ opacity: 0, y: 20 }}
             animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-sm md:text-lg text-white/90 max-w-lg font-light leading-relaxed drop-shadow-sm"
+            className={cn(
+              "text-sm md:text-lg text-white/90 max-w-lg font-light leading-relaxed drop-shadow-sm",
+              locale === "ar" && "text-right",
+            )}
           >
             {slide[locale].description}
           </motion.p>
@@ -253,7 +270,10 @@ const SlideItem = ({
         initial={{ scaleX: 0 }}
         animate={isActive ? { scaleX: 1 } : { scaleX: 0 }}
         transition={{ duration: 6, ease: "linear" }}
-        className="absolute bottom-0 left-0 h-1 bg-[#189CD9] z-20 origin-left w-full opacity-60"
+        className={cn(
+          "absolute bottom-0 h-1 bg-[#189CD9] z-20 w-full opacity-60",
+          locale === "ar" ? "right-0 origin-right" : "left-0 origin-left",
+        )}
       />
     </div>
   );
