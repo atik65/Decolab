@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { X } from "lucide-react";
+// import { X } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -10,6 +10,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { useGetLocale } from "@/hooks/useGetLocale";
+// import { useSearchParams } from "next/navigation";
 
 interface FiltersProps {
   show?: boolean;
@@ -29,6 +31,10 @@ const Filters = ({
   const [availability, setAvailability] = useState("all");
   const [priceSort, setPriceSort] = useState("default");
   const [sort, setSort] = useState("default");
+  const locale = useGetLocale();
+  // const params = useSearchParams();
+
+  // const category = params.get("category") || "";
 
   const clearAll = () => {
     setAvailability("all");
@@ -46,13 +52,14 @@ const Filters = ({
       {/* Category Heading */}
       <div className="container mx-auto px-4 mb-6 md:mb-10">
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-normal text-gray-900 capitalize">
-          {categoryName || "Shop"}
+          {/* {categoryName || (locale === "en" ? "Shop" : "المتجر")} */}
+          {categoryName || (locale === "en" ? "Shop" : "المتجر")}
         </h1>
       </div>
 
       {/* Filter Bar */}
       <div className="container mx-auto px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 text-sm text-gray-600">
+        <div className="flex  md:flex-row justify-between items-start md:items-center gap-4 text-sm text-gray-600">
           {/* Left Side: Filters */}
           <div className="flex items-center gap-1 md:gap-3 flex-wrap w-full md:w-auto">
             {/* Availability */}
@@ -73,7 +80,7 @@ const Filters = ({
             </div>
 
             {/* Divider */}
-            <div className="h-4 w-px bg-gray-200 mx-1 hidden sm:block" />
+            <div className="h-4 w-px bg-gray-200 mx-1 block sm:block" />
 
             {/* Price */}
             <div className="flex items-center gap-1">
@@ -131,7 +138,7 @@ const Filters = ({
             </div>
 
             {/* Layout Toggle */}
-            <div className="flex items-center gap-0.5 border-l border-gray-200 pl-3 ml-1">
+            <div className="hidden sm:flex items-center gap-0.5 border-l border-gray-200 pl-3 ml-1">
               {/* 2x2 grid (3 col) */}
               <button
                 onClick={() => setLayout("grid-3")}
