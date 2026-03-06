@@ -164,8 +164,18 @@ const Footer = () => {
 
         {/* Payment & Attribution Section */}
         <div className="border-t border-gray-100 pt-5">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-start">
-            <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
+          <div
+            className={cn(
+              "flex flex-col md:flex-row justify-between items-center gap-8 text-center md:text-left",
+              locale === "ar" && "md:flex-row-reverse",
+            )}
+          >
+            <div
+              className={cn(
+                "flex flex-col sm:flex-row items-center gap-4 sm:gap-6",
+                locale === "ar" && "sm:flex-row-reverse",
+              )}
+            >
               <span className="text-xs uppercase tracking-[0.2em] text-gray-400 font-bold">
                 {locale === "en" ? "Payment Available" : "الدفع متاح"}
               </span>
@@ -179,7 +189,10 @@ const Footer = () => {
             </div>
 
             <div
-              className={`flex items-center gap-8 text-[11px] uppercase tracking-widest text-gray-400 ${locale === "ar" ? "md:flex-row-reverse" : ""}`}
+              className={cn(
+                "flex items-center gap-8 text-[11px] uppercase tracking-widest text-gray-400",
+                locale === "ar" && "md:flex-row-reverse",
+              )}
             >
               <p>
                 © {new Date().getFullYear()}{" "}
