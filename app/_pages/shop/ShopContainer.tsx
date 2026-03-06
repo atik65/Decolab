@@ -26,7 +26,7 @@ const ShopContainer = () => {
   const params = useSearchParams();
   const category = params.get("category") || "";
   const [layout, setLayout] = useState<"grid-2" | "grid-3" | "grid-4">(
-    "grid-4",
+    "grid-3",
   );
 
   // console.log("Category from params:", encodeURIComponent(category));
@@ -173,16 +173,16 @@ const ShopContainer = () => {
       {/* <CategoryFilter /> */}
 
       {/* Why Choose Us */}
-      <WhyChooseUs />
+      {/* <WhyChooseUs /> */}
 
       {/* How It Works */}
-      <HowItWorksSection />
+      {/* <HowItWorksSection /> */}
 
       {/* Testimonials */}
-      <TestimonialsSection />
+      {/* <TestimonialsSection /> */}
 
       {/* FAQ */}
-      <FAQSection />
+      {/* <FAQSection /> */}
     </>
   );
 };
