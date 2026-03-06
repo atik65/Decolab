@@ -7,6 +7,7 @@ import {
 } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
 import MobileMenu from "./MobileMenu";
+import { useGetLocale } from "@/hooks/useGetLocale";
 
 export default function MobileMenuSidebar({
   isOpen,
@@ -15,6 +16,8 @@ export default function MobileMenuSidebar({
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
 }) {
+  const locale = useGetLocale();
+
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
@@ -26,12 +29,12 @@ export default function MobileMenuSidebar({
           <Menu size={24} />
         </button>
       </SheetTrigger>
-      <SheetContent side="left">
-        <SheetHeader>
+      <SheetContent
+        side={locale === "ar" ? "right" : "left"}
+        className="p-0 border-none w-[300px] sm:w-[350px]"
+      >
+        <SheetHeader className="hidden">
           <SheetTitle></SheetTitle>
-          {/* <SheetDescription>
-            Make changes to your profile here. Click save when you&apos;re done.
-          </SheetDescription> */}
         </SheetHeader>
 
         <MobileMenu onOpenChange={onOpenChange} isOpen={isOpen} />
