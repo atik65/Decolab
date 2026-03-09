@@ -1,283 +1,252 @@
 "use client";
 
+import Link from "next/link";
 import Image from "next/image";
-// import { enqueueSnackbar } from "notistack";
 import React from "react";
-// import { GiPayMoney } from "react-icons/gi";
-// import dynamic from "next/dynamic";
-import { useOrderStore } from "@/hooks/zustand/useOrderStore";
+import cart from "@/utils/localStorage";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
-import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
-// import { constructImageURL } from "@/lib/utils";
-import SummarySkt from "@/components/skeletons/checkout/SummarySkt";
-// import { useQueryState } from "nuqs";
-
-// const GiPayMoney = dynamic(() =>
-//   import("react-icons/gi").then((mod) => mod.GiPayMoney)
-// );
+import { Trash2, Plus, Minus } from "lucide-react";
 
 const OrderSummary = () => {
   const locale = useGetLocale();
-  // const [prodId, setProdId] = useQueryState("product");
+  const [cartItems, setCartItems] = React.useState(cart.getAllProducts());
 
-  // console.log("Product ID in Order Summary:", prodId);
+  React.useEffect(() => {
+    setCartItems(cart.getAllProducts());
+  }, []);
 
-  // const [selectedProduct, setSelectedProduct] = useState<ProductDetails | null>(
-  //   null
-  // );
+  const handleUpdateQuantity = (index: number, newQuantity: number) => {
+    if (newQuantity < 1) return;
+    cart.updateQuantity(index, newQuantity);
+    setCartItems(cart.getAllProducts());
+  };
 
-  const { productInfo } = useOrderStore();
+  const handleRemoveItem = (index: number) => {
+    cart.removeProduct(index);
+    setCartItems(cart.getAllProducts());
+  };
 
-  // get product by id
-  const { data: product, isLoading } = useGetProductDetails(
-    productInfo.productId!,
-    // prodId?.toString() || ""
-  );
+  const totalPrice = cart.getTotalPrice();
 
-  console.log("Product details in Order Summary:", product);
-  console.log("Product info from store in Order Summary:", productInfo);
+  console.log("Cart items in Order Summary:", cartItems);
 
-  const selectedProduct = product?.[locale];
-
-  if (isLoading) {
-    return <SummarySkt />;
-  }
-
-  if (!selectedProduct) {
-    return <NoDetails />;
+  if (cartItems.length === 0) {
+    return (
+      <div className="rounded-lg p-10 bg-gray-50 border border-dashed border-gray-300 text-center">
+        <h2 className="text-2xl font-semibold mb-4 text-gray-800">
+          {locale === "en" ? "Order Summary" : "ملخص الطلب"}
+        </h2>
+        <p className="text-gray-500 mb-6">
+          {locale === "en" ? "Your cart is empty" : "سلة التسوق فارغة"}
+        </p>
+        <Link
+          href="/shop"
+          className="inline-block px-6 py-2 bg-[#87A786] text-white rounded-lg font-medium hover:bg-[#6d8a6c] transition-colors"
+        >
+          {locale === "en" ? "Continue Shopping" : "مواصلة التسوق"}
+        </Link>
+      </div>
+    );
   }
 
   return (
-    <div className="rounded-lg ">
-      <h2 className="text-2xl font-semibold mb-4">
+    <div className="rounded-lg">
+      <h2 className="text-2xl font-semibold mb-6 text-gray-800">
         {locale === "en" ? "Order Summary" : "ملخص الطلب"}
       </h2>
 
-      <div className="space-y-4">
-        {/* Product image + name + description */}
-        <div className="flex items-start gap-4 border-b pb-4 ">
-          <div className="relative">
-            {selectedProduct?.mainImage ? (
-              <Image
-                width={80}
-                height={80}
-                // src={constructImageURL(selectedProduct.mainImage) || ""}
-                src={
-                  selectedProduct?.mainImage ? selectedProduct.mainImage : ""
-                }
-                alt="Number Front Light"
-                className="w-16 h-16 object-cover rounded-md"
-              />
-            ) : (
-              <div className="w-16 h-16 bg-gray-200 rounded-md"></div>
-            )}
+      <div className="space-y-6">
+        {cartItems.map((item, index) => (
+          <div
+            key={`${item.productId}-${index}`}
+            className="border-b pb-6 last:border-0 border-gray-100"
+          >
+            {/* Product image + name + description */}
+            <div className="flex items-start gap-4">
+              <div className="relative group shrink-0">
+                {item.productImage && item.productImage !== "" ? (
+                  <Image
+                    width={80}
+                    height={80}
+                    src={item.productImage}
+                    alt={item.productTitle}
+                    className="w-20 h-20 object-cover rounded-lg shadow-sm"
+                  />
+                ) : (
+                  <div className="w-20 h-20 bg-gray-200 rounded-lg"></div>
+                )}
+              </div>
 
-            <span className="absolute -top-2 -right-2 bg-gray-500 text-white w-5 h-5 rounded-full flex items-center justify-center text-xs">
-              {productInfo.quantity}
-            </span>
-          </div>
+              <div className="flex-1 min-w-0">
+                {/* title and removal */}
+                <div className="flex justify-between items-start w-full gap-2">
+                  <h3 className="font-bold text-gray-900 truncate">
+                    {item.productTitle}
+                  </h3>
+                  <button
+                    onClick={() => handleRemoveItem(index)}
+                    className="text-gray-400 hover:text-red-500 transition-colors p-1"
+                    title={locale === "en" ? "Remove item" : "إزالة العنصر"}
+                  >
+                    <Trash2 size={18} />
+                  </button>
+                </div>
 
-          <div className="flex-1 w-full">
-            {/* title and price */}
-            <div className="flex justify-between w-full">
-              <h3 className="font-bold">{selectedProduct?.title}</h3>
+                <div className="flex justify-between items-end mt-2">
+                  <div className="space-y-1">
+                    <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">
+                      {item.category}
+                    </p>
+                    <p className="font-bold text-[#87A786]">KD {item.price}</p>
+                  </div>
 
-              <div className="text-right">
-                <p className="font-medium">KD {productInfo.price}</p>
+                  {/* Quantity adjustment */}
+                  <div className="flex items-center border border-gray-200 rounded-lg overflow-hidden shadow-sm bg-white">
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleUpdateQuantity(index, item.quantity - 1)
+                      }
+                      className="w-8 h-8 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors disabled:opacity-30"
+                      disabled={item.quantity <= 1}
+                    >
+                      <Minus size={14} />
+                    </button>
+                    <span className="w-10 h-8 flex items-center justify-center text-sm font-semibold text-gray-700 bg-gray-50 border-x border-gray-200">
+                      {item.quantity}
+                    </span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        handleUpdateQuantity(index, item.quantity + 1)
+                      }
+                      className="w-8 h-8 flex items-center justify-center text-gray-500 hover:bg-gray-100 transition-colors"
+                    >
+                      <Plus size={14} />
+                    </button>
+                  </div>
+                </div>
               </div>
             </div>
 
-            <div className="space-y-2 mt-1">
-              {/* description */}
-              {selectedProduct?.description && (
+            {/* Product details simplified list */}
+            <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 bg-gray-50/50 p-3 rounded-lg border border-gray-100">
+              {/* digit count */}
+              {item.digitCount && (
                 <p className="text-sm text-gray-600 flex justify-between w-full gap-2">
-                  {/* <span>{locale === "en" ? "Description : " : "الوصف"}</span> */}
-                  <span>{selectedProduct?.description}</span>
+                  <span className="">
+                    {locale === "en" ? "Digits" : "عدد الأرقام"}
+                  </span>
+                  <span>{item.digitCount}</span>
                 </p>
+              )}
+
+              {/* size */}
+              {item.size && (
+                <p className="text-sm text-gray-600 flex justify-between w-full gap-2">
+                  <span>{locale === "en" ? "Size" : "الحجم"}</span>
+                  <span>{item.size.title}</span>
+                </p>
+              )}
+
+              {/* color */}
+              {item.color && (
+                <div className="text-sm text-gray-600 flex justify-between w-full gap-2 items-center">
+                  <span>{locale === "en" ? "Color" : "اللون"}</span>
+                  <ColorCapsule color={item.color} />
+                </div>
+              )}
+
+              {/* light color */}
+              {item.lightColor && (
+                <div className="text-sm text-gray-600 flex justify-between w-full gap-2 items-center">
+                  <span>{locale === "en" ? "Light Color" : "لون الضوء"}</span>
+                  <ColorCapsule color={item.lightColor} />
+                </div>
+              )}
+
+              {/* house number */}
+              {item.houseNumber && (
+                <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
+                  <span>{locale === "en" ? "House Number" : "رقم المنزل"}</span>
+                  <span> {item.houseNumber}</span>
+                </p>
+              )}
+
+              {/* text */}
+              {item.text && (
+                <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
+                  <span>{locale === "en" ? "Text" : "النص"}</span>
+                  <span> {item.text}</span>
+                </p>
+              )}
+
+              {/* design */}
+              {item.design && (
+                <div className="text-sm text-gray-600 w-full gap-2 flex justify-between items-center">
+                  <span>{locale === "en" ? "Design" : "التصميم"}</span>
+                  <div className="max-w-[100px]">
+                    {item.design.url ? (
+                      <Image
+                        width={100}
+                        height={40}
+                        src={item.design.url}
+                        alt={item.design.name || "Design"}
+                        className="w-full max-h-12 object-contain"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-[10px] text-gray-400">
+                        N/A
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* font */}
+              {item.font && (
+                <div className="text-sm text-gray-600 flex flex-row gap-5 justify-between items-center w-full">
+                  <span>{locale === "en" ? "Font" : "الخط"}</span>
+                  <div className="max-w-[100px]">
+                    {item.font.image ? (
+                      <Image
+                        width={100}
+                        height={40}
+                        src={item.font.image}
+                        alt={item.font.name || "Font"}
+                        className="w-auto max-h-12 object-contain"
+                      />
+                    ) : (
+                      <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-[10px] text-gray-400">
+                        N/A
+                      </div>
+                    )}
+                  </div>
+                </div>
               )}
             </div>
           </div>
-          {/* <div className="text-right">
-            <p className="font-medium">KWD 22.000</p>
-          </div> */}
-        </div>
+        ))}
 
-        {/* Product details */}
-        <div className="space-y-2 mt-3 border-b pb-4">
-          {/* digit count */}
-          {productInfo.digitId && (
-            <p className="text-sm text-gray-600 flex justify-between w-full gap-2">
-              <span className="">
-                {" "}
-                {locale === "en" ? "How Many Digits  " : "كم عدد الأرقام"}
-              </span>
-              <span>
-                {
-                  selectedProduct?.digits?.find(
-                    (digit) => digit.id.toString() === productInfo.digitId,
-                  )?.value
-                }
-              </span>
-            </p>
-          )}
-
-          {/* size */}
-          {productInfo.sizeId && (
-            <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
-              <span>{locale === "en" ? "Size  " : "الطول"}</span>
-              <span>
-                {" "}
-                {
-                  selectedProduct?.sizes?.find(
-                    (size) => size.id.toString() === productInfo.sizeId,
-                  )?.value
-                }
-              </span>
-            </p>
-          )}
-
-          {/* color */}
-          {productInfo.colorId && (
-            <div className="text-sm text-gray-600 flex justify-between w-full gap-2 items-center">
-              <span>{locale === "en" ? "Color  " : "اللون"}</span>
-
-              <ColorCapsule
-                color={selectedProduct?.colors?.find(
-                  (color) => color.id.toString() === productInfo.colorId,
-                )}
-              />
-            </div>
-          )}
-
-          {/* light color */}
-          {productInfo.lightColorId && (
-            <div className="text-sm text-gray-600 flex justify-between w-full gap-2 items-center">
-              <span>{locale === "en" ? "Light Color  " : "لون الضوء"}</span>
-              <span>
-                <ColorCapsule
-                  color={selectedProduct?.lightColors?.find(
-                    (lightColor) =>
-                      lightColor.id.toString() === productInfo.lightColorId,
-                  )}
-                />
-              </span>
-            </div>
-          )}
-
-          {/* house number */}
-          {productInfo.houseNumber && (
-            <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
-              <span>{locale === "en" ? "House Number  " : "رقم المنزل"}</span>
-              <span> {productInfo.houseNumber}</span>
-            </p>
-          )}
-
-          {/* text */}
-          {productInfo.text && (
-            <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
-              <span>{locale === "en" ? "Text  " : "النص"}</span>
-              <span> {productInfo.text}</span>
-            </p>
-          )}
-
-          {/* design */}
-          {productInfo.designId && (
-            <div className="text-sm text-gray-600 w-full gap-2 flex  justify-between items-center">
-              <span>{locale === "en" ? "Design  " : "التصميم"}</span>
-              <div>
-                <Image
-                  width={200}
-                  height={200}
-                  src={
-                    selectedProduct?.designs?.find(
-                      (design) => design.id.toString() === productInfo.designId,
-                    )?.url || ""
-                  }
-                  alt="Design"
-                  className="w-full max-h-16 object-cover"
-                />
-              </div>
-            </div>
-          )}
-
-          {/* font */}
-          {productInfo.fontId && (
-            <div className="text-sm text-gray-600 flex flex-row gap-5 justify-between items-center  w-full ">
-              <span>{locale === "en" ? "Font  " : "الخط"}</span>
-              <div className="mt-1">
-                <Image
-                  title={
-                    selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId,
-                    )?.name
-                  }
-                  width={200}
-                  height={200}
-                  src={
-                    selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId,
-                    )?.url || ""
-                  }
-                  alt={
-                    selectedProduct?.fonts?.find(
-                      (font) => font.id.toString() === productInfo.fontId,
-                    )?.name || "Font"
-                  }
-                  className="w-auto max-h-12 object-cover"
-                />
-              </div>
-            </div>
-          )}
-        </div>
-
-        {/* Discount Code */}
-        {/* <div className="flex gap-2">
-              <Input
-                type="text"
-                placeholder="Discount code"
-                className="flex-1"
-              />
-              <button className="flex items-center text-sm text-gray-600 hover:text-gray-900  border border-[#87A786] px-4  rounded">
-                Apply
-              </button>
-            </div> */}
-
-        {/* Order Summary */}
-        <div className="space-y-2 ">
+        {/* Totals Section */}
+        <div className="space-y-2 pt-4">
           <div className="flex justify-between">
             <span>
               {locale === "en" ? "Subtotal" : "المجموع الفرعي"} ·{" "}
-              {productInfo.quantity} {locale === "en" ? "items" : "عناصر"}
+              {cartItems.reduce((acc, item) => acc + item.quantity, 0)}{" "}
+              {locale === "en" ? "items" : "عناصر"}
             </span>
-            <span>KD {productInfo.price}</span>
+            <span>KD {cart.getTotalPrice()}</span>
           </div>
-          {/* <div className="flex justify-between">
-            <span>Shipping</span>
-            <span className="text-green-600">Upcoming</span>
-          </div> */}
-          <div className="flex justify-between text-lg font-semibold pt-2 border-t">
-            <span>{locale === "en" ? "Total" : "الإجمالي"}</span>
-            <span>KD {productInfo.price * productInfo.quantity}</span>
+          <div className="flex justify-between text-lg font-semibold pt-4 border-t border-gray-200">
+            <span className="text-gray-900">
+              {locale === "en" ? "Total" : "الإجمالي"}
+            </span>
+            <span className="text-2xl text-[#87A786]">
+              KD {totalPrice.toFixed(3)}
+            </span>
           </div>
         </div>
-
-        {/* Place Order Button */}
-        {/* <button
-          type="submit"
-          onClick={() => {
-            enqueueSnackbar("Coming Soon", {
-              variant: "info",
-              style: {
-                backgroundColor: "#87a786ef",
-                fontWeight: "bold",
-              },
-            });
-          }}
-          className="w-full mt-4 bg-[#87A786] hover:bg-[#87a786ea] text-white py-2  font-bold flex justify-center items-center gap-2"
-        >
-          <span>Place Order </span> <GiPayMoney size={20} />
-        </button> */}
       </div>
     </div>
   );
@@ -297,7 +266,7 @@ const ColorCapsule = ({
       title={color?.colorCode}
       className={`flex items-center gap-2 px-2 py-1 rounded-full border hover:border-[#87A786] transition-colors border-[#87A786] `}
     >
-      {color?.image ? (
+      {color?.image && color.image !== "" ? (
         <Image
           src={color.image}
           alt={color.name}

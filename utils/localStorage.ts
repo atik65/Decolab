@@ -118,6 +118,17 @@ export const clearCart = (): void => {
   setItem(CART_STORAGE_KEY, []);
 };
 
+/**
+ * Update product quantity in cart by index
+ */
+export const updateQuantity = (index: number, quantity: number): void => {
+  const cart = getAllProducts();
+  if (index >= 0 && index < cart.length && quantity > 0) {
+    cart[index].quantity = quantity;
+    setItem(CART_STORAGE_KEY, cart);
+  }
+};
+
 // ============================================================================
 // DEFAULT EXPORT
 // ============================================================================
@@ -127,6 +138,7 @@ const cart = {
   getAllProducts,
   getTotalPrice,
   removeProduct,
+  updateQuantity,
   clearCart,
 };
 

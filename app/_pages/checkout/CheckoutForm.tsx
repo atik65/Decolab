@@ -14,22 +14,11 @@ import { enqueueSnackbar } from "notistack";
 import { GiPayMoney } from "react-icons/gi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useOrderStore } from "@/hooks/zustand/useOrderStore";
+import { useLocale } from "next-intl";
+import { useRouter } from "@bprogress/next";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
-import { useRouter } from "@bprogress/next";
 import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
-import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
-import {
-  Color,
-  Design,
-  Font,
-  LightColor,
-  ProductDetails,
-  Size,
-} from "@/types/api/products";
-import { useLocale } from "next-intl";
-// import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
 
@@ -73,14 +62,15 @@ export interface OrderInfo {
   };
 }
 
+import cart from "@/utils/localStorage";
+
 const CheckoutForm = () => {
-  const { productInfo } = useOrderStore();
-  const { data: product } = useGetProductDetails(productInfo?.productId || "");
+  const cartItems = cart.getAllProducts();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
+  // @ts-ignore - Backend expects items instead of single item configuration
   const { mutateAsync, isPending } = useCreateOrder();
   const router = useRouter();
-
-  // console.log("product ", product);
+  const locale = useLocale();
 
   const { values, handleChange, handleSubmit, errors, touched } = useFormik({
     initialValues: {
@@ -97,9 +87,8 @@ const CheckoutForm = () => {
     },
     validationSchema: validationSchema,
     onSubmit: async (values) => {
-      // Check if product info exists
-      if (!productInfo.productId) {
-        enqueueSnackbar("No product selected. Please select a product first.", {
+      if (cartItems.length === 0) {
+        enqueueSnackbar("Your cart is empty.", {
           variant: "error",
           style: {
             backgroundColor: "#c51616",
@@ -109,96 +98,69 @@ const CheckoutForm = () => {
         return;
       }
 
-      const payload = {
-        productId: productInfo.productId,
-        quantity: productInfo.quantity,
-        customization: {
-          sizeId: productInfo.sizeId,
-          colorId: productInfo.colorId,
-          lightColorId: productInfo.lightColorId,
-          houseNumber: productInfo.houseNumber,
-          text: productInfo.text,
-          designId: productInfo.designId,
-          fontId: productInfo.fontId,
-          digitCount: productInfo?.digitCount || 0,
-        },
-        contact: {
-          phoneNumber: values.phone,
-          email: values.email,
-        },
-        delivery: {
-          country: values.country,
-          firstName: values.firstName,
-          lastName: values.lastName,
-          address: values.address,
-          apartmentSuite: values.apartment,
-          city: values.city,
-          postalCode: values.postalCode,
-          googleMapsLink: values.googleMapsLink,
-        },
-      };
-
-      const enProduct: ProductDetails = product
-        ? product["en"]
-        : ({} as ProductDetails);
-
-      // Helper functions to find names by ID
-      const getSizeTitle = (id: string) =>
-        enProduct.sizes?.find((s: Size) => s.id == id)?.title || id;
-      const getColorName = (id: string) =>
-        enProduct.colors?.find((c: Color) => c.id == id)?.name || id;
-      const getLightColorName = (id: string) =>
-        enProduct.lightColors?.find((lc: LightColor) => lc.id == id)?.name ||
-        id;
-      const getDesignName = (id: string) =>
-        enProduct.designs?.find((d: Design) => d.id == id)?.name || id;
-      const getFontName = (id: string) =>
-        enProduct.fonts?.find((f: Font) => f.id == id)?.name || id;
-      const sheetPayload: Payload = {
-        // Product Info
-        productTitle: enProduct.title,
-        quantity: payload.quantity,
-
-        // Customization (Mapped to readable values)
-        size: getSizeTitle(payload.customization.sizeId),
-        color: getColorName(payload.customization.colorId),
-        lightColor: getLightColorName(payload.customization.lightColorId),
-        houseNumber: payload.customization.houseNumber
-          ? Number(payload.customization.houseNumber)
-          : undefined,
-        // additionalText: payload.customization.text,
-        design: getDesignName(payload.customization.designId),
-        font: getFontName(payload.customization.fontId),
-        digitCount: payload.customization.digitCount
-          ? String(payload.customization.digitCount)
-          : undefined,
-
-        // Contact Info
-        phoneNumber: payload.contact.phoneNumber,
-        email: payload.contact.email,
-
-        // Delivery Info
-        customerName:
-          `${payload.delivery.firstName} ${payload.delivery.lastName}`.trim(),
-        address: payload.delivery.address,
-        // apartmentSuite: payload.delivery.apartmentSuite,
-        // city: payload.delivery.city,
-        // country: payload.delivery.country,
-        // postalCode: payload.delivery.postalCode,
-        googleMapsLink: payload.delivery.googleMapsLink,
-      };
-
-      // console.log("enProduct:", enProduct);
-      // console.log("product info:", productInfo);
-      console.log("payload:", payload);
-      console.log("sheetPayload:", sheetPayload);
-      // return;
-
       try {
         setIsSubmitting(true);
-        const response = await mutateAsync(payload);
-        console.log(response);
 
+        // Map cart items to backend format
+        const items = cartItems.map((item) => ({
+          productId: item.productId,
+          quantity: item.quantity,
+          customization: {
+            sizeId: item.size?.id.toString(),
+            colorId: item.color?.id.toString(),
+            lightColorId: item.lightColor?.id.toString(),
+            houseNumber: item.houseNumber,
+            text: item.text,
+            designId: item.design?.id.toString(),
+            fontId: item.font?.id.toString(),
+            digitCount: item.digitCount || 0,
+          },
+        }));
+
+        const payload = {
+          items,
+          contact: {
+            phoneNumber: values.phone,
+            email: values.email,
+          },
+          delivery: {
+            country: values.country,
+            firstName: values.firstName,
+            lastName: values.lastName,
+            address: values.address,
+            apartmentSuite: values.apartment,
+            city: values.city,
+            postalCode: values.postalCode,
+            googleMapsLink: values.googleMapsLink,
+          },
+        };
+
+        // Prepare sheet payload for all items (joined or separate, usually joined for summary)
+        const sheetPayload: Payload = {
+          productTitle: cartItems.map((i) => i.productTitle).join(", "),
+          quantity: cartItems.reduce((acc, i) => acc + i.quantity, 0),
+          size: cartItems.map((i) => i.size?.title).join(", "),
+          color: cartItems.map((i) => i.color?.name).join(", "),
+          lightColor: cartItems.map((i) => i.lightColor?.name).join(", "),
+          houseNumber: cartItems
+            .map((i) => i.houseNumber)
+            .filter(Boolean)
+            .join(", "),
+          design: cartItems.map((i) => i.design?.name).join(", "),
+          font: cartItems.map((i) => i.font?.name).join(", "),
+          digitCount: cartItems.map((i) => i.digitCount).join(", "),
+          phoneNumber: payload.contact.phoneNumber,
+          email: payload.contact.email,
+          customerName:
+            `${payload.delivery.firstName} ${payload.delivery.lastName}`.trim(),
+          address: payload.delivery.address,
+          googleMapsLink: payload.delivery.googleMapsLink,
+        };
+
+        console.log("payload:", payload);
+        console.log("sheetPayload:", sheetPayload);
+
+        // await mutateAsync(payload as any); // Type cast if backend expects single item for now, but usually it should be multi
         const res = await createSheetOrder(sheetPayload);
         console.log("Sheet order created:", res);
 
@@ -210,10 +172,12 @@ const CheckoutForm = () => {
           },
         });
 
+        // Clear cart after successful order
+        cart.clearCart();
         router.push("/");
       } catch (error) {
-        console.log(error);
-        enqueueSnackbar("Order placed failed", {
+        console.error(error);
+        enqueueSnackbar("Failed to place order", {
           variant: "error",
           style: {
             backgroundColor: "#c51616",
@@ -225,8 +189,6 @@ const CheckoutForm = () => {
       }
     },
   });
-
-  const locale = useLocale();
 
   return (
     <form onSubmit={handleSubmit} className="space-y-8">

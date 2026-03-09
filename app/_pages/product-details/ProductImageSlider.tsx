@@ -195,17 +195,19 @@ const ThumbsComponent = ({
 }) => {
   return (
     <div className="cursor-pointer select-none">
-      <Image
-        height={500}
-        width={500}
-        alt="product image"
-        // src={"/images/home/bed.png"}
-        // src={constructImageURL(imgURI) || "/images/home/bed.png"}
-        src={imgURI ? imgURI : ""}
-        className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
-          index === activeIndex ? "border-[#189CD9]" : "border-transparent "
-        }`}
-      />
+      {imgURI ? (
+        <Image
+          height={500}
+          width={500}
+          alt="product image"
+          src={imgURI}
+          className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
+            index === activeIndex ? "border-[#189CD9]" : "border-transparent "
+          }`}
+        />
+      ) : (
+        <div className="h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 bg-gray-200 border-[5px] border-transparent"></div>
+      )}
     </div>
   );
 };

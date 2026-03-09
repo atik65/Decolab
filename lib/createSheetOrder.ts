@@ -21,7 +21,7 @@ export type Payload = {
   size?: string;
   color?: string;
   lightColor?: string;
-  houseNumber?: number;
+  houseNumber?: string;
   design?: string;
   font?: string;
   digitCount?: string;
