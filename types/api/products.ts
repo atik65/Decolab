@@ -348,24 +348,28 @@ export interface Color {
   id: string | number;
   name: string;
   colorCode: string;
+  image?: string;
 }
 
 export interface LightColor {
   id: number | string;
   name: string;
   colorCode: string;
+  image?: string;
 }
 
 export interface Design {
   id: number | string;
   url: string;
   name: string;
+  image?: string;
 }
 
 export interface Font {
   id: number | string;
-  url: string;
+  url?: string;
   name: string;
+  image?: string;
 }
 
 export interface Digit {

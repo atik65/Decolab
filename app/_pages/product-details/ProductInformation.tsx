@@ -66,6 +66,8 @@ import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { ProductDetails } from "@/types/api/products";
 import ProductInfoSkt from "@/components/skeletons/productDetails/ProductInfoSkt";
 import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
+import prepareCartItem, { validateUserOptions } from "@/utils/productUtils";
+import cart from "@/utils/localStorage";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -76,6 +78,8 @@ const ProductInformation = () => {
 
   const locale = useGetLocale();
   const currentProduct = product?.[locale];
+
+  console.log(currentProduct);
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
@@ -159,7 +163,7 @@ const ProductInformation = () => {
       });
 
       const orderStorePayload = {
-        productId: Array.isArray(slug) ? slug[0] : slug?.toString(),
+        productId: Array.isArray(slug) ? slug[0] : slug?.toString() || "",
         sizeId: values.size?.toString(),
         ...((currentProduct?.digits?.length ?? 0 > 0)
           ? { digitId: values.digitCount?.toString() }
@@ -167,7 +171,7 @@ const ProductInformation = () => {
 
         colorId: values.color?.toString(),
         lightColorId: values.lightColor?.toString(),
-        houseNumber: values.houseNumber,
+        houseNumber: Number(values.houseNumber),
         text: values.text,
         designId: values.design?.toString(),
         fontId: values.font?.toString(),
@@ -195,17 +199,32 @@ const ProductInformation = () => {
         }
       }
 
-      const productPrice = getProductPrice(
-        currentProduct,
-        values.size ? Number(values.size) : undefined,
-        values.digitCount ? Number(values.digitCount) : undefined,
-      );
+      // Guard: currentProduct must be defined (TypeScript can't narrow across closure boundary)
+      if (!currentProduct) return;
 
-      console.log("order payload = ", orderStorePayload);
+      // Validate first (optional)
+      const validation = validateUserOptions(orderStorePayload);
+      if (!validation.isValid) {
+        console.error("Missing fields:", validation.missingFields);
+        return;
+      }
+
+      // Prepare complete cart item
+      const cartItem = prepareCartItem(currentProduct, orderStorePayload);
+
+      if (cartItem) {
+        // Add to cart
+        cart.addProduct(cartItem);
+        console.log("Added to cart:", cartItem);
+      } else {
+        console.error("Failed to prepare cart item");
+      }
+
+      // console.log("order payload = ", orderStorePayload);
       return;
 
       // set product order - info to global state
-      setProductInfo(orderStorePayload);
+      // setProductInfo(orderStorePayload);
 
       router.push("/checkout");
     },

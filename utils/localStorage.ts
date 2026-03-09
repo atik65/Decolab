@@ -3,23 +3,14 @@
  * Simple cart management with type-safe operations
  */
 
+import { CompleteCartItem } from "./productUtils";
+
 // ============================================================================
 // TYPES & INTERFACES
 // ============================================================================
 
-export interface CartItem {
-  productId: string;
-  sizeId: string;
-  colorId: string;
-  lightColorId: string;
-  houseNumber: number;
-  text: string;
-  designId: string;
-  fontId: string;
-  quantity: number;
-  digitCount: string;
-  price: number;
-}
+// Re-export CompleteCartItem as CartItem so consumers can use either name
+export type CartItem = CompleteCartItem;
 
 // ============================================================================
 // CONSTANTS
