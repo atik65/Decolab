@@ -373,7 +373,7 @@ const ProductInformation = () => {
         />
 
         {/* Quantity Selector and place order */}
-        <div className="mt-8 pt-6 border-t border-gray-200">
+        <div className="mt-0 pt-6 ">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             {/* Quantity Selector */}
             <div className="flex items-center">
@@ -429,49 +429,6 @@ const ProductInformation = () => {
           </div>
         </div>
       </form>
-
-      {/* Additional Actions  */}
-      {/* <div className="mt-4 flex items-center space-x-4">
-        <button className="flex items-center text-sm text-gray-600 hover:text-gray-900">
-          <FiBarChart2 className="w-5 h-5 mr-1" /> Add to compare
-        </button>
-        <button className="flex items-center text-sm text-gray-600 hover:text-gray-900">
-          <FiHeart className="w-5 h-5 mr-1" /> Add to wishlist
-        </button>
-      </div> */}
-
-      {/* Sharing Options */}
-      <div className="mt-8 pt-6 border-t border-gray-200">
-        <p className="text-sm font-medium text-gray-700 mb-3">
-          {locale === "en" ? "Share this product:" : "شارك هذا المنتج:"}
-        </p>
-        <div className="flex gap-3">
-          <a
-            href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors shadow-sm hover:shadow-md"
-          >
-            <FaFacebookF className="w-4 h-4" />
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-sky-50 text-sky-500 hover:bg-sky-100 transition-colors shadow-sm hover:shadow-md"
-          >
-            <FaTwitter className="w-4 h-4" />
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-pink-50 text-pink-600 hover:bg-pink-100 transition-colors shadow-sm hover:shadow-md"
-          >
-            <FaInstagram className="w-4 h-4" />
-          </a>
-          <a
-            href="#"
-            className="w-10 h-10 flex items-center justify-center rounded-full bg-red-50 text-red-600 hover:bg-red-100 transition-colors shadow-sm hover:shadow-md"
-          >
-            <FaPinterestP className="w-4 h-4" />
-          </a>
-        </div>
-      </div>
     </div>
   );
 };
