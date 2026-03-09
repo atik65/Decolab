@@ -194,7 +194,7 @@ const ProductInformation = () => {
       // if pricing type is variant then must provide size and digitCount
       if (currentProduct?.pricing?.type === "variant") {
         if (!values.size || !values.digitCount) {
-          enqueueSnackbar("Please select a valid variant", {
+          enqueueSnackbar("Please select a valid variant to get price", {
             variant: "error",
             style: {
               backgroundColor: "#c51616",
@@ -348,8 +348,8 @@ const ProductInformation = () => {
       ) : (
         <p className="animate-pulse font-bold text-sm text-red-500 bg-red-50 p-3 rounded-lg border border-red-200 mb-6">
           {locale === "en"
-            ? "Please select a valid variant "
-            : "الحالة غير متاحة"}
+            ? "Please select a valid variant to get price "
+            : "الرجاء اختيار متغير صالح للحصول على السعر"}
         </p>
       )}
 
