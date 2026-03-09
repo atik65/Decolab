@@ -20,16 +20,16 @@ import dynamic from "next/dynamic";
 // import { FiBarChart2, FiHeart } from "react-icons/fi";
 
 const FaFacebookF = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaFacebookF)
+  import("react-icons/fa").then((mod) => mod.FaFacebookF),
 );
 const FaTwitter = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaTwitter)
+  import("react-icons/fa").then((mod) => mod.FaTwitter),
 );
 const FaInstagram = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaInstagram)
+  import("react-icons/fa").then((mod) => mod.FaInstagram),
 );
 const FaPinterestP = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaPinterestP)
+  import("react-icons/fa").then((mod) => mod.FaPinterestP),
 );
 // const FiBarChart2 = dynamic(() =>
 //   import("react-icons/fi").then((mod) => mod.FiBarChart2)
@@ -71,7 +71,7 @@ const ProductInformation = () => {
   const { slug } = useParams();
 
   const { data: product, isLoading } = useGetProductDetails(
-    slug?.toString() || ""
+    slug?.toString() || "",
   );
 
   const locale = useGetLocale();
@@ -84,7 +84,7 @@ const ProductInformation = () => {
   useEffect(() => {
     if (currentProduct?.pricing?.type === "variant") {
       const highestVariant = currentProduct?.pricing?.variants?.sort(
-        (a, b) => b.conditions.digitCount - a.conditions.digitCount
+        (a, b) => b.conditions.digitCount - a.conditions.digitCount,
       )[0];
 
       // console.log("highestVariant = ", highestVariant);
@@ -103,25 +103,25 @@ const ProductInformation = () => {
   const { setProductInfo } = useOrderStore();
 
   const productValidation = Yup.object().shape({
-    ...(currentProduct?.sizes?.length ?? 0 > 0
+    ...((currentProduct?.sizes?.length ?? 0 > 0)
       ? { size: Yup.string().required("Size is required") }
       : {}),
 
-    ...(currentProduct?.digits?.length ?? 0 > 0
+    ...((currentProduct?.digits?.length ?? 0 > 0)
       ? { digitCount: Yup.number().required("Digit count is required") }
       : {}),
-    ...(currentProduct?.colors?.length ?? 0 > 0
+    ...((currentProduct?.colors?.length ?? 0 > 0)
       ? { color: Yup.string().required("Color is required") }
       : {}),
-    ...(currentProduct?.lightColors?.length ?? 0 > 0
+    ...((currentProduct?.lightColors?.length ?? 0 > 0)
       ? { lightColor: Yup.string().required("Light color is required") }
       : {}),
     houseNumber: Yup.string().required("House number is required"),
     text: Yup.string().notRequired(),
-    ...(currentProduct?.designs?.length ?? 0 > 0
+    ...((currentProduct?.designs?.length ?? 0 > 0)
       ? { design: Yup.string().required("Design is required") }
       : {}),
-    ...(currentProduct?.fonts?.length ?? 0 > 0
+    ...((currentProduct?.fonts?.length ?? 0 > 0)
       ? { font: Yup.string().required("Font is required") }
       : {}),
     quantity: Yup.number().required("Quantity is required"),
@@ -161,7 +161,7 @@ const ProductInformation = () => {
       const orderStorePayload = {
         productId: Array.isArray(slug) ? slug[0] : slug?.toString(),
         sizeId: values.size?.toString(),
-        ...(currentProduct?.digits?.length ?? 0 > 0
+        ...((currentProduct?.digits?.length ?? 0 > 0)
           ? { digitId: values.digitCount?.toString() }
           : {}),
 
@@ -177,7 +177,7 @@ const ProductInformation = () => {
           getProductPrice(
             currentProduct,
             values.size ? Number(values.size) : undefined,
-            values.digitCount ? Number(values.digitCount) : undefined
+            values.digitCount ? Number(values.digitCount) : undefined,
           ) || 0,
       };
 
@@ -194,6 +194,15 @@ const ProductInformation = () => {
           return;
         }
       }
+
+      const productPrice = getProductPrice(
+        currentProduct,
+        values.size ? Number(values.size) : undefined,
+        values.digitCount ? Number(values.digitCount) : undefined,
+      );
+
+      console.log("order payload = ", orderStorePayload);
+      return;
 
       // set product order - info to global state
       setProductInfo(orderStorePayload);
@@ -296,7 +305,7 @@ const ProductInformation = () => {
       {getProductPrice(
         currentProduct,
         values.size ? Number(values.size) : undefined,
-        values.digitCount ? Number(values.digitCount) : undefined
+        values.digitCount ? Number(values.digitCount) : undefined,
       ) ? (
         <div className="bg-gradient-to-r from-[#87A786]/10 to-transparent p-4 rounded-lg border-l-4 border-[#87A786] mb-6">
           <p className="text-sm text-gray-600 mb-1">
@@ -306,7 +315,7 @@ const ProductInformation = () => {
             {getProductPrice(
               currentProduct,
               values.size ? Number(values.size) : undefined,
-              values.digitCount ? Number(values.digitCount) : undefined
+              values.digitCount ? Number(values.digitCount) : undefined,
             ) + " KD"}
           </p>
         </div>
@@ -568,7 +577,7 @@ const ProductOptions = ({
                   <SelectItem key={digit} value={digit.toString()}>
                     {digit}
                   </SelectItem>
-                )
+                ),
               )}
             </SelectContent>
           </Select>
