@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 // import { products } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetProducts } from "@/hooks/tanstack/useProducts";
+import { cn } from "@/lib/utils";
 
 const RelatedProducts = () => {
   const locale = useGetLocale();
@@ -17,15 +18,30 @@ const RelatedProducts = () => {
   return (
     <div className="container mx-auto px-4 py-8 mt-5 sm:mt-10 md:mt-12">
       {/* header part */}
-      <div className="flex flex-col items-start mb-8">
-        <h2 className="text-[20px] md:text-[24px] xl:text-[32px] font-bold text-gray-800 mb-2">
+      <div
+        className={cn(
+          "flex flex-col items-start mb-8",
+          locale === "ar" && "items-end",
+        )}
+      >
+        <h2
+          className={cn(
+            "text-[20px] md:text-[24px] xl:text-[32px] font-bold text-gray-800 mb-2",
+            locale === "ar" && "text-right",
+          )}
+        >
           {locale === "en" ? "You may also like" : "قد يعجبك أيضاً"}
         </h2>
         <div className="w-16 h-0.5 bg-[#189CD9]"></div>
       </div>
 
       {/* products container */}
-      <section className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 gap-x-8  px-0">
+      <section
+        className={cn(
+          "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 gap-x-8  px-0",
+          locale === "ar" && "[direction:rtl]",
+        )}
+      >
         {products.map((item, index) => {
           return (
             <motion.div
