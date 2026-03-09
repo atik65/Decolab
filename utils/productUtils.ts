@@ -20,7 +20,7 @@ export interface UserSelectedOptions {
   sizeId: string;
   colorId: string;
   lightColorId: string;
-  houseNumber: number;
+  houseNumber: string;
   text: string;
   designId: string;
   fontId: string;
@@ -39,7 +39,7 @@ export interface CompleteCartItem {
   lightColor: LightColor;
   design: Design;
   font: Font;
-  houseNumber: number;
+  houseNumber: string;
   text: string;
   quantity: number;
   digitCount: string;

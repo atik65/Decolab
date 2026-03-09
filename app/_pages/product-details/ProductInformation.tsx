@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 // interface ProductIntroCartProps {
 //   productName?: string;
@@ -105,6 +105,7 @@ const ProductInformation = () => {
 
   const router = useRouter();
   const { setProductInfo } = useOrderStore();
+  const submitType = useRef<"addToCart" | "orderNow">("addToCart");
 
   const productValidation = Yup.object().shape({
     ...((currentProduct?.sizes?.length ?? 0 > 0)
@@ -154,13 +155,18 @@ const ProductInformation = () => {
     validationSchema: productValidation,
     onSubmit: (values) => {
       console.log(values);
-      enqueueSnackbar("Checkout is Initiating.", {
-        variant: "success",
-        style: {
-          backgroundColor: "#87A786",
-          color: "white",
+      enqueueSnackbar(
+        submitType.current === "orderNow"
+          ? "Checkout is Initiating."
+          : "Added to Cart successfully!",
+        {
+          variant: "success",
+          style: {
+            backgroundColor: "#87A786",
+            color: "white",
+          },
         },
-      });
+      );
 
       const orderStorePayload = {
         productId: Array.isArray(slug) ? slug[0] : slug?.toString() || "",
@@ -171,7 +177,7 @@ const ProductInformation = () => {
 
         colorId: values.color?.toString(),
         lightColorId: values.lightColor?.toString(),
-        houseNumber: Number(values.houseNumber),
+        houseNumber: values.houseNumber?.toString(),
         text: values.text,
         designId: values.design?.toString(),
         fontId: values.font?.toString(),
@@ -221,12 +227,13 @@ const ProductInformation = () => {
       }
 
       // console.log("order payload = ", orderStorePayload);
-      return;
+      // return;
 
       // set product order - info to global state
-      // setProductInfo(orderStorePayload);
-
-      router.push("/checkout");
+      if (submitType.current === "orderNow") {
+        setProductInfo(orderStorePayload);
+        router.push("/checkout");
+      }
     },
   });
 
@@ -394,9 +401,21 @@ const ProductInformation = () => {
               </div>
             </div>
 
+            {/* add to cart Button */}
+            <button
+              type="submit"
+              onClick={() => (submitType.current = "addToCart")}
+              className="flex-1 px-6 py-2.5 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300"
+            >
+              <span className="text-base">
+                {locale === "en" ? "Add to Cart" : "أضف إلى السلة"}
+              </span>
+            </button>
+
             {/* order now Button */}
             <button
               type="submit"
+              onClick={() => (submitType.current = "orderNow")}
               className="flex-1 px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group"
             >
               <span className="text-base">
