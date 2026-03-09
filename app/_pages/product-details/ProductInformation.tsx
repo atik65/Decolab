@@ -68,6 +68,7 @@ import ProductInfoSkt from "@/components/skeletons/productDetails/ProductInfoSkt
 import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
 import prepareCartItem, { validateUserOptions } from "@/utils/productUtils";
 import cart from "@/utils/localStorage";
+import { cn } from "@/lib/utils";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -271,12 +272,20 @@ const ProductInformation = () => {
   }
 
   return (
-    <div className="bg-white shadow-lg rounded-xl p-6 border border-gray-100">
+    <div
+      className={cn(
+        "bg-white shadow-lg rounded-xl p-6 border border-gray-100",
+        locale === "ar" && "text-right",
+      )}
+    >
       {/* Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="mb-6">
         <ol
           role="list"
-          className="flex items-center space-x-2 text-sm font-medium text-gray-500 bg-gray-50 px-4 py-2 rounded-lg"
+          className={cn(
+            "flex items-center space-x-2 text-sm font-medium text-gray-500 bg-gray-50 px-4 py-2 rounded-lg",
+            locale === "ar" && "flex-row-reverse space-x-reverse",
+          )}
         >
           <li>
             <Link
@@ -377,10 +386,20 @@ const ProductInformation = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             {/* Quantity Selector */}
             <div className="flex items-center">
-              <label className="text-sm font-medium text-gray-700 mr-3">
+              <label
+                className={cn(
+                  "text-sm font-medium text-gray-700",
+                  locale === "en" ? "mr-3" : "ml-3",
+                )}
+              >
                 {locale === "en" ? "Quantity:" : "الكمية:"}
               </label>
-              <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm">
+              <div
+                className={cn(
+                  "flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm",
+                  locale === "ar" && "flex-row-reverse",
+                )}
+              >
                 <button
                   type="button"
                   onClick={() => handleQuantityChange("decrease")}

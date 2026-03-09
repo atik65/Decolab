@@ -1,6 +1,8 @@
+"use client";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useState } from "react";
 import { ProductDetails } from "@/types/api/products";
+import { cn } from "@/lib/utils";
 
 interface Color {
   name: string;
@@ -42,9 +44,14 @@ export const ColorOptions = ({
   return (
     <div className="">
       <h3 className="text-sm  mb-2 font-bold text-gray-700">
-        {locale === "en" ? "Colors" : "اللون"}
+        {locale === "en" ? "Colors" : "الألوان"}
       </h3>
-      <div className="flex flex-wrap gap-2">
+      <div
+        className={cn(
+          "flex flex-wrap gap-2",
+          locale === "ar" && "flex-row-reverse",
+        )}
+      >
         {product.colors.map((color) => (
           <button
             key={color.id}
@@ -95,14 +102,17 @@ export const ColorOptions = ({
           style={{
             borderColor: selectedColor.colorCode,
           }}
-          className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full font-bold border "
+          className={cn(
+            "mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full font-bold border",
+            locale === "ar" && "flex-row-reverse",
+          )}
         >
           <div
             className="w-3 h-3 rounded-full"
             style={{ backgroundColor: selectedColor.colorCode }}
           />
           <span className="text-sm text-gray-600">
-            Selected: {selectedColor.name}
+            {locale === "en" ? "Selected" : "تم اختيار"}: {selectedColor.name}
           </span>
         </div>
       )}
@@ -149,9 +159,14 @@ export const LightColorOptions = ({
   return (
     <div className="">
       <h3 className="mb-2 text-sm font-bold text-gray-700">
-        {locale === "en" ? "Light Colors" : "اللونات الخفيفة"}
+        {locale === "en" ? "Light Colors" : "ألوان الإضاءة"}
       </h3>
-      <div className="flex flex-wrap gap-2">
+      <div
+        className={cn(
+          "flex flex-wrap gap-2",
+          locale === "ar" && "flex-row-reverse",
+        )}
+      >
         {product.lightColors.map((color) => (
           <button
             key={color.id}
@@ -204,7 +219,10 @@ export const LightColorOptions = ({
           style={{
             borderColor: selectedColor.colorCode,
           }}
-          className="mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full font-bold border"
+          className={cn(
+            "mt-4 inline-flex items-center gap-2 px-3 py-1.5 bg-gray-50 rounded-full font-bold border",
+            locale === "ar" && "flex-row-reverse",
+          )}
         >
           <div
             className="w-3 h-3 rounded-full"
@@ -215,7 +233,7 @@ export const LightColorOptions = ({
             }}
           />
           <span className="text-sm text-gray-600">
-            Selected: {selectedColor.name}
+            {locale === "en" ? "Selected" : "تم اختيار"}: {selectedColor.name}
           </span>
         </div>
       )}

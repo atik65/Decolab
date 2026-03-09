@@ -1,3 +1,4 @@
+"use client";
 import {
   Accordion,
   AccordionContent,
@@ -8,6 +9,7 @@ import { useGetLocale } from "@/hooks/useGetLocale";
 import Image from "next/image";
 import { useState } from "react";
 import { ProductDetails } from "@/types/api/products";
+import { cn } from "@/lib/utils";
 
 // const designs = [
 //   {
@@ -62,18 +64,28 @@ const DesignSelection = ({
       {/* accordion */}
       <Accordion type="single" collapsible defaultValue="item-1">
         <AccordionItem value="item-1">
-          <AccordionTrigger className="">
+          <AccordionTrigger
+            className={cn(locale === "ar" && "flex-row-reverse")}
+          >
             {" "}
             <label
               htmlFor="size"
-              className="block text-sm font-bold text-gray-700"
+              className={cn(
+                "block text-sm font-bold text-gray-700",
+                locale === "ar" && "text-right w-full px-2",
+              )}
             >
               {locale === "en" ? "Select Design" : "اختر التصميم"}{" "}
               <span className="text-red-500">*</span>
             </label>
           </AccordionTrigger>
           <AccordionContent>
-            <div className="grid grid-cols-2 sm:grid-cols-3 gap-5 p-1">
+            <div
+              className={cn(
+                "grid grid-cols-2 sm:grid-cols-3 gap-5 p-1",
+                locale === "ar" && "[direction:rtl]",
+              )}
+            >
               {product?.designs?.map((design) => {
                 const isSelected = selectedDesign === design.id;
                 return (
