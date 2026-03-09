@@ -12,6 +12,8 @@ const ProductInfoContainer = () => {
       <div>
         <ProductInformation />
       </div>
+
+      
     </div>
   );
 };

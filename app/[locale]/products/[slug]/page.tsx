@@ -1,6 +1,7 @@
 // import AdditionalInfoTabs from "@/app/_pages/product-details/AdditionalInfoTabs";
 // import AdditionalInfoTabs from "@/app/_pages/product-details/AdditionalInfoTabs";
 import ProductInfoContainer from "@/app/_pages/product-details/ProductInfoContainer";
+import RelatedProducts from "@/app/_pages/product-details/RealtedProducts";
 // import RelatedProducts from "@/app/_pages/product-details/RealtedProducts";
 import React from "react";
 
@@ -10,7 +11,7 @@ const page = () => {
       <ProductInfoContainer />
       {/* <AdditionalInfoTabs /> */}
 
-      {/* <RelatedProducts /> */}
+      <RelatedProducts />
     </div>
   );
 };
