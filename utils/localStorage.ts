@@ -88,7 +88,32 @@ export const getAllProducts = (): CartItem[] => {
  */
 export const addProduct = (product: CartItem): void => {
   const cart = getAllProducts();
-  cart.push(product);
+
+  // Find index of existing product with exact same options
+  const existingProductIndex = cart.findIndex(
+    (item) =>
+      item.productId === product.productId &&
+      String(item.size?.id) === String(product.size?.id) &&
+      String(item.color?.id) === String(product.color?.id) &&
+      String(item.lightColor?.id) === String(product.lightColor?.id) &&
+      String(item.design?.id) === String(product.design?.id) &&
+      String(item.font?.id) === String(product.font?.id) &&
+      item.houseNumber === product.houseNumber &&
+      item.text === product.text &&
+      String(item.digitCount) === String(product.digitCount),
+  );
+
+  if (existingProductIndex !== -1) {
+    // If found, increase quantity
+    cart[existingProductIndex].quantity += product.quantity;
+    // Update totalPrice for that item
+    cart[existingProductIndex].totalPrice =
+      cart[existingProductIndex].price * cart[existingProductIndex].quantity;
+  } else {
+    // If not found, add as new item
+    cart.push(product);
+  }
+
   setItem(CART_STORAGE_KEY, cart);
 };
 
@@ -125,6 +150,8 @@ export const updateQuantity = (index: number, quantity: number): void => {
   const cart = getAllProducts();
   if (index >= 0 && index < cart.length && quantity > 0) {
     cart[index].quantity = quantity;
+    // Update individual item total price
+    cart[index].totalPrice = cart[index].price * quantity;
     setItem(CART_STORAGE_KEY, cart);
   }
 };
