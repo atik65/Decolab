@@ -115,6 +115,10 @@ export const addProduct = (product: CartItem): void => {
   }
 
   setItem(CART_STORAGE_KEY, cart);
+  // Dispatch custom event for reactivity
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("cart-updated"));
+  }
 };
 
 /**
@@ -125,6 +129,10 @@ export const removeProduct = (index: number): void => {
   if (index >= 0 && index < cart.length) {
     cart.splice(index, 1);
     setItem(CART_STORAGE_KEY, cart);
+    // Dispatch custom event for reactivity
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("cart-updated"));
+    }
   }
 };
 
@@ -141,6 +149,10 @@ export const getTotalPrice = (): number => {
  */
 export const clearCart = (): void => {
   setItem(CART_STORAGE_KEY, []);
+  // Dispatch custom event for reactivity
+  if (typeof window !== "undefined") {
+    window.dispatchEvent(new Event("cart-updated"));
+  }
 };
 
 /**
@@ -153,6 +165,10 @@ export const updateQuantity = (index: number, quantity: number): void => {
     // Update individual item total price
     cart[index].totalPrice = cart[index].price * quantity;
     setItem(CART_STORAGE_KEY, cart);
+    // Dispatch custom event for reactivity
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("cart-updated"));
+    }
   }
 };
 

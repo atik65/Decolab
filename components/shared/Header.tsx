@@ -14,7 +14,7 @@ import MobileMenuSidebar from "./MobileMenuSidebar";
 import AnnounceBar from "./AnnounceBar";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
-// import CreateSheetOrder from "./CreateSheetOrder";
+import CartSheet from "./CartSheet";
 
 gsap.registerPlugin(useGSAP);
 
@@ -167,7 +167,8 @@ const Header: React.FC = () => {
             <div className="p-2 rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm">
               <SearchBar />
             </div>
-            {/* <CreateSheetOrder /> */}
+
+            <CartSheet />
 
             <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
 
