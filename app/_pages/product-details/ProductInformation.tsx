@@ -382,68 +382,61 @@ const ProductInformation = () => {
         />
 
         {/* Quantity Selector and place order */}
-        <div className="mt-0 pt-6 ">
+        <div className="mt-0 pt-6">
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
-            {/* Quantity Selector */}
-            <div className="flex items-center">
-              {/* <label
-                className={cn(
-                  "text-sm font-medium text-gray-700",
-                  locale === "en" ? "mr-3" : "ml-3",
-                )}
-              >
-                {locale === "en" ? "Quantity:" : "الكمية:"}
-              </label> */}
+            {/* Group: Quantity & Add to Cart (Shared row on mobile) */}
+            <div className="flex flex-row items-center gap-3 md:gap-4 flex-1">
+              {/* Quantity Selector */}
               <div
                 className={cn(
-                  "flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm",
+                  "flex items-center shrink-0 border border-gray-300 rounded-lg overflow-hidden shadow-sm h-12",
                   locale === "ar" && "flex-row-reverse",
                 )}
               >
                 <button
                   type="button"
                   onClick={() => handleQuantityChange("decrease")}
-                  className="w-10 h-12 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                  className="w-10 h-full text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
                 >
                   -
                 </button>
-                <span className="w-12 h-12 flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
+                <span className="w-12 h-full flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
                   {values.quantity}
                 </span>
                 <button
                   type="button"
                   onClick={() => handleQuantityChange("increase")}
-                  className="w-10 h-12 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                  className="w-10 h-full text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
                 >
                   +
                 </button>
               </div>
+
+              {/* add to cart Button */}
+              <button
+                type="submit"
+                onClick={() => (submitType.current = "addToCart")}
+                className={cn(
+                  "flex-1 h-12 px-2 sm:px-6 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group",
+                  locale === "ar" && "flex-row-reverse",
+                )}
+              >
+                <ShoppingCart
+                  size={18}
+                  className="group-hover:scale-110 transition-transform"
+                />
+                <span className="text-sm sm:text-base whitespace-nowrap">
+                  {locale === "en" ? "Add to Cart" : "أضف إلى السلة"}
+                </span>
+              </button>
             </div>
 
-            {/* add to cart Button */}
-            <button
-              type="submit"
-              onClick={() => (submitType.current = "addToCart")}
-              className={cn(
-                "flex-1 px-6 py-2.5 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group",
-                locale === "ar" && "flex-row-reverse",
-              )}
-            >
-              <ShoppingCart
-                size={18}
-                className="group-hover:scale-110 transition-transform"
-              />
-              <span className="text-base">
-                {locale === "en" ? "Add to Cart" : "أضف إلى السلة"}
-              </span>
-            </button>
-
-            {/* order now Button */}
+            {/* order now Button (Full width on mobile, joined row on sm:) */}
             <button
               type="submit"
               onClick={() => (submitType.current = "orderNow")}
               className={cn(
-                "flex-1 px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
+                "w-full sm:flex-1 h-12 px-6 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
                 locale === "ar" && "flex-row-reverse",
               )}
             >
@@ -451,7 +444,7 @@ const ProductInformation = () => {
                 size={18}
                 className="group-hover:scale-110 transition-transform"
               />
-              <span className="text-base">
+              <span className="text-base whitespace-nowrap">
                 {locale === "en" ? "Order Now" : "الآن تأكد"}
               </span>
             </button>
