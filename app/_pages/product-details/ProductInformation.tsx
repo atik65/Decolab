@@ -40,7 +40,7 @@ const FaPinterestP = dynamic(() =>
 
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
-import { BaggageClaim } from "lucide-react";
+import { BaggageClaim, ShoppingCart } from "lucide-react";
 import FontSelection from "./FontSelection";
 import Link from "next/link";
 import { Input, TextArea } from "@/components/ui/input";
@@ -424,8 +424,15 @@ const ProductInformation = () => {
             <button
               type="submit"
               onClick={() => (submitType.current = "addToCart")}
-              className="flex-1 px-6 py-2.5 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300"
+              className={cn(
+                "flex-1 px-6 py-2.5 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group",
+                locale === "ar" && "flex-row-reverse",
+              )}
             >
+              <ShoppingCart
+                size={18}
+                className="group-hover:scale-110 transition-transform"
+              />
               <span className="text-base">
                 {locale === "en" ? "Add to Cart" : "أضف إلى السلة"}
               </span>
@@ -435,15 +442,18 @@ const ProductInformation = () => {
             <button
               type="submit"
               onClick={() => (submitType.current = "orderNow")}
-              className="flex-1 px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group"
+              className={cn(
+                "flex-1 px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
+                locale === "ar" && "flex-row-reverse",
+              )}
             >
-              <span className="text-base">
-                {locale === "en" ? "Order Now" : "الآن تأكد"}
-              </span>
               <BaggageClaim
                 size={18}
                 className="group-hover:scale-110 transition-transform"
               />
+              <span className="text-base">
+                {locale === "en" ? "Order Now" : "الآن تأكد"}
+              </span>
             </button>
           </div>
         </div>
