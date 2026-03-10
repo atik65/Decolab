@@ -386,14 +386,14 @@ const ProductInformation = () => {
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4">
             {/* Quantity Selector */}
             <div className="flex items-center">
-              <label
+              {/* <label
                 className={cn(
                   "text-sm font-medium text-gray-700",
                   locale === "en" ? "mr-3" : "ml-3",
                 )}
               >
                 {locale === "en" ? "Quantity:" : "الكمية:"}
-              </label>
+              </label> */}
               <div
                 className={cn(
                   "flex items-center border border-gray-300 rounded-lg overflow-hidden shadow-sm",
@@ -403,17 +403,17 @@ const ProductInformation = () => {
                 <button
                   type="button"
                   onClick={() => handleQuantityChange("decrease")}
-                  className="w-10 h-10 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                  className="w-10 h-12 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
                 >
                   -
                 </button>
-                <span className="w-12 h-10 flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
+                <span className="w-12 h-12 flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
                   {values.quantity}
                 </span>
                 <button
                   type="button"
                   onClick={() => handleQuantityChange("increase")}
-                  className="w-10 h-10 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
+                  className="w-10 h-12 text-center text-lg font-medium text-gray-700 bg-white hover:bg-gray-100 focus:outline-none transition-colors"
                 >
                   +
                 </button>
