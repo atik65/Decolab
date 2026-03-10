@@ -34,7 +34,6 @@ export const staticNavLinks: NavLink[] = [
 ];
 
 const MobileMenu = ({
-  isOpen,
   onOpenChange,
 }: {
   isOpen: boolean;

@@ -8,36 +8,6 @@ import React, { useEffect, useState, useRef } from "react";
 //   category?: string;
 // }
 
-import dynamic from "next/dynamic";
-
-// import {
-//   FaFacebookF,
-//   FaTwitter,
-//   FaInstagram,
-//   FaPinterestP,
-// } from "react-icons/fa";
-
-// import { FiBarChart2, FiHeart } from "react-icons/fi";
-
-const FaFacebookF = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaFacebookF),
-);
-const FaTwitter = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaTwitter),
-);
-const FaInstagram = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaInstagram),
-);
-const FaPinterestP = dynamic(() =>
-  import("react-icons/fa").then((mod) => mod.FaPinterestP),
-);
-// const FiBarChart2 = dynamic(() =>
-//   import("react-icons/fi").then((mod) => mod.FiBarChart2)
-// );
-// const FiHeart = dynamic(() =>
-//   import("react-icons/fi").then((mod) => mod.FiHeart)
-// );
-
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim, ShoppingCart } from "lucide-react";
@@ -54,8 +24,8 @@ import {
 } from "@/components/ui/select";
 import { useRouter } from "@bprogress/next";
 import { useParams } from "next/navigation";
-// import { findProductById } from "@/data/products";
 import { useGetLocale } from "@/hooks/useGetLocale";
+
 import { getProductPrice } from "@/utils/getProductPrice";
 import { useFormik } from "formik";
 // import { productValidation } from "./productValidation";

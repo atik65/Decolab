@@ -67,8 +67,7 @@ import cart from "@/utils/localStorage";
 const CheckoutForm = () => {
   const cartItems = cart.getAllProducts();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  // @ts-ignore - Backend expects items instead of single item configuration
-  const { mutateAsync, isPending } = useCreateOrder();
+  const { isPending } = useCreateOrder();
   const router = useRouter();
   const locale = useLocale();
 

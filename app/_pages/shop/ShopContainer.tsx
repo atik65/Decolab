@@ -8,17 +8,10 @@ import {
   NoProductsFound,
 } from "@/components/shared/loading-skeletons/loading-skeleton";
 // import CategoryFilter from "./CategoryFilter";
-import WhyChooseUs from "./WhyChooseUs";
-import {
-  TestimonialsSection,
-  HowItWorksSection,
-  FAQSection,
-} from "./BottomSections";
+
 import { useQueryState } from "nuqs";
-import { useLocale } from "next-intl";
-import { ShapeHero } from "@/components/shared/ShapeHero";
 import { useSearchParams } from "next/navigation";
-import CategoryFilter from "./CategoryFilter";
+
 import Filters from "./Filters";
 import { useState } from "react";
 
@@ -37,7 +30,6 @@ const ShopContainer = () => {
     search,
     category: encodeURIComponent(category),
   });
-  const locale = useLocale();
 
   const products = data?.results || [];
 

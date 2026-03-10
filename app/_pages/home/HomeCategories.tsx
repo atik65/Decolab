@@ -98,10 +98,9 @@ const HomeCategories = ({ className }: { className?: string }) => {
         }}
         onBeforeInit={(swiper) => {
           // @ts-expect-error - Swiper types are not fully compatible with TypeScript
-          // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.prevEl = prevRef.current;
+
           // @ts-expect-error - Swiper types are not fully compatible with TypeScript
-          // eslint-disable-next-line no-param-reassign
           swiper.params.navigation.nextEl = nextRef.current;
         }}
         breakpoints={{
