@@ -18,7 +18,8 @@ import { useLocale } from "next-intl";
 import { useRouter } from "@bprogress/next";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
-import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
+// import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
+import { Payload } from "@/lib/createSheetOrder";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
 
@@ -67,7 +68,7 @@ import cart from "@/utils/localStorage";
 const CheckoutForm = () => {
   const cartItems = cart.getAllProducts();
   const [isSubmitting, setIsSubmitting] = React.useState(false);
-  const { isPending } = useCreateOrder();
+  const { isPending, mutateAsync } = useCreateOrder();
   const router = useRouter();
   const locale = useLocale();
 
@@ -160,7 +161,9 @@ const CheckoutForm = () => {
         console.log("sheetPayload:", sheetPayload);
 
         // await mutateAsync(payload as any); // Type cast if backend expects single item for now, but usually it should be multi
-        const res = await createSheetOrder(sheetPayload);
+        // const res = await createSheetOrder(sheetPayload);
+        // const res = await mutateAsync(payload);
+        const res = await mutateAsync(sheetPayload);
         console.log("Sheet order created:", res);
 
         enqueueSnackbar("Order placed successfully", {
