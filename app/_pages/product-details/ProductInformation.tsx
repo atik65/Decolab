@@ -11,7 +11,7 @@ import React, { useEffect, useState, useRef } from "react";
 import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim, ShoppingCart } from "lucide-react";
-import FontSelection from "./FontSelection";
+// import FontSelection from "./FontSelection";
 import Link from "next/link";
 import { Input, TextArea } from "@/components/ui/input";
 
@@ -31,7 +31,7 @@ import { useFormik } from "formik";
 // import { productValidation } from "./productValidation";
 import { enqueueSnackbar } from "notistack";
 import * as Yup from "yup";
-import { useOrderStore } from "@/hooks/zustand/useOrderStore";
+// import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { ProductDetails } from "@/types/api/products";
 import ProductInfoSkt from "@/components/skeletons/productDetails/ProductInfoSkt";
@@ -75,7 +75,7 @@ const ProductInformation = () => {
   // console.log("digitCount = ", digitCount);
 
   const router = useRouter();
-  const { setProductInfo } = useOrderStore();
+  // const { setProductInfo } = useOrderStore();
   const submitType = useRef<"addToCart" | "orderNow">("addToCart");
 
   const productValidation = Yup.object().shape({

@@ -97,7 +97,7 @@ export const addProduct = (product: CartItem): void => {
       String(item.color?.id) === String(product.color?.id) &&
       String(item.lightColor?.id) === String(product.lightColor?.id) &&
       String(item.design?.id) === String(product.design?.id) &&
-      String(item.font?.id) === String(product.font?.id) &&
+      // String(item.font?.id) === String(product.font?.id) &&
       item.houseNumber === product.houseNumber &&
       item.text === product.text &&
       String(item.digitCount) === String(product.digitCount),
