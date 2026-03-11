@@ -173,7 +173,7 @@ const SlideItem = ({
       {/* ─── Minimal Content Layer ─── */}
       <div
         className={cn(
-          "relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-center items-start text-white pb-12 md:pb-0",
+          "relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-end  items-start text-white pb-12 md:pb-40",
           locale === "ar" && "items-end text-right",
         )}
       >
@@ -184,7 +184,7 @@ const SlideItem = ({
           )}
         >
           {/* Minimal Title */}
-          <motion.h1
+          {/* <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
@@ -194,10 +194,10 @@ const SlideItem = ({
             )}
           >
             {slide[locale].title}
-          </motion.h1>
+          </motion.h1> */}
 
           {/* Minimal Description */}
-          <motion.p
+          {/* <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={isActive ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
             transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -207,7 +207,7 @@ const SlideItem = ({
             )}
           >
             {slide[locale].description}
-          </motion.p>
+          </motion.p> */}
 
           {/* Compact CTA Button with Eye-Catchy Animation */}
           <motion.div

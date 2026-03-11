@@ -84,6 +84,7 @@ export default {
         roboto: ["var(--font-roboto)"],
         geDiner: ["var(--font-ge-diner)"],
         vexa: ["var(--font-vexa)"],
+        dgRarah: ["var(--font-dgrarah)"],
       },
     },
   },

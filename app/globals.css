@@ -141,11 +141,13 @@
   html[data-locale="ar"] h4,
   html[data-locale="ar"] h5,
   html[data-locale="ar"] h6 {
-    @apply font-geDiner;
+    /* @apply font-geDiner; */
+    @apply font-dgRarah;
   }
 
   html[data-locale="ar"] p {
-    @apply font-vexa;
+    /* @apply font-vexa; */
+    @apply font-geDiner;
   }
 
   /* Arabic fonts - override when locale is 'ar' */

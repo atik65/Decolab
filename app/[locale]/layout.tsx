@@ -15,6 +15,13 @@ const vexa = localFont({
   style: "normal",
 });
 
+const dgRarah = localFont({
+  src: "../../public/fonts/DGRafah.otf",
+  variable: "--font-dgrarah",
+  weight: "400",
+  style: "normal",
+});
+
 const geDiner = localFont({
   src: "../../public/fonts/ge_dinar.otf",
   variable: "--font-ge-diner",
@@ -56,8 +63,7 @@ export default async function RootLayout({
     notFound();
   }
 
-
-  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable}`;
+  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable}`;
 
   return (
     <html lang={locale} className={allFonts} data-locale={locale}>

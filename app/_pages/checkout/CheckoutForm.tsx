@@ -163,7 +163,7 @@ const CheckoutForm = () => {
         // await mutateAsync(payload as any); // Type cast if backend expects single item for now, but usually it should be multi
         // const res = await createSheetOrder(sheetPayload);
         // const res = await mutateAsync(payload);
-        const res = await mutateAsync(sheetPayload);
+        const res = await mutateAsync(payload);
         console.log("Sheet order created:", res);
 
         enqueueSnackbar("Order placed successfully", {
