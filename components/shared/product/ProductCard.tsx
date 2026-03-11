@@ -141,9 +141,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             locale === "ar" ? "items-end" : "items-start",
           )}
         >
-          <h2 className="text-[12px] font-bold">
+          <p className="text-[12px] font-bold">
             {locale === "en" ? "Explore Details" : "تفاصيل التفاصيل"}
-          </h2>
+          </p>
           <div className="w-16 h-[2px] bg-[#189CD9]"></div>
         </div>
       </div>

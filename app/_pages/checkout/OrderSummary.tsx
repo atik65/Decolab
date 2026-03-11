@@ -97,7 +97,7 @@ const OrderSummary = () => {
                     <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">
                       {item.category}
                     </p>
-                    <p className="font-bold text-[#87A786]">KD {item.price}</p>
+                    <p className="font-bold text-[#1489C1]">KD {item.price}</p>
                   </div>
 
                   {/* Quantity adjustment */}
@@ -242,7 +242,7 @@ const OrderSummary = () => {
             <span className="text-gray-900">
               {locale === "en" ? "Total" : "الإجمالي"}
             </span>
-            <span className="text-2xl text-[#87A786]">
+            <span className="text-2xl text-[#1489C1]">
               KD {totalPrice.toFixed(3)}
             </span>
           </div>

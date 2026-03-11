@@ -177,7 +177,7 @@ const CartSheet = () => {
                           <Plus size={12} />
                         </button>
                       </div>
-                      <p className="font-bold text-[#87A786] text-sm">
+                      <p className="font-bold text-[#1489C1] text-sm">
                         KD {(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -199,7 +199,7 @@ const CartSheet = () => {
                 <span className="text-lg font-bold text-gray-900">
                   {locale === "en" ? "Total" : "الإجمالي"}
                 </span>
-                <span className="text-2xl font-bold text-[#87A786]">
+                <span className="text-2xl font-bold text-[#1489C1]">
                   KD {total.toFixed(3)}
                 </span>
               </div>
@@ -210,7 +210,7 @@ const CartSheet = () => {
               className="w-full"
               onClick={() => setIsOpen(false)}
             >
-              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#189CD9] to-[#10b981] hover:brightness-110 shadow-lg transition-all duration-300">
+              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] duration-300 shadow-lg transition-all duration-300">
                 {locale === "en" ? "Proceed to Checkout" : "الذهاب للدفع"}
               </Button>
             </Link>

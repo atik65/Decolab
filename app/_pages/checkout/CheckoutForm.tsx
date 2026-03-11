@@ -197,10 +197,10 @@ const CheckoutForm = () => {
       {/* Contact Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
         <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#87A786]/10 rounded-lg">
+          <div className="p-2 bg-[#1489C1]/10 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-[#87A786]"
+              className="h-5 w-5 text-[#1489C1]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -281,10 +281,10 @@ const CheckoutForm = () => {
       {/* Delivery Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
         <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#87A786]/10 rounded-lg">
+          <div className="p-2 bg-[#1489C1]/10 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-[#87A786]"
+              className="h-5 w-5 text-[#1489C1]"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -603,7 +603,7 @@ const CheckoutForm = () => {
           <button
             type="submit"
             disabled={isPending || isSubmitting}
-            className="w-full bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
+            className="w-full bg-gradient-to-r from-[#1489C1] to-[#1489C1] hover:from-[#1489C1] hover:to-[#1489C1] text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
           >
             {!isPending && !isSubmitting ? (
               <>

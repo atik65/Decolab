@@ -260,7 +260,7 @@ const ProductInformation = () => {
           <li>
             <Link
               href="/"
-              className="text-[#87A786] hover:text-[#6d8a6c] duration-200 transition-colors"
+              className="text-[#189CD9] hover:text-[#189CD9]/80 duration-200 transition-colors"
             >
               {locale === "en" ? "Home" : "بيت"}
             </Link>
@@ -269,7 +269,7 @@ const ProductInformation = () => {
           <li>
             <Link
               href="/shop"
-              className="text-[#87A786] hover:text-[#6d8a6c] duration-200 transition-colors"
+              className="text-[#189CD9] hover:text-[#189CD9]/70 duration-200 transition-colors"
             >
               {locale === "en" ? "Products" : "منتجات"}
             </Link>
@@ -296,7 +296,7 @@ const ProductInformation = () => {
       </h1>
       {/* Category Information */}
       <div className="mb-4">
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#87A786]/20 to-[#87A786]/10 text-[#87A786] border border-[#87A786]/30 shadow-sm">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 text-[#189CD9] border border-[#189CD9]/30 shadow-sm">
           {currentProduct.category}
         </span>
       </div>
@@ -387,7 +387,7 @@ const ProductInformation = () => {
                 type="submit"
                 onClick={() => (submitType.current = "addToCart")}
                 className={cn(
-                  "flex-1 h-12 px-2 sm:px-6 border-2 border-[#87A786] text-[#87A786] hover:bg-[#87A786] hover:text-white rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group",
+                  "flex-1 h-12 px-2 sm:px-6 border-2 border-[#189CD9] text-[#189CD9] hover:bg-[#189CD9]/10 hover:text-[#189CD9] rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group shadow-sm hover:shadow-md",
                   locale === "ar" && "flex-row-reverse",
                 )}
               >
@@ -406,7 +406,7 @@ const ProductInformation = () => {
               type="submit"
               onClick={() => (submitType.current = "orderNow")}
               className={cn(
-                "w-full sm:flex-1 h-12 px-6 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
+                "w-full sm:flex-1 h-12 px-6 bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
                 locale === "ar" && "flex-row-reverse",
               )}
             >
