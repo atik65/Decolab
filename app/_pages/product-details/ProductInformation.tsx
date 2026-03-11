@@ -97,9 +97,9 @@ const ProductInformation = () => {
     ...((currentProduct?.designs?.length ?? 0 > 0)
       ? { design: Yup.string().required("Design is required") }
       : {}),
-    ...((currentProduct?.fonts?.length ?? 0 > 0)
-      ? { font: Yup.string().required("Font is required") }
-      : {}),
+    // ...((currentProduct?.fonts?.length ?? 0 > 0)
+    //   ? { font: Yup.string().required("Font is required") }
+    //   : {}),
     quantity: Yup.number().required("Quantity is required"),
   });
 
@@ -151,7 +151,7 @@ const ProductInformation = () => {
         houseNumber: values.houseNumber?.toString(),
         text: values.text,
         designId: values.design?.toString(),
-        fontId: values.font?.toString(),
+        // fontId: values.font?.toString(),
         quantity: values.quantity,
         digitCount: values.digitCount,
         price:
@@ -202,8 +202,12 @@ const ProductInformation = () => {
 
       // set product order - info to global state
       if (submitType.current === "orderNow") {
-        setProductInfo(orderStorePayload);
-        router.push("/checkout");
+        // setProductInfo(orderStorePayload);
+
+        if (cartItem) {
+          cart.addProduct(cartItem);
+          router.push("/checkout");
+        }
       }
     },
   });
@@ -312,11 +316,11 @@ const ProductInformation = () => {
         values.size ? Number(values.size) : undefined,
         values.digitCount ? Number(values.digitCount) : undefined,
       ) ? (
-        <div className="bg-gradient-to-r from-[#87A786]/10 to-transparent p-4 rounded-lg border-l-4 border-[#87A786] mb-6">
+        <div className="bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 p-4 rounded-lg border-l-4 border-[#189CD9] mb-6">
           <p className="text-sm text-gray-600 mb-1">
             {locale === "en" ? "Price" : "السعر"}
           </p>
-          <p className="text-2xl sm:text-3xl font-bold text-[#87A786]">
+          <p className="text-2xl sm:text-3xl font-bold text-[#189CD9]">
             {getProductPrice(
               currentProduct,
               values.size ? Number(values.size) : undefined,
@@ -647,7 +651,7 @@ const ProductOptions = ({
         />
       )}
       {/* Font selection */}
-      {product.fonts.length > 0 && (
+      {/* {product.fonts.length > 0 && (
         <FontSelection
           values={values}
           setFieldValue={setFieldValue}
@@ -655,7 +659,7 @@ const ProductOptions = ({
           touched={touched}
           product={product}
         />
-      )}
+      )} */}
     </div>
   );
 };

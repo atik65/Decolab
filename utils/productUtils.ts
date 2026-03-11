@@ -23,7 +23,7 @@ export interface UserSelectedOptions {
   houseNumber: string;
   text: string;
   designId: string;
-  fontId: string;
+  fontId?: string;
   quantity: number;
   digitCount: string;
   price: number;
@@ -38,7 +38,7 @@ export interface CompleteCartItem {
   color: Color;
   lightColor: LightColor;
   design: Design;
-  font: Font;
+  // font: Font;
   houseNumber: string;
   text: string;
   quantity: number;
@@ -99,13 +99,13 @@ export const prepareCartItem = (
     }
 
     // Find font object
-    const font = product.fonts.find(
-      (f) => String(f.id) === String(userOptions.fontId),
-    );
-    if (!font) {
-      console.error("Font not found");
-      return null;
-    }
+    // const font = product.fonts.find(
+    //   (f) => String(f.id) === String(userOptions.fontId),
+    // );
+    // if (!font) {
+    //   console.error("Font not found");
+    //   return null;
+    // }
 
     // Calculate total price
     const totalPrice = userOptions.price * userOptions.quantity;
@@ -139,11 +139,11 @@ export const prepareCartItem = (
         name: design.name,
         image: design.image,
       },
-      font: {
-        id: font.id,
-        name: font.name,
-        image: font.image,
-      },
+      // font: {
+      //   id: font?.id,
+      //   name: font?.name,
+      //   image: font?.image,
+      // },
       houseNumber: userOptions.houseNumber,
       text: userOptions.text,
       quantity: userOptions.quantity,
@@ -170,7 +170,7 @@ export const validateUserOptions = (
   if (!userOptions.colorId) missingFields.push("colorId");
   if (!userOptions.lightColorId) missingFields.push("lightColorId");
   if (!userOptions.designId) missingFields.push("designId");
-  if (!userOptions.fontId) missingFields.push("fontId");
+  // if (!userOptions.fontId) missingFields.push("fontId");
   if (!userOptions.quantity || userOptions.quantity < 1)
     missingFields.push("quantity");
   if (!userOptions.price || userOptions.price <= 0) missingFields.push("price");

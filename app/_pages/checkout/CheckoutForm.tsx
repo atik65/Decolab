@@ -112,7 +112,7 @@ const CheckoutForm = () => {
             houseNumber: item.houseNumber,
             text: item.text,
             designId: item.design?.id.toString(),
-            fontId: item.font?.id.toString(),
+            // fontId: item.font?.id.toString(),
             digitCount: item.digitCount || 0,
           },
         }));
@@ -147,7 +147,7 @@ const CheckoutForm = () => {
             .filter(Boolean)
             .join(", "),
           design: cartItems.map((i) => i.design?.name).join(", "),
-          font: cartItems.map((i) => i.font?.name).join(", "),
+          // font: cartItems.map((i) => i.font?.name).join(", "),
           digitCount: cartItems.map((i) => i.digitCount).join(", "),
           phoneNumber: payload.contact.phoneNumber,
           email: payload.contact.email,
@@ -630,7 +630,7 @@ const CheckoutForm = () => {
             <div className="flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-[#87A786]"
+                className="h-4 w-4 text-[#1489C1]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -647,7 +647,7 @@ const CheckoutForm = () => {
             <div className="flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-[#87A786]"
+                className="h-4 w-4 text-[#1489C1]"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
