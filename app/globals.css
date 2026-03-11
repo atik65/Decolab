@@ -145,7 +145,11 @@
     @apply font-dgRarah;
   }
 
-  html[data-locale="ar"] p {
+  html[data-locale="ar"] p,
+  html[data-locale="ar"] button,
+  html[data-locale="ar"] a,
+  html[data-locale="ar"] label,
+  html[data-locale="ar"] span {
     /* @apply font-vexa; */
     @apply font-geDiner;
   }
