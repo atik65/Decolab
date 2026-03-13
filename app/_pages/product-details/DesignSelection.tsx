@@ -71,12 +71,14 @@ const DesignSelection = ({
             <label
               htmlFor="size"
               className={cn(
-                "block text-sm font-bold text-gray-700",
+                "block text-sm font-bold text-gray-700 space-x-1",
                 locale === "ar" && "text-right w-full px-2",
               )}
             >
-              {locale === "en" ? "Select Design" : "اختر التصميم"}{" "}
-              <span className="text-red-500">*</span>
+              <strong>
+                {locale === "en" ? "Select Design" : "اختر التصميم"}
+              </strong>
+              <strong className="text-red-500">*</strong>
             </label>
           </AccordionTrigger>
           <AccordionContent>
