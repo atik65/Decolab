@@ -27,16 +27,16 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       error = "",
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div className=" ">
         {label && (
           <label htmlFor={label} className="">
-            <span className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-bold text-gray-700 ">
+            <strong className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 font-bold text-gray-700 ">
               {label}{" "}
-              {isRequiredStar && <span className="text-red-500">*</span>}
-            </span>
+              {isRequiredStar && <strong className="text-red-500">*</strong>}
+            </strong>
           </label>
         )}
         <input
@@ -48,7 +48,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           // )}
           className={cn(
             "mt-1 block w-full border border-gray-300 bg-white py-[10px] px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm",
-            className
+            className,
           )}
           ref={ref}
           {...props}
@@ -60,14 +60,13 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         )}
       </div>
     );
-  }
+  },
 );
 Input.displayName = "Input";
 
 // Text Area
 
-interface TextAreaProps
-  extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
+interface TextAreaProps extends React.TextareaHTMLAttributes<HTMLTextAreaElement> {
   label?: string; // Add the label property
   isRequiredStar?: boolean;
   touched?: boolean;
@@ -85,16 +84,16 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
       error = "",
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <div>
         {label && (
           <label htmlFor={label}>
-            <span className="text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700">
+            <strong className="text-sm font-bold leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 text-gray-700">
               {label}{" "}
-              {isRequiredStar && <span className="text-red-500">*</span>}
-            </span>
+              {isRequiredStar && <strong className="text-red-500">*</strong>}
+            </strong>
           </label>
         )}
         <textarea
@@ -106,7 +105,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
 
           className={cn(
             "mt-1 block w-full border border-gray-300 bg-white py-[8px] px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm",
-            className
+            className,
           )}
           ref={ref}
           {...props}
@@ -118,7 +117,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
         )}
       </div>
     );
-  }
+  },
 );
 
 TextArea.displayName = "TextArea";

@@ -43,12 +43,16 @@ export const ColorOptions = ({
 
   return (
     <div className="">
-      <h3 className="text-sm  mb-2 font-bold text-gray-700">
-        {locale === "en" ? "Colors" : "الألوان"}
-      </h3>
+      <label
+        // htmlFor="color"
+        className="text-sm  mb-2 font-bold text-gray-700 space-x-1 "
+      >
+        <strong>{locale === "en" ? "Colors" : "الألوان"}</strong>
+        <strong className="text-red-500">*</strong>
+      </label>
       <div
         className={cn(
-          "flex flex-wrap gap-2",
+          "flex flex-wrap gap-2 mt-1",
           locale === "ar" && "flex-row-reverse",
         )}
       >
@@ -158,12 +162,13 @@ export const LightColorOptions = ({
 
   return (
     <div className="">
-      <h3 className="mb-2 text-sm font-bold text-gray-700">
-        {locale === "en" ? "Light Colors" : "ألوان الإضاءة"}
+      <h3 className="mb-2 text-sm font-bold text-gray-700 space-x-1">
+        <strong>{locale === "en" ? "Light Colors" : "ألوان الإضاءة"}</strong>
+        <strong className="text-red-500">*</strong>
       </h3>
       <div
         className={cn(
-          "flex flex-wrap gap-2",
+          "flex flex-wrap gap-2 mt-1",
           locale === "ar" && "flex-row-reverse",
         )}
       >

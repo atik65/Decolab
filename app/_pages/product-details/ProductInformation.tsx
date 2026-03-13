@@ -504,10 +504,10 @@ const ProductOptions = ({
         <div>
           <label
             htmlFor="size"
-            className="block text-sm  text-gray-700 mb-1 font-bold"
+            className="block text-sm  text-gray-700 mb-1 font-bold space-x-1"
           >
-            {locale === "en" ? "Size" : "الحجم"}
-            <span className="text-red-500">*</span>
+            <strong>{locale === "en" ? "Size" : "الحجم"}</strong>
+            <strong className="text-red-500">*</strong>
           </label>
 
           <Select
@@ -545,10 +545,12 @@ const ProductOptions = ({
         <div>
           <label
             htmlFor="how-many-digits"
-            className="block text-sm font-bold text-gray-700 mb-1 "
+            className="block text-sm font-bold text-gray-700 mb-1 space-x-1"
           >
-            {locale === "en" ? "How Many Digits" : "عدد الأرقام"}
-            <span className="text-red-500">*</span>
+            <strong>
+              {locale === "en" ? "How Many Digits" : "عدد الأرقام"}
+            </strong>
+            <strong className="text-red-500">*</strong>
           </label>
           <Select
             value={values.digitCount.toString()}

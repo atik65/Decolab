@@ -140,7 +140,8 @@
   html[data-locale="ar"] h3,
   html[data-locale="ar"] h4,
   html[data-locale="ar"] h5,
-  html[data-locale="ar"] h6 {
+  html[data-locale="ar"] h6,
+  html[data-locale="ar"] strong {
     /* @apply font-geDiner; */
     @apply font-dgRarah;
   }
@@ -148,7 +149,6 @@
   html[data-locale="ar"] p,
   html[data-locale="ar"] button,
   html[data-locale="ar"] a,
-  html[data-locale="ar"] label,
   html[data-locale="ar"] span {
     /* @apply font-vexa; */
     @apply font-geDiner;
