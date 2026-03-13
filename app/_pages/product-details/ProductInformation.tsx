@@ -320,7 +320,7 @@ const ProductInformation = () => {
           <p className="text-sm text-gray-600 mb-1">
             {locale === "en" ? "Price" : "السعر"}
           </p>
-          <p className="text-2xl sm:text-3xl font-bold text-[#189CD9]">
+          <p className="text-2xl sm:text-3xl font-bold text-[#189CD9] !font-roboto">
             {getProductPrice(
               currentProduct,
               values.size ? Number(values.size) : undefined,
