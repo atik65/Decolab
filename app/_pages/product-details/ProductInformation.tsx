@@ -374,7 +374,7 @@ const ProductInformation = () => {
                 >
                   -
                 </button>
-                <span className="w-12 h-full flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50">
+                <span className="w-12 h-full flex items-center justify-center border-x border-gray-300 text-base font-semibold text-gray-900 bg-gray-50 !font-roboto">
                   {values.quantity}
                 </span>
                 <button
