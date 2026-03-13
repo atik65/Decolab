@@ -13,21 +13,21 @@ import Link from "next/link";
 
 const SLIDES = [
   {
-    full: "Free delivery on Every Order",
-    short: "Free Delivery",
+    full: "Free delivery & Installation",
+    short: "Free Delivery & Installation",
   },
-  {
-    full: "Fast, professional installation",
-    short: "Pro Installation",
-  },
-  {
-    full: "24/7 Customer support",
-    short: "24/7 Support",
-  },
-  {
-    full: "Premium materials and craftsmanship",
-    short: "Premium Craftsmanship",
-  },
+  // {
+  //   full: "Fast, professional installation",
+  //   short: "Pro Installation",
+  // },
+  // {
+  //   full: "24/7 Customer support",
+  //   short: "24/7 Support",
+  // },
+  // {
+  //   full: "Premium materials and craftsmanship",
+  //   short: "Premium Craftsmanship",
+  // },
 ];
 
 const PHONE_NUMBER = "+971 50 123 4567";
