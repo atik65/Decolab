@@ -514,7 +514,6 @@ const ProductOptions = ({
             value={values.size}
             onValueChange={(value) => setFieldValue("size", value)}
           >
-            {/* <Select onValueChange={(value) => handleVariantChange("size", value)}> */}
             <SelectTrigger className="">
               <SelectValue
                 placeholder={
@@ -525,7 +524,7 @@ const ProductOptions = ({
             <SelectContent>
               {product.sizes.map((size) => (
                 <SelectItem key={size.id} value={size.id.toString()}>
-                  {size.title}
+                  <span className="!font-roboto">{size.title}</span>
                 </SelectItem>
               ))}
             </SelectContent>
@@ -557,6 +556,7 @@ const ProductOptions = ({
           >
             <SelectTrigger className="">
               <SelectValue
+                // className="!font-roboto"
                 placeholder={
                   locale === "en" ? "-- Select Digit --" : "--اختر الرقم--"
                 }
@@ -566,7 +566,7 @@ const ProductOptions = ({
               {Array.from({ length: digitCount }, (_, i) => i + 1).map(
                 (digit) => (
                   <SelectItem key={digit} value={digit.toString()}>
-                    {digit}
+                    <span className="!font-roboto">{digit}</span>
                   </SelectItem>
                 ),
               )}
