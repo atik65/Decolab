@@ -97,7 +97,7 @@ const Footer = () => {
             >
               <Link
                 href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
-                className="block hover:text-[#189CD9] transition-colors duration-300"
+                className="block hover:text-[#189CD9] transition-colors duration-300 !font-roboto"
               >
                 {contactInfo.phone}
               </Link>

@@ -125,9 +125,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {/* {product[locale].price} */}
 
             {product.pricing_type === "base" ? (
-              <span>{product.base_price} KD</span>
+              <span lang="en" className="!font-roboto">
+                {product.base_price} KD
+              </span>
             ) : (
-              <span>{product.min_price} KD</span>
+              <span lang="en" className="!font-roboto">
+                {product.min_price} KD
+              </span>
             )}
           </span>
         </div>
