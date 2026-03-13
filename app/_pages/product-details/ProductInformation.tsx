@@ -547,7 +547,7 @@ const ProductOptions = ({
             htmlFor="how-many-digits"
             className="block text-sm font-bold text-gray-700 mb-1 "
           >
-            {locale === "en" ? "How Many Digits" : "عدد الأرقام"}{" "}
+            {locale === "en" ? "How Many Digits" : "عدد الأرقام"}
             <span className="text-red-500">*</span>
           </label>
           <Select
