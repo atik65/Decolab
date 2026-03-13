@@ -143,7 +143,9 @@ const AnnounceBar: React.FC = () => {
             className="hidden md:flex items-center gap-1.5 text-white/90 hover:text-white hover:scale-105 transition-all duration-300 text-sm font-medium"
           >
             <Phone className="h-3.5 w-3.5 fill-white/10" />
-            <span>{PHONE_NUMBER}</span>
+            <span lang="en" className="!font-roboto">
+              {PHONE_NUMBER}
+            </span>
           </Link>
 
           <Link
