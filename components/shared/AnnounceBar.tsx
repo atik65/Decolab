@@ -157,13 +157,15 @@ const AnnounceBar: React.FC = () => {
 
         {/* ─── Center Zone: Wavy Announcement ─── */}
         <div className="flex items-center justify-center gap-1">
-          <button
-            onClick={prev}
-            aria-label="Previous announcement"
-            className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
-          >
-            <ChevronLeftIcon className="h-4 w-4" />
-          </button>
+          {SLIDES?.length > 1 && (
+            <button
+              onClick={prev}
+              aria-label="Previous announcement"
+              className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
+            >
+              <ChevronLeftIcon className="h-4 w-4" />
+            </button>
+          )}
 
           <div className="relative overflow-hidden h-10 flex items-center min-w-[180px] md:min-w-[360px] justify-center">
             {/* Desktop View */}
@@ -189,13 +191,15 @@ const AnnounceBar: React.FC = () => {
             </div>
           </div>
 
-          <button
-            onClick={next}
-            aria-label="Next announcement"
-            className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
-          >
-            <ChevronRightIcon className="h-4 w-4" />
-          </button>
+          {SLIDES?.length > 1 && (
+            <button
+              onClick={next}
+              aria-label="Next announcement"
+              className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
+            >
+              <ChevronRightIcon className="h-4 w-4" />
+            </button>
+          )}
         </div>
 
         {/* ─── Right Zone: Social Icons ─── */}
