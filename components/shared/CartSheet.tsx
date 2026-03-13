@@ -56,7 +56,7 @@ const CartSheet = () => {
         <div className="relative cursor-pointer p-2 hover:bg-gray-100 rounded-full transition-all duration-300 group">
           <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-black" />
           {items.length > 0 && (
-            <span className="absolute -top-1 -right-1 bg-[#189CD9] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-in zoom-in duration-300">
+            <span className="absolute -top-1 -right-1 bg-[#189CD9] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-in zoom-in duration-300 !font-roboto">
               {items.reduce((acc, item) => acc + item.quantity, 0)}
             </span>
           )}

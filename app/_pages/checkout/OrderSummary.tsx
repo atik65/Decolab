@@ -41,7 +41,7 @@ const OrderSummary = () => {
         </p>
         <Link
           href="/shop"
-          className="inline-block px-6 py-2 bg-[#1489C1] text-white rounded-lg font-medium hover:bg-[#6d8a6c] transition-colors"
+          className="inline-block px-6 py-2 bg-[#1489C1] text-white rounded-lg font-medium hover:bg-[#1489C1]/80 transition-colors"
         >
           {locale === "en" ? "Continue Shopping" : "مواصلة التسوق"}
         </Link>
