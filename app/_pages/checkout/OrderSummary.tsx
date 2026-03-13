@@ -41,7 +41,7 @@ const OrderSummary = () => {
         </p>
         <Link
           href="/shop"
-          className="inline-block px-6 py-2 bg-[#87A786] text-white rounded-lg font-medium hover:bg-[#6d8a6c] transition-colors"
+          className="inline-block px-6 py-2 bg-[#1489C1] text-white rounded-lg font-medium hover:bg-[#6d8a6c] transition-colors"
         >
           {locale === "en" ? "Continue Shopping" : "مواصلة التسوق"}
         </Link>
@@ -97,7 +97,12 @@ const OrderSummary = () => {
                     <p className="text-xs text-gray-400 font-medium uppercase tracking-wider">
                       {item.category}
                     </p>
-                    <p className="font-bold text-[#1489C1]">KD {item.price}</p>
+                    <p
+                      lang="en"
+                      className="font-bold text-[#1489C1] !font-roboto"
+                    >
+                      KD {item.price}
+                    </p>
                   </div>
 
                   {/* Quantity adjustment */}
@@ -112,7 +117,7 @@ const OrderSummary = () => {
                     >
                       <Minus size={14} />
                     </button>
-                    <span className="w-10 h-8 flex items-center justify-center text-sm font-semibold text-gray-700 bg-gray-50 border-x border-gray-200">
+                    <span className="w-10 h-8 flex items-center justify-center text-sm font-semibold text-gray-700 bg-gray-50 border-x border-gray-200 !font-roboto">
                       {item.quantity}
                     </span>
                     <button
@@ -137,7 +142,9 @@ const OrderSummary = () => {
                   <span className="">
                     {locale === "en" ? "Digits" : "عدد الأرقام"}
                   </span>
-                  <span>{item.digitCount}</span>
+                  <span lang="en" className="!font-roboto">
+                    {item.digitCount}
+                  </span>
                 </p>
               )}
 
@@ -145,7 +152,7 @@ const OrderSummary = () => {
               {item.size && (
                 <p className="text-sm text-gray-600 flex justify-between w-full gap-2">
                   <span>{locale === "en" ? "Size" : "الحجم"}</span>
-                  <span>{item.size.title}</span>
+                  <span className="!font-roboto">{item.size.title}</span>
                 </p>
               )}
 
@@ -169,7 +176,7 @@ const OrderSummary = () => {
               {item.houseNumber && (
                 <p className="text-sm text-gray-600 flex justify-between w-full gap-2 ">
                   <span>{locale === "en" ? "House Number" : "رقم المنزل"}</span>
-                  <span> {item.houseNumber}</span>
+                  <span className="!font-roboto"> {item.houseNumber}</span>
                 </p>
               )}
 
@@ -236,14 +243,14 @@ const OrderSummary = () => {
               {cartItems.reduce((acc, item) => acc + item.quantity, 0)}{" "}
               {locale === "en" ? "items" : "عناصر"}
             </span>
-            <span>KD {cart.getTotalPrice()}</span>
+            <span className="!font-roboto">KD {cart.getTotalPrice()}</span>
           </div>
           <div className="flex justify-between text-lg font-semibold pt-4 border-t border-gray-200">
             <span className="text-gray-900">
               {locale === "en" ? "Total" : "الإجمالي"}
             </span>
-            <span className="text-2xl text-[#1489C1]">
-              KD {totalPrice.toFixed(3)}
+            <span className="!font-roboto text-2xl text-[#1489C1]">
+              KD {totalPrice.toFixed(2)}
             </span>
           </div>
         </div>

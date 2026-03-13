@@ -189,11 +189,11 @@ const ProductInformation = () => {
       // Prepare complete cart item
       const cartItem = prepareCartItem(currentProduct, orderStorePayload);
 
-      if (cartItem) {
+      if (cartItem && submitType.current === "addToCart") {
         // Add to cart
         cart.addProduct(cartItem);
         console.log("Added to cart:", cartItem);
-      } else {
+      } else if (!cartItem) {
         console.error("Failed to prepare cart item");
       }
 
