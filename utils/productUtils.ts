@@ -11,6 +11,11 @@ import {
   LightColor,
   Font,
 } from "@/types/api/products";
+import {
+  validateCustomization,
+  buildVariantConditions,
+} from "@/lib/variantSystem";
+
 // ============================================================================
 // TYPES
 // ============================================================================
@@ -62,6 +67,17 @@ export const prepareCartItem = (
   userOptions: UserSelectedOptions,
 ): CompleteCartItem | null => {
   try {
+    // Validate variant conditions first (if variant pricing)
+    if (product.pricing?.type === "variant") {
+      const variantConditions = buildVariantConditions(product, userOptions);
+      const validation = validateCustomization(product, variantConditions);
+
+      if (!validation.isValid) {
+        console.error("Variant validation failed:", validation.message);
+        return null;
+      }
+    }
+
     // Find size object
     const size = product.sizes.find(
       (s: Size) => String(s.id) === String(userOptions.sizeId),
@@ -159,6 +175,7 @@ export const prepareCartItem = (
 
 /**
  * Helper function to validate if all required options are selected
+ * Updated to use generic variant system validation
  */
 export const validateUserOptions = (
   userOptions: UserSelectedOptions,

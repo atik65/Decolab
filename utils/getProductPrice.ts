@@ -1,43 +1,51 @@
 import { ProductDetails } from "@/types/api/products";
+import {
+  calculateCustomizationPrice,
+  VariantConditions,
+  buildVariantConditions,
+} from "@/lib/variantSystem";
 
+/**
+ * Get product price based on size and digitCount (backward compatible)
+ * @deprecated Use calculateCustomizationPrice from variantSystem for more flexibility
+ */
 export const getProductPrice = (
   product?: ProductDetails,
   size?: number,
-  digitCount?: number
-) => {
-  const price = getPrice(product, {
-    ...(size && { sizeId: size }),
-    ...(digitCount && { digitCount }),
-  });
-
-  return price;
-};
-
-export const getPrice = (
-  product?: ProductDetails,
-  options?: {
-    sizeId?: number;
-    digitCount?: number;
-  }
+  digitCount?: number,
 ): number | null => {
   if (!product) {
     return null;
   }
 
-  // console.log("product = ", product);
+  const customization: VariantConditions = {};
 
-  if (product?.pricing?.type === "base") {
-    return product?.pricing?.price ?? null;
+  if (size !== undefined) {
+    customization.sizeId = size;
   }
 
-  const variant = product?.pricing?.variants.find((v) => {
-    return (
-      v.conditions.sizeId == options?.sizeId &&
-      v.conditions.digitCount == options?.digitCount
-    );
-  });
+  if (digitCount !== undefined) {
+    customization.digitCount = digitCount;
+  }
 
-  // console.log("variant = ", variant);
+  const { price } = calculateCustomizationPrice(product, customization);
+  return price;
+};
 
-  return variant ? variant.price : null;
+/**
+ * Generic price calculation using variant conditions
+ * Works with any condition keys (sizeId, digitCount, materialId, etc.)
+ */
+export const getPrice = (
+  product?: ProductDetails,
+  options?: VariantConditions,
+): number | null => {
+  if (!product) {
+    return null;
+  }
+
+  const customization = options || {};
+  const { price } = calculateCustomizationPrice(product, customization);
+
+  return price;
 };

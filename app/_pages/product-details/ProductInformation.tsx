@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef, useMemo } from "react";
 
 // interface ProductIntroCartProps {
 //   productName?: string;
@@ -26,9 +26,6 @@ import { useRouter } from "@bprogress/next";
 import { useParams } from "next/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
 
-import { getProductPrice } from "@/utils/getProductPrice";
-import { useFormik } from "formik";
-// import { productValidation } from "./productValidation";
 import { enqueueSnackbar } from "notistack";
 import * as Yup from "yup";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
@@ -39,6 +36,12 @@ import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
 import prepareCartItem, { validateUserOptions } from "@/utils/productUtils";
 import cart from "@/utils/localStorage";
 import { cn } from "@/lib/utils";
+import { useFormik } from "formik";
+import {
+  calculateCustomizationPrice,
+  buildVariantConditions,
+  getRequiredVariantKeys,
+} from "@/lib/variantSystem";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -54,54 +57,67 @@ const ProductInformation = () => {
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);
-  const [digitCount, setDigitCount] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (currentProduct?.pricing?.type === "variant") {
-      const highestVariant = currentProduct?.pricing?.variants?.sort(
-        (a, b) => b.conditions.digitCount - a.conditions.digitCount,
-      )[0];
-
-      // console.log("highestVariant = ", highestVariant);
-
-      setDigitCount(highestVariant?.conditions.digitCount);
-    }
-
-    if (currentProduct?.pricing?.type === "base") {
-      setDigitCount(3);
-    }
-  }, [currentProduct]);
-
-  // console.log("digitCount = ", digitCount);
+  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
 
   const router = useRouter();
   // const { setProductInfo } = useOrderStore();
   const submitType = useRef<"addToCart" | "orderNow">("addToCart");
 
-  const productValidation = Yup.object().shape({
-    ...((currentProduct?.sizes?.length ?? 0 > 0)
-      ? { size: Yup.string().required("Size is required") }
-      : {}),
+  // Dynamically build validation schema based on product configuration
+  const productValidation = useMemo(() => {
+    if (!currentProduct) return Yup.object().shape({});
 
-    ...((currentProduct?.digits?.length ?? 0 > 0)
-      ? { digitCount: Yup.number().required("Digit count is required") }
-      : {}),
-    ...((currentProduct?.colors?.length ?? 0 > 0)
-      ? { color: Yup.string().required("Color is required") }
-      : {}),
-    ...((currentProduct?.lightColors?.length ?? 0 > 0)
-      ? { lightColor: Yup.string().required("Light color is required") }
-      : {}),
-    houseNumber: Yup.string().required("House number is required"),
-    text: Yup.string().notRequired(),
-    ...((currentProduct?.designs?.length ?? 0 > 0)
-      ? { design: Yup.string().required("Design is required") }
-      : {}),
-    // ...((currentProduct?.fonts?.length ?? 0 > 0)
-    //   ? { font: Yup.string().required("Font is required") }
-    //   : {}),
-    quantity: Yup.number().required("Quantity is required"),
-  });
+    const schema: Record<string, any> = {};
+
+    // Size validation
+    if (currentProduct.sizes?.length > 0) {
+      schema.size = Yup.string().required("Size is required");
+    }
+
+    // Digit count validation - only if product has digit customization
+    if (currentProduct.minDigits && currentProduct.maxDigits) {
+      schema.digitCount = Yup.number()
+        .required("Digit count is required")
+        .min(
+          currentProduct.minDigits,
+          `Minimum ${currentProduct.minDigits} digits`,
+        )
+        .max(
+          currentProduct.maxDigits,
+          `Maximum ${currentProduct.maxDigits} digits`,
+        );
+    }
+
+    // Color validation
+    if (currentProduct.colors?.length > 0) {
+      schema.color = Yup.string().required("Color is required");
+    }
+
+    // Light color validation
+    if (currentProduct.lightColors?.length > 0) {
+      schema.lightColor = Yup.string().required("Light color is required");
+    }
+
+    // Design validation
+    if (currentProduct.designs?.length > 0) {
+      schema.design = Yup.string().required("Design is required");
+    }
+
+    // House number is always required for customizable products
+    if (currentProduct.isCustomizable) {
+      schema.houseNumber = Yup.string().required("House number is required");
+    }
+
+    // Text is optional
+    schema.text = Yup.string().notRequired();
+
+    // Quantity is always required
+    schema.quantity = Yup.number()
+      .required("Quantity is required")
+      .min(1, "Minimum quantity is 1");
+
+    return Yup.object().shape(schema);
+  }, [currentProduct]);
 
   const {
     values,
@@ -142,10 +158,9 @@ const ProductInformation = () => {
       const orderStorePayload = {
         productId: Array.isArray(slug) ? slug[0] : slug?.toString() || "",
         sizeId: values.size?.toString(),
-        ...((currentProduct?.digits?.length ?? 0 > 0)
+        ...(currentProduct?.minDigits && currentProduct?.maxDigits
           ? { digitId: values.digitCount?.toString() }
           : {}),
-
         colorId: values.color?.toString(),
         lightColorId: values.lightColor?.toString(),
         houseNumber: values.houseNumber?.toString(),
@@ -154,24 +169,33 @@ const ProductInformation = () => {
         // fontId: values.font?.toString(),
         quantity: values.quantity,
         digitCount: values.digitCount,
-        price:
-          getProductPrice(
-            currentProduct,
-            values.size ? Number(values.size) : undefined,
-            values.digitCount ? Number(values.digitCount) : undefined,
-          ) || 0,
+        price: currentPrice || 0,
       };
 
-      // if pricing type is variant then must provide size and digitCount
+      // Validate variant selection if using variant pricing
       if (currentProduct?.pricing?.type === "variant") {
-        if (!values.size || !values.digitCount) {
-          enqueueSnackbar("Please select a valid variant to get price", {
-            variant: "error",
-            style: {
-              backgroundColor: "#c51616",
-              color: "white",
+        const variantConditions = buildVariantConditions(
+          currentProduct,
+          values,
+        );
+        const { price } = calculateCustomizationPrice(
+          currentProduct,
+          variantConditions,
+        );
+
+        if (!price) {
+          enqueueSnackbar(
+            locale === "en"
+              ? "Please select valid options to get a price"
+              : "الرجاء اختيار خيارات صالحة للحصول على السعر",
+            {
+              variant: "error",
+              style: {
+                backgroundColor: "#c51616",
+                color: "white",
+              },
             },
-          });
+          );
           return;
         }
       }
@@ -183,6 +207,16 @@ const ProductInformation = () => {
       const validation = validateUserOptions(orderStorePayload);
       if (!validation.isValid) {
         console.error("Missing fields:", validation.missingFields);
+        enqueueSnackbar(
+          `Missing required fields: ${validation.missingFields.join(", ")}`,
+          {
+            variant: "error",
+            style: {
+              backgroundColor: "#c51616",
+              color: "white",
+            },
+          },
+        );
         return;
       }
 
@@ -195,6 +229,14 @@ const ProductInformation = () => {
         console.log("Added to cart:", cartItem);
       } else if (!cartItem) {
         console.error("Failed to prepare cart item");
+        enqueueSnackbar("Failed to prepare cart item", {
+          variant: "error",
+          style: {
+            backgroundColor: "#c51616",
+            color: "white",
+          },
+        });
+        return;
       }
 
       // console.log("order payload = ", orderStorePayload);
@@ -212,16 +254,25 @@ const ProductInformation = () => {
     },
   });
 
-  // console.log("values = ", values);
+  // Calculate price dynamically whenever relevant form values change
+  useEffect(() => {
+    if (!currentProduct) return;
 
-  // console.log(
-  //   "price = ",
-  //   getProductPrice(
-  //     product as any,
-  //     values.size ? Number(values.size) : undefined,
-  //     values.digitCount ? Number(values.digitCount) : undefined
-  //   )
-  // );
+    const variantConditions = buildVariantConditions(currentProduct, values);
+    const { price } = calculateCustomizationPrice(
+      currentProduct,
+      variantConditions,
+    );
+
+    setCurrentPrice(price);
+  }, [
+    currentProduct,
+    values.size,
+    values.digitCount,
+    // Add other fields that might affect pricing in the future
+  ]);
+
+  // console.log("values = ", values);
 
   // Function to handle quantity change
   const handleQuantityChange = (type: "increase" | "decrease") => {
@@ -311,48 +362,32 @@ const ProductInformation = () => {
       </p>
 
       {/* Product Price */}
-      {getProductPrice(
-        currentProduct,
-        values.size ? Number(values.size) : undefined,
-        values.digitCount ? Number(values.digitCount) : undefined,
-      ) ? (
+      {currentPrice !== null && currentPrice > 0 ? (
         <div className="bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 p-4 rounded-lg border-l-4 border-[#189CD9] mb-6">
           <p className="text-sm text-gray-600 mb-1">
             {locale === "en" ? "Price" : "السعر"}
           </p>
           <p className="text-2xl sm:text-3xl font-bold text-[#189CD9] !font-roboto">
-            {getProductPrice(
-              currentProduct,
-              values.size ? Number(values.size) : undefined,
-              values.digitCount ? Number(values.digitCount) : undefined,
-            ) + " KD"}
+            {currentPrice.toFixed(3)} KD
           </p>
         </div>
       ) : (
         <p className="animate-pulse font-bold text-sm text-red-500 bg-red-50 p-3 rounded-lg border border-red-200 mb-6">
           {locale === "en"
-            ? "Please select a valid variant to get price "
-            : "الرجاء اختيار متغير صالح للحصول على السعر"}
+            ? "Please select valid options to get price"
+            : "الرجاء اختيار خيارات صالحة للحصول على السعر"}
         </p>
       )}
 
       <form onSubmit={handleSubmit}>
         {/* Product options */}
         <ProductOptions
-          // handleVariantChange={handleVariantChange}
-          size={values.size}
-          // digitCount={Number(values.digitCount)}
-          color={values.color}
-          lightColor={values.lightColor}
-          design={values.design}
-          font={values.font}
           product={currentProduct}
           values={values}
           errors={errors}
           touched={touched}
           setFieldValue={setFieldValue}
           handleChange={handleChange}
-          digitCount={digitCount}
         />
 
         {/* Quantity Selector and place order */}
@@ -433,31 +468,13 @@ export default ProductInformation;
 
 const ProductOptions = ({
   product,
-  // handleVariantChange,
   values,
   errors,
   touched,
   setFieldValue,
   handleChange,
-  digitCount,
-}: // size,
-// digitCount,
-// color,
-// lightColor,
-// design,
-// font,
-{
+}: {
   product: ProductDetails;
-  // handleVariantChange: (
-  //   variant: "size" | "digitCount" | "color" | "lightColor" | "design" | "font",
-  //   value: string
-  // ) => void;
-  size: string | null;
-  digitCount: number | null;
-  color: string | null;
-  lightColor: string | null;
-  design: string | null;
-  font: string | null;
   values: {
     size: string;
     digitCount: string;
@@ -495,6 +512,13 @@ const ProductOptions = ({
   handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }) => {
   const locale = useGetLocale();
+
+  // Determine if digit customization is enabled
+  const hasDigitCustomization =
+    product.minDigits !== undefined &&
+    product.maxDigits !== undefined &&
+    product.minDigits > 0 &&
+    product.maxDigits > 0;
 
   return (
     <div className=" space-y-4 mt-4">
@@ -539,9 +563,8 @@ const ProductOptions = ({
         </div>
       )}
 
-      {/* How Many Digits dropdown */}
-      {/* {product?.digits && product.digits.length > 0 && ( */}
-      {digitCount && (
+      {/* How Many Digits dropdown - dynamically shown based on product config */}
+      {hasDigitCustomization && (
         <div>
           <label
             htmlFor="how-many-digits"
@@ -558,20 +581,20 @@ const ProductOptions = ({
           >
             <SelectTrigger className="">
               <SelectValue
-                // className="!font-roboto"
                 placeholder={
                   locale === "en" ? "-- Select Digit --" : "--اختر الرقم--"
                 }
               />
             </SelectTrigger>
             <SelectContent>
-              {Array.from({ length: digitCount }, (_, i) => i + 1).map(
-                (digit) => (
-                  <SelectItem key={digit} value={digit.toString()}>
-                    <span className="!font-roboto">{digit}</span>
-                  </SelectItem>
-                ),
-              )}
+              {Array.from(
+                { length: product.maxDigits! - product.minDigits! + 1 },
+                (_, i) => product.minDigits! + i,
+              ).map((digit) => (
+                <SelectItem key={digit} value={digit.toString()}>
+                  <span className="!font-roboto">{digit}</span>
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
 
