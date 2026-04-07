@@ -212,6 +212,7 @@ export function shouldUseVariantPricing(product: ProductDetails): {
 /**
  * Get required variant condition keys based on product configuration
  * Used for validation - tells which fields must be selected
+ * This analyzes actual variant conditions to determine what's required
  *
  * @param product - Product details
  * @returns Array of required condition keys
@@ -219,12 +220,40 @@ export function shouldUseVariantPricing(product: ProductDetails): {
 export function getRequiredVariantKeys(product: ProductDetails): string[] {
   const required: string[] = [];
 
-  if (product.pricing?.type === "variant") {
-    const dimensions = detectPricingDimensions(product);
-    return dimensions.map((d) => d.key);
+  if (product.pricing?.type === "variant" && product.pricing.variants) {
+    // Analyze actual variant conditions to see what keys are used
+    const conditionKeys = new Set<string>();
+
+    product.pricing.variants.forEach((variant) => {
+      if (variant.conditions) {
+        Object.keys(variant.conditions).forEach((key) => {
+          conditionKeys.add(key);
+        });
+      }
+    });
+
+    return Array.from(conditionKeys);
   }
 
   return required;
+}
+
+/**
+ * Check if a specific field is used in variant pricing
+ * @param product - Product details
+ * @param fieldKey - Field to check (e.g., 'sizeId', 'digitCount')
+ * @returns true if the field affects variant pricing
+ */
+export function isFieldUsedInVariants(
+  product: ProductDetails,
+  fieldKey: string,
+): boolean {
+  if (product.pricing?.type === "variant" && product.pricing.variants) {
+    return product.pricing.variants.some(
+      (variant) => variant.conditions && fieldKey in variant.conditions,
+    );
+  }
+  return false;
 }
 
 /**
@@ -296,15 +325,34 @@ export function buildVariantConditions(
   const conditions: VariantConditions = {};
   const requiredKeys = getRequiredVariantKeys(product);
 
-  for (const key of requiredKeys) {
-    if (
-      formValues[key] !== undefined &&
-      formValues[key] !== null &&
-      formValues[key] !== ""
-    ) {
-      // Convert to number if it's a digit count or ID
-      const value = formValues[key];
-      conditions[key] = typeof value === "string" ? parseInt(value, 10) : value;
+  // Map form field names to variant condition keys
+  // Handle both form field names (size, digitCount) and payload names (sizeId, digitCount)
+  const fieldMapping: Record<string, string[]> = {
+    sizeId: ["size", "sizeId"], // Check both 'size' (form) and 'sizeId' (payload)
+    digitCount: ["digitCount"], // Always 'digitCount'
+  };
+
+  for (const conditionKey of requiredKeys) {
+    // Get all possible form field names for this condition
+    const possibleFieldNames = fieldMapping[conditionKey] || [conditionKey];
+
+    // Try each possible field name until we find a value
+    let value = undefined;
+    for (const fieldName of possibleFieldNames) {
+      if (
+        formValues[fieldName] !== undefined &&
+        formValues[fieldName] !== null &&
+        formValues[fieldName] !== ""
+      ) {
+        value = formValues[fieldName];
+        break;
+      }
+    }
+
+    if (value !== undefined) {
+      // Convert to number if it's a string
+      conditions[conditionKey] =
+        typeof value === "string" ? parseInt(value, 10) : value;
     }
   }
 

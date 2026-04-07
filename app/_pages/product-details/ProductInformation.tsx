@@ -41,6 +41,7 @@ import {
   calculateCustomizationPrice,
   buildVariantConditions,
   getRequiredVariantKeys,
+  isFieldUsedInVariants,
 } from "@/lib/variantSystem";
 
 const ProductInformation = () => {
@@ -69,13 +70,24 @@ const ProductInformation = () => {
 
     const schema: Record<string, any> = {};
 
-    // Size validation
-    if (currentProduct.sizes?.length > 0) {
+    // For variant pricing, only require fields that affect pricing
+    // For base pricing, fields are optional (used only for customization)
+    const isVariantPricing = currentProduct.pricing?.type === "variant";
+    const requiredKeys = isVariantPricing
+      ? getRequiredVariantKeys(currentProduct)
+      : [];
+
+    // Size validation - required only if used in variant pricing
+    if (currentProduct.sizes?.length > 0 && requiredKeys.includes("sizeId")) {
       schema.size = Yup.string().required("Size is required");
     }
 
-    // Digit count validation - only if product has digit customization
-    if (currentProduct.minDigits && currentProduct.maxDigits) {
+    // Digit count validation - required only if used in variant pricing
+    if (
+      currentProduct.minDigits &&
+      currentProduct.maxDigits &&
+      requiredKeys.includes("digitCount")
+    ) {
       schema.digitCount = Yup.number()
         .required("Digit count is required")
         .min(
@@ -258,6 +270,15 @@ const ProductInformation = () => {
   useEffect(() => {
     if (!currentProduct) return;
 
+    // For base pricing, use base price directly
+    if (currentProduct.pricing?.type === "base") {
+      setCurrentPrice(
+        currentProduct.pricing.price ?? currentProduct.minPrice ?? 0,
+      );
+      return;
+    }
+
+    // For variant pricing, calculate based on selections
     const variantConditions = buildVariantConditions(currentProduct, values);
     const { price } = calculateCustomizationPrice(
       currentProduct,
@@ -513,18 +534,28 @@ const ProductOptions = ({
 }) => {
   const locale = useGetLocale();
 
-  // Determine if digit customization is enabled
-  const hasDigitCustomization =
+  // Determine what to show based on pricing type
+  const isVariantPricing = product.pricing?.type === "variant";
+  const isBasePricing = product.pricing?.type === "base";
+
+  // For variant pricing: only show fields that are used in variant conditions
+  // For base pricing: show all available fields (they're optional for customization)
+  const shouldShowSize =
+    product.sizes?.length > 0 &&
+    (isBasePricing || isFieldUsedInVariants(product, "sizeId"));
+
+  const shouldShowDigits =
     product.minDigits !== undefined &&
     product.maxDigits !== undefined &&
     product.minDigits > 0 &&
-    product.maxDigits > 0;
+    product.maxDigits > 0 &&
+    (isBasePricing || isFieldUsedInVariants(product, "digitCount"));
 
   return (
     <div className=" space-y-4 mt-4">
       {/* Size Dropdown */}
 
-      {product.sizes.length > 0 && (
+      {shouldShowSize && (
         <div>
           <label
             htmlFor="size"
@@ -564,7 +595,7 @@ const ProductOptions = ({
       )}
 
       {/* How Many Digits dropdown - dynamically shown based on product config */}
-      {hasDigitCustomization && (
+      {shouldShowDigits && (
         <div>
           <label
             htmlFor="how-many-digits"
