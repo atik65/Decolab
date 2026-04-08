@@ -78,15 +78,17 @@ const ProductInformation = () => {
       : [];
 
     // Size validation - required only if used in variant pricing
-    if (currentProduct.sizes?.length > 0 && requiredKeys.includes("sizeId")) {
+    if (currentProduct.sizes?.length > 0
+      // && requiredKeys.includes("sizeId")
+    ) {
       schema.size = Yup.string().required("Size is required");
     }
 
     // Digit count validation - required only if used in variant pricing
     if (
       currentProduct.minDigits &&
-      currentProduct.maxDigits &&
-      requiredKeys.includes("digitCount")
+      currentProduct.maxDigits
+      // && requiredKeys.includes("digitCount")
     ) {
       schema.digitCount = Yup.number()
         .required("Digit count is required")
@@ -154,18 +156,18 @@ const ProductInformation = () => {
     validationSchema: productValidation,
     onSubmit: (values) => {
       console.log(values);
-      enqueueSnackbar(
-        submitType.current === "orderNow"
-          ? "Checkout is Initiating."
-          : "Added to Cart successfully!",
-        {
-          variant: "success",
-          style: {
-            backgroundColor: "#87A786",
-            color: "white",
-          },
-        },
-      );
+      // enqueueSnackbar(
+      //   submitType.current === "orderNow"
+      //     ? "Checkout is Initiating."
+      //     : "Added to Cart successfully!",
+      //   {
+      //     variant: "success",
+      //     style: {
+      //       backgroundColor: "#87A786",
+      //       color: "white",
+      //     },
+      //   },
+      // );
 
       const orderStorePayload = {
         productId: Array.isArray(slug) ? slug[0] : slug?.toString() || "",
@@ -239,6 +241,19 @@ const ProductInformation = () => {
         // Add to cart
         cart.addProduct(cartItem);
         console.log("Added to cart:", cartItem);
+
+
+        enqueueSnackbar(
+          "Added to Cart successfully!",
+          {
+            variant: "success",
+            style: {
+              backgroundColor: "#189CD9",
+              color: "white",
+            },
+          },
+        );
+
       } else if (!cartItem) {
         console.error("Failed to prepare cart item");
         enqueueSnackbar("Failed to prepare cart item", {
@@ -261,6 +276,18 @@ const ProductInformation = () => {
         if (cartItem) {
           cart.addProduct(cartItem);
           router.push("/checkout");
+
+
+          enqueueSnackbar(
+            "Checkout is Initiating.",
+            {
+              variant: "success",
+              style: {
+                backgroundColor: "#189CD9",
+                color: "white",
+              },
+            },
+          );
         }
       }
     },
@@ -305,6 +332,10 @@ const ProductInformation = () => {
       setFieldValue("quantity", values.quantity - 1);
     }
   };
+
+
+
+  // console.log('current product = ', currentProduct)
 
   // console.log(errors);
 

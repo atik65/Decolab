@@ -39,7 +39,7 @@ export interface CompleteCartItem {
   productTitle: string;
   productImage: string;
   category: string;
-  size: Size;
+  size?: Size;
   color: Color;
   lightColor: LightColor;
   design: Design;
@@ -66,6 +66,9 @@ export const prepareCartItem = (
   product: ProductDetails,
   userOptions: UserSelectedOptions,
 ): CompleteCartItem | null => {
+
+  console.log('product from cart createtion = ', product)
+
   try {
     // Validate variant conditions first (if variant pricing)
     if (product.pricing?.type === "variant") {
@@ -82,7 +85,7 @@ export const prepareCartItem = (
     const size = product.sizes.find(
       (s: Size) => String(s.id) === String(userOptions.sizeId),
     );
-    if (!size) {
+    if ( product?.sizes?.length > 0 && !size) {
       console.error("Size not found");
       return null;
     }
@@ -132,11 +135,11 @@ export const prepareCartItem = (
       productTitle: product.title,
       productImage: product.mainImage,
       category: product.category,
-      size: {
+      size: product?.sizes?.length > 0 && size ? {
         id: size.id,
         title: size.title,
         value: size.value,
-      },
+      } : undefined,
       color: {
         id: color.id,
         name: color.name,
@@ -183,7 +186,7 @@ export const validateUserOptions = (
   const missingFields: string[] = [];
 
   if (!userOptions.productId) missingFields.push("productId");
-  if (!userOptions.sizeId) missingFields.push("sizeId");
+  // if (!userOptions.sizeId) missingFields.push("sizeId");
   if (!userOptions.colorId) missingFields.push("colorId");
   if (!userOptions.lightColorId) missingFields.push("lightColorId");
   if (!userOptions.designId) missingFields.push("designId");
