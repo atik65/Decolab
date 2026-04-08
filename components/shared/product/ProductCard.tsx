@@ -75,6 +75,8 @@ const ProductCard = ({ product }: ProductCardProps) => {
 
   // console.log("locale = ", locale);
 
+  console.log("current image = ", product);
+
   return (
     <Link
       ref={container}
@@ -90,6 +92,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
           className="w-full mx-auto object-cover h-72 md:h-[450px] mt-0 pt-0"
           src={currentImage || "/images/home/bed.png"}
           alt={"Product"}
+          unoptimized
         />
 
         <p

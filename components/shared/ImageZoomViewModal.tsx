@@ -103,6 +103,7 @@ const ImageZoomViewModal = ({
             className={cn(className)}
             loading={isEager ? "eager" : "lazy"}
             quality={100}
+            unoptimized
           />
         </DialogTrigger>
         <DialogContent

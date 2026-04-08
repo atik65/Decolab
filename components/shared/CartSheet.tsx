@@ -114,6 +114,7 @@ const CartSheet = () => {
                         alt={item.productTitle}
                         fill
                         className="object-cover group-hover:scale-105 transition-transform duration-500"
+                        unoptimized
                       />
                     ) : (
                       <div className="w-full h-full flex items-center justify-center text-gray-300">
@@ -200,7 +201,7 @@ const CartSheet = () => {
                   {locale === "en" ? "Total" : "الإجمالي"}
                 </span>
                 <span className="text-2xl font-bold text-[#1489C1]">
-                  KD {total.toFixed(3)}
+                  KD {total.toFixed(2)}
                 </span>
               </div>
             </div>
@@ -210,7 +211,7 @@ const CartSheet = () => {
               className="w-full"
               onClick={() => setIsOpen(false)}
             >
-              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] duration-300 shadow-lg transition-all duration-300">
+              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] duration-300 shadow-lg transition-all ">
                 {locale === "en" ? "Proceed to Checkout" : "الذهاب للدفع"}
               </Button>
             </Link>

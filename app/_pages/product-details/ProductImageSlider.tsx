@@ -204,6 +204,7 @@ const ThumbsComponent = ({
           className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
             index === activeIndex ? "border-[#189CD9]" : "border-transparent "
           }`}
+          unoptimized
         />
       ) : (
         <div className="h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 bg-gray-200 border-[5px] border-transparent"></div>
