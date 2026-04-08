@@ -334,8 +334,9 @@ export interface Variant {
 }
 
 export interface Conditions {
-  sizeId: number;
-  digitCount: number;
+  sizeId?: number;
+  digitCount?: number;
+  [key: string]: number | string | undefined; // Allow any future dimensions (materialId, colorId, etc.)
 }
 
 export interface Size {

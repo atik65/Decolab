@@ -49,6 +49,8 @@ const OrderSummary = () => {
     );
   }
 
+  console.log("cartItems", cartItems);
+
   return (
     <div className="rounded-lg">
       <h2 className="text-2xl font-semibold mb-6 text-gray-800">
@@ -71,6 +73,7 @@ const OrderSummary = () => {
                     src={item.productImage}
                     alt={item.productTitle}
                     className="w-20 h-20 object-cover rounded-lg shadow-sm"
+                    unoptimized
                   />
                 ) : (
                   <div className="w-20 h-20 bg-gray-200 rounded-lg"></div>
@@ -193,13 +196,14 @@ const OrderSummary = () => {
                 <div className="text-sm text-gray-600 w-full gap-2 flex justify-between items-center">
                   <span>{locale === "en" ? "Design" : "التصميم"}</span>
                   <div className="max-w-[100px]">
-                    {item.design.url ? (
+                    {item.design.image ? (
                       <Image
                         width={100}
                         height={40}
-                        src={item.design.url}
+                        src={item.design.image}
                         alt={item.design.name || "Design"}
                         className="w-full max-h-12 object-contain"
+                        unoptimized
                       />
                     ) : (
                       <div className="w-10 h-10 bg-gray-200 rounded flex items-center justify-center text-[10px] text-gray-400">
@@ -280,6 +284,7 @@ const ColorCapsule = ({
           width={20}
           height={20}
           className="w-5 h-5 rounded-full object-cover"
+          unoptimized
         />
       ) : (
         <div
