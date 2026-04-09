@@ -78,7 +78,8 @@ const ProductInformation = () => {
       : [];
 
     // Size validation - required only if used in variant pricing
-    if (currentProduct.sizes?.length > 0
+    if (
+      currentProduct.sizes?.length > 0
       // && requiredKeys.includes("sizeId")
     ) {
       schema.size = Yup.string().required("Size is required");
@@ -242,18 +243,13 @@ const ProductInformation = () => {
         cart.addProduct(cartItem);
         console.log("Added to cart:", cartItem);
 
-
-        enqueueSnackbar(
-          "Added to Cart successfully!",
-          {
-            variant: "success",
-            style: {
-              backgroundColor: "#189CD9",
-              color: "white",
-            },
+        enqueueSnackbar("Added to Cart successfully!", {
+          variant: "success",
+          style: {
+            backgroundColor: "#189CD9",
+            color: "white",
           },
-        );
-
+        });
       } else if (!cartItem) {
         console.error("Failed to prepare cart item");
         enqueueSnackbar("Failed to prepare cart item", {
@@ -277,17 +273,13 @@ const ProductInformation = () => {
           cart.addProduct(cartItem);
           router.push("/checkout");
 
-
-          enqueueSnackbar(
-            "Checkout is Initiating.",
-            {
-              variant: "success",
-              style: {
-                backgroundColor: "#189CD9",
-                color: "white",
-              },
+          enqueueSnackbar("Checkout is Initiating.", {
+            variant: "success",
+            style: {
+              backgroundColor: "#189CD9",
+              color: "white",
             },
-          );
+          });
         }
       }
     },
@@ -333,9 +325,7 @@ const ProductInformation = () => {
     }
   };
 
-
-
-  // console.log('current product = ', currentProduct)
+  // console.log("current product = ", currentProduct);
 
   // console.log(errors);
 
@@ -409,9 +399,9 @@ const ProductInformation = () => {
       </div>
 
       {/* Product Description */}
-      <p className="text-base text-gray-600 leading-relaxed mb-6">
+      {/* <p className="text-base text-gray-600 leading-relaxed mb-6">
         {currentProduct.description}
-      </p>
+      </p> */}
 
       {/* Product Price */}
       {currentPrice !== null && currentPrice > 0 ? (
@@ -441,6 +431,9 @@ const ProductInformation = () => {
           setFieldValue={setFieldValue}
           handleChange={handleChange}
         />
+
+        {/* Product Description */}
+        <ProductDescription description={currentProduct.description} />
 
         {/* Quantity Selector and place order */}
         <div className="mt-0 pt-6">
@@ -748,5 +741,24 @@ const ProductOptions = ({
         />
       )} */}
     </div>
+  );
+};
+
+const ProductDescription = ({ description }: { description: string }) => {
+  return (
+    <div
+      // className="prose prose-sm max-w-none
+      //   [&>p]:mb-4 [&>p]:text-gray-700 [&>p]:leading-relaxed
+      //   [&>div]:mb-4 [&>div]:text-gray-700 [&>div]:leading-relaxed
+      //   [&strong]:font-bold
+      //   [&_span]:text-inherit
+      //   [&>p>strong]:text-gray-900
+      //   [&a]:text-[#189CD9] [&a]:no-underline hover:[&a]:underline
+      //   [&>ul]:list-disc [&>ul]:pl-6 [&>ul]:mb-4
+      //   [&>ol]:list-decimal [&>ol]:pl-6 [&>ol]:mb-4
+      //   [&>li]:mb-2
+      //   [&>br]:mb-2"
+      dangerouslySetInnerHTML={{ __html: description }}
+    />
   );
 };
