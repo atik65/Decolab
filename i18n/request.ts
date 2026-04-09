@@ -9,10 +9,14 @@ export default getRequestConfig(async ({ requestLocale }) => {
     ? requested
     : routing.defaultLocale;
 
-  const messages = await import(`@/messages/${locale}.json`);
+  // const messages = await import(`@/messages/${locale}.json`);
+
+  const messages = {
+    ...(await import(`../messages/${locale}.json`)).default,
+  };
 
   return {
     locale,
-    messages: messages.default,
+    messages: messages,
   };
 });

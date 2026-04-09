@@ -3,11 +3,9 @@ import { routing } from "./i18n/routing";
 
 export default createMiddleware({
   ...routing,
-  // localePrefix: "always",
-  // defaultLocale: "ar",
-  // localeDetection: false,
-  // save to session
-  // localeDetection: true,
+  // Only use cookie for locale detection, ignore Accept-Language header
+  // This ensures Arabic is default for first-time visitors
+  localeDetection: true,
 });
 
 export const config = {

@@ -66,7 +66,11 @@ export default async function RootLayout({
   const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable}`;
 
   return (
-    <html lang={locale} className={allFonts} data-locale={locale}>
+    <html
+      lang={locale || routing.defaultLocale}
+      className={allFonts}
+      data-locale={locale}
+    >
       <body className={`antialiased`}>
         <NextIntlClientProvider>
           <CustomRootProvider>{children}</CustomRootProvider>
