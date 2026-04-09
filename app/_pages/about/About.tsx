@@ -1,9 +1,28 @@
 "use client";
-import React from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { ShapeHero } from "@/components/shared/ShapeHero";
+import {
+  Target,
+  Eye,
+  Award,
+  Lightbulb,
+  Heart,
+  Shield,
+  Leaf,
+  Palette,
+  Home,
+  Building2,
+  Store,
+  Type,
+  Wrench,
+  CheckCircle2,
+  Users,
+  Briefcase,
+  TrendingUp,
+  Package,
+} from "lucide-react";
 
 const About = () => {
   const locale = useGetLocale();
@@ -40,37 +59,37 @@ const About = () => {
             title: "Quality Excellence",
             description:
               "We never compromise on quality. Every product undergoes rigorous quality checks to ensure it meets our high standards.",
-            icon: "⭐",
+            Icon: Award,
           },
           {
             title: "Innovation",
             description:
               "We stay ahead of industry trends, continuously exploring new materials, techniques, and designs.",
-            icon: "💡",
+            Icon: Lightbulb,
           },
           {
             title: "Customer Focus",
             description:
               "Your satisfaction is our priority. We listen, understand, and deliver solutions that exceed expectations.",
-            icon: "❤️",
+            Icon: Heart,
           },
           {
             title: "Integrity",
             description:
               "We conduct business with honesty and transparency, building lasting relationships based on trust.",
-            icon: "🤝",
+            Icon: Shield,
           },
           {
             title: "Sustainability",
             description:
               "We're committed to eco-friendly practices, using sustainable materials whenever possible.",
-            icon: "🌱",
+            Icon: Leaf,
           },
           {
             title: "Craftsmanship",
             description:
               "Each piece is created with meticulous attention to detail by our skilled artisans.",
-            icon: "🎨",
+            Icon: Palette,
           },
         ],
       },
@@ -81,39 +100,45 @@ const About = () => {
             title: "Custom House Numbers",
             description:
               "Elegant and durable house numbers that add personality to your home.",
+            Icon: Home,
           },
           {
             title: "Diwaniya Designs",
             description:
               "Traditional and modern designs that honor cultural heritage.",
+            Icon: Building2,
           },
           {
             title: "Business Signage",
             description:
               "Eye-catching illuminated signs that boost your brand presence.",
+            Icon: Store,
           },
           {
             title: "Islamic Calligraphy",
             description:
               "Beautiful Arabic calligraphy pieces crafted with reverence.",
+            Icon: Type,
           },
           {
             title: "Custom Designs",
             description:
               "Bespoke solutions tailored to your unique requirements.",
+            Icon: Palette,
           },
           {
             title: "Installation Services",
             description:
               "Professional installation ensuring perfect placement.",
+            Icon: Wrench,
           },
         ],
       },
       stats: [
-        { number: "2500+", label: "Happy Clients" },
-        { number: "5000+", label: "Projects Completed" },
-        { number: "15+", label: "Years of Experience" },
-        { number: "50+", label: "Product Categories" },
+        { number: "2500+", label: "Happy Clients", Icon: Users },
+        { number: "5000+", label: "Projects Completed", Icon: Briefcase },
+        { number: "15+", label: "Years of Experience", Icon: TrendingUp },
+        { number: "50+", label: "Product Categories", Icon: Package },
       ],
       cta: {
         title: "Ready to Create Something Amazing?",
@@ -152,37 +177,37 @@ const About = () => {
             title: "التميز في الجودة",
             description:
               "نحن لا نساوم أبدًا على الجودة. كل منتج يخضع لفحوصات جودة صارمة لضمان أنه يلبي معاييرنا العالية.",
-            icon: "⭐",
+            Icon: Award,
           },
           {
             title: "الابتكار",
             description:
               "نحن نتقدم على اتجاهات الصناعة، ونستكشف باستمرار مواد وتقنيات وتصاميم جديدة.",
-            icon: "💡",
+            Icon: Lightbulb,
           },
           {
             title: "التركيز على العميل",
             description:
               "رضاك هو أولويتنا. نحن نستمع ونفهم ونقدم حلولًا تتجاوز التوقعات.",
-            icon: "❤️",
+            Icon: Heart,
           },
           {
             title: "النزاهة",
             description:
               "نحن نمارس الأعمال بصدق وشفافية، وبناء علاقات دائمة على أساس الثقة.",
-            icon: "🤝",
+            Icon: Shield,
           },
           {
             title: "الاستدامة",
             description:
               "نحن ملتزمون بالممارسات الصديقة للبيئة، باستخدام مواد مستدامة كلما أمكن ذلك.",
-            icon: "🌱",
+            Icon: Leaf,
           },
           {
             title: "الحرفية",
             description:
               "كل قطعة يتم إنشاؤها باهتمام دقيق بالتفاصيل من قبل حرفيينا المهرة.",
-            icon: "🎨",
+            Icon: Palette,
           },
         ],
       },
@@ -192,34 +217,40 @@ const About = () => {
           {
             title: "أرقام المنازل المخصصة",
             description: "أرقام منازل أنيقة ومتينة تضيف شخصية لمنزلك.",
+            Icon: Home,
           },
           {
             title: "تصاميم الديوانية",
             description: "تصاميم تقليدية وحديثة تكرم التراث الثقافي.",
+            Icon: Building2,
           },
           {
             title: "لافتات الأعمال",
             description: "لافتات مضيئة ملفتة للنظر تعزز حضور علامتك التجارية.",
+            Icon: Store,
           },
           {
             title: "الخط الإسلامي",
             description: "قطع خط عربي جميلة مصنوعة باحترام.",
+            Icon: Type,
           },
           {
             title: "التصاميم المخصصة",
             description: "حلول مخصصة مصممة لمتطلباتك الفريدة.",
+            Icon: Palette,
           },
           {
             title: "خدمات التركيب",
             description: "تركيب احترافي يضمن وضعًا مثاليًا.",
+            Icon: Wrench,
           },
         ],
       },
       stats: [
-        { number: "2500+", label: "عميل سعيد" },
-        { number: "5000+", label: "مشروع مكتمل" },
-        { number: "15+", label: "سنة من الخبرة" },
-        { number: "50+", label: "فئة منتج" },
+        { number: "2500+", label: "عميل سعيد", Icon: Users },
+        { number: "5000+", label: "مشروع مكتمل", Icon: Briefcase },
+        { number: "15+", label: "سنة من الخبرة", Icon: TrendingUp },
+        { number: "50+", label: "فئة منتج", Icon: Package },
       ],
       cta: {
         title: "هل أنت مستعد لإنشاء شيء مذهل؟",
@@ -337,13 +368,14 @@ const About = () => {
 
               <motion.div
                 variants={fadeInUp}
-                className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden"
+                className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl group"
               >
+                <div className="absolute inset-0 bg-gradient-to-t from-[#189CD9]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                 <Image
                   src="/images/home/banner7.jpg"
                   alt="One Direction Story"
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
               </motion.div>
             </div>
@@ -363,9 +395,11 @@ const About = () => {
           >
             <motion.div
               variants={fadeInUp}
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#189CD9]"
+              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
             >
-              <div className="text-4xl mb-4">🎯</div>
+              <div className="w-16 h-16 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#189CD9]/20 transition-colors">
+                <Target className="w-8 h-8 text-[#189CD9]" />
+              </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
                 {currentContent.mission.title}
               </h3>
@@ -376,9 +410,11 @@ const About = () => {
 
             <motion.div
               variants={fadeInUp}
-              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg border-t-4 border-[#189CD9]"
+              className="bg-white p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
             >
-              <div className="text-4xl mb-4">🔭</div>
+              <div className="w-16 h-16 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#189CD9]/20 transition-colors">
+                <Eye className="w-8 h-8 text-[#189CD9]" />
+              </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
                 {currentContent.vision.title}
               </h3>
@@ -391,8 +427,16 @@ const About = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-[#87A786] to-[#6d8a6c] text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-[#189CD9] to-[#1070B0] text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -400,20 +444,28 @@ const About = () => {
             variants={staggerContainer}
             className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-8"
           >
-            {currentContent.stats.map((stat, index) => (
-              <motion.div
-                key={index}
-                variants={fadeInUp}
-                className="text-center"
-              >
-                <div className="text-4xl md:text-5xl lg:text-6xl font-black mb-2">
-                  {stat.number}
-                </div>
-                <div className="text-white/90 text-sm md:text-base font-medium">
-                  {stat.label}
-                </div>
-              </motion.div>
-            ))}
+            {currentContent.stats.map((stat, index) => {
+              const IconComponent = stat.Icon;
+              return (
+                <motion.div
+                  key={index}
+                  variants={fadeInUp}
+                  className="text-center group"
+                >
+                  <div className="flex justify-center mb-4">
+                    <div className="w-16 h-16 bg-white/10 rounded-2xl flex items-center justify-center group-hover:bg-white/20 transition-colors">
+                      <IconComponent className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                  <div className="text-4xl md:text-5xl lg:text-6xl font-black mb-2">
+                    {stat.number}
+                  </div>
+                  <div className="text-white/90 text-sm md:text-base font-medium">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              );
+            })}
           </motion.div>
         </div>
       </section>
@@ -439,22 +491,27 @@ const About = () => {
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-              {currentContent.values.items.map((value, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ y: -8, scale: 1.02 }}
-                  className="bg-gray-50 p-6 md:p-8 rounded-2xl border-2 border-gray-100 hover:border-[#189CD9] transition-all duration-300"
-                >
-                  <div className="text-4xl mb-4">{value.icon}</div>
-                  <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
-                    {value.title}
-                  </h3>
-                  <p className="text-gray-600 leading-relaxed text-sm md:text-base">
-                    {value.description}
-                  </p>
-                </motion.div>
-              ))}
+              {currentContent.values.items.map((value, index) => {
+                const IconComponent = value.Icon;
+                return (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    whileHover={{ y: -8 }}
+                    className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-[#189CD9] hover:shadow-xl transition-all duration-300 group"
+                  >
+                    <div className="w-14 h-14 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#189CD9] transition-colors">
+                      <IconComponent className="w-7 h-7 text-[#189CD9] group-hover:text-white transition-colors" />
+                    </div>
+                    <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
+                      {value.title}
+                    </h3>
+                    <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+                      {value.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
@@ -481,29 +538,43 @@ const About = () => {
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-              {currentContent.expertise.items.map((item, index) => (
-                <motion.div
-                  key={index}
-                  variants={fadeInUp}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white p-6 rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300"
-                >
-                  <h4 className="text-lg md:text-xl font-bold mb-2 text-gray-900">
-                    {item.title}
-                  </h4>
-                  <p className="text-gray-600 text-sm md:text-base">
-                    {item.description}
-                  </p>
-                </motion.div>
-              ))}
+              {currentContent.expertise.items.map((item, index) => {
+                const IconComponent = item.Icon;
+                return (
+                  <motion.div
+                    key={index}
+                    variants={fadeInUp}
+                    whileHover={{ y: -5 }}
+                    className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-[#189CD9] group"
+                  >
+                    <div className="w-12 h-12 bg-[#189CD9]/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#189CD9] transition-colors">
+                      <IconComponent className="w-6 h-6 text-[#189CD9] group-hover:text-white transition-colors" />
+                    </div>
+                    <h4 className="text-lg md:text-xl font-bold mb-2 text-gray-900">
+                      {item.title}
+                    </h4>
+                    <p className="text-gray-600 text-sm md:text-base">
+                      {item.description}
+                    </p>
+                  </motion.div>
+                );
+              })}
             </div>
           </motion.div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#87A786] to-[#6d8a6c] text-white">
-        <div className="container mx-auto px-4">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-[#189CD9] to-[#1070B0] text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-10">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            }}
+          />
+        </div>
+        <div className="container mx-auto px-4 relative z-10">
           <motion.div
             initial="hidden"
             whileInView="visible"
@@ -528,9 +599,10 @@ const About = () => {
                 href={`/${locale}/contact`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-block bg-white text-[#189CD9] px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300"
+                className="inline-flex items-center gap-3 bg-white text-[#189CD9] px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300 shadow-xl"
               >
                 {currentContent.cta.button}
+                <CheckCircle2 className="w-5 h-5" />
               </motion.a>
             </motion.div>
           </motion.div>
