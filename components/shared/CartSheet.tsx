@@ -178,7 +178,7 @@ const CartSheet = () => {
                           <Plus size={12} />
                         </button>
                       </div>
-                      <p className="font-bold text-[#1489C1] text-sm">
+                      <p className="font-bold text-[#1489C1] text-sm !font-roboto">
                         KD {(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -194,13 +194,13 @@ const CartSheet = () => {
             <div className="space-y-1.5 w-full">
               <div className="flex justify-between text-gray-500 text-sm">
                 <span>{locale === "en" ? "Subtotal" : "المجموع الفرعي"}</span>
-                <span>KD {total.toFixed(2)}</span>
+                <span className="!font-roboto">KD {total.toFixed(2)}</span>
               </div>
               <div className="flex justify-between items-end">
                 <span className="text-lg font-bold text-gray-900">
                   {locale === "en" ? "Total" : "الإجمالي"}
                 </span>
-                <span className="text-2xl font-bold text-[#1489C1]">
+                <span className="text-2xl font-bold text-[#1489C1] !font-roboto">
                   KD {total.toFixed(2)}
                 </span>
               </div>
