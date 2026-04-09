@@ -24,6 +24,11 @@ const CartSheet = () => {
 
   const router = useRouter();
 
+  const handleVistiProduct = (productId: string) => {
+    setIsOpen(false);
+    router.push(`/products/${productId}`);
+  };
+
   const loadCart = () => {
     setItems(cart.getAllProducts());
   };
@@ -107,7 +112,10 @@ const CartSheet = () => {
                   key={`${item.productId}-${index}`}
                   className="flex gap-4 group"
                 >
-                  <div className="relative w-24 h-24 bg-gray-50 rounded-xl overflow-hidden shrink-0 border border-gray-100">
+                  <div
+                    onClick={() => handleVistiProduct(item?.productId)}
+                    className="relative w-24 h-24 bg-gray-50 rounded-xl overflow-hidden shrink-0 border border-gray-100 cursor-pointer group-hover:shadow-md transition-shadow duration-300"
+                  >
                     {item.productImage ? (
                       <Image
                         src={item.productImage}
@@ -125,7 +133,10 @@ const CartSheet = () => {
 
                   <div className="flex-1 flex flex-col justify-between py-1 min-w-0">
                     <div>
-                      <div className="flex justify-between items-start gap-2">
+                      <div
+                        onClick={() => handleVistiProduct(item?.productId)}
+                        className="flex justify-between items-start gap-2 cursor-pointer"
+                      >
                         <h4 className="font-bold text-gray-900 truncate text-sm sm:text-base">
                           {item.productTitle}
                         </h4>

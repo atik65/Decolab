@@ -34,7 +34,7 @@ export const NoImage = () => {
             {/* Action Button */}
             <Link
               href="/shop"
-              className="mt-6 px-6 py-2.5 bg-[#87A786] hover:bg-[#6d8a6c] text-white font-medium rounded-md transition-all duration-200 shadow-sm hover:shadow-md"
+              className="mt-6 px-6 py-2.5 bg-[#189CD9] hover:bg-[#1489C1] text-white font-medium rounded-md transition-all duration-200 shadow-sm hover:shadow-md"
             >
               Browse Other Products
             </Link>
@@ -111,7 +111,7 @@ export const NoDetails = () => {
       <div className="flex flex-col sm:flex-row gap-3">
         <Link
           href="/shop"
-          className="flex-1 px-6 py-3 bg-[#87A786] hover:bg-[#6d8a6c] text-white font-semibold rounded-md transition-all duration-200 shadow-sm hover:shadow-md text-center"
+          className="flex-1 px-6 py-3 bg-[#189CD9] hover:bg-[#1489C1] text-white font-semibold rounded-md transition-all duration-200 shadow-sm hover:shadow-md text-center"
         >
           Browse All Products
         </Link>
@@ -129,7 +129,7 @@ export const NoDetails = () => {
           Need help? Contact us at{" "}
           <a
             href="mailto:support@onedirection.com"
-            className="text-[#87A786] hover:underline font-medium"
+            className="text-[#189CD9] hover:underline font-medium"
           >
             support@onedirection.com
           </a>
