@@ -6,6 +6,7 @@ import React from "react";
 import cart from "@/utils/localStorage";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { Trash2, Plus, Minus } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const OrderSummary = () => {
   const locale = useGetLocale();
@@ -24,6 +25,11 @@ const OrderSummary = () => {
   const handleRemoveItem = (index: number) => {
     cart.removeProduct(index);
     setCartItems(cart.getAllProducts());
+  };
+
+  const router = useRouter();
+  const handleNavigateToProduct = (productId: string) => {
+    router.push(`/products/${productId}`);
   };
 
   const totalPrice = cart.getTotalPrice();
@@ -64,8 +70,11 @@ const OrderSummary = () => {
             className="border-b pb-6 last:border-0 border-gray-100"
           >
             {/* Product image + name + description */}
-            <div className="flex items-start gap-4">
-              <div className="relative group shrink-0">
+            <div className="flex items-start gap-4 ">
+              <div
+                onClick={() => handleNavigateToProduct(item.productId)}
+                className="relative group shrink-0 cursor-pointer"
+              >
                 {item.productImage && item.productImage !== "" ? (
                   <Image
                     width={80}
@@ -83,7 +92,10 @@ const OrderSummary = () => {
               <div className="flex-1 min-w-0">
                 {/* title and removal */}
                 <div className="flex justify-between items-start w-full gap-2">
-                  <h3 className="font-bold text-gray-900 truncate">
+                  <h3
+                    className="font-bold text-gray-900 truncate cursor-pointer"
+                    onClick={() => handleNavigateToProduct(item.productId)}
+                  >
                     {item.productTitle}
                   </h3>
                   <button

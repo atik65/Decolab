@@ -170,6 +170,22 @@
   }
 }
 
+/* Product description styling - keep default fonts */
+.product-description {
+  @apply font-roboto;
+}
+
+/* Arabic locale uses Arabic fonts */
+
+/* Force Roboto font ONLY for numbers wrapped in roboto-num class */
+.roboto-num {
+  font-family: "DG Rarah", sans-serif !important;
+  font-variant-numeric: tabular-nums;
+  direction: ltr;
+  unicode-bidi: embed;
+  display: inline-block;
+}
+
 /* scroll bar for all */
 
 ::-webkit-scrollbar {
