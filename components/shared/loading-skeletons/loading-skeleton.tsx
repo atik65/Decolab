@@ -132,7 +132,7 @@ export const NoProductsFound = () => {
           </div>
 
           {/* Suggestions */}
-          <div className="bg-gradient-to-r from-[#87A786]/10 to-[#87A786]/5 rounded-xl p-6 mb-8 text-left">
+          <div className="bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 rounded-xl p-6 mb-8 text-left">
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -152,15 +152,15 @@ export const NoProductsFound = () => {
             </h3>
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="text-[#87A786] mt-1">•</span>
+                <span className="text-[#189CD9] mt-1">•</span>
                 <span>Check the spelling of your search terms</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#87A786] mt-1">•</span>
+                <span className="text-[#189CD9] mt-1">•</span>
                 <span>Try using more general keywords</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#87A786] mt-1">•</span>
+                <span className="text-[#189CD9] mt-1">•</span>
                 <span>Browse our popular categories below</span>
               </li>
             </ul>
@@ -170,7 +170,7 @@ export const NoProductsFound = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/shop"
-              className="px-6 py-3 bg-gradient-to-r from-[#87A786] to-[#6d8a6c] hover:from-[#6d8a6c] hover:to-[#87A786] text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+              className="px-6 py-3 bg-gradient-to-r from-[#189CD9] to-[#1070B0] hover:from-[#1070B0] hover:to-[#189CD9] text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
             >
               View All Products
             </Link>
