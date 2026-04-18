@@ -227,7 +227,7 @@ const OrderSummary = () => {
               )}
 
               {/* font */}
-              {/* {item.font && (
+              {item.font && (
                 <div className="text-sm text-gray-600 flex flex-row gap-5 justify-between items-center w-full">
                   <span>{locale === "en" ? "Font" : "الخط"}</span>
                   <div className="max-w-[100px]">
@@ -246,7 +246,7 @@ const OrderSummary = () => {
                     )}
                   </div>
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         ))}

@@ -40,8 +40,8 @@ export interface CompleteCartItem {
   productImage: string;
   category: string;
   size?: Size;
-  color: Color;
-  lightColor: LightColor;
+  color?: Color;
+  lightColor?: LightColor;
   design?: Design;
   font?: Font;
   houseNumber: string;
@@ -66,8 +66,7 @@ export const prepareCartItem = (
   product: ProductDetails,
   userOptions: UserSelectedOptions,
 ): CompleteCartItem | null => {
-
-  console.log('product from cart createtion = ', product)
+  console.log("product from cart createtion = ", product);
 
   try {
     // Validate variant conditions first (if variant pricing)
@@ -82,9 +81,12 @@ export const prepareCartItem = (
     }
 
     // Find size object
-    const size = product.sizes.length > 0
-      ? product.sizes.find((s: Size) => String(s.id) === String(userOptions.sizeId))
-      : undefined;
+    const size =
+      product.sizes.length > 0
+        ? product.sizes.find(
+            (s: Size) => String(s.id) === String(userOptions.sizeId),
+          )
+        : undefined;
 
     if (product.sizes.length > 0 && !size) {
       console.error("Size not found");
@@ -92,9 +94,12 @@ export const prepareCartItem = (
     }
 
     // Find color object
-    const color = product.colors.length > 0
-      ? product.colors.find((c) => String(c.id) === String(userOptions.colorId))
-      : undefined;
+    const color =
+      product.colors.length > 0
+        ? product.colors.find(
+            (c) => String(c.id) === String(userOptions.colorId),
+          )
+        : undefined;
 
     if (product.colors.length > 0 && !color) {
       console.error("Color not found");
@@ -102,9 +107,12 @@ export const prepareCartItem = (
     }
 
     // Find light color object
-    const lightColor = product.lightColors.length > 0
-      ? product.lightColors.find((lc) => String(lc.id) === String(userOptions.lightColorId))
-      : undefined;
+    const lightColor =
+      product.lightColors.length > 0
+        ? product.lightColors.find(
+            (lc) => String(lc.id) === String(userOptions.lightColorId),
+          )
+        : undefined;
 
     if (product.lightColors.length > 0 && !lightColor) {
       console.error("Light color not found");
@@ -112,9 +120,12 @@ export const prepareCartItem = (
     }
 
     // Find design object
-    const design = product.designs.length > 0
-      ? product.designs.find((d) => String(d.id) === String(userOptions.designId))
-      : undefined;
+    const design =
+      product.designs.length > 0
+        ? product.designs.find(
+            (d) => String(d.id) === String(userOptions.designId),
+          )
+        : undefined;
 
     if (product.designs.length > 0 && !design) {
       console.error("Design not found");
@@ -122,9 +133,10 @@ export const prepareCartItem = (
     }
 
     // Find font object
-    const font = product.fonts.length > 0
-      ? product.fonts.find((f) => String(f.id) === String(userOptions.fontId))
-      : undefined;
+    const font =
+      product.fonts.length > 0
+        ? product.fonts.find((f) => String(f.id) === String(userOptions.fontId))
+        : undefined;
 
     if (product.fonts.length > 0 && !font) {
       console.error("Font not found");
@@ -140,34 +152,45 @@ export const prepareCartItem = (
       productTitle: product.title,
       productImage: product.mainImage,
       category: product.category,
-      size: product?.sizes?.length > 0 && size ? {
-        id: size.id,
-        title: size.title,
-        value: size.value,
-      } : undefined,
-      color: {
-        id: color.id,
-        name: color.name,
-        colorCode: color.colorCode,
-        image: color.image,
-      },
-      lightColor: {
-        id: lightColor.id,
-        name: lightColor.name,
-        colorCode: lightColor.colorCode,
-        image: lightColor.image,
-      },
-      design: design ? {
-        id: design.id,
-        url: design.url,
-        name: design.name,
-        image: design.image,
-      } : undefined,
-      font: font ? {
-        id: font?.id,
-        name: font?.name,
-        image: font?.image,
-      } : undefined,
+      size:
+        product?.sizes?.length > 0 && size
+          ? {
+              id: size.id,
+              title: size.title,
+              value: size.value,
+            }
+          : undefined,
+      color: color
+        ? {
+            id: color.id,
+            name: color.name,
+            colorCode: color.colorCode,
+            image: color.image,
+          }
+        : undefined,
+      lightColor: lightColor
+        ? {
+            id: lightColor.id,
+            name: lightColor.name,
+            colorCode: lightColor.colorCode,
+            image: lightColor.image,
+          }
+        : undefined,
+      design: design
+        ? {
+            id: design.id,
+            url: design.url,
+            name: design.name,
+            image: design.image,
+          }
+        : undefined,
+      font: font
+        ? {
+            id: font?.id,
+            name: font?.name,
+            image: font?.image,
+          }
+        : undefined,
       houseNumber: userOptions.houseNumber,
       text: userOptions.text,
       quantity: userOptions.quantity,
@@ -192,7 +215,8 @@ export const validateUserOptions = (
 
   if (!userOptions.productId) missingFields.push("productId");
   // Basic validation - Formik handles the specific product logic
-  if (!userOptions.quantity || userOptions.quantity < 1) missingFields.push("quantity");
+  if (!userOptions.quantity || userOptions.quantity < 1)
+    missingFields.push("quantity");
   if (!userOptions.price || userOptions.price <= 0) missingFields.push("price");
 
   return {
