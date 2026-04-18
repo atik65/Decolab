@@ -42,8 +42,8 @@ export interface CompleteCartItem {
   size?: Size;
   color: Color;
   lightColor: LightColor;
-  design: Design;
-  // font: Font;
+  design?: Design;
+  font?: Font;
   houseNumber: string;
   text: string;
   quantity: number;
@@ -82,49 +82,54 @@ export const prepareCartItem = (
     }
 
     // Find size object
-    const size = product.sizes.find(
-      (s: Size) => String(s.id) === String(userOptions.sizeId),
-    );
-    if ( product?.sizes?.length > 0 && !size) {
+    const size = product.sizes.length > 0
+      ? product.sizes.find((s: Size) => String(s.id) === String(userOptions.sizeId))
+      : undefined;
+
+    if (product.sizes.length > 0 && !size) {
       console.error("Size not found");
       return null;
     }
 
     // Find color object
-    const color = product.colors.find(
-      (c) => String(c.id) === String(userOptions.colorId),
-    );
-    if (!color) {
+    const color = product.colors.length > 0
+      ? product.colors.find((c) => String(c.id) === String(userOptions.colorId))
+      : undefined;
+
+    if (product.colors.length > 0 && !color) {
       console.error("Color not found");
       return null;
     }
 
     // Find light color object
-    const lightColor = product.lightColors.find(
-      (lc) => String(lc.id) === String(userOptions.lightColorId),
-    );
-    if (!lightColor) {
+    const lightColor = product.lightColors.length > 0
+      ? product.lightColors.find((lc) => String(lc.id) === String(userOptions.lightColorId))
+      : undefined;
+
+    if (product.lightColors.length > 0 && !lightColor) {
       console.error("Light color not found");
       return null;
     }
 
     // Find design object
-    const design = product.designs.find(
-      (d) => String(d.id) === String(userOptions.designId),
-    );
-    if (!design) {
+    const design = product.designs.length > 0
+      ? product.designs.find((d) => String(d.id) === String(userOptions.designId))
+      : undefined;
+
+    if (product.designs.length > 0 && !design) {
       console.error("Design not found");
       return null;
     }
 
     // Find font object
-    // const font = product.fonts.find(
-    //   (f) => String(f.id) === String(userOptions.fontId),
-    // );
-    // if (!font) {
-    //   console.error("Font not found");
-    //   return null;
-    // }
+    const font = product.fonts.length > 0
+      ? product.fonts.find((f) => String(f.id) === String(userOptions.fontId))
+      : undefined;
+
+    if (product.fonts.length > 0 && !font) {
+      console.error("Font not found");
+      return null;
+    }
 
     // Calculate total price
     const totalPrice = userOptions.price * userOptions.quantity;
@@ -152,17 +157,17 @@ export const prepareCartItem = (
         colorCode: lightColor.colorCode,
         image: lightColor.image,
       },
-      design: {
+      design: design ? {
         id: design.id,
         url: design.url,
         name: design.name,
         image: design.image,
-      },
-      // font: {
-      //   id: font?.id,
-      //   name: font?.name,
-      //   image: font?.image,
-      // },
+      } : undefined,
+      font: font ? {
+        id: font?.id,
+        name: font?.name,
+        image: font?.image,
+      } : undefined,
       houseNumber: userOptions.houseNumber,
       text: userOptions.text,
       quantity: userOptions.quantity,
@@ -186,13 +191,8 @@ export const validateUserOptions = (
   const missingFields: string[] = [];
 
   if (!userOptions.productId) missingFields.push("productId");
-  // if (!userOptions.sizeId) missingFields.push("sizeId");
-  if (!userOptions.colorId) missingFields.push("colorId");
-  if (!userOptions.lightColorId) missingFields.push("lightColorId");
-  if (!userOptions.designId) missingFields.push("designId");
-  // if (!userOptions.fontId) missingFields.push("fontId");
-  if (!userOptions.quantity || userOptions.quantity < 1)
-    missingFields.push("quantity");
+  // Basic validation - Formik handles the specific product logic
+  if (!userOptions.quantity || userOptions.quantity < 1) missingFields.push("quantity");
   if (!userOptions.price || userOptions.price <= 0) missingFields.push("price");
 
   return {

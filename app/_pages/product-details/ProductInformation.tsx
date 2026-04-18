@@ -43,6 +43,7 @@ import {
   getRequiredVariantKeys,
   isFieldUsedInVariants,
 } from "@/lib/variantSystem";
+import FontSelection from "./FontSelection";
 
 const ProductInformation = () => {
   const { slug } = useParams();
@@ -118,6 +119,11 @@ const ProductInformation = () => {
       schema.design = Yup.string().required("Design is required");
     }
 
+    // Font validation
+    if (currentProduct.fonts?.length > 0) {
+      schema.font = Yup.string().required("Font is required");
+    }
+
     // House number is always required for customizable products
     if (currentProduct.isCustomizable) {
       schema.houseNumber = Yup.string().required("House number is required");
@@ -181,7 +187,7 @@ const ProductInformation = () => {
         houseNumber: values.houseNumber?.toString(),
         text: values.text,
         designId: values.design?.toString(),
-        // fontId: values.font?.toString(),
+        fontId: values.font?.toString(),
         quantity: values.quantity,
         digitCount: values.digitCount,
         price: currentPrice || 0,
@@ -731,7 +737,7 @@ const ProductOptions = ({
         />
       )}
       {/* Font selection */}
-      {/* {product.fonts.length > 0 && (
+      {product.fonts.length > 0 && (
         <FontSelection
           values={values}
           setFieldValue={setFieldValue}
@@ -739,7 +745,7 @@ const ProductOptions = ({
           touched={touched}
           product={product}
         />
-      )} */}
+      )}
     </div>
   );
 };
