@@ -4,6 +4,7 @@ export interface Category {
   name_ar: string;
   description: string;
   description_ar: string;
+  is_showable_navbar: boolean;
 }
 
 export interface Image {

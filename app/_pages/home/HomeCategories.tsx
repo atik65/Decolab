@@ -23,6 +23,7 @@ export interface Category {
   description: string;
   description_ar: string;
   image?: string;
+  is_showable_navbar: boolean;
 }
 
 export interface CategoresResponse {

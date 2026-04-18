@@ -41,12 +41,14 @@ const Header: React.FC = () => {
 
   React.useEffect(() => {
     if (!isLoading && categoriesData) {
-      const categoryLinks = categoriesData.results.map((category) => ({
-        href: `/shop?category=${encodeURIComponent(category.name)}`,
-        label: category.name,
-        labelAr: category.name_ar,
-      }));
-      setNavLinks([...categoryLinks, ...staticNavLinks]);
+      const showableCategories = categoriesData.results
+        .filter((category) => category.is_showable_navbar)
+        .map((category) => ({
+          href: `/shop?category=${encodeURIComponent(category.name)}`,
+          label: category.name,
+          labelAr: category.name_ar,
+        }));
+      setNavLinks([...showableCategories, ...staticNavLinks]);
     }
   }, [isLoading, categoriesData]);
 
