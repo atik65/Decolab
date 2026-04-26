@@ -75,7 +75,7 @@ export const ColorOptions = ({
             <div
               className={cn(
                 "relative w-10 h-8 flex items-center justify-center transition-transform duration-300",
-                locale === "ar" ? "rounded-r-full" : "rounded-l-full",
+                locale === "ar" ? "rounded-l-full" : "rounded-l-full",
                 values.color == color.id.toString() && "scale-105",
               )}
               style={{ backgroundColor: color.colorCode }}
@@ -83,7 +83,7 @@ export const ColorOptions = ({
               {values.color == color.id.toString() && (
                 <div className={cn(
                   "absolute inset-0 bg-black/20 flex items-center justify-center",
-                  locale === "ar" ? "rounded-r-full" : "rounded-l-full"
+                  locale === "ar" ? "rounded-l-full" : "rounded-l-full"
                 )}>
                   <svg
                     className="w-4 h-4 text-white"
