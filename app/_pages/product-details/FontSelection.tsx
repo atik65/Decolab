@@ -115,11 +115,10 @@ const FontSelection = ({
                       handleFontSelect(Number(font.id));
                       setFieldValue("font", font.id.toString());
                     }}
-                    className={`relative cursor-pointer transition-all duration-200 ${
-                      isSelected
-                        ? "ring-2 ring-[#87A786] ring-offset-2 scale-100"
-                        : "hover:scale-105"
-                    }`}
+                    className={`relative cursor-pointer transition-all duration-200 ${isSelected
+                      ? "ring-2 ring-[#189CD9] ring-offset-2 scale-100"
+                      : "hover:scale-105"
+                      }`}
                   >
                     <Image
                       height={300}
@@ -128,7 +127,7 @@ const FontSelection = ({
                       src={font?.url || "/images/products/fonts/f1.avif"}
                     />
                     {isSelected && (
-                      <div className="absolute inset-0 bg-[#87A786]/10 rounded-lg" />
+                      <div className="absolute inset-0 bg-[#189CD9]/10 rounded-lg" />
                     )}
                   </div>
                 );

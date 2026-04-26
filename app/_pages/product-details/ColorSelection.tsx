@@ -209,20 +209,19 @@ export const LightColorOptions = ({
             className={cn(
               "group relative flex items-center gap-3 pr-4 rounded-full border transition-all duration-300 active:scale-95",
               values.lightColor == color.id.toString()
-                ? "border-[#87A786] bg-[#87A786]/5 shadow-sm"
-                : "border-gray-200 bg-white hover:border-[#87A786]/50 shadow-none hover:shadow-xs",
+                ? "border-[#189CD9] bg-[#189CD9]/5 shadow-sm"
+                : "border-gray-200 bg-white hover:border-[#189CD9]/50 shadow-none hover:shadow-xs",
             )}
           >
             {/* Swatch with Glow Effect for Light Colors */}
             <div
               className={cn(
                 "relative w-10 h-8 flex items-center justify-center transition-all duration-300",
-                locale === "ar" ? "rounded-r-full" : "rounded-l-full",
+                locale === "ar" ? "rounded-l-full" : "rounded-l-full",
                 values.lightColor == color.id.toString() && "scale-105",
               )}
               style={{
                 backgroundColor: color.colorCode,
-                boxShadow: values.lightColor == color.id.toString() ? `0 0 10px ${color.colorCode}80` : 'none'
               }}
             >
               {values.lightColor == color.id.toString() && (
@@ -255,7 +254,7 @@ export const LightColorOptions = ({
               className={cn(
                 "text-sm font-semibold transition-colors duration-300",
                 values.lightColor == color.id.toString()
-                  ? "text-[#87A786]"
+                  ? "text-[#189CD9]"
                   : "text-gray-600 group-hover:text-gray-900",
               )}
             >
@@ -263,7 +262,7 @@ export const LightColorOptions = ({
             </span>
 
             {values.lightColor == color.id.toString() && (
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#87A786] rounded-full border-2 border-white animate-in zoom-in duration-300" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#189CD9] rounded-full border-2 border-white animate-in zoom-in duration-300" />
             )}
           </button>
         ))}
@@ -289,7 +288,7 @@ export const LightColorOptions = ({
             className="w-3 h-3 rounded-full"
             style={{
               backgroundColor: selectedColor.colorCode,
-              borderColor: "#87A786",
+              borderColor: "#189CD9",
               borderWidth: "1px",
             }}
           />
