@@ -1,55 +1,50 @@
-import { useLocale, useTranslations } from "next-intl";
-import { routing } from "@/i18n/routing";
-import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
+"use client";
+
+import { useLocale } from "next-intl";
+import { usePathname, useRouter } from "@/i18n/navigation";
+import { useParams } from "next/navigation";
+import { useTransition } from "react";
+import { cn } from "@/lib/utils";
 
 export default function LocaleSwitcher() {
-  const t = useTranslations("LocaleSwitcher");
   const locale = useLocale();
+  const router = useRouter();
+  const pathname = usePathname();
+  const params = useParams();
+  const [isPending, startTransition] = useTransition();
 
-  //   console.log("locale = ", locale);
+  const toggleLocale = () => {
+    const nextLocale = locale === "en" ? "ar" : "en";
+    startTransition(() => {
+      // @ts-expect-error -- TypeScript will validate that only known `params`
+      // are used in combination with a given `pathname`.
+      router.replace({ pathname, params }, { locale: nextLocale });
+    });
+  };
 
   return (
-    <LocaleSwitcherSelect defaultValue={locale} label={t("label")}>
-      {routing.locales.map((cur) => (
-        <option className="outline-none cursor-pointer " key={cur} value={cur}>
-          {t("locale", { locale: cur })}
-        </option>
-      ))}
-    </LocaleSwitcherSelect>
+    <button
+      onClick={toggleLocale}
+      disabled={isPending}
+      className={cn(
+        "flex items-center justify-center h-10 px-4 transition-all duration-300 select-none cursor-pointer",
+        isPending && "opacity-50"
+      )}
+      aria-label={locale === "en" ? "Switch to Arabic" : "Switch to English"}
+    >
+      {locale === "en" ? (
+        <div className="flex items-center gap-1.5 text-[13px] font-bold tracking-widest uppercase">
+          <span className="text-black">EN</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-400 group-hover:text-gray-600 transition-colors">AR</span>
+        </div>
+      ) : (
+        <div className="flex items-center gap-1.5 text-[13px] font-bold tracking-widest uppercase">
+          <span className="text-black">AR</span>
+          <span className="text-gray-300">/</span>
+          <span className="text-gray-400 group-hover:text-gray-600 transition-colors">EN</span>
+        </div>
+      )}
+    </button>
   );
 }
-
-// "use client";
-
-// import { usePathname, useRouter } from "@/i18n/navigation";
-// import { useLocale } from "next-intl";
-
-// export default function LocaleSwitcher() {
-//   const locale = useLocale();
-//   const router = useRouter();
-//   const pathname = usePathname();
-
-//   const switchLocale = (newLocale: string) => {
-//     if (newLocale !== locale) {
-//       router.replace(pathname, { locale: newLocale });
-//       router.refresh();
-//     }
-//   };
-
-//   return (
-//     <div className="relative">
-//       <select
-//         className="bg-white text-gray-900 px-0 text-xs sm:text-base sm:px-2 py-1 rounded border border-gray-300 focus:outline-none focus:ring-1 cursor-pointer focus:ring-[#006A4E]"
-//         value={locale}
-//         onChange={(e) => switchLocale(e.target.value)}
-//       >
-//         <option value="ar" className="cursor-pointer">
-//           Arabic
-//         </option>
-//         <option value="en" className="cursor-pointer">
-//           English
-//         </option>
-//       </select>
-//     </div>
-//   );
-// }

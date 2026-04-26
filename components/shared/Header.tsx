@@ -203,7 +203,7 @@ const Header: React.FC = () => {
 
             <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
 
-            <div className="p-2 py-0 bg-gray-100 rounded-full hover:bg-gray-50 transition-all duration-300">
+            <div className="bg-gray-100 rounded-full hover:bg-gray-50 transition-all duration-300 overflow-hidden">
               <LocaleSwitcher />
             </div>
           </div>
