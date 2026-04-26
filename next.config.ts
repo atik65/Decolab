@@ -56,6 +56,10 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+
+  compiler: {
+    // removeConsole: true,
+  }
 };
 
 const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
