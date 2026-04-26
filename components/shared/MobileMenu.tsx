@@ -162,7 +162,7 @@ const MobileMenu = ({
             )}
           >
             <Phone className="w-4 h-4 text-gray-400" />
-            <span dir="ltr" className="font-medium tracking-wide">
+            <span className="roboto-num font-medium tracking-wide">
               +965 6688 9159
             </span>
           </a>

@@ -99,7 +99,7 @@ const Footer = () => {
                 href={`https://wa.me/${contactInfo.phone.replace(/[\s+]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#189CD9] transition-colors duration-300 !font-roboto"
+                className="block hover:text-[#189CD9] transition-colors duration-300 roboto-num"
               >
                 {contactInfo.phone}
               </Link>

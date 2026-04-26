@@ -142,10 +142,10 @@ const AnnounceBar: React.FC = () => {
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-1.5 text-white/90 hover:text-white hover:scale-105 transition-all duration-300 text-sm font-medium"
+            className="hidden md:flex items-center gap-1.5 text-white/90 hover:text-white hover:scale-105 transition-all duration-300 text-sm font-medium roboto-num"
           >
             <Phone className="h-3.5 w-3.5 fill-white/10" />
-            <span lang="en" className="!font-roboto">
+            <span className="roboto-num">
               {PHONE_NUMBER}
             </span>
           </Link>
@@ -153,7 +153,7 @@ const AnnounceBar: React.FC = () => {
           <Link
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
             target="_blank"
-            rel="noopener noreferrer"
+            // rel="noopener noreferrer"
             aria-label={`WhatsApp ${PHONE_NUMBER}`}
             className="md:hidden text-white/90 hover:text-white transition-all duration-300 p-2 active:scale-95"
           >

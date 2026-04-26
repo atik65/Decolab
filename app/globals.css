@@ -187,8 +187,8 @@
 .roboto-num {
   font-family: "DG Rarah", sans-serif !important;
   font-variant-numeric: tabular-nums;
-  direction: ltr;
-  unicode-bidi: embed;
+  direction: ltr !important;
+  unicode-bidi: embed !important;
   display: inline-block;
 }
 
