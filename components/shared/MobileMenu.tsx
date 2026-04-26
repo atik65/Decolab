@@ -96,7 +96,7 @@ const MobileMenu = ({
               onOpenChange(false);
               setTimeout(() => {
                 onSearchOpen();
-              }, 150);
+              }, 400);
             }}
             className={cn(
               "w-full flex items-center gap-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-gray-400 hover:bg-gray-100 transition-all duration-300 group",
@@ -127,7 +127,7 @@ const MobileMenu = ({
                 className={cn(
                   "text-base font-medium text-gray-800 group-hover:text-[#189CD9] group-hover:translate-x-1 transition-all duration-300",
                   locale === "ar" &&
-                    "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
+                  "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
                 )}
               >
                 {locale === "ar" && link.labelAr ? link.labelAr : link.label}
