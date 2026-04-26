@@ -153,7 +153,9 @@ const MobileMenu = ({
           )}
         >
           <a
-            href="tel:+971501234567"
+            href="https://wa.me/96566889159"
+            target="_blank"
+            rel="noopener noreferrer"
             className={cn(
               "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
               locale === "ar" && "flex-row-reverse",
@@ -161,19 +163,19 @@ const MobileMenu = ({
           >
             <Phone className="w-4 h-4 text-gray-400" />
             <span dir="ltr" className="font-medium tracking-wide">
-              +971 50 123 4567
+              +965 6688 9159
             </span>
           </a>
 
           <a
-            href="mailto:info@onedirection.com"
+            href="mailto:onedirectionkwt@gmail.com"
             className={cn(
               "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
               locale === "ar" && "flex-row-reverse",
             )}
           >
             <Mail className="w-4 h-4 text-gray-400" />
-            <span className="font-medium">info@onedirection.com</span>
+            <span className="font-medium">onedirectionkwt@gmail.com</span>
           </a>
         </div>
 

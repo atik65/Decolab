@@ -51,12 +51,12 @@ const Footer = () => {
   };
 
   const contactInfo = {
-    phone: "+971 50 123 4567",
-    email: "info@onedirection.com",
+    phone: "+965 6688 9159",
+    email: "onedirectionkwt@gmail.com",
     address:
       locale === "en"
-        ? "Panasonic Tower, 1b Fahad Al-Salem Street, Kuwait City, Kuwait"
-        : "برج باناسونيك، 1ب شارع فهد السالم، مدينة الكويت، الكويت",
+        ? "Shuwaikh Industrial Area 1 Plot: 1, Parcel: 79C, Street: 19"
+        : "شويخ الصناعية 1، قطعة 1، قسيمة 79C، شارع 19",
   };
 
   return (
@@ -96,7 +96,9 @@ const Footer = () => {
               )}
             >
               <Link
-                href={`tel:${contactInfo.phone.replace(/\s/g, "")}`}
+                href={`https://wa.me/${contactInfo.phone.replace(/[\s+]/g, "")}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="block hover:text-[#189CD9] transition-colors duration-300 !font-roboto"
               >
                 {contactInfo.phone}
@@ -190,23 +192,24 @@ const Footer = () => {
 
             <div
               className={cn(
-                "flex items-center gap-8 text-[11px] uppercase tracking-widest text-gray-400",
+                "flex items-center gap-6 text-[10px] sm:text-[11px] uppercase tracking-widest text-gray-400",
                 locale === "ar" && "md:flex-row-reverse",
               )}
             >
               <p>
                 © {new Date().getFullYear()}{" "}
                 {locale === "en" ? "One Direction" : "وان دايركشن"}.
-                <span className="ms-1 opacity-60">
-                  {locale === "en" ? "Powered by Atik" : "بواسطة Atik"}
-                </span>
               </p>
               <Link
-                href="https://instagram.com"
+                href="https://iamatik.me"
                 target="_blank"
-                className="text-gray-900 hover:text-[#189CD9] transition-colors duration-300"
+                rel="noopener noreferrer"
+                className="flex items-center gap-1.5 hover:text-[#189CD9] transition-colors duration-300 group"
               >
-                <Instagram size={18} />
+                <span className="opacity-60">
+                  {locale === "en" ? "Developed by" : "تم التطوير بواسطة"}
+                </span>
+                <span className="font-bold text-gray-500 group-hover:text-[#189CD9]">Atik</span>
               </Link>
             </div>
           </div>
