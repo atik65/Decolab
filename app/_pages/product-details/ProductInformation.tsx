@@ -146,6 +146,8 @@ const ProductInformation = () => {
     setFieldValue,
     errors,
     touched,
+    submitCount,
+    isValidating,
     // resetForm,
   } = useFormik({
     initialValues: {
@@ -317,7 +319,18 @@ const ProductInformation = () => {
     // Add other fields that might affect pricing in the future
   ]);
 
-  // console.log("values = ", values);
+
+
+  // Scroll to first error on failed submission
+  useEffect(() => {
+    if (submitCount > 0 && Object.keys(errors).length > 0 && !isValidating) {
+      const firstErrorKey = Object.keys(errors)[0];
+      const element = document.getElementById(`field-${firstErrorKey}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [submitCount, isValidating]);
 
   // Function to handle quantity change
   const handleQuantityChange = (type: "increase" | "decrease") => {
@@ -332,7 +345,7 @@ const ProductInformation = () => {
 
   // console.log("current product = ", currentProduct);
 
-  // console.log(errors);
+  console.log("errors = ", errors);
 
   // Show loading skeleton while fetching data
   if (isLoading) {
@@ -585,7 +598,7 @@ const ProductOptions = ({
       {/* Size Dropdown */}
 
       {shouldShowSize && (
-        <div>
+        <div id="field-size">
           <label
             htmlFor="size"
             className="block text-sm  text-gray-700 mb-1 font-bold space-x-1"
@@ -625,7 +638,7 @@ const ProductOptions = ({
 
       {/* How Many Digits dropdown - dynamically shown based on product config */}
       {shouldShowDigits && (
-        <div>
+        <div id="field-digitCount">
           <label
             htmlFor="how-many-digits"
             className="block text-sm font-bold text-gray-700 mb-1 space-x-1"
@@ -669,27 +682,31 @@ const ProductOptions = ({
 
       {/* Color Options */}
       {product.colors.length > 0 && (
-        <ColorOptions
-          values={values}
-          setFieldValue={setFieldValue}
-          errors={errors}
-          touched={touched}
-          product={product}
-        />
+        <div id="field-color">
+          <ColorOptions
+            values={values}
+            setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
+            product={product}
+          />
+        </div>
       )}
       {/*Light Color Options */}
       {product.lightColors.length > 0 && (
-        <LightColorOptions
-          values={values}
-          setFieldValue={setFieldValue}
-          errors={errors}
-          touched={touched}
-          product={product}
-        />
+        <div id="field-lightColor">
+          <LightColorOptions
+            values={values}
+            setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
+            product={product}
+          />
+        </div>
       )}
       {/* House Number Input */}
 
-      <div>
+      <div id="field-houseNumber">
         <Input
           label={locale === "en" ? "House Number" : "رقم المنزل"}
           type="number"
@@ -707,7 +724,7 @@ const ProductOptions = ({
       </div>
 
       {/* Text Area */}
-      <div>
+      <div id="field-text">
         <TextArea
           label={locale === "en" ? "Text" : "النص"}
           name="text"
@@ -727,23 +744,27 @@ const ProductOptions = ({
 
       {/* design selection */}
       {product.designs.length > 0 && (
-        <DesignSelection
-          values={values}
-          setFieldValue={setFieldValue}
-          errors={errors}
-          touched={touched}
-          product={product}
-        />
+        <div id="field-design">
+          <DesignSelection
+            values={values}
+            setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
+            product={product}
+          />
+        </div>
       )}
       {/* Font selection */}
       {product.fonts.length > 0 && (
-        <FontSelection
-          values={values}
-          setFieldValue={setFieldValue}
-          errors={errors}
-          touched={touched}
-          product={product}
-        />
+        <div id="field-font">
+          <FontSelection
+            values={values}
+            setFieldValue={setFieldValue}
+            errors={errors}
+            touched={touched}
+            product={product}
+          />
+        </div>
       )}
     </div>
   );
