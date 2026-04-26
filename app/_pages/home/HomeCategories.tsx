@@ -65,7 +65,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 uppercase tracking-normal">
             {locale === "en" ? "Our Categories" : "فئاتنا"}
           </h2>
-          <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
+          <div className="h-0.5 w-20 bg-[#189CD9] rounded-full" />
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
