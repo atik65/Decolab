@@ -55,7 +55,7 @@ const ProductInformation = () => {
   const locale = useGetLocale();
   const currentProduct = product?.[locale];
 
-  console.log(currentProduct);
+  // console.log(currentProduct);
 
   // State to manage the quantity
   const [quantity, setQuantity] = useState(1);

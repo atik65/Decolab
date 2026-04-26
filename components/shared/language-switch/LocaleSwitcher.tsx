@@ -15,12 +15,21 @@ export default function LocaleSwitcher() {
 
   const toggleLocale = () => {
     const nextLocale = locale === "en" ? "ar" : "en";
+
+
+
     startTransition(() => {
+
       // @ts-expect-error -- TypeScript will validate that only known `params`
       // are used in combination with a given `pathname`.
       router.replace({ pathname, params }, { locale: nextLocale });
     });
+
+    router.replace({ pathname }, { locale: nextLocale });
   };
+
+
+  console.log('current locale = ', locale)
 
   return (
     <button
