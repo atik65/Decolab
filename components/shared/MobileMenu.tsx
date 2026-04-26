@@ -158,7 +158,6 @@ const MobileMenu = ({
             rel="noopener noreferrer"
             className={cn(
               "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
-              locale === "ar" && "flex-row-reverse",
             )}
           >
             <Phone className="w-4 h-4 text-gray-400" />
@@ -171,7 +170,6 @@ const MobileMenu = ({
             href="mailto:onedirectionkwt@gmail.com"
             className={cn(
               "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
-              locale === "ar" && "flex-row-reverse",
             )}
           >
             <Mail className="w-4 h-4 text-gray-400" />

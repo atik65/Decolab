@@ -138,7 +138,7 @@ const AnnounceBar: React.FC = () => {
       <div className="container mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center min-h-[40px]">
         {/* ─── Left Zone: Phone Number ─── */}
         <div className="flex items-center justify-start">
-          <Link
+          <span className="hidden md:block">  <Link
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
             target="_blank"
             rel="noopener noreferrer"
@@ -149,7 +149,7 @@ const AnnounceBar: React.FC = () => {
               {PHONE_NUMBER}
             </span>
           </Link>
-
+          </span>
           <Link
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
             target="_blank"
