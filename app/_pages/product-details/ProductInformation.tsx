@@ -218,6 +218,10 @@ const ProductInformation = () => {
               },
             },
           );
+          const optionsTop = document.getElementById("product-title");
+          if (optionsTop) {
+            optionsTop.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
           return;
         }
       }
@@ -410,7 +414,7 @@ const ProductInformation = () => {
         {currentProduct.title}
       </h1>
       {/* Category Information */}
-      <div className="mb-4">
+      <div id="product-title" className="mb-4">
         <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 text-[#189CD9] border border-[#189CD9]/30 shadow-sm">
           {currentProduct.category}
         </span>
