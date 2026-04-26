@@ -62,7 +62,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
         )}
       >
         <div className="space-y-1">
-          <h2 className="text-xl md:text-3xl font-bold text-gray-900 font-montserrat uppercase tracking-normal">
+          <h2 className="text-xl md:text-3xl font-bold text-gray-900 uppercase tracking-normal">
             {locale === "en" ? "Our Categories" : "فئاتنا"}
           </h2>
           <div className="h-1 w-20 bg-[#189CD9] rounded-full" />
@@ -173,7 +173,7 @@ function CategoryCard({ data }: { data: Category }) {
       <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center">
         <h3
           className={cn(
-            "text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 font-montserrat uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1",
+            "text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1",
             locale === "en" && "text-[10px] sm:text-base md:text-xl",
           )}
         >

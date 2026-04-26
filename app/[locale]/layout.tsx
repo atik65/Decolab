@@ -3,10 +3,12 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
-import { Montserrat, Roboto_Flex } from "next/font/google";
+import { Montserrat, Roboto_Flex, Cairo } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
+
+
 
 const vexa = localFont({
   src: "../../public/fonts/vexa.otf",
@@ -43,6 +45,14 @@ const roboto = Roboto_Flex({
   style: ["normal"],
 });
 
+const cairo = Cairo({
+  variable: "--font-cairo",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+  display: "swap",
+  style: ["normal"],
+});
+
 export const metadata: Metadata = {
   title:
     "One Direction – Illuminated Signage, LED House Numbers & Custom Advertising",
@@ -63,7 +73,7 @@ export default async function RootLayout({
     notFound();
   }
 
-  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable}`;
+  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
 
   return (
     <html

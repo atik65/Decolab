@@ -115,7 +115,8 @@
 
   /* Default (English) fonts */
   * {
-    @apply font-roboto;
+    /* @apply font-roboto; */
+    @apply font-cairo
   }
 
   * {
@@ -128,11 +129,13 @@
   h4,
   h5,
   h6 {
-    @apply font-montserrat;
+    /* @apply font-montserrat; */
+    @apply font-cairo
   }
 
   p {
-    @apply font-roboto;
+    /* @apply font-roboto; */
+    @apply font-cairo
   }
 
   html[data-locale="ar"] h1,
@@ -143,7 +146,8 @@
   html[data-locale="ar"] h6,
   html[data-locale="ar"] strong {
     /* @apply font-geDiner; */
-    @apply font-dgRarah;
+    /* @apply font-dgRarah; */
+    @apply font-cairo
   }
 
   html[data-locale="ar"] p,
@@ -151,7 +155,8 @@
   html[data-locale="ar"] a,
   html[data-locale="ar"] span {
     /* @apply font-vexa; */
-    @apply font-geDiner;
+    /* @apply font-geDiner; */
+    @apply font-cairo
   }
 
   /* Arabic fonts - override when locale is 'ar' */
@@ -172,7 +177,8 @@
 
 /* Product description styling - keep default fonts */
 .product-description {
-  @apply font-roboto;
+  /* @apply font-roboto; */
+  @apply font-cairo
 }
 
 /* Arabic locale uses Arabic fonts */

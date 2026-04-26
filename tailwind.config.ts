@@ -79,6 +79,7 @@ export default {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       fontFamily: {
+        cairo: ["var(--font-cairo)"],
         museo: ["var(--font-museo)"],
         montserrat: ["var(--font-montserrat)"],
         roboto: ["var(--font-roboto)"],
