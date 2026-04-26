@@ -215,10 +215,10 @@ const SlideItem = ({
             animate={
               isActive
                 ? {
-                    opacity: 1,
-                    y: 0,
-                    scale: [1, 1.05, 1],
-                  }
+                  opacity: 1,
+                  y: 0,
+                  scale: [1, 1.05, 1],
+                }
                 : { opacity: 0, y: 20 }
             }
             transition={{
@@ -233,7 +233,7 @@ const SlideItem = ({
             className="pt-2"
           >
             <Link href="/shop">
-              <button className="relative group/shimmer overflow-hidden bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 sm:py-5 px-8 sm:px-12 rounded-full transition-all duration-300 font-bold uppercase text-[10px] md:text-base tracking-[0.2em] shadow-lg shadow-black/10">
+              <button className={`relative group/shimmer overflow-hidden bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 sm:py-5 px-8 sm:px-12 rounded-full transition-all duration-300 font-bold uppercase text-[10px] md:text-base tracking-[0.2em] shadow-lg shadow-black/10 ${locale === "ar" ? "text-sm" : ""}`}>
                 <span className="relative z-10">
                   {locale === "en" ? "Shop Now" : "تسوق الآن"}
                 </span>
