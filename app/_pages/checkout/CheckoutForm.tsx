@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Input, TextArea } from "@/components/ui/input";
 
 // import {
@@ -72,7 +72,7 @@ const CheckoutForm = () => {
   const router = useRouter();
   const locale = useLocale();
 
-  const { values, handleChange, handleSubmit, errors, touched } = useFormik({
+  const { values, handleChange, handleSubmit, errors, touched, submitCount, isValidating } = useFormik({
     initialValues: {
       phone: "",
       email: "",
@@ -192,6 +192,17 @@ const CheckoutForm = () => {
     },
   });
 
+  // Scroll to first error on failed submission
+  useEffect(() => {
+    if (submitCount > 0 && Object.keys(errors).length > 0 && !isValidating) {
+      const firstErrorKey = Object.keys(errors)[0];
+      const element = document.getElementById(`field-${firstErrorKey}`);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
+    }
+  }, [submitCount, isValidating]);
+
   return (
     <form onSubmit={handleSubmit} className="space-y-8">
       {/* Contact Section */}
@@ -219,7 +230,7 @@ const CheckoutForm = () => {
         </div>
 
         {/* phone number */}
-        <div className="mt-4">
+        <div className="mt-4" id="field-phone">
           <label
             htmlFor="phone"
             className="block text-sm font-medium text-gray-700 mb-2"
@@ -257,7 +268,7 @@ const CheckoutForm = () => {
             </p>
           )}
         </div>
-        {/* <div className="mt-4">
+        {/* <div className="mt-4" id="field-email">
           <Input
             type="email"
             placeholder="Email Address"
@@ -333,7 +344,7 @@ const CheckoutForm = () => {
         {/* first name & last name */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
           {/* first name */}
-          <div>
+          <div id="field-firstName">
             <label
               htmlFor="firstName"
               className="block text-sm font-medium text-gray-700 mb-2"
@@ -375,7 +386,7 @@ const CheckoutForm = () => {
           </div>
 
           {/* last name */}
-          <div>
+          <div id="field-lastName">
             <label
               htmlFor="lastName"
               className="block text-sm font-medium text-gray-700 mb-2"
@@ -420,7 +431,7 @@ const CheckoutForm = () => {
         </div>
 
         {/* address */}
-        <div className="mt-4">
+        <div className="mt-4" id="field-address">
           <label
             htmlFor="address"
             className="block text-sm font-medium text-gray-700 mb-2"
@@ -464,7 +475,7 @@ const CheckoutForm = () => {
         </div>
 
         {/* apartment, suite, etc. */}
-        <div className="mt-4">
+        <div className="mt-4" id="field-apartment">
           <label
             htmlFor="apartment"
             className="block text-sm font-medium text-gray-700 mb-2"
@@ -510,7 +521,7 @@ const CheckoutForm = () => {
         </div>
 
         {/* google maps link */}
-        <div className="mt-4">
+        <div className="mt-4" id="field-googleMapsLink">
           <label
             htmlFor="googleMapsLink"
             className="block text-sm font-medium text-gray-700 mb-2"

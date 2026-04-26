@@ -42,12 +42,9 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <input
           id={label}
           type={type}
-          // className={cn(
-          //   "flex h-[40px] w-full rounded-[10px] border-[2px] border-[#CFB284] bg-white px-3 py-1 text-base shadow-sm transition-colors file:border-0 file:bg-white file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground outline-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm mt-2  ",
-          //   className
-          // )}
+
           className={cn(
-            "mt-1 block w-full border border-gray-300 bg-white py-[10px] px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm",
+            "mt-1 block w-full border border-gray-300 bg-white py-[10px] px-3 shadow-sm focus:border-[#189CD9] focus:outline-none focus:ring-[#189CD9] sm:text-sm",
             className,
           )}
           ref={ref}
