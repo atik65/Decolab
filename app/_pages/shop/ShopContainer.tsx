@@ -153,7 +153,7 @@ const ShopContainer = () => {
 
         {/* Product Grid */}
         <div
-          className={`grid grid-cols-2 md:grid-cols-3 ${layout === "grid-3" ? "lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3" : "lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-4"} gap-4`}
+          className={`grid grid-cols-2 md:grid-cols-3 ${layout === "grid-3" ? "lg:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-4" : "lg:grid-cols-4 xl:grid-cols-4 2xl:grid-cols-5"} gap-4`}
         >
           {products.map((product, index) => (
             <ProductCard key={index} product={product} />

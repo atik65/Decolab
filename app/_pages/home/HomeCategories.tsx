@@ -151,7 +151,7 @@ function CategoryCard({ data }: { data: Category }) {
       className="group cursor-pointer bg-white rounded-lg md:rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.05)] md:shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100 "
     >
       {/* Image Section */}
-      <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden bg-gray-50">
+      <div className="relative aspect-square overflow-hidden bg-gray-50">
         <Image
           src={data?.image || "/images/placeholder.jpg"}
           alt={data?.name || "Category"}

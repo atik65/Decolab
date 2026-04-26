@@ -132,6 +132,7 @@ const HomeBanner = () => {
         loop
         speed={1000}
         className="h-[60vh] md:h-[calc(100vh-140px)]"
+      // className="w-full aspect-video md:h-auto"
       >
         {slides.map((slide) => (
           <SwiperSlide key={slide.id}>

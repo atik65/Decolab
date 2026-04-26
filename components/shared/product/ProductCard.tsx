@@ -83,15 +83,13 @@ const ProductCard = ({ product }: ProductCardProps) => {
       href={`/products/${product.id}`}
       className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer "
     >
-      <div className="overflow-hidden relative rounded-lg">
+      <div className="overflow-hidden relative rounded-xl aspect-square">
         <Image
           ref={imageRef}
-          height={500}
-          width={500}
-          // className="w-full mx-auto object-contain mt-0 pt-0 group-hover:scale-105 duration-300 "
-          className="w-full mx-auto object-cover h-72 md:h-[450px] mt-0 pt-0"
           src={currentImage || "/images/home/bed.png"}
           alt={"Product"}
+          fill
+          className="w-full mx-auto object-cover transition-transform duration-500 group-hover:scale-110"
           unoptimized
         />
 
