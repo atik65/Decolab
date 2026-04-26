@@ -134,7 +134,7 @@ const HomeBanner = () => {
         slidesPerView={1}
         loop
         speed={1000}
-        className="h-[60vh] md:h-[calc(100vh-140px)]"
+        className="h-[60vh] sm:h-[calc(100vh-125px)] lg:h-[calc(100vh-140px)]"
       // className="w-full aspect-video md:h-auto"
       >
         {slides.map((slide) => (
