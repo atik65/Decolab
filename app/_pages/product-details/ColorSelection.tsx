@@ -59,39 +59,65 @@ export const ColorOptions = ({
         {product.colors.map((color) => (
           <button
             key={color.id}
-            // onClick={() => handleColorSelect(color)}
+            type="button"
             onClick={() => {
               setFieldValue("color", color.id);
               setSelectedColor(color);
             }}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full border hover:border-[#87A786] transition-colors ${
+            className={cn(
+              "group relative flex items-center gap-3 pr-4 rounded-full border transition-all duration-300 active:scale-95",
               values.color == color.id.toString()
-                ? "border-[#87A786]"
-                : "border-gray-200"
-            }`}
-          >
-            {values.color == color.id.toString() ? (
-              <svg
-                className="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            ) : (
-              <div
-                className="w-4 h-4 rounded-full"
-                style={{ backgroundColor: color.colorCode }}
-              />
+                ? "border-[#189CD9] bg-[#189CD9]/5 shadow-sm"
+                : "border-gray-200 bg-white hover:border-[#189CD9]/50 shadow-none hover:shadow-xs",
             )}
-            <span className="text-sm">{color.name}</span>
+          >
+            {/* Color Swatch / Check Container */}
+            <div
+              className={cn(
+                "relative w-10 h-8 flex items-center justify-center transition-transform duration-300",
+                locale === "ar" ? "rounded-r-full" : "rounded-l-full",
+                values.color == color.id.toString() && "scale-105",
+              )}
+              style={{ backgroundColor: color.colorCode }}
+            >
+              {values.color == color.id.toString() && (
+                <div className={cn(
+                  "absolute inset-0 bg-black/20 flex items-center justify-center",
+                  locale === "ar" ? "rounded-r-full" : "rounded-l-full"
+                )}>
+                  <svg
+                    className="w-4 h-4 text-white"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20 6L9 17L4 12"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            <span
+              className={cn(
+                "text-sm font-semibold transition-colors duration-300",
+                values.color == color.id.toString()
+                  ? "text-[#189CD9]"
+                  : "text-gray-600 group-hover:text-gray-900",
+              )}
+            >
+              {color.name}
+            </span>
+
+            {/* Active Indicator Dot (Optional Premium Touch) */}
+            {values.color == color.id.toString() && (
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#189CD9] rounded-full border-2 border-white animate-in zoom-in duration-300" />
+            )}
           </button>
         ))}
       </div>
@@ -175,40 +201,70 @@ export const LightColorOptions = ({
         {product.lightColors.map((color) => (
           <button
             key={color.id}
+            type="button"
             onClick={() => {
               setFieldValue("lightColor", color.id);
               setSelectedColor(color);
             }}
-            className={`flex items-center gap-2 px-4 py-1.5 rounded-full border hover:border-[#87A786] transition-colors ${
+            className={cn(
+              "group relative flex items-center gap-3 pr-4 rounded-full border transition-all duration-300 active:scale-95",
               values.lightColor == color.id.toString()
-                ? "border-[#87A786]"
-                : "border-gray-200"
-            }`}
-          >
-            {values.lightColor == color.id.toString() ? (
-              <svg
-                className="w-4 h-4"
-                viewBox="0 0 24 24"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20 6L9 17L4 12"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            ) : (
-              <div
-                className="w-4 h-4 rounded-full"
-                style={{
-                  backgroundColor: color.colorCode,
-                }}
-              />
+                ? "border-[#87A786] bg-[#87A786]/5 shadow-sm"
+                : "border-gray-200 bg-white hover:border-[#87A786]/50 shadow-none hover:shadow-xs",
             )}
-            <span className="text-sm">{color.name}</span>
+          >
+            {/* Swatch with Glow Effect for Light Colors */}
+            <div
+              className={cn(
+                "relative w-10 h-8 flex items-center justify-center transition-all duration-300",
+                locale === "ar" ? "rounded-r-full" : "rounded-l-full",
+                values.lightColor == color.id.toString() && "scale-105",
+              )}
+              style={{
+                backgroundColor: color.colorCode,
+                boxShadow: values.lightColor == color.id.toString() ? `0 0 10px ${color.colorCode}80` : 'none'
+              }}
+            >
+              {values.lightColor == color.id.toString() && (
+                <div className={cn(
+                  "absolute inset-0 bg-black/10 flex items-center justify-center",
+                  locale === "ar" ? "rounded-r-full" : "rounded-l-full"
+                )}>
+                  <svg
+                    className={cn(
+                      "w-4 h-4",
+                      color.colorCode.toLowerCase() === '#ffffff' ? "text-black" : "text-white"
+                    )}
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M20 6L9 17L4 12"
+                      stroke="currentColor"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              )}
+            </div>
+
+            <span
+              className={cn(
+                "text-sm font-semibold transition-colors duration-300",
+                values.lightColor == color.id.toString()
+                  ? "text-[#87A786]"
+                  : "text-gray-600 group-hover:text-gray-900",
+              )}
+            >
+              {color.name}
+            </span>
+
+            {values.lightColor == color.id.toString() && (
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#87A786] rounded-full border-2 border-white animate-in zoom-in duration-300" />
+            )}
           </button>
         ))}
       </div>
