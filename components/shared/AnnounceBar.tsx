@@ -210,7 +210,7 @@ const AnnounceBar: React.FC = () => {
 
         {/* ─── Right Zone: Social Icons ─── */}
         <div className="flex justify-end items-center gap-4">
-          <Link
+          {/* <Link
             href={FACEBOOK_URL}
             target="_blank"
             rel="noopener noreferrer"
@@ -218,7 +218,7 @@ const AnnounceBar: React.FC = () => {
             className="text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
           >
             <Facebook className="h-4 w-4 fill-white/5" />
-          </Link>
+          </Link> */}
           <Link
             href={INSTAGRAM_URL}
             target="_blank"
