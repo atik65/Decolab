@@ -27,7 +27,7 @@ export default function LocaleSwitcher() {
       onClick={toggleLocale}
       disabled={isPending}
       className={cn(
-        "flex items-center justify-center h-10 px-4 transition-all duration-300 select-none cursor-pointer",
+        "flex items-center justify-center h-10 px-4 transition-all duration-300 select-none cursor-pointer ",
         isPending && "opacity-50"
       )}
       aria-label={locale === "en" ? "Switch to Arabic" : "Switch to English"}

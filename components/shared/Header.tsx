@@ -154,15 +154,15 @@ const Header: React.FC = () => {
                 href="/"
                 className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
               >
-              {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
-              <Image
-                src="/images/logo.svg"
-                alt="One Direction"
-                className="w-full transition-transform duration-300 group-hover:scale-105"
-                width={100}
-                height={100}
-              />
-            </Link>
+                {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
+                <Image
+                  src="/images/logo.svg"
+                  alt="One Direction"
+                  className="w-full transition-transform duration-300 group-hover:scale-105"
+                  width={100}
+                  height={100}
+                />
+              </Link>
             )}
           </div>
 
@@ -203,7 +203,7 @@ const Header: React.FC = () => {
 
             <div className="h-6 w-px bg-gray-200 hidden md:block"></div>
 
-            <div className="bg-gray-100 rounded-full hover:bg-gray-50 transition-all duration-300 overflow-hidden">
+            <div className="bg-gray-100 rounded-full hover:bg-gray-50 transition-all duration-300 overflow-hidden min-w-[85px]">
               <LocaleSwitcher />
             </div>
           </div>
