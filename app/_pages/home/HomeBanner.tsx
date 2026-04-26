@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 interface Slide {
   id: number;
   bg: string;
+  bgMobile?: string;
   en: {
     title: string;
     description: string;
@@ -28,7 +29,8 @@ interface Slide {
 const slides = [
   {
     id: 7,
-    bg: "/images/home/banner/banner-1.webp",
+    bg: "/images/home/banner/banner-1-940.webp",
+    bgMobile: "/images/home/banner/banner-1-1080x1350.webp",
 
     en: {
       title: "Making Businesses Stand Out: Our Eye-Catching Signage Designs",
@@ -43,7 +45,8 @@ const slides = [
   },
   {
     id: 8,
-    bg: "/images/home/banner/banner-2.webp",
+    bg: "/images/home/banner/banner-2-940.webp",
+    bgMobile: "/images/home/banner/banner-2-1080x1350.webp",
 
     en: {
       title: "Custom-Designed Illuminated Signs for a Global Audience",
@@ -159,16 +162,32 @@ const SlideItem = ({
     <div className="relative w-full h-full overflow-hidden group">
       {/* ─── Background Image ─── */}
       <div className="absolute inset-0 z-0">
-        <Image
-          src={slide.bg}
-          alt="banner"
-          fill
-          priority
-          className="lg:aspect-[16/9] object-cover object-top"
-          quality={100}
-        />
+        {/* Desktop Image */}
+        <div className="hidden md:block absolute inset-0">
+          <Image
+            src={slide.bg}
+            alt="banner desktop"
+            fill
+            priority
+            className="object-cover object-top"
+            quality={100}
+          />
+        </div>
+
+        {/* Mobile Image */}
+        <div className="block md:hidden absolute inset-0">
+          <Image
+            src={slide.bgMobile || slide.bg}
+            alt="banner mobile"
+            fill
+            priority
+            className="object-cover object-center"
+            quality={100}
+          />
+        </div>
+
         {/* Subtle Gradient for legibility without hiding the image */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/ to-black/10 md:bg-gradient-to-r md:from-black/60 md:to-black/40" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent md:bg-gradient-to-r md:from-black/60 md:to-transparent" />
       </div>
 
       {/* ─── Minimal Content Layer ─── */}
