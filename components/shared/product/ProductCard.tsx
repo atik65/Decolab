@@ -114,19 +114,17 @@ const ProductCard = ({ product }: ProductCardProps) => {
       </div>
       <div
         className={cn(
-          "h-6 mt-1 flex flex-col overflow-hidden w-full items-start text-left",
-          locale === "ar" && "items-end text-right",
+          "mt-2 flex items-center justify-between w-full transition-all duration-300",
+          locale === "ar" && "flex-row-reverse",
         )}
       >
-        <div className="pb-0 group-hover:-translate-y-5 group-hover:opacity-0 duration-300">
+        <div className="transition-all duration-300">
           <span
             className={cn(
-              "inline-block font-bold text-[#189CD9] text-sm",
+              "inline-block font-bold text-[#189CD9] text-base whitespace-nowrap",
               locale === "ar" && "text-right",
             )}
           >
-            {/* {product[locale].price} */}
-
             {product.pricing_type === "base" ? (
               <span lang="en" className="!font-roboto">
                 {product.base_price} KD
@@ -140,18 +138,20 @@ const ProductCard = ({ product }: ProductCardProps) => {
         </div>
 
         <div
-          style={{
-            transition: "all 0.5s cubic-bezier(0.22, 1, 0.36, 1)",
-          }}
           className={cn(
-            "flex flex-col opacity-0 translate-y-0 group-hover:-translate-y-6 group-hover:opacity-100 duration-300",
-            locale === "ar" ? "items-end" : "items-start",
+            "flex flex-col opacity-0 transition-all duration-500 ease-out transform",
+            locale === "ar"
+              ? "items-start -translate-x-4 group-hover:translate-x-0 group-hover:opacity-100"
+              : "items-end translate-x-4 group-hover:translate-x-0 group-hover:opacity-100"
           )}
         >
-          <p className="text-[12px] font-bold">
-            {locale === "en" ? "Explore Details" : "تفاصيل التفاصيل"}
+          <p className="text-[13px] font-bold text-gray-800 whitespace-nowrap">
+            {locale === "en" ? "Explore Details" : "مشاهدة التفاصيل"}
           </p>
-          <div className="w-16 h-[2px] bg-[#189CD9]"></div>
+          <div className={cn(
+            "w-12 h-[2px] bg-[#189CD9] mt-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500",
+            locale === "ar" ? "origin-right" : "origin-left"
+          )}></div>
         </div>
       </div>
     </Link>
