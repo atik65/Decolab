@@ -143,10 +143,12 @@ function CategoryCard({ data }: { data: Category }) {
     router.push(`/shop?category=${encodeURIComponent(data?.name || "")}`);
   };
 
+
+
   return (
     <div
       onClick={handleRedirect}
-      className="group cursor-pointer bg-white rounded-lg md:rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.05)] md:shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100"
+      className="group cursor-pointer bg-white rounded-lg md:rounded-2xl overflow-hidden shadow-[0_2px_10px_rgba(0,0,0,0.05)] md:shadow-[0_4px_20px_rgba(0,0,0,0.05)] hover:shadow-[0_10px_30px_rgba(24,156,217,0.15)] transition-all duration-500 flex flex-col h-full border border-gray-100 "
     >
       {/* Image Section */}
       <div className="relative aspect-square sm:aspect-[4/3] overflow-hidden bg-gray-50">
@@ -170,7 +172,7 @@ function CategoryCard({ data }: { data: Category }) {
       </div>
 
       {/* Content Section */}
-      <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center">
+      <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center bg-[#189CD9]/10">
         <h3
           className={cn(
             "text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1",
@@ -179,19 +181,7 @@ function CategoryCard({ data }: { data: Category }) {
         >
           {data?.name_ar && locale === "ar" ? data.name_ar : data.name}
         </h3>
-        {/* <p className="hidden sm:line-clamp-2 text-xs md:text-sm text-gray-500 leading-relaxed">
-          {data?.description_ar && locale === "ar"
-            ? data.description_ar
-            : data.description}
-        </p> */}
 
-        {/* Mobile Arrow - visible only on mobile */}
-        {/* <div className="mt-1 md:hidden flex items-center gap-0.5 text-[#189CD9] font-bold text-[8px] uppercase tracking-tighter">
-          <span className="truncate max-w-[50px]">
-            {locale === "en" ? "View" : "عرض"}
-          </span>
-          <ChevronRight className="w-2 h-2" />
-        </div> */}
       </div>
     </div>
   );
