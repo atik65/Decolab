@@ -41,9 +41,9 @@ const ProductCard = ({ product }: ProductCardProps) => {
             setCurrentImage(hoveredImage);
             gsap.to(imageRef.current, {
               opacity: 1,
-              scale: 1.1,
+              scale: 1,
               delay: 0.1,
-              duration: 0.3,
+              duration: 0.2,
             });
           },
         });

@@ -53,7 +53,7 @@ const HomeCategories = ({ className }: { className?: string }) => {
   }
 
   return (
-    <div className={cn("relative mt-12 px-2 sm:px-4", className)}>
+    <div className={cn("relative mt-12 px-2 sm:px-4 ", className)}>
       {/* ─── Header & Navigation ─── */}
       <div
         className={cn(
@@ -156,7 +156,7 @@ function CategoryCard({ data }: { data: Category }) {
           src={data?.image || "/images/placeholder.jpg"}
           alt={data?.name || "Category"}
           fill
-          className="object-cover transition-transform duration-700 ease-out group-hover:scale-110"
+          className="object-cover  transition-transform duration-700 ease-out group-hover:scale-110"
           sizes="(max-width: 640px) 33vw, (max-width: 1024px) 33vw, 33vw"
           quality={100}
         />
