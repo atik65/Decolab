@@ -8,7 +8,7 @@ import "swiper/css/effect-fade";
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { cn } from "@/lib/utils";
 

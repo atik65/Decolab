@@ -1,12 +1,13 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
+import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import React from "react";
 import cart from "@/utils/localStorage";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { Trash2, Plus, Minus } from "lucide-react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/i18n/navigation";
 
 const OrderSummary = () => {
   const locale = useGetLocale();

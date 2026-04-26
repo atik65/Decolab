@@ -15,7 +15,7 @@ import { GiPayMoney } from "react-icons/gi";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocale } from "next-intl";
-import { useRouter } from "@bprogress/next";
+import { useRouter } from "@/i18n/navigation";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
 // import createSheetOrder, { Payload } from "@/lib/createSheetOrder";

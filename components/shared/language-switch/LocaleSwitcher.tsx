@@ -2,7 +2,7 @@
 
 import { useLocale } from "next-intl";
 import { usePathname, useRouter } from "@/i18n/navigation";
-import { useParams } from "next/navigation";
+import { useParams, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { cn } from "@/lib/utils";
 
@@ -11,25 +11,18 @@ export default function LocaleSwitcher() {
   const router = useRouter();
   const pathname = usePathname();
   const params = useParams();
+  const searchParams = useSearchParams();
   const [isPending, startTransition] = useTransition();
 
   const toggleLocale = () => {
     const nextLocale = locale === "en" ? "ar" : "en";
-
-
+    const queryString = searchParams.toString();
+    const targetPath = queryString ? `${pathname}?${queryString}` : pathname;
 
     startTransition(() => {
-
-      // @ts-expect-error -- TypeScript will validate that only known `params`
-      // are used in combination with a given `pathname`.
-      router.replace({ pathname, params }, { locale: nextLocale });
+      router.replace(targetPath, { locale: nextLocale });
     });
-
-    router.replace({ pathname }, { locale: nextLocale });
   };
-
-
-  console.log('current locale = ', locale)
 
   return (
     <button

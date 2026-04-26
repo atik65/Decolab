@@ -12,10 +12,9 @@ import {
 import { Button } from "@/components/ui/button";
 import { ShoppingCart, Trash2, Plus, Minus, ShoppingBag } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
+import { Link, useRouter } from "@/i18n/navigation";
 import cart, { CartItem } from "@/utils/localStorage";
 import { useLocale } from "next-intl";
-import { useRouter } from "next/navigation";
 
 const CartSheet = () => {
   const [items, setItems] = useState<CartItem[]>([]);

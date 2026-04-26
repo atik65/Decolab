@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CategoriesSkt from "@/components/skeletons/home/CategoriesSkt";
-import { useRouter } from "@bprogress/next";
+import { useRouter } from "@/i18n/navigation";
 import { cn } from "@/lib/utils";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";

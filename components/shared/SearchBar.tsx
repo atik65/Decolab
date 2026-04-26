@@ -7,7 +7,7 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { useRouter } from "@bprogress/next";
+import { useRouter } from "@/i18n/navigation";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 

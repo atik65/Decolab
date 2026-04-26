@@ -12,7 +12,7 @@ import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim, ShoppingCart } from "lucide-react";
 // import FontSelection from "./FontSelection";
-import Link from "next/link";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Input, TextArea } from "@/components/ui/input";
 
 import {
@@ -22,8 +22,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useRouter } from "@bprogress/next";
-import { useParams } from "next/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
 
 import { enqueueSnackbar } from "notistack";
@@ -44,6 +42,7 @@ import {
   isFieldUsedInVariants,
 } from "@/lib/variantSystem";
 import FontSelection from "./FontSelection";
+import { useParams } from "next/navigation";
 
 const ProductInformation = () => {
   const { slug } = useParams();

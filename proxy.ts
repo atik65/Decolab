@@ -4,7 +4,7 @@ import { routing } from "./i18n/routing";
 
 const intlMiddleware = createMiddleware(routing);
 
-export default function middleware(request: NextRequest) {
+export default function proxy(request: NextRequest) {
   // Check if user has a saved locale preference (cookie)
   const localeCookie = request.cookies.get("NEXT_LOCALE");
 

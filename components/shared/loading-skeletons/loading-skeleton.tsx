@@ -1,5 +1,5 @@
 import { Skeleton } from "@/components/ui/skeleton";
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { cn } from "@/lib/utils";
 

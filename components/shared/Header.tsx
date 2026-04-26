@@ -1,8 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { Link, usePathname, useRouter } from "@/i18n/navigation";
 import { X, Search } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";

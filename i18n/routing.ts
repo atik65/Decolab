@@ -10,5 +10,5 @@ export const routing = defineRouting({
 
   // Disable locale detection to rely only on the URL
   // This prevents redirects based on cookies or accept-language header
-  // localeDetection: false,
+  localeDetection: false,
 });
