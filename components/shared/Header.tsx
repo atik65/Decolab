@@ -2,6 +2,7 @@
 
 import React, { useRef, useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
@@ -15,6 +16,8 @@ import AnnounceBar from "./AnnounceBar";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CartSheet from "./CartSheet";
+import BackNavigation from "./BackNavigation";
+import { cn } from "@/lib/utils";
 
 gsap.registerPlugin(useGSAP);
 
@@ -98,7 +101,12 @@ const Header: React.FC = () => {
 
   // const t = useTranslations("NavLinks");
   const locale = useLocale();
-  // const locale = useGetLocale();
+  const pathname = usePathname();
+  const isHomePage =
+    pathname === `/${locale}` ||
+    pathname === `/${locale}/` ||
+    pathname === "/" ||
+    pathname === "";
 
   return (
     <header className="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm z-40 sticky top-0 transition-all duration-300">
@@ -119,13 +127,33 @@ const Header: React.FC = () => {
             onOpenChange={setIsMobileMenuOpen}
           />
 
-          {/* Logo */}
-          <div className="w-[22%] h-full flex items-center">
+          {/* <div className="w-60 h-full flex items-center">
             <Link
               ref={logoRef}
               href="/"
-              className="text-2xl font-bold tracking-tight hidden lg:block transition-all duration-300 hover:opacity-80 relative group"
+              className="text-2xl font-bold tracking-tight block lg:hidden transition-all duration-300 hover:opacity-80 relative group"
             >
+              <Image
+                src="/images/logo.svg"
+                alt="One Direction"
+                className="w-full transition-transform duration-300 group-hover:scale-105"
+                width={100}
+                height={100}
+              />
+            </Link>
+          </div> */}
+
+          <BackNavigation />
+
+
+          {/* Logo (Desktop Only) */}
+          <div className="hidden lg:flex w-[22%] h-full items-center">
+            {!isHomePage && (
+              <Link
+                ref={logoRef}
+                href="/"
+                className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
+              >
               {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
               <Image
                 src="/images/logo.svg"
@@ -135,6 +163,7 @@ const Header: React.FC = () => {
                 height={100}
               />
             </Link>
+            )}
           </div>
 
           {/* Navigation */}
