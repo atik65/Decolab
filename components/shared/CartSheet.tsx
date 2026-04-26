@@ -67,7 +67,7 @@ const CartSheet = () => {
           )}
         </div>
       </SheetTrigger>
-      <SheetContent className="flex flex-col w-full sm:max-w-md p-0 gap-0">
+      <SheetContent isShowCloseButton={true} className="flex flex-col w-full sm:max-w-md p-0 gap-0">
         <SheetHeader className="p-6 border-b">
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-[#189CD9]" />

@@ -32,6 +32,7 @@ export default function MobileMenuSidebar({
         </button>
       </SheetTrigger>
       <SheetContent
+        isShowCloseButton={true}
         side={locale === "ar" ? "right" : "left"}
         className="p-0 border-none w-[300px] sm:w-[350px]"
       >
