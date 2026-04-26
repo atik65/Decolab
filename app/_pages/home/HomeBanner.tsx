@@ -253,7 +253,7 @@ const SlideItem = ({
             className="pt-2"
           >
             <Link href="/shop">
-              <button className={`relative group/shimmer overflow-hidden bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 sm:py-5 px-8 sm:px-12 rounded-full transition-all duration-300 font-bold text-[10px] md:text-base shadow-lg shadow-black/10 ${locale === "ar" ? "text-sm" : ""}`}>
+              <button className={`relative group/shimmer overflow-hidden bg-[#189CD9] hover:bg-white hover:text-[#189CD9] text-white py-3 sm:py-5 px-8 sm:px-12 rounded-full transition-all duration-300 font-bold text-[12px] md:text-base shadow-lg shadow-black/10 ${locale === "ar" ? "text-sm" : ""}`}>
                 <span className="relative z-10">
                   {locale === "en" ? "Shop Now" : "تسوق الآن"}
                 </span>
