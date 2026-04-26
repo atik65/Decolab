@@ -174,7 +174,7 @@ const SlideItem = ({
       {/* ─── Minimal Content Layer ─── */}
       <div
         className={cn(
-          "relative z-10 container mx-auto h-full px-6 md:px-12 flex flex-col justify-end md:justify-end  items-start text-white pb-12 md:pb-48",
+          "relative z-10 container mx-auto h-full px-6 md:px-0 flex flex-col justify-end md:justify-end  items-start text-white pb-12 md:pb-16",
           locale === "ar" && "items-end text-right",
         )}
       >
