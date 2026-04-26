@@ -150,22 +150,22 @@ const Header: React.FC = () => {
 
           {/* Logo (Desktop Only) */}
           <div className="hidden lg:flex w-[22%] h-full items-center">
-            {!isHomePage && (
-              <Link
-                ref={logoRef}
-                href="/"
-                className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
-              >
-                {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
-                <Image
-                  src="/images/logo.svg"
-                  alt="One Direction"
-                  className="w-full transition-transform duration-300 group-hover:scale-105"
-                  width={100}
-                  height={100}
-                />
-              </Link>
-            )}
+
+            <Link
+              ref={logoRef}
+              href="/"
+              className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
+            >
+              {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
+              <Image
+                src="/images/logo.svg"
+                alt="One Direction"
+                className="w-full transition-transform duration-300 group-hover:scale-105"
+                width={100}
+                height={100}
+              />
+            </Link>
+
           </div>
 
           {/* Navigation */}
@@ -197,7 +197,7 @@ const Header: React.FC = () => {
             ref={actionRef}
             className="flex justify-end items-center gap-3 lg:gap-4 w-auto md:w-[15%]"
           >
-            <div 
+            <div
               onClick={() => setIsSearchOpen(true)}
               className="p-2 hidden md:block rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm"
             >
