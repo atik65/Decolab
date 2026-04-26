@@ -11,15 +11,26 @@ import { useRouter } from "@bprogress/next";
 import { Search, X } from "lucide-react";
 import { useState } from "react";
 
-const SearchBar = () => {
-  const [open, setOpen] = useState(false);
+const SearchBar = ({
+  isOpen: externalOpen,
+  onOpenChange: externalOnOpenChange,
+  showTrigger = true,
+}: {
+  isOpen?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  showTrigger?: boolean;
+}) => {
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const open = externalOpen !== undefined ? externalOpen : internalOpen;
+  const setOpen = externalOnOpenChange || setInternalOpen;
 
   const handleOpenChange = (isOpen: boolean) => {
     setOpen(isOpen);
   };
   return (
     <Drawer open={open} onOpenChange={handleOpenChange}>
-      <DrawerTrigger className="">
+      {showTrigger && <DrawerTrigger className="">
         {" "}
         <span
           className="text-gray-700 hover:text-black transition-colors relative h-full "
@@ -28,7 +39,7 @@ const SearchBar = () => {
         >
           <Search size={20} />
         </span>
-      </DrawerTrigger>
+      </DrawerTrigger>}
       {/* <DrawerOverlay /> */}
       <DrawerContent
         overlayClassName="bg-white md:bg-transparent"

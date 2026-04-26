@@ -3,7 +3,7 @@
 import React, { useRef, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X } from "lucide-react";
+import { X, Search } from "lucide-react";
 import SearchBar from "./SearchBar";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -41,6 +41,7 @@ const Header: React.FC = () => {
 
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
+
 
   React.useEffect(() => {
     if (!isLoading && categoriesData) {
@@ -125,6 +126,7 @@ const Header: React.FC = () => {
           <MobileMenuSidebar
             isOpen={isMobileMenuOpen}
             onOpenChange={setIsMobileMenuOpen}
+            onSearchOpen={() => setIsSearchOpen(true)}
           />
 
           {/* <div className="w-60 h-full flex items-center">
@@ -195,8 +197,13 @@ const Header: React.FC = () => {
             ref={actionRef}
             className="flex justify-end items-center gap-3 lg:gap-4 w-auto md:w-[15%]"
           >
-            <div className="p-2 rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm">
-              <SearchBar />
+            <div 
+              onClick={() => setIsSearchOpen(true)}
+              className="p-2 hidden md:block rounded-full hover:bg-gray-50 transition-all duration-300 cursor-pointer hover:shadow-sm"
+            >
+              <span className="text-gray-700 hover:text-black transition-colors">
+                <Search size={20} />
+              </span>
             </div>
 
             <CartSheet />
@@ -209,38 +216,8 @@ const Header: React.FC = () => {
           </div>
         </div>
 
-        {/* Search Overlay */}
-        {isSearchOpen && (
-          <div className="absolute top-full left-0 w-full bg-white/95 backdrop-blur-md border-t border-gray-100 p-6 shadow-xl z-50 animate-in slide-in-from-top-2 duration-300">
-            <div className="container mx-auto relative">
-              <form
-                className="flex items-center gap-2"
-                onSubmit={handleSearchSubmit}
-              >
-                <input
-                  type="text"
-                  placeholder="Search for products..."
-                  className="w-full px-6 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#189CD9] focus:border-transparent transition-all duration-300 bg-gray-50 hover:bg-white"
-                  autoFocus
-                />
-                <button
-                  type="submit"
-                  className="px-8 py-3 bg-[#189CD9] text-white rounded-lg hover:bg-[#88a887] transition-all duration-300 font-medium shadow-sm hover:shadow-md"
-                >
-                  Search
-                </button>
-              </form>
-              <button
-                onClick={() => setIsSearchOpen(false)}
-                className="absolute -right-2 -top-2 p-2 text-gray-500 hover:text-black transition-colors rounded-full hover:bg-gray-100"
-                aria-label="Close search"
-              >
-                <X size={20} />
-              </button>
-            </div>
-          </div>
-        )}
-
+        {/* Global Search Drawer Instance */}
+        <SearchBar isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} showTrigger={false} />
         {/* Mobile Menu */}
         {/* <div
           className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${

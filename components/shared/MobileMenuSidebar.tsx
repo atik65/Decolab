@@ -12,9 +12,11 @@ import { useGetLocale } from "@/hooks/useGetLocale";
 export default function MobileMenuSidebar({
   isOpen,
   onOpenChange,
+  onSearchOpen,
 }: {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  onSearchOpen: () => void;
 }) {
   const locale = useGetLocale();
 
@@ -37,7 +39,7 @@ export default function MobileMenuSidebar({
           <SheetTitle></SheetTitle>
         </SheetHeader>
 
-        <MobileMenu onOpenChange={onOpenChange} isOpen={isOpen} />
+        <MobileMenu onOpenChange={onOpenChange} isOpen={isOpen} onSearchOpen={onSearchOpen} />
 
         {/* <SheetFooter>
           <button>Save changes</button>

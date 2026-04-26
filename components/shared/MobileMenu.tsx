@@ -9,6 +9,7 @@ import {
   Phone,
   Mail,
   Instagram,
+  Search,
 } from "lucide-react";
 import Image from "next/image";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
@@ -35,9 +36,11 @@ export const staticNavLinks: NavLink[] = [
 
 const MobileMenu = ({
   onOpenChange,
+  onSearchOpen,
 }: {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
+  onSearchOpen: () => void;
 }) => {
   const [navLinks, setNavLinks] = useState<NavLink[]>(staticNavLinks);
   const { data: categoriesData, isLoading } =
@@ -85,6 +88,29 @@ const MobileMenu = ({
         >
           {locale === "en" ? "Our Categories" : "فئاتنا"}
         </h3>
+
+        {/* ─── Search Bar Trigger ─── */}
+        <div className="mb-6">
+          <button
+            onClick={() => {
+              onOpenChange(false);
+              setTimeout(() => {
+                onSearchOpen();
+              }, 150);
+            }}
+            className={cn(
+              "w-full flex items-center gap-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-gray-400 hover:bg-gray-100 transition-all duration-300 group",
+              locale === "ar" && "flex-row-reverse text-right",
+            )}
+          >
+            <Search className="w-5 h-5 text-gray-400 group-hover:text-[#189CD9] transition-colors" />
+            <span className="text-sm font-medium">
+              {locale === "en"
+                ? "Search for products..."
+                : "البحث عن المنتجات..."}
+            </span>
+          </button>
+        </div>
 
         <nav className="space-y-2">
           {navLinks.map((link) => (
