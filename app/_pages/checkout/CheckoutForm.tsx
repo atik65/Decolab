@@ -19,7 +19,7 @@ import { useRouter } from "@/i18n/navigation";
 import { useCreateOrder } from "@/hooks/tanstack/useOrder";
 import { Loader } from "lucide-react";
 // import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
-import { Payload } from "@/lib/createSheetOrder";
+import createSheetOrder, { Payload } from "@/lib/createSheetOrder";
 // import { products } from "@/data/research-product";
 // import axios from "axios";
 
@@ -161,10 +161,11 @@ const CheckoutForm = () => {
         console.log("sheetPayload:", sheetPayload);
 
         // await mutateAsync(payload as any); // Type cast if backend expects single item for now, but usually it should be multi
-        // const res = await createSheetOrder(sheetPayload);
+        const sheetOrderRes = await createSheetOrder(sheetPayload);
+        console.log("Sheet order created:", sheetOrderRes);
         // const res = await mutateAsync(payload);
         const res = await mutateAsync(payload);
-        console.log("Sheet order created:", res);
+        console.log("Order created:", res);
 
         enqueueSnackbar("Order placed successfully", {
           variant: "success",
