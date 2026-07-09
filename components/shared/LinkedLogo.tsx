@@ -19,7 +19,8 @@ export interface LinkedLogoProps extends Omit<
 export const LinkedLogo = React.forwardRef<HTMLAnchorElement, LinkedLogoProps>(
   (
     {
-      logoSrc = "/images/logo.svg",
+      // logoSrc = "/images/logo.svg",
+      logoSrc = "/decolab/black-logo-large.png",
       altText = "Decolab",
       width = 140,
       height = 50,
