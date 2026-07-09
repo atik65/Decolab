@@ -60,7 +60,7 @@ const CartSheet = () => {
         <div className="relative cursor-pointer p-2 hover:bg-gray-100 rounded-full transition-all duration-300 group">
           <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-black" />
           {items.length > 0 && (
-            <span className="absolute -top-1 -right-1 bg-[#189CD9] text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-in zoom-in duration-300 !font-roboto">
+            <span className="absolute -top-1 -right-1 bg-brand-primary text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-in zoom-in duration-300 !font-roboto">
               {items.reduce((acc, item) => acc + item.quantity, 0)}
             </span>
           )}
@@ -69,7 +69,7 @@ const CartSheet = () => {
       <SheetContent isShowCloseButton={true} className="flex flex-col w-full sm:max-w-md p-0 gap-0">
         <SheetHeader className="p-6 border-b">
           <SheetTitle className="flex items-center gap-2">
-            <ShoppingBag className="w-5 h-5 text-[#189CD9]" />
+            <ShoppingBag className="w-5 h-5 text-brand-primary" />
             {locale === "en" ? "Shopping Cart" : "سلة التسوق"}
             <span className="text-sm font-normal text-gray-500 ml-2">
               ({items.length} {locale === "en" ? "items" : "عناصر"})
@@ -188,7 +188,7 @@ const CartSheet = () => {
                           <Plus size={12} />
                         </button>
                       </div>
-                      <p className="font-bold text-[#1489C1] text-sm !font-roboto">
+                      <p className="font-bold text-brand-primary-dark text-sm !font-roboto">
                         KD {(item.price * item.quantity).toFixed(2)}
                       </p>
                     </div>
@@ -210,7 +210,7 @@ const CartSheet = () => {
                 <span className="text-lg font-bold text-gray-900">
                   {locale === "en" ? "Total" : "الإجمالي"}
                 </span>
-                <span className="text-2xl font-bold text-[#1489C1] !font-roboto">
+                <span className="text-2xl font-bold text-brand-primary-dark !font-roboto">
                   KD {total.toFixed(2)}
                 </span>
               </div>
@@ -221,7 +221,7 @@ const CartSheet = () => {
               className="w-full"
               onClick={() => setIsOpen(false)}
             >
-              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] duration-300 shadow-lg transition-all ">
+              <Button className="w-full h-12 text-base font-bold bg-gradient-to-r from-brand-primary to-brand-primary-gradEnd hover:from-brand-primary-dark hover:to-brand-primary-gradEndDark duration-300 shadow-lg transition-all ">
                 {locale === "en" ? "Proceed to Checkout" : "الذهاب للدفع"}
               </Button>
             </Link>

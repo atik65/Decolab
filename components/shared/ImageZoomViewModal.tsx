@@ -108,17 +108,17 @@ const ImageZoomViewModal = ({
         </DialogTrigger>
         <DialogContent
           style={{
-            backgroundImage: "linear-gradient(to right, #189cd917, #189cd91e  )",
+            backgroundImage: "linear-gradient(to right, color-mix(in srgb, var(--brand-primary), transparent 91%), color-mix(in srgb, var(--brand-primary), transparent 88%))",
             // backgroundImage: "linear-gradient(to right, #ffffff, #ffffff  )",
           }}
-          className="p-0 w-[90%] md:w-[60%] rounded-[10px] border border-[#189CD9] overflow-auto  "
+          className="p-0 w-[90%] md:w-[60%] rounded-[10px] border border-brand-primary overflow-auto  "
         >
           <DialogHeader className="p-5">
             <DialogTitle className="flex justify-end">
               {/* close button */}
               <button
                 onClick={() => setOpen(false)}
-                className="text-black h-6 w-6 flex justify-center items-center border-2 border-[#189CD9] rounded-md"
+                className="text-black h-6 w-6 flex justify-center items-center border-2 border-brand-primary rounded-md"
               >
                 <X size={16} />
               </button>

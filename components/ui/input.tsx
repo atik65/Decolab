@@ -44,7 +44,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           type={type}
 
           className={cn(
-            "mt-1 block w-full border border-gray-300 bg-white py-[10px] px-3 shadow-sm focus:border-[#189CD9] focus:outline-none focus:ring-[#189CD9] sm:text-sm",
+            "mt-1 block w-full border border-gray-300 bg-white py-[10px] px-3 shadow-sm focus:border-brand-primary focus:outline-none focus:ring-brand-primary sm:text-sm",
             className,
           )}
           ref={ref}
@@ -101,7 +101,7 @@ const TextArea = React.forwardRef<HTMLTextAreaElement, TextAreaProps>(
           // )}
 
           className={cn(
-            "mt-1 block w-full border border-gray-300 bg-white py-[8px] px-3 shadow-sm focus:border-[#87A786] focus:outline-none focus:ring-[#87A786] sm:text-sm",
+            "mt-1 block w-full border border-gray-300 bg-white py-[8px] px-3 shadow-sm focus:border-brand-secondary focus:outline-none focus:ring-brand-secondary sm:text-sm",
             className,
           )}
           ref={ref}

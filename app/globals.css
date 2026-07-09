@@ -53,6 +53,21 @@
     --chart-5: 27 87% 67%;
 
     --radius: 0.5rem;
+
+    --brand-primary: #189cd9;
+    --brand-primary-dark: #1489c1;
+    --brand-primary-grad-end: #1182b5;
+    --brand-primary-grad-end-dark: #0b76a8;
+    --brand-primary-grad-alt: #1070b0;
+
+    --brand-secondary: #189cd9;
+    --brand-secondary-hover: #189cd9e0;
+
+    --brand-accent: #cfb284;
+    --brand-accent-hover: #cfb284e0;
+
+    --brand-destructive: #c51616;
+    --brand-neutral-light: #f9f9f9;
   }
   .dark {
     --background: 0 0% 3.9%;
@@ -116,7 +131,7 @@
   /* Default (English) fonts */
   * {
     /* @apply font-roboto; */
-    @apply font-cairo
+    @apply font-cairo;
   }
 
   * {
@@ -130,12 +145,12 @@
   h5,
   h6 {
     /* @apply font-montserrat; */
-    @apply font-cairo
+    @apply font-cairo;
   }
 
   p {
     /* @apply font-roboto; */
-    @apply font-cairo
+    @apply font-cairo;
   }
 
   html[data-locale="ar"] h1,
@@ -147,7 +162,7 @@
   html[data-locale="ar"] strong {
     /* @apply font-geDiner; */
     /* @apply font-dgRarah; */
-    @apply font-cairo
+    @apply font-cairo;
   }
 
   html[data-locale="ar"] p,
@@ -156,7 +171,7 @@
   html[data-locale="ar"] span {
     /* @apply font-vexa; */
     /* @apply font-geDiner; */
-    @apply font-cairo
+    @apply font-cairo;
   }
 
   /* Arabic fonts - override when locale is 'ar' */
@@ -178,7 +193,7 @@
 /* Product description styling - keep default fonts */
 .product-description {
   /* @apply font-roboto; */
-  @apply font-cairo
+  @apply font-cairo;
 }
 
 /* Arabic locale uses Arabic fonts */
@@ -205,7 +220,7 @@
 } */
 
 ::-webkit-scrollbar-thumb {
-  background-color: #189cd9;
+  background-color: var(--brand-primary);
   border-radius: 10px;
   cursor: grabbing;
   height: 50px;
@@ -216,7 +231,7 @@
   position: fixed;
   left: 30px;
   bottom: 50px;
-  background-color: #189cd92b;
+  background-color: color-mix(in srgb, var(--brand-primary), transparent 83%);
   color: #fff;
   border-radius: 50%;
   z-index: 1000;

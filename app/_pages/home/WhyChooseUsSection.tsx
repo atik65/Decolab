@@ -22,8 +22,8 @@ const features = {
       description:
         "Your order arrives at your doorstep at zero extra cost — always.",
       icon: Truck,
-      color: "#189CD9",
-      bg: "rgba(24,156,217,0.08)",
+      color: "var(--brand-primary)",
+      bg: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
     },
     {
       title: "Free Installation Support",
@@ -62,8 +62,8 @@ const features = {
       description:
         "15+ years of proven expertise in signage, branding & creative design.",
       icon: Users,
-      color: "#189CD9",
-      bg: "rgba(24,156,217,0.08)",
+      color: "var(--brand-primary)",
+      bg: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
     },
   ],
   ar: [
@@ -71,8 +71,8 @@ const features = {
       title: "توصيل مجاني",
       description: "طلبك يصل إلى باب منزلك دون أي تكلفة إضافية — دائمًا.",
       icon: Truck,
-      color: "#189CD9",
-      bg: "rgba(24,156,217,0.08)",
+      color: "var(--brand-primary)",
+      bg: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
     },
     {
       title: "دعم تركيب مجاني",
@@ -106,8 +106,8 @@ const features = {
       title: "فريق الخبراء",
       description: "أكثر من 15 عامًا من الخبرة في اللافتات والعلامات التجارية.",
       icon: Users,
-      color: "#189CD9",
-      bg: "rgba(24,156,217,0.08)",
+      color: "var(--brand-primary)",
+      bg: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
     },
   ],
 };
@@ -198,14 +198,14 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.4, delay: 0.05 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
             style={{
-              background: "rgba(24,156,217,0.08)",
-              border: "1px solid rgba(24,156,217,0.22)",
+              background: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
+              border: "1px solid color-mix(in srgb, var(--brand-primary), transparent 78%)",
             }}
           >
-            <Sparkles className="w-3.5 h-3.5" style={{ color: "#189CD9" }} />
+            <Sparkles className="w-3.5 h-3.5" style={{ color: "var(--brand-primary)" }} />
             <span
               className="text-xs font-semibold tracking-widest uppercase"
-              style={{ color: "#189CD9" }}
+              style={{ color: "var(--brand-primary)" }}
             >
               {locale === "en" ? "Our Advantages" : "مميزاتنا"}
             </span>
@@ -224,7 +224,7 @@ const WhyChooseUsSection = () => {
                 Why Businesses Choose{" "}
                 <span
                   className="relative whitespace-nowrap"
-                  style={{ color: "#189CD9" }}
+                  style={{ color: "var(--brand-primary)" }}
                 >
                   One Direction
                   <svg
@@ -237,7 +237,7 @@ const WhyChooseUsSection = () => {
                   >
                     <path
                       d="M2 7 Q75 1 150 5 Q225 9 298 4"
-                      stroke="#189CD9"
+                      stroke="currentColor"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       fill="none"
@@ -251,7 +251,7 @@ const WhyChooseUsSection = () => {
                 لماذا تختار الشركات{" "}
                 <span
                   className="relative whitespace-nowrap"
-                  style={{ color: "#189CD9" }}
+                  style={{ color: "var(--brand-primary)" }}
                 >
                   ون دايركشن
                   <svg
@@ -263,7 +263,7 @@ const WhyChooseUsSection = () => {
                   >
                     <path
                       d="M2 7 Q75 1 150 5 Q225 9 298 4"
-                      stroke="#189CD9"
+                      stroke="currentColor"
                       strokeWidth="2.5"
                       strokeLinecap="round"
                       fill="none"

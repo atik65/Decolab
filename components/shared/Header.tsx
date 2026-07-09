@@ -186,7 +186,7 @@ const Header: React.FC = () => {
                     ? link.labelAr
                     : link?.label?.split("_")?.join(" ")}
                 </span>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#189CD9] transition-all duration-300 group-hover:w-3/4"></span>
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
             ))}
           </nav>

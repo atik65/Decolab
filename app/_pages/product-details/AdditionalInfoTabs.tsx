@@ -24,7 +24,7 @@ const AdditionalInfoTabs = () => {
       <TabsList className="w-full bg-white border-t sm:gap-5  overflow-x-auto md:overflow-x-scroll justify-start md:justify-center h-full">
         {tabs.map((tab) => (
           <TabsTrigger
-            className="text-base md:text-lg -mt-1 font-bold border-t-[3px] border-transparent text-gray-500 hover:text-gray-900 duration-200 data-[state=active]:text-[#87A786] data-[state=active]:border-[#87A786] rounded-none py-3 uppercase"
+            className="text-base md:text-lg -mt-1 font-bold border-t-[3px] border-transparent text-gray-500 hover:text-gray-900 duration-200 data-[state=active]:text-brand-secondary data-[state=active]:border-brand-secondary rounded-none py-3 uppercase"
             key={tab.id}
             value={tab.id.toString()}
           >
@@ -224,7 +224,7 @@ const AdditionalInfo = () => {
     <div className="space-y-8 container mx-auto px-5">
       {/* Ramadan Crescent Moon */}
       <section className="border rounded-lg p-6 bg-white">
-        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Ramadan Crescent Moon</h3>
+        <h3 className="text-2xl font-semibold mb-4 text-brand-secondary">Ramadan Crescent Moon</h3>
         
         <div className="space-y-6">
           {/* Product Description */}
@@ -238,14 +238,14 @@ const AdditionalInfo = () => {
 
           {/* Delivery Info */}
           <div>
-            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <h4 className="text-lg font-medium mb-2 text-brand-secondary">Delivery & Installation</h4>
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Your order will be delivered and installed within 3 days or less</span>
               </li>
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Enjoy free delivery and installation by our team of experts</span>
               </li>
             </ul>
@@ -255,7 +255,7 @@ const AdditionalInfo = () => {
 
       {/* Wall-Mounted House Numbers */}
       <section className="border rounded-lg p-6 bg-white">
-        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Aluminum House Numbers</h3>
+        <h3 className="text-2xl font-semibold mb-4 text-brand-secondary">Aluminum House Numbers</h3>
         
         <div className="space-y-6">
           {/* Product Description */}
@@ -269,22 +269,22 @@ const AdditionalInfo = () => {
 
           {/* Delivery Info */}
           <div>
-            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <h4 className="text-lg font-medium mb-2 text-brand-secondary">Delivery & Installation</h4>
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Your order will be delivered and installed within a week or less</span>
               </li>
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Enjoy free delivery and installation by our team of experts</span>
               </li>
             </ul>
           </div>
 
           {/* Important Note */}
-          <div className="bg-[#87A786]/5 p-4 rounded-lg border border-[#87A786]">
-            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Important Note</h4>
+          <div className="bg-brand-secondary/5 p-4 rounded-lg border border-brand-secondary">
+            <h4 className="text-lg font-medium mb-2 text-brand-secondary">Important Note</h4>
             <p className="text-gray-700">
               The customer is responsible for providing a properly placed electrical connection.
               We are not responsible for installing or supplying the electrical point needed for this product.
@@ -295,7 +295,7 @@ const AdditionalInfo = () => {
 
       {/* Double-Sided House Numbers */}
       <section className="border rounded-lg p-6 bg-white">
-        <h3 className="text-2xl font-semibold mb-4 text-[#87A786]">Double-Sided House Numbers</h3>
+        <h3 className="text-2xl font-semibold mb-4 text-brand-secondary">Double-Sided House Numbers</h3>
         
         <div className="space-y-6">
           {/* Product Description */}
@@ -310,22 +310,22 @@ const AdditionalInfo = () => {
 
           {/* Delivery Info */}
           <div>
-            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Delivery & Installation</h4>
+            <h4 className="text-lg font-medium mb-2 text-brand-secondary">Delivery & Installation</h4>
             <ul className="space-y-2">
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Your order will be delivered and installed within a week or less</span>
               </li>
               <li className="flex items-start gap-2">
-                <ChevronRight className="w-4 h-4 mt-1 text-[#87A786]" />
+                <ChevronRight className="w-4 h-4 mt-1 text-brand-secondary" />
                 <span>Enjoy free delivery and installation by our team of experts</span>
               </li>
             </ul>
           </div>
 
           {/* Important Note */}
-          <div className="bg-[#87A786]/5 p-4 rounded-lg border border-[#87A786]">
-            <h4 className="text-lg font-medium mb-2 text-[#87A786]">Important Note</h4>
+          <div className="bg-brand-secondary/5 p-4 rounded-lg border border-brand-secondary">
+            <h4 className="text-lg font-medium mb-2 text-brand-secondary">Important Note</h4>
             <p className="text-gray-700">
               The customer is responsible for providing a properly placed electrical connection.
               We are not responsible for installing or supplying the electrical point needed for this product.
@@ -335,8 +335,8 @@ const AdditionalInfo = () => {
       </section>
 
       {/* Order Process - Common for all products */}
-      <section className="bg-[#87A786]/5 p-6 rounded-lg border border-[#87A786]">
-        <h3 className="text-xl font-semibold mb-3 text-[#87A786]">Order Process</h3>
+      <section className="bg-brand-secondary/5 p-6 rounded-lg border border-brand-secondary">
+        <h3 className="text-xl font-semibold mb-3 text-brand-secondary">Order Process</h3>
         <p className="text-gray-700">
           Dear customer, after purchasing, the design department will contact you in 10 minutes or less
           to confirm your design before starting manufacturing.

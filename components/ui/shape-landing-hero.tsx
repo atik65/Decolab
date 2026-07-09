@@ -185,11 +185,11 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
           >
             <h1 className="text-4xl sm:text-6xl md:text-7xl font-bold mb-5 md:mb-8 tracking-tight">
               {title1 && (
-                <span className="bg-clip-text text-transparent bg-gradient-to-b from-[#189CD9] to-violet-700">
+                <span className="bg-clip-text text-transparent bg-gradient-to-b from-brand-primary to-violet-700">
                   {title1}
                 </span>
 
-                // <span className="text-[#189CD9">{title1}</span>
+                // <span className="text-brand-primary">{title1}</span>
               )}
 
               {title2 && (
@@ -197,7 +197,7 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
                   <br />
                   <span
                     className={cn(
-                      "bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-600 to-[#189CD9]"
+                      "bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-600 to-brand-primary"
                     )}
                   >
                     {title2}

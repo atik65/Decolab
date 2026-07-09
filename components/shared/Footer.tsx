@@ -99,13 +99,13 @@ const Footer = () => {
                 href={`https://wa.me/${contactInfo.phone.replace(/[\s+]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#189CD9] transition-colors duration-300 roboto-num"
+                className="block hover:text-brand-primary transition-colors duration-300 roboto-num"
               >
                 {contactInfo.phone}
               </Link>
               <Link
                 href={`mailto:${contactInfo.email}`}
-                className="block underline underline-offset-4 hover:text-[#189CD9] transition-colors duration-300"
+                className="block underline underline-offset-4 hover:text-brand-primary transition-colors duration-300"
               >
                 {contactInfo.email}
               </Link>
@@ -130,7 +130,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-[#189CD9] transition-colors duration-300"
+                    className="text-sm hover:text-brand-primary transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -154,7 +154,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-[#189CD9] transition-colors duration-300"
+                    className="text-sm hover:text-brand-primary transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -204,12 +204,12 @@ const Footer = () => {
                 href="https://iamatik.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[#189CD9] transition-colors duration-300 group"
+                className="flex items-center gap-1.5 hover:text-brand-primary transition-colors duration-300 group"
               >
                 <span className="opacity-60">
                   {locale === "en" ? "Developed by" : "تم التطوير بواسطة"}
                 </span>
-                <span className="font-bold text-gray-500 group-hover:text-[#189CD9]">Atik</span>
+                <span className="font-bold text-gray-500 group-hover:text-brand-primary">Atik</span>
               </Link>
             </div>
           </div>

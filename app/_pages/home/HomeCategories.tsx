@@ -65,21 +65,21 @@ const HomeCategories = ({ className }: { className?: string }) => {
           <h2 className="text-xl md:text-3xl font-bold text-gray-900 uppercase tracking-normal">
             {locale === "en" ? "Our Categories" : "فئاتنا"}
           </h2>
-          <div className="h-0.5 w-20 bg-[#189CD9] rounded-full" />
+          <div className="h-0.5 w-20 bg-brand-primary rounded-full" />
         </div>
 
         <div className="flex items-center gap-2 md:gap-3">
           <button
             ref={prevRef}
             aria-label="Previous Category"
-            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
           >
             <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 group-active:scale-90 transition-transform" />
           </button>
           <button
             ref={nextRef}
             aria-label="Next Category"
-            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-[#189CD9] hover:text-white hover:border-[#189CD9] transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
+            className="p-2 md:p-3 rounded-full border border-gray-200 text-gray-600 hover:bg-brand-primary hover:text-white hover:border-brand-primary transition-all duration-300 shadow-sm disabled:opacity-30 disabled:cursor-not-allowed group"
           >
             <ChevronRight className="w-4 h-4 md:w-5 md:h-5 group-active:scale-90 transition-transform" />
           </button>
@@ -172,10 +172,10 @@ function CategoryCard({ data }: { data: Category }) {
       </div>
 
       {/* Content Section */}
-      <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center bg-[#189CD9]/10">
+      <div className="p-2 md:p-6 flex flex-col flex-grow items-center text-center bg-brand-primary/10">
         <h3
           className={cn(
-            "text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 uppercase transition-colors duration-300 group-hover:text-[#189CD9] line-clamp-1",
+            "text-xs sm:text-base md:text-xl font-bold text-gray-900 mb-1 md:mb-2 uppercase transition-colors duration-300 group-hover:text-brand-primary line-clamp-1",
             locale === "en" && "text-[10px] sm:text-base md:text-xl",
           )}
         >

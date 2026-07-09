@@ -67,8 +67,8 @@ export const ColorOptions = ({
             className={cn(
               "group relative flex items-center gap-3 pr-4 rounded-full border transition-all duration-300 active:scale-95",
               values.color == color.id.toString()
-                ? "border-[#189CD9] bg-[#189CD9]/5 shadow-sm"
-                : "border-gray-200 bg-white hover:border-[#189CD9]/50 shadow-none hover:shadow-xs",
+                ? "border-brand-primary bg-brand-primary/5 shadow-sm"
+                : "border-gray-200 bg-white hover:border-brand-primary/50 shadow-none hover:shadow-xs",
             )}
           >
             {/* Color Swatch / Check Container */}
@@ -107,7 +107,7 @@ export const ColorOptions = ({
               className={cn(
                 "text-sm font-semibold transition-colors duration-300",
                 values.color == color.id.toString()
-                  ? "text-[#189CD9]"
+                  ? "text-brand-primary"
                   : "text-gray-600 group-hover:text-gray-900",
               )}
             >
@@ -116,7 +116,7 @@ export const ColorOptions = ({
 
             {/* Active Indicator Dot (Optional Premium Touch) */}
             {values.color == color.id.toString() && (
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#189CD9] rounded-full border-2 border-white animate-in zoom-in duration-300" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-brand-primary rounded-full border-2 border-white animate-in zoom-in duration-300" />
             )}
           </button>
         ))}
@@ -209,8 +209,8 @@ export const LightColorOptions = ({
             className={cn(
               "group relative flex items-center gap-3 pr-4 rounded-full border transition-all duration-300 active:scale-95",
               values.lightColor == color.id.toString()
-                ? "border-[#189CD9] bg-[#189CD9]/5 shadow-sm"
-                : "border-gray-200 bg-white hover:border-[#189CD9]/50 shadow-none hover:shadow-xs",
+                ? "border-brand-primary bg-brand-primary/5 shadow-sm"
+                : "border-gray-200 bg-white hover:border-brand-primary/50 shadow-none hover:shadow-xs",
             )}
           >
             {/* Swatch with Glow Effect for Light Colors */}
@@ -254,7 +254,7 @@ export const LightColorOptions = ({
               className={cn(
                 "text-sm font-semibold transition-colors duration-300",
                 values.lightColor == color.id.toString()
-                  ? "text-[#189CD9]"
+                  ? "text-brand-primary"
                   : "text-gray-600 group-hover:text-gray-900",
               )}
             >
@@ -262,7 +262,7 @@ export const LightColorOptions = ({
             </span>
 
             {values.lightColor == color.id.toString() && (
-              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-[#189CD9] rounded-full border-2 border-white animate-in zoom-in duration-300" />
+              <div className="absolute -top-1 -right-1 w-2.5 h-2.5 bg-brand-primary rounded-full border-2 border-white animate-in zoom-in duration-300" />
             )}
           </button>
         ))}
@@ -288,7 +288,7 @@ export const LightColorOptions = ({
             className="w-3 h-3 rounded-full"
             style={{
               backgroundColor: selectedColor.colorCode,
-              borderColor: "#189CD9",
+              borderColor: "var(--brand-primary)",
               borderWidth: "1px",
             }}
           />

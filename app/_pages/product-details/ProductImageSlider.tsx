@@ -145,7 +145,7 @@ const ProductImageSlider = () => {
               width={200}
               src="/images/home/left-arrow.svg"
               alt="Previous"
-              className="w-8 h-8 sm:w-11 sm:h-11 bg-[#CFB284] rounded-full p-2 hidden md:block"
+              className="w-8 h-8 sm:w-11 sm:h-11 bg-brand-accent rounded-full p-2 hidden md:block"
             />
 
             <Image
@@ -164,7 +164,7 @@ const ProductImageSlider = () => {
               alt="Next"
               height={200}
               width={200}
-              className="w-8 h-8 sm:w-11 sm:h-11 bg-[#CFB284] rounded-full p-2 hidden md:block"
+              className="w-8 h-8 sm:w-11 sm:h-11 bg-brand-accent rounded-full p-2 hidden md:block"
             />
             <Image
               height={200}
@@ -202,7 +202,7 @@ const ThumbsComponent = ({
           alt="product image"
           src={imgURI}
           className={` border-[5px] h-16 w-20 md:h-[90px] xl:h-[80px] md:w-40 object-cover ${
-            index === activeIndex ? "border-[#189CD9]" : "border-transparent "
+            index === activeIndex ? "border-brand-primary" : "border-transparent "
           }`}
           unoptimized
         />

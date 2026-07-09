@@ -79,8 +79,8 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
             onClick={() => handleCategoryClick(category.id)}
             className={`group relative overflow-hidden rounded-xl transition-all duration-300 ${
               activeCategory === category.id
-                ? "ring-4 ring-[#87A786] shadow-xl scale-105"
-                : "ring-1 ring-gray-200 hover:ring-2 hover:ring-[#87A786] hover:shadow-lg"
+                ? "ring-4 ring-brand-secondary shadow-xl scale-105"
+                : "ring-1 ring-gray-200 hover:ring-2 hover:ring-brand-secondary hover:shadow-lg"
             }`}
           >
             {/* Background Image */}
@@ -104,7 +104,7 @@ const CategoryFilter = ({ onCategoryChange }: CategoryFilterProps) => {
 
             {/* Active Indicator */}
             {activeCategory === category.id && (
-              <div className="absolute top-2 right-2 bg-[#87A786] text-white rounded-full p-1">
+              <div className="absolute top-2 right-2 bg-brand-secondary text-white rounded-full p-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   className="h-4 w-4"

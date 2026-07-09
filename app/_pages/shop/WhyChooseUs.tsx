@@ -144,10 +144,10 @@ const WhyChooseUs = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="group bg-white rounded-lg md:rounded-xl p-4 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-[#87A786]/50 hover:-translate-y-1"
+              className="group bg-white rounded-lg md:rounded-xl p-4 md:p-6 shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 hover:border-brand-secondary/50 hover:-translate-y-1"
             >
               {/* Icon */}
-              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-[#87A786]/20 to-[#87A786]/10 rounded-lg md:rounded-xl text-[#87A786] mb-3 md:mb-4 group-hover:scale-110 transition-transform">
+              <div className="inline-flex items-center justify-center w-12 h-12 md:w-16 md:h-16 bg-gradient-to-br from-brand-secondary/20 to-brand-secondary/10 rounded-lg md:rounded-xl text-brand-secondary mb-3 md:mb-4 group-hover:scale-110 transition-transform">
                 {feature.icon}
               </div>
 
@@ -168,15 +168,15 @@ const WhyChooseUs = () => {
         <div className="mt-16 text-center">
           <div className="relative inline-block">
             {/* Decorative glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#87A786]/20 via-[#87A786]/30 to-[#87A786]/20 blur-xl rounded-full"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-brand-secondary/20 via-brand-secondary/30 to-brand-secondary/20 blur-xl rounded-full"></div>
 
             {/* Main badge */}
-            <div className="relative bg-gradient-to-r from-white via-gray-50 to-white px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-[#87A786]/20 shadow-lg backdrop-blur-sm">
+            <div className="relative bg-gradient-to-r from-white via-gray-50 to-white px-8 md:px-10 py-4 md:py-5 rounded-2xl border-2 border-brand-secondary/20 shadow-lg backdrop-blur-sm">
               <div className="flex items-center gap-3 md:gap-4">
                 {/* Premium icon with animation */}
                 <div className="relative">
-                  <div className="absolute inset-0 bg-[#87A786]/20 rounded-full animate-ping"></div>
-                  <div className="relative bg-gradient-to-br from-[#87A786] to-[#6d8a6d] p-2 rounded-full shadow-md">
+                  <div className="absolute inset-0 bg-brand-secondary/20 rounded-full animate-ping"></div>
+                  <div className="relative bg-gradient-to-br from-brand-secondary to-brand-secondary-hover p-2 rounded-full shadow-md">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       className="h-5 w-5 md:h-6 md:w-6 text-white"
@@ -196,7 +196,7 @@ const WhyChooseUs = () => {
 
                 {/* Text content */}
                 <div className="flex flex-col items-start gap-0.5">
-                  <span className="text-sm md:text-base font-bold bg-gradient-to-r from-[#87A786] to-[#6d8a6d] bg-clip-text text-transparent">
+                  <span className="text-sm md:text-base font-bold bg-gradient-to-r from-brand-secondary to-brand-secondary-hover bg-clip-text text-transparent">
                     {locale === "en"
                       ? "Trusted by 1000+ customers"
                       : "موثوق به من قبل أكثر من 1000 عميل"}
@@ -209,11 +209,11 @@ const WhyChooseUs = () => {
                 </div>
 
                 {/* Star ratings */}
-                <div className="hidden md:flex items-center gap-1 ml-2 pl-4 border-l-2 border-[#87A786]/20">
+                <div className="hidden md:flex items-center gap-1 ml-2 pl-4 border-l-2 border-brand-secondary/20">
                   {[...Array(5)].map((_, i) => (
                     <svg
                       key={i}
-                      className="h-4 w-4 text-[#87A786] fill-current"
+                      className="h-4 w-4 text-brand-secondary fill-current"
                       xmlns="http://www.w3.org/2000/svg"
                       viewBox="0 0 20 20"
                     >

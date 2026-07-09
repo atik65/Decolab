@@ -282,7 +282,7 @@ const About = () => {
   return (
     <div className="bg-white">
       {/* Hero Section */}
-      {/* <section className="relative bg-gradient-to-br from-[#87A786] to-[#6d8a6c] text-white py-20 md:py-32 overflow-hidden">
+      {/* <section className="relative bg-gradient-to-br from-brand-secondary to-brand-secondary-hover text-white py-20 md:py-32 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -350,7 +350,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
+              className="w-16 h-1 bg-brand-primary mx-auto mb-12"
             />
 
             <div className="grid md:grid-cols-2 gap-8 items-center">
@@ -370,7 +370,7 @@ const About = () => {
                 variants={fadeInUp}
                 className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-2xl group"
               >
-                <div className="absolute inset-0 bg-gradient-to-t from-[#189CD9]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
+                <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                 <Image
                   src="/images/home/banner7.jpg"
                   alt="One Direction Story"
@@ -397,8 +397,8 @@ const About = () => {
               variants={fadeInUp}
               className="bg-white p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
             >
-              <div className="w-16 h-16 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#189CD9]/20 transition-colors">
-                <Target className="w-8 h-8 text-[#189CD9]" />
+              <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-primary/20 transition-colors">
+                <Target className="w-8 h-8 text-brand-primary" />
               </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
                 {currentContent.mission.title}
@@ -412,8 +412,8 @@ const About = () => {
               variants={fadeInUp}
               className="bg-white p-8 md:p-10 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 group"
             >
-              <div className="w-16 h-16 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-[#189CD9]/20 transition-colors">
-                <Eye className="w-8 h-8 text-[#189CD9]" />
+              <div className="w-16 h-16 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-brand-primary/20 transition-colors">
+                <Eye className="w-8 h-8 text-brand-primary" />
               </div>
               <h3 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
                 {currentContent.vision.title}
@@ -427,7 +427,7 @@ const About = () => {
       </section>
 
       {/* Stats Section */}
-      <section className="py-16 md:py-20 bg-gradient-to-br from-[#189CD9] to-[#1070B0] text-white relative overflow-hidden">
+      <section className="py-16 md:py-20 bg-gradient-to-br from-brand-primary to-brand-primary-gradAlt text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -487,7 +487,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
+              className="w-16 h-1 bg-brand-primary mx-auto mb-12"
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
@@ -498,10 +498,10 @@ const About = () => {
                     key={index}
                     variants={fadeInUp}
                     whileHover={{ y: -8 }}
-                    className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-[#189CD9] hover:shadow-xl transition-all duration-300 group"
+                    className="bg-white p-6 md:p-8 rounded-2xl border border-gray-200 hover:border-brand-primary hover:shadow-xl transition-all duration-300 group"
                   >
-                    <div className="w-14 h-14 bg-[#189CD9]/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-[#189CD9] transition-colors">
-                      <IconComponent className="w-7 h-7 text-[#189CD9] group-hover:text-white transition-colors" />
+                    <div className="w-14 h-14 bg-brand-primary/10 rounded-xl flex items-center justify-center mb-5 group-hover:bg-brand-primary transition-colors">
+                      <IconComponent className="w-7 h-7 text-brand-primary group-hover:text-white transition-colors" />
                     </div>
                     <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
                       {value.title}
@@ -534,7 +534,7 @@ const About = () => {
             </motion.h2>
             <motion.div
               variants={fadeInUp}
-              className="w-16 h-1 bg-[#189CD9] mx-auto mb-12"
+              className="w-16 h-1 bg-brand-primary mx-auto mb-12"
             />
 
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
@@ -545,10 +545,10 @@ const About = () => {
                     key={index}
                     variants={fadeInUp}
                     whileHover={{ y: -5 }}
-                    className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-[#189CD9] group"
+                    className="bg-white p-6 md:p-8 rounded-xl shadow-md hover:shadow-2xl transition-all duration-300 border border-transparent hover:border-brand-primary group"
                   >
-                    <div className="w-12 h-12 bg-[#189CD9]/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-[#189CD9] transition-colors">
-                      <IconComponent className="w-6 h-6 text-[#189CD9] group-hover:text-white transition-colors" />
+                    <div className="w-12 h-12 bg-brand-primary/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-brand-primary transition-colors">
+                      <IconComponent className="w-6 h-6 text-brand-primary group-hover:text-white transition-colors" />
                     </div>
                     <h4 className="text-lg md:text-xl font-bold mb-2 text-gray-900">
                       {item.title}
@@ -565,7 +565,7 @@ const About = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 md:py-24 bg-gradient-to-br from-[#189CD9] to-[#1070B0] text-white relative overflow-hidden">
+      <section className="py-16 md:py-24 bg-gradient-to-br from-brand-primary to-brand-primary-gradAlt text-white relative overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div
             className="absolute inset-0"
@@ -599,7 +599,7 @@ const About = () => {
                 href={`/${locale}/contact`}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center gap-3 bg-white text-[#189CD9] px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300 shadow-xl"
+                className="inline-flex items-center gap-3 bg-white text-brand-primary px-8 md:px-12 py-4 rounded-lg font-bold text-base md:text-lg hover:bg-gray-100 transition-colors duration-300 shadow-xl"
               >
                 {currentContent.cta.button}
                 <CheckCircle2 className="w-5 h-5" />
