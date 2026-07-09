@@ -12,6 +12,7 @@ import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 import Image from "next/image";
 import MobileMenuSidebar from "./MobileMenuSidebar";
 import AnnounceBar from "./AnnounceBar";
+import LinkedLogo from "./LinkedLogo";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CartSheet from "./CartSheet";
@@ -150,20 +151,13 @@ const Header: React.FC = () => {
           {/* Logo (Desktop Only) */}
           <div className="hidden lg:flex w-[22%] h-full items-center">
 
-            <Link
+            <LinkedLogo
               ref={logoRef}
-              href="/"
-              className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
-            >
-              {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
-              <Image
-                src="/images/logo.svg"
-                alt="One Direction"
-                className="w-full transition-transform duration-300 group-hover:scale-105"
-                width={100}
-                height={100}
-              />
-            </Link>
+              className="text-2xl font-bold tracking-tight"
+              imgClassName="w-full"
+              width={100}
+              height={100}
+            />
 
           </div>
 

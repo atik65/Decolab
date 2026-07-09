@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import React from "react";
+import LinkedLogo from "./LinkedLogo";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { Instagram } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -73,21 +74,15 @@ const Footer = () => {
               locale === "ar" && "lg:text-right lg:order-3",
             )}
           >
-            <Link
-              href="/"
+            <LinkedLogo
+              width={180}
+              height={60}
               className="inline-block transition-opacity hover:opacity-80"
-            >
-              <Image
-                src="/images/logo.svg"
-                alt="One Direction"
-                width={180}
-                height={60}
-                className={cn(
-                  "h-12 w-auto object-contain mx-auto md:ml-0 md:mr-auto",
-                  locale === "ar" && "lg:ml-auto lg:mr-0",
-                )}
-              />
-            </Link>
+              imgClassName={cn(
+                "h-12 w-auto object-contain mx-auto md:ml-0 md:mr-auto",
+                locale === "ar" && "lg:ml-auto lg:mr-0",
+              )}
+            />
 
             <div
               className={cn(

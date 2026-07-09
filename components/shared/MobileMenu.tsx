@@ -12,6 +12,7 @@ import {
   Search,
 } from "lucide-react";
 import Image from "next/image";
+import LinkedLogo from "./LinkedLogo";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { cn } from "@/lib/utils";
@@ -67,15 +68,10 @@ const MobileMenu = ({
           locale === "ar" ? "justify-end" : "justify-start",
         )}
       >
-        <Link href="/" onClick={() => onOpenChange(false)}>
-          <Image
-            src="/images/logo.svg"
-            alt="One Direction Logo"
-            width={140}
-            height={50}
-            className="w-32 h-auto object-contain transition-opacity hover:opacity-80"
-          />
-        </Link>
+        <LinkedLogo
+          onClick={() => onOpenChange(false)}
+          imgClassName="w-32 h-auto object-contain"
+        />
       </div>
 
       {/* ─── Scrollable Navigation ─── */}
