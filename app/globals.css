@@ -54,7 +54,7 @@
 
     --radius: 0.5rem;
 
-    --brand-primary: #189cd9;
+    /* --brand-primary: #189cd9;
     --brand-primary-dark: #1489c1;
     --brand-primary-grad-end: #1182b5;
     --brand-primary-grad-end-dark: #0b76a8;
@@ -64,7 +64,25 @@
     --brand-secondary-hover: #189cd9e0;
 
     --brand-accent: #cfb284;
-    --brand-accent-hover: #cfb284e0;
+    --brand-accent-hover: #cfb284e0; */
+
+    /* Primary Colors (Using the main #3D3D3D and its darker variants) */
+    --brand-primary: #3d3d3d;
+    --brand-primary-dark: #282828;
+    --brand-primary-grad-end: #282828;
+    --brand-primary-grad-end-dark: #000000;
+    --brand-primary-grad-alt: #686868;
+
+    /* Secondary Colors (Using Black for strong contrast) */
+    --brand-secondary: #000000;
+    --brand-secondary-hover: #000000e0; /* Added 80% opacity to match your previous setup */
+
+    /* Accent Colors (Using the lighter #686868 to replace the old gold) */
+    --brand-accent: #686868;
+    --brand-accent-hover: #686868e0; /* Added 80% opacity */
+
+    /* Base/Background (Optional additions based on your new guidelines) */
+    --brand-white: #ffffff;
 
     --brand-destructive: #c51616;
     --brand-neutral-light: #f9f9f9;
