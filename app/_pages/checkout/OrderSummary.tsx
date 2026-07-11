@@ -48,7 +48,7 @@ const OrderSummary = () => {
         </p>
         <Link
           href="/shop"
-          className="inline-block px-6 py-2 bg-[#1489C1] text-white rounded-lg font-medium hover:bg-[#1489C1]/80 transition-colors"
+          className="inline-block px-6 py-2 bg-brand-primary-dark text-white rounded-lg font-medium hover:bg-brand-primary-dark/80 transition-colors"
         >
           {locale === "en" ? "Continue Shopping" : "مواصلة التسوق"}
         </Link>
@@ -115,7 +115,7 @@ const OrderSummary = () => {
                     </p>
                     <p
                       lang="en"
-                      className="font-bold text-[#1489C1] !font-roboto"
+                      className="font-bold text-brand-primary-dark !font-roboto"
                     >
                       KD {item.price}
                     </p>
@@ -266,7 +266,7 @@ const OrderSummary = () => {
             <span className="text-gray-900">
               {locale === "en" ? "Total" : "الإجمالي"}
             </span>
-            <span className="!font-roboto text-2xl text-[#1489C1]">
+            <span className="!font-roboto text-2xl text-brand-primary-dark">
               KD {totalPrice.toFixed(2)}
             </span>
           </div>
@@ -288,7 +288,7 @@ const ColorCapsule = ({
   return (
     <div
       title={color?.colorCode}
-      className={`flex items-center gap-2 px-2 py-1 rounded-full border hover:border-[#87A786] transition-colors border-[#87A786] `}
+      className={`flex items-center gap-2 px-2 py-1 rounded-full border hover:border-brand-secondary transition-colors border-brand-secondary `}
     >
       {color?.image && color.image !== "" ? (
         <Image

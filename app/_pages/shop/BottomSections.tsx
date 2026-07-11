@@ -153,7 +153,7 @@ export const HowItWorksSection = () => {
   ];
 
   return (
-    <div className="bg-gradient-to-br from-[#87A786]/5 to-white py-16">
+    <div className="bg-gradient-to-br from-brand-secondary/5 to-white py-16">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
@@ -171,17 +171,17 @@ export const HowItWorksSection = () => {
             <div key={index} className="relative">
               {/* Connector Line */}
               {index < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-0.5 bg-gradient-to-r from-[#87A786] to-[#87A786]/30 z-0" />
+                <div className="hidden lg:block absolute top-12 left-1/2 w-full h-0.5 bg-gradient-to-r from-brand-secondary to-brand-secondary/30 z-0" />
               )}
 
               <div className="relative z-10 text-center">
                 {/* Number Badge */}
-                <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-[#87A786] to-[#6d8a6c] rounded-full text-white font-bold text-2xl mb-4 shadow-lg">
+                <div className="inline-flex items-center justify-center w-24 h-24 bg-gradient-to-br from-brand-secondary to-brand-secondary-hover rounded-full text-white font-bold text-2xl mb-4 shadow-lg">
                   <span className="text-4xl">{step.icon}</span>
                 </div>
 
                 {/* Step Number */}
-                <div className="text-[#87A786] font-bold text-sm mb-2">
+                <div className="text-brand-secondary font-bold text-sm mb-2">
                   {step.number}
                 </div>
 
@@ -282,7 +282,7 @@ export const FAQSection = () => {
             {faqs.map((faq, index) => (
               <div
                 key={index}
-                className="border border-gray-200 rounded-xl overflow-hidden hover:border-[#87A786]/50 transition-colors"
+                className="border border-gray-200 rounded-xl overflow-hidden hover:border-brand-secondary/50 transition-colors"
               >
                 <button
                   onClick={() =>
@@ -294,7 +294,7 @@ export const FAQSection = () => {
                     {faq.question[locale]}
                   </span>
                   <ChevronDown
-                    className={`w-5 h-5 text-[#87A786] transition-transform flex-shrink-0 ${
+                    className={`w-5 h-5 text-brand-secondary transition-transform flex-shrink-0 ${
                       openIndex === index ? "rotate-180" : ""
                     }`}
                   />
@@ -312,7 +312,7 @@ export const FAQSection = () => {
           </div>
 
           {/* Contact CTA */}
-          {/* <div className="mt-12 text-center bg-gradient-to-r from-[#87A786]/10 to-transparent p-6 rounded-xl border border-[#87A786]/20">
+          {/* <div className="mt-12 text-center bg-gradient-to-r from-brand-secondary/10 to-transparent p-6 rounded-xl border border-brand-secondary/20">
             <p className="text-gray-700 mb-4">
               {locale === "en"
                 ? "Still have questions? We're here to help!"
@@ -320,7 +320,7 @@ export const FAQSection = () => {
             </p>
             <a
               href="#"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-[#87A786] hover:bg-[#6d8a6c] text-white font-semibold rounded-lg transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-brand-secondary hover:bg-brand-secondary-hover text-white font-semibold rounded-lg transition-colors"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"

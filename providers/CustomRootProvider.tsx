@@ -52,7 +52,7 @@ const CustomRootProvider = ({ children }: Props) => {
             {/* <SessionProvider session={session}> */}
             <AppProgressProvider
               height="3px"
-              color="#189CD9"
+              color="var(--brand-primary)"
               options={{ showSpinner: false }}
               shallowRouting
             >

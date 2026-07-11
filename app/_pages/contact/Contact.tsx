@@ -72,7 +72,7 @@ const Contact = () => {
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4">
               {currentContent.title}
             </h1>
-            <div className="w-16 h-1 bg-[#189CD9] mx-auto mb-6" />
+            <div className="w-16 h-1 bg-brand-primary mx-auto mb-6" />
             <p className="text-lg md:text-xl text-gray-600 mb-12">
               {currentContent.subtitle}
             </p>
@@ -86,10 +86,10 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.1 }}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-[#189CD9]/10 transition-all duration-300 border-2 border-gray-100 hover:border-[#189CD9]"
+                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-brand-primary/10 transition-all duration-300 border-2 border-gray-100 hover:border-brand-primary"
               >
-                <div className="w-12 h-12 bg-[#189CD9]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Phone className="w-6 h-6 text-[#189CD9]" />
+                <div className="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Phone className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div className="text-left">
                   <p className="text-sm text-gray-500 mb-1">
@@ -110,11 +110,11 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-[#189CD9]/10 transition-all duration-300 border-2 border-gray-100 hover:border-[#189CD9]"
+                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-brand-primary/10 transition-all duration-300 border-2 border-gray-100 hover:border-brand-primary"
               >
-                <div className="w-12 h-12 bg-[#189CD9]/10 rounded-full flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
                   <svg
-                    className="w-6 h-6 text-[#189CD9]"
+                    className="w-6 h-6 text-brand-primary"
                     fill="currentColor"
                     viewBox="0 0 24 24"
                   >
@@ -138,10 +138,10 @@ const Contact = () => {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.3 }}
                 whileHover={{ scale: 1.02, y: -4 }}
-                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-[#189CD9]/10 transition-all duration-300 border-2 border-gray-100 hover:border-[#189CD9]"
+                className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl hover:bg-brand-primary/10 transition-all duration-300 border-2 border-gray-100 hover:border-brand-primary"
               >
-                <div className="w-12 h-12 bg-[#189CD9]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <Mail className="w-6 h-6 text-[#189CD9]" />
+                <div className="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <Mail className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div className="text-left">
                   <p className="text-sm text-gray-500 mb-1">
@@ -160,8 +160,8 @@ const Contact = () => {
                 transition={{ duration: 0.6, delay: 0.4 }}
                 className="flex items-center gap-4 p-6 bg-gray-50 rounded-2xl border-2 border-gray-100"
               >
-                <div className="w-12 h-12 bg-[#189CD9]/10 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-[#189CD9]" />
+                <div className="w-12 h-12 bg-brand-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-brand-primary" />
                 </div>
                 <div className="text-left">
                   <p className="text-sm text-gray-500 mb-1">

@@ -99,7 +99,7 @@ const DesignSelection = ({
                     }}
                     className={`relative cursor-pointer transition-all duration-200 ${
                       isSelected
-                        ? "ring-2 ring-[#189CD9] ring-offset-2 scale-100"
+                        ? "ring-2 ring-brand-primary ring-offset-2 scale-100"
                         : "hover:scale-105"
                     }`}
                   >
@@ -112,7 +112,7 @@ const DesignSelection = ({
                       }
                     />
                     {isSelected && (
-                      <div className="absolute inset-0 bg-[#189CD9]/10 rounded-lg" />
+                      <div className="absolute inset-0 bg-brand-primary/10 rounded-lg" />
                     )}
                   </div>
                 );

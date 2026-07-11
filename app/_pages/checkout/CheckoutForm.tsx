@@ -91,7 +91,7 @@ const CheckoutForm = () => {
         enqueueSnackbar("Your cart is empty.", {
           variant: "error",
           style: {
-            backgroundColor: "#c51616",
+            backgroundColor: "var(--brand-destructive)",
             color: "white",
           },
         });
@@ -170,7 +170,7 @@ const CheckoutForm = () => {
         enqueueSnackbar("Order placed successfully", {
           variant: "success",
           style: {
-            backgroundColor: "#87A786",
+            backgroundColor: "var(--brand-secondary)",
             color: "white",
           },
         });
@@ -183,7 +183,7 @@ const CheckoutForm = () => {
         enqueueSnackbar("Failed to place order", {
           variant: "error",
           style: {
-            backgroundColor: "#c51616",
+            backgroundColor: "var(--brand-destructive)",
             color: "white",
           },
         });
@@ -209,10 +209,10 @@ const CheckoutForm = () => {
       {/* Contact Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
         <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#189CD9]/10 rounded-lg">
+          <div className="p-2 bg-brand-primary/10 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-[#189CD9]"
+              className="h-5 w-5 text-brand-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -244,7 +244,7 @@ const CheckoutForm = () => {
             placeholder="Enter your phone number"
             name="phone"
             id="phone"
-            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+            className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
             onChange={handleChange}
             value={values.phone}
           />
@@ -293,10 +293,10 @@ const CheckoutForm = () => {
       {/* Delivery Section */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 transition-all hover:shadow-md">
         <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 bg-[#189CD9]/10 rounded-lg">
+          <div className="p-2 bg-brand-primary/10 rounded-lg">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-5 w-5 text-[#189CD9]"
+              className="h-5 w-5 text-brand-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -358,7 +358,7 @@ const CheckoutForm = () => {
               placeholder={
                 locale === "ar" ? "أدخل الاسم الأول" : "Enter first name"
               }
-              className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+              className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
               onChange={handleChange}
               name="firstName"
               id="firstName"
@@ -402,7 +402,7 @@ const CheckoutForm = () => {
               placeholder={
                 locale === "ar" ? "أدخل الاسم الأخير" : "Enter last name"
               }
-              className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+              className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
               onChange={handleChange}
               name="lastName"
               id="lastName"
@@ -446,7 +446,7 @@ const CheckoutForm = () => {
                 ? "مثال: بلوك 5، شارع 50، منزل 25، حولي، الكويت"
                 : "e.g., Block 5, Street 50, House 25, Hawalli, Kuwait"
             }
-            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+            className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
             onChange={handleChange}
             name="address"
             id="address"
@@ -493,7 +493,7 @@ const CheckoutForm = () => {
                 ? "شقة، جناح، وحدة، مبنى، طابق، إلخ."
                 : "Apt, Suite, Unit, Building, Floor, etc."
             }
-            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+            className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
             onChange={handleChange}
             name="apartment"
             id="apartment"
@@ -537,7 +537,7 @@ const CheckoutForm = () => {
             placeholder={
               locale === "ar" ? "رابط خرائط جوجل" : "Google Maps Link"
             }
-            className="w-full transition-all focus:ring-2 focus:ring-[#87A786]/20"
+            className="w-full transition-all focus:ring-2 focus:ring-brand-secondary/20"
             onChange={handleChange}
             name="googleMapsLink"
             id="googleMapsLink"
@@ -615,7 +615,7 @@ const CheckoutForm = () => {
           <button
             type="submit"
             disabled={isPending || isSubmitting}
-            className="w-full bg-gradient-to-r from-[#189CD9] to-[#189CD9] hover:from-[#189CD9] hover:to-[#189CD9] text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
+            className="w-full bg-gradient-to-r from-brand-primary to-brand-primary hover:from-brand-primary hover:to-brand-primary text-white py-3.5 rounded-lg font-bold flex justify-center items-center gap-2 shadow-md hover:shadow-lg transition-all duration-300 disabled:opacity-70 disabled:cursor-not-allowed group"
           >
             {!isPending && !isSubmitting ? (
               <>
@@ -642,7 +642,7 @@ const CheckoutForm = () => {
             <div className="flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-[#189CD9]"
+                className="h-4 w-4 text-brand-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -659,7 +659,7 @@ const CheckoutForm = () => {
             <div className="flex items-center gap-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-4 w-4 text-[#189CD9]"
+                className="h-4 w-4 text-brand-primary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"

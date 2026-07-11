@@ -50,6 +50,22 @@ export default {
           "4": "hsl(var(--chart-4))",
           "5": "hsl(var(--chart-5))",
         },
+        brand: {
+          primary: {
+            DEFAULT: "color-mix(in srgb, var(--brand-primary), transparent calc(100% * (1 - <alpha-value>)))",
+            dark: "color-mix(in srgb, var(--brand-primary-dark), transparent calc(100% * (1 - <alpha-value>)))",
+            gradEnd: "color-mix(in srgb, var(--brand-primary-grad-end), transparent calc(100% * (1 - <alpha-value>)))",
+            gradEndDark: "color-mix(in srgb, var(--brand-primary-grad-end-dark), transparent calc(100% * (1 - <alpha-value>)))",
+            gradAlt: "color-mix(in srgb, var(--brand-primary-grad-alt), transparent calc(100% * (1 - <alpha-value>)))",
+          },
+          secondary: {
+            DEFAULT: "color-mix(in srgb, var(--brand-secondary), transparent calc(100% * (1 - <alpha-value>)))",
+            hover: "color-mix(in srgb, var(--brand-secondary-hover), transparent calc(100% * (1 - <alpha-value>)))",
+          },
+          accent: "color-mix(in srgb, var(--brand-accent), transparent calc(100% * (1 - <alpha-value>)))",
+          destructive: "color-mix(in srgb, var(--brand-destructive), transparent calc(100% * (1 - <alpha-value>)))",
+          neutralLight: "color-mix(in srgb, var(--brand-neutral-light), transparent calc(100% * (1 - <alpha-value>)))",
+        },
       },
       borderRadius: {
         lg: "var(--radius)",

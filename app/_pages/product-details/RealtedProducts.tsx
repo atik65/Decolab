@@ -32,7 +32,7 @@ const RelatedProducts = () => {
         >
           {locale === "en" ? "You may also like" : "قد يعجبك أيضاً"}
         </h2>
-        <div className="w-16 h-0.5 bg-[#189CD9]"></div>
+        <div className="w-16 h-0.5 bg-brand-primary"></div>
       </div>
 
       {/* products container */}

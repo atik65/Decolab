@@ -8,7 +8,7 @@ const ShopHeroBanner = () => {
   const locale = useGetLocale();
 
   return (
-    <div className="relative bg-gradient-to-br from-[#87A786] via-[#87A786] to-[#6d8a6c] overflow-hidden">
+    <div className="relative bg-gradient-to-br from-brand-secondary via-brand-secondary to-brand-secondary-hover overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-10">
         <div

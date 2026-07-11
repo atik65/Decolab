@@ -130,7 +130,7 @@ const AnnounceBar: React.FC = () => {
   return (
     <div
       id="announce-bar"
-      className="w-full direction-ltr bg-[#189CD9] text-white py-0.5 text-sm relative z-[100]"
+      className="w-full direction-ltr bg-brand-primary text-white py-0.5 text-sm relative z-[100]"
       onMouseEnter={() => (hovering.current = true)}
       onMouseLeave={() => (hovering.current = false)}
       aria-live="polite"

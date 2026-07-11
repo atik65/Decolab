@@ -12,6 +12,7 @@ import {
   Search,
 } from "lucide-react";
 import Image from "next/image";
+import LinkedLogo from "./LinkedLogo";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { cn } from "@/lib/utils";
@@ -67,15 +68,10 @@ const MobileMenu = ({
           locale === "ar" ? "justify-end" : "justify-start",
         )}
       >
-        <Link href="/" onClick={() => onOpenChange(false)}>
-          <Image
-            src="/images/logo.svg"
-            alt="One Direction Logo"
-            width={140}
-            height={50}
-            className="w-32 h-auto object-contain transition-opacity hover:opacity-80"
-          />
-        </Link>
+        <LinkedLogo
+          onClick={() => onOpenChange(false)}
+          imgClassName="w-32 h-auto object-contain"
+        />
       </div>
 
       {/* ─── Scrollable Navigation ─── */}
@@ -103,7 +99,7 @@ const MobileMenu = ({
               locale === "ar" && "flex-row-reverse text-right",
             )}
           >
-            <Search className="w-5 h-5 text-gray-400 group-hover:text-[#189CD9] transition-colors" />
+            <Search className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors" />
             <span className="text-sm font-medium">
               {locale === "en"
                 ? "Search for products..."
@@ -125,14 +121,14 @@ const MobileMenu = ({
             >
               <span
                 className={cn(
-                  "text-base font-medium text-gray-800 group-hover:text-[#189CD9] group-hover:translate-x-1 transition-all duration-300",
+                  "text-base font-medium text-gray-800 group-hover:text-brand-primary group-hover:translate-x-1 transition-all duration-300",
                   locale === "ar" &&
-                  "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
+                    "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
                 )}
               >
                 {locale === "ar" && link.labelAr ? link.labelAr : link.label}
               </span>
-              <span className="text-gray-300 group-hover:text-[#189CD9] transition-colors">
+              <span className="text-gray-300 group-hover:text-brand-primary transition-colors">
                 {locale === "ar" ? (
                   <ChevronLeft className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" />
                 ) : (
@@ -157,7 +153,7 @@ const MobileMenu = ({
             target="_blank"
             rel="noopener noreferrer"
             className={cn(
-              "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
+              "flex items-center gap-3 text-sm text-gray-600 hover:text-brand-primary transition-colors",
             )}
           >
             <Phone className="w-4 h-4 text-gray-400" />
@@ -169,7 +165,7 @@ const MobileMenu = ({
           <a
             href="mailto:onedirectionkwt@gmail.com"
             className={cn(
-              "flex items-center gap-3 text-sm text-gray-600 hover:text-[#189CD9] transition-colors",
+              "flex items-center gap-3 text-sm text-gray-600 hover:text-brand-primary transition-colors",
             )}
           >
             <Mail className="w-4 h-4 text-gray-400" />
@@ -185,13 +181,13 @@ const MobileMenu = ({
         >
           <p className="text-[11px] text-gray-400 uppercase tracking-widest">
             © {new Date().getFullYear()}{" "}
-            {locale === "en" ? "One Direction" : "وان دايركشن"}
+            {locale === "en" ? "Decolab" : "وان دايركشن"}
           </p>
           <a
             href="https://instagram.com"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-gray-400 hover:text-[#189CD9] transition-transform hover:scale-110"
+            className="text-gray-400 hover:text-brand-primary transition-transform hover:scale-110"
             aria-label="Instagram"
           >
             <Instagram className="w-5 h-5" />

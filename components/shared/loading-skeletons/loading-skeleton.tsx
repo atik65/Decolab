@@ -8,7 +8,7 @@ export const ProductCardSkeleton = () => {
   const locale = useGetLocale();
 
   return (
-    <div className="w-full overflow-hidden mx-auto p-0 bg-[#f9f9f9] group cursor-pointer border-transparent">
+    <div className="w-full overflow-hidden mx-auto p-0 bg-brand-neutralLight group cursor-pointer border-transparent">
       {/* Image skeleton - matches your h-72 md:h-[450px] height */}
       <div className="overflow-hidden relative rounded-lg">
         <Skeleton className="w-full h-72 md:h-[450px] bg-gray-200" />
@@ -132,11 +132,11 @@ export const NoProductsFound = () => {
           </div>
 
           {/* Suggestions */}
-          <div className="bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 rounded-xl p-6 mb-8 text-left">
+          <div className="bg-gradient-to-r from-brand-primary/10 to-brand-primary/5 rounded-xl p-6 mb-8 text-left">
             <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-[#87A786]"
+                className="h-5 w-5 text-brand-secondary"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -152,15 +152,15 @@ export const NoProductsFound = () => {
             </h3>
             <ul className="space-y-2 text-sm text-gray-700">
               <li className="flex items-start gap-2">
-                <span className="text-[#189CD9] mt-1">•</span>
+                <span className="text-brand-primary mt-1">•</span>
                 <span>Check the spelling of your search terms</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#189CD9] mt-1">•</span>
+                <span className="text-brand-primary mt-1">•</span>
                 <span>Try using more general keywords</span>
               </li>
               <li className="flex items-start gap-2">
-                <span className="text-[#189CD9] mt-1">•</span>
+                <span className="text-brand-primary mt-1">•</span>
                 <span>Browse our popular categories below</span>
               </li>
             </ul>
@@ -170,7 +170,7 @@ export const NoProductsFound = () => {
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               href="/shop"
-              className="px-6 py-3 bg-gradient-to-r from-[#189CD9] to-[#1070B0] hover:from-[#1070B0] hover:to-[#189CD9] text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
+              className="px-6 py-3 bg-gradient-to-r from-brand-primary to-brand-primary-gradAlt hover:from-brand-primary-gradAlt hover:to-brand-primary text-white font-semibold rounded-lg transition-all duration-300 shadow-md hover:shadow-lg"
             >
               View All Products
             </Link>

@@ -171,7 +171,7 @@ const ProductInformation = () => {
       //   {
       //     variant: "success",
       //     style: {
-      //       backgroundColor: "#87A786",
+      //       backgroundColor: "var(--brand-secondary)",
       //       color: "white",
       //     },
       //   },
@@ -213,7 +213,7 @@ const ProductInformation = () => {
             {
               variant: "error",
               style: {
-                backgroundColor: "#c51616",
+                backgroundColor: "var(--brand-destructive)",
                 color: "white",
               },
             },
@@ -238,7 +238,7 @@ const ProductInformation = () => {
           {
             variant: "error",
             style: {
-              backgroundColor: "#c51616",
+              backgroundColor: "var(--brand-destructive)",
               color: "white",
             },
           },
@@ -257,7 +257,7 @@ const ProductInformation = () => {
         enqueueSnackbar("Added to Cart successfully!", {
           variant: "success",
           style: {
-            backgroundColor: "#189CD9",
+            backgroundColor: "var(--brand-primary)",
             color: "white",
           },
         });
@@ -266,7 +266,7 @@ const ProductInformation = () => {
         enqueueSnackbar("Failed to prepare cart item", {
           variant: "error",
           style: {
-            backgroundColor: "#c51616",
+            backgroundColor: "var(--brand-destructive)",
             color: "white",
           },
         });
@@ -287,7 +287,7 @@ const ProductInformation = () => {
           enqueueSnackbar("Checkout is Initiating.", {
             variant: "success",
             style: {
-              backgroundColor: "#189CD9",
+              backgroundColor: "var(--brand-primary)",
               color: "white",
             },
           });
@@ -379,7 +379,7 @@ const ProductInformation = () => {
           <li>
             <Link
               href="/"
-              className="text-[#189CD9] hover:text-[#189CD9]/80 duration-200 transition-colors"
+              className="text-brand-primary hover:text-brand-primary/80 duration-200 transition-colors"
             >
               {locale === "en" ? "Home" : "بيت"}
             </Link>
@@ -388,7 +388,7 @@ const ProductInformation = () => {
           <li>
             <Link
               href="/shop"
-              className="text-[#189CD9] hover:text-[#189CD9]/70 duration-200 transition-colors"
+              className="text-brand-primary hover:text-brand-primary/70 duration-200 transition-colors"
             >
               {locale === "en" ? "Products" : "منتجات"}
             </Link>
@@ -397,7 +397,7 @@ const ProductInformation = () => {
           {/* <li>
             <a
               href="#"
-              className="text-[#87A786] hover:text-black duration-200"
+              className="text-brand-secondary hover:text-black duration-200"
             >
               Other
             </a>
@@ -415,7 +415,7 @@ const ProductInformation = () => {
       </h1>
       {/* Category Information */}
       <div id="product-title" className="mb-4">
-        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 text-[#189CD9] border border-[#189CD9]/30 shadow-sm">
+        <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-gradient-to-r from-brand-primary/10 to-brand-primary/5 text-brand-primary border border-brand-primary/30 shadow-sm">
           {currentProduct.category}
         </span>
       </div>
@@ -427,11 +427,11 @@ const ProductInformation = () => {
 
       {/* Product Price */}
       {currentPrice !== null && currentPrice > 0 ? (
-        <div className="bg-gradient-to-r from-[#189CD9]/10 to-[#189CD9]/5 p-4 rounded-lg border-l-4 border-[#189CD9] mb-6">
+        <div className="bg-gradient-to-r from-brand-primary/10 to-brand-primary/5 p-4 rounded-lg border-l-4 border-brand-primary mb-6">
           <p className="text-sm text-gray-600 mb-1">
             {locale === "en" ? "Price" : "السعر"}
           </p>
-          <p className="text-2xl sm:text-3xl font-bold text-[#189CD9] !font-roboto">
+          <p className="text-2xl sm:text-3xl font-bold text-brand-primary !font-roboto">
             {currentPrice.toFixed(3)} KD
           </p>
         </div>
@@ -493,7 +493,7 @@ const ProductInformation = () => {
                 type="submit"
                 onClick={() => (submitType.current = "addToCart")}
                 className={cn(
-                  "flex-1 h-12 px-2 sm:px-6 border-2 border-[#189CD9] text-[#189CD9] hover:bg-[#189CD9]/10 hover:text-[#189CD9] rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group shadow-sm hover:shadow-md",
+                  "flex-1 h-12 px-2 sm:px-6 border-2 border-brand-primary text-brand-primary hover:bg-brand-primary/10 hover:text-brand-primary rounded-lg font-bold flex gap-2 items-center justify-center transition-all duration-300 group shadow-sm hover:shadow-md",
                   locale === "ar" && "flex-row-reverse",
                 )}
               >
@@ -512,7 +512,7 @@ const ProductInformation = () => {
               type="submit"
               onClick={() => (submitType.current = "orderNow")}
               className={cn(
-                "w-full sm:flex-1 h-12 px-6 bg-gradient-to-r from-[#189CD9] to-[#1182B5] hover:from-[#1489C1] hover:to-[#0B76A8] text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
+                "w-full sm:flex-1 h-12 px-6 bg-gradient-to-r from-brand-primary to-brand-primary-gradEnd hover:from-brand-primary-dark hover:to-brand-primary-gradEndDark text-white rounded-lg font-bold flex gap-2 items-center justify-center shadow-md hover:shadow-lg transition-all duration-300 group",
                 locale === "ar" && "flex-row-reverse",
               )}
             >

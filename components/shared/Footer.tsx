@@ -1,6 +1,7 @@
 import Image from "next/image";
 import { Link } from "@/i18n/navigation";
 import React from "react";
+import LinkedLogo from "./LinkedLogo";
 import { useGetLocale } from "@/hooks/useGetLocale";
 import { Instagram } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -73,21 +74,15 @@ const Footer = () => {
               locale === "ar" && "lg:text-right lg:order-3",
             )}
           >
-            <Link
-              href="/"
+            <LinkedLogo
+              width={180}
+              height={60}
               className="inline-block transition-opacity hover:opacity-80"
-            >
-              <Image
-                src="/images/logo.svg"
-                alt="One Direction"
-                width={180}
-                height={60}
-                className={cn(
-                  "h-12 w-auto object-contain mx-auto md:ml-0 md:mr-auto",
-                  locale === "ar" && "lg:ml-auto lg:mr-0",
-                )}
-              />
-            </Link>
+              imgClassName={cn(
+                "h-12 w-auto object-contain mx-auto md:ml-0 md:mr-auto",
+                locale === "ar" && "lg:ml-auto lg:mr-0",
+              )}
+            />
 
             <div
               className={cn(
@@ -99,13 +94,13 @@ const Footer = () => {
                 href={`https://wa.me/${contactInfo.phone.replace(/[\s+]/g, "")}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block hover:text-[#189CD9] transition-colors duration-300 roboto-num"
+                className="block hover:text-brand-primary transition-colors duration-300 roboto-num"
               >
                 {contactInfo.phone}
               </Link>
               <Link
                 href={`mailto:${contactInfo.email}`}
-                className="block underline underline-offset-4 hover:text-[#189CD9] transition-colors duration-300"
+                className="block underline underline-offset-4 hover:text-brand-primary transition-colors duration-300"
               >
                 {contactInfo.email}
               </Link>
@@ -130,7 +125,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-[#189CD9] transition-colors duration-300"
+                    className="text-sm hover:text-brand-primary transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -154,7 +149,7 @@ const Footer = () => {
                 <li key={link.name}>
                   <Link
                     href={link.href}
-                    className="text-sm hover:text-[#189CD9] transition-colors duration-300"
+                    className="text-sm hover:text-brand-primary transition-colors duration-300"
                   >
                     {link.name}
                   </Link>
@@ -198,18 +193,20 @@ const Footer = () => {
             >
               <p>
                 © {new Date().getFullYear()}{" "}
-                {locale === "en" ? "One Direction" : "وان دايركشن"}.
+                {locale === "en" ? "Decolab" : "ديكولاب"}.
               </p>
               <Link
                 href="https://iamatik.me"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 hover:text-[#189CD9] transition-colors duration-300 group"
+                className="flex items-center gap-1.5 hover:text-brand-primary transition-colors duration-300 group"
               >
                 <span className="opacity-60">
                   {locale === "en" ? "Developed by" : "تم التطوير بواسطة"}
                 </span>
-                <span className="font-bold text-gray-500 group-hover:text-[#189CD9]">Atik</span>
+                <span className="font-bold text-gray-500 group-hover:text-brand-primary">
+                  Atik
+                </span>
               </Link>
             </div>
           </div>

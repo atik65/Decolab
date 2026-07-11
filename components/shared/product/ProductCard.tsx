@@ -81,7 +81,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <Link
       ref={container}
       href={`/products/${product.id}`}
-      className="w-full  overflow-hidden mx-auto  p-0 bg-[#f9f9f9] group cursor-pointer "
+      className="w-full  overflow-hidden mx-auto  p-0 bg-brand-neutralLight group cursor-pointer "
     >
       <div className="overflow-hidden relative rounded-xl aspect-square">
         <Image
@@ -119,7 +119,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <div className="transition-all duration-300">
           <span
             className={cn(
-              "inline-block font-bold text-[#189CD9] text-base whitespace-nowrap",
+              "inline-block font-bold text-brand-primary text-base whitespace-nowrap",
               locale === "ar" && "text-right",
             )}
           >
@@ -147,7 +147,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
             {locale === "en" ? "Explore Details" : "مشاهدة التفاصيل"}
           </p>
           <div className={cn(
-            "w-12 h-[2px] bg-[#189CD9] mt-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500",
+            "w-12 h-[2px] bg-brand-primary mt-0.5 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500",
             locale === "ar" ? "origin-right" : "origin-left"
           )}></div>
         </div>

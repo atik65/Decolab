@@ -12,6 +12,7 @@ import LocaleSwitcher from "./language-switch/LocaleSwitcher";
 import Image from "next/image";
 import MobileMenuSidebar from "./MobileMenuSidebar";
 import AnnounceBar from "./AnnounceBar";
+import LinkedLogo from "./LinkedLogo";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import CartSheet from "./CartSheet";
@@ -40,7 +41,6 @@ const Header: React.FC = () => {
 
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
-
 
   React.useEffect(() => {
     if (!isLoading && categoriesData) {
@@ -136,7 +136,7 @@ const Header: React.FC = () => {
             >
               <Image
                 src="/images/logo.svg"
-                alt="One Direction"
+                alt="Decolab"
                 className="w-full transition-transform duration-300 group-hover:scale-105"
                 width={100}
                 height={100}
@@ -146,25 +146,15 @@ const Header: React.FC = () => {
 
           <BackNavigation />
 
-
           {/* Logo (Desktop Only) */}
           <div className="hidden lg:flex w-[22%] h-full items-center">
-
-            <Link
+            <LinkedLogo
               ref={logoRef}
-              href="/"
-              className="text-2xl font-bold tracking-tight transition-all duration-300 hover:opacity-80 relative group"
-            >
-              {/* {locale === "en" ? "One Direction" : "اتجاه واحد"} */}
-              <Image
-                src="/images/logo.svg"
-                alt="One Direction"
-                className="w-full transition-transform duration-300 group-hover:scale-105"
-                width={100}
-                height={100}
-              />
-            </Link>
-
+              className="text-2xl font-bold tracking-tight"
+              imgClassName="w-full"
+              width={100}
+              height={100}
+            />
           </div>
 
           {/* Navigation */}
@@ -186,7 +176,7 @@ const Header: React.FC = () => {
                     ? link.labelAr
                     : link?.label?.split("_")?.join(" ")}
                 </span>
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-[#189CD9] transition-all duration-300 group-hover:w-3/4"></span>
+                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-brand-primary transition-all duration-300 group-hover:w-3/4"></span>
               </Link>
             ))}
           </nav>
@@ -216,7 +206,11 @@ const Header: React.FC = () => {
         </div>
 
         {/* Global Search Drawer Instance */}
-        <SearchBar isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} showTrigger={false} />
+        <SearchBar
+          isOpen={isSearchOpen}
+          onOpenChange={setIsSearchOpen}
+          showTrigger={false}
+        />
         {/* Mobile Menu */}
         {/* <div
           className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${
