@@ -123,7 +123,7 @@ const MobileMenu = ({
                 className={cn(
                   "text-base font-medium text-gray-800 group-hover:text-brand-primary group-hover:translate-x-1 transition-all duration-300",
                   locale === "ar" &&
-                  "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
+                    "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
                 )}
               >
                 {locale === "ar" && link.labelAr ? link.labelAr : link.label}
@@ -181,7 +181,7 @@ const MobileMenu = ({
         >
           <p className="text-[11px] text-gray-400 uppercase tracking-widest">
             © {new Date().getFullYear()}{" "}
-            {locale === "en" ? "One Direction" : "وان دايركشن"}
+            {locale === "en" ? "Decolab" : "وان دايركشن"}
           </p>
           <a
             href="https://instagram.com"

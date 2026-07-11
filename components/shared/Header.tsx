@@ -42,7 +42,6 @@ const Header: React.FC = () => {
   const { data: categoriesData, isLoading } =
     useGetCategories<CategoresResponse>();
 
-
   React.useEffect(() => {
     if (!isLoading && categoriesData) {
       const showableCategories = categoriesData.results
@@ -137,7 +136,7 @@ const Header: React.FC = () => {
             >
               <Image
                 src="/images/logo.svg"
-                alt="One Direction"
+                alt="Decolab"
                 className="w-full transition-transform duration-300 group-hover:scale-105"
                 width={100}
                 height={100}
@@ -147,10 +146,8 @@ const Header: React.FC = () => {
 
           <BackNavigation />
 
-
           {/* Logo (Desktop Only) */}
           <div className="hidden lg:flex w-[22%] h-full items-center">
-
             <LinkedLogo
               ref={logoRef}
               className="text-2xl font-bold tracking-tight"
@@ -158,7 +155,6 @@ const Header: React.FC = () => {
               width={100}
               height={100}
             />
-
           </div>
 
           {/* Navigation */}
@@ -210,7 +206,11 @@ const Header: React.FC = () => {
         </div>
 
         {/* Global Search Drawer Instance */}
-        <SearchBar isOpen={isSearchOpen} onOpenChange={setIsSearchOpen} showTrigger={false} />
+        <SearchBar
+          isOpen={isSearchOpen}
+          onOpenChange={setIsSearchOpen}
+          showTrigger={false}
+        />
         {/* Mobile Menu */}
         {/* <div
           className={`md:hidden fixed inset-0 bg-black bg-opacity-50 z-50 transition-opacity duration-300 ${

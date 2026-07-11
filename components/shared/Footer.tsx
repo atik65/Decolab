@@ -193,7 +193,7 @@ const Footer = () => {
             >
               <p>
                 © {new Date().getFullYear()}{" "}
-                {locale === "en" ? "One Direction" : "وان دايركشن"}.
+                {locale === "en" ? "Decolab" : "ديكولاب"}.
               </p>
               <Link
                 href="https://iamatik.me"
@@ -204,7 +204,9 @@ const Footer = () => {
                 <span className="opacity-60">
                   {locale === "en" ? "Developed by" : "تم التطوير بواسطة"}
                 </span>
-                <span className="font-bold text-gray-500 group-hover:text-brand-primary">Atik</span>
+                <span className="font-bold text-gray-500 group-hover:text-brand-primary">
+                  Atik
+                </span>
               </Link>
             </div>
           </div>

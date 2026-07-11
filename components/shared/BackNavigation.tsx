@@ -62,7 +62,7 @@ const BackNavigation = () => {
                             >
                                 <Image
                                     src="/images/logo.svg"
-                                    alt="One Direction Logo"
+                                    alt="Decolab Logo"
                                     width={120}
                                     height={40}
                                     className="w-28 h-auto object-contain"

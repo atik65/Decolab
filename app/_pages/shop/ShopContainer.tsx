@@ -72,7 +72,7 @@ const ShopContainer = () => {
       {/* <ShopHeroBanner /> */}
 
       {/* <ShapeHero
-        badge="ONE DIRECTION"
+        badge="DECOLAB"
         title1={
           locale === "en"
             ? `Discover Premium ${

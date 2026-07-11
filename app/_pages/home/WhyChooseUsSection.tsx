@@ -198,11 +198,16 @@ const WhyChooseUsSection = () => {
             transition={{ duration: 0.4, delay: 0.05 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-5"
             style={{
-              background: "color-mix(in srgb, var(--brand-primary), transparent 92%)",
-              border: "1px solid color-mix(in srgb, var(--brand-primary), transparent 78%)",
+              background:
+                "color-mix(in srgb, var(--brand-primary), transparent 92%)",
+              border:
+                "1px solid color-mix(in srgb, var(--brand-primary), transparent 78%)",
             }}
           >
-            <Sparkles className="w-3.5 h-3.5" style={{ color: "var(--brand-primary)" }} />
+            <Sparkles
+              className="w-3.5 h-3.5"
+              style={{ color: "var(--brand-primary)" }}
+            />
             <span
               className="text-xs font-semibold tracking-widest uppercase"
               style={{ color: "var(--brand-primary)" }}
@@ -226,7 +231,7 @@ const WhyChooseUsSection = () => {
                   className="relative whitespace-nowrap"
                   style={{ color: "var(--brand-primary)" }}
                 >
-                  One Direction
+                  Decolab
                   <svg
                     className="absolute -bottom-2 left-0 w-full"
                     viewBox="0 0 300 10"

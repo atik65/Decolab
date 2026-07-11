@@ -30,7 +30,7 @@ const About = () => {
   const content = {
     en: {
       hero: {
-        title: "About One Direction",
+        title: "About Decolab",
         subtitle: "Crafting Identity Through Excellence",
         description:
           "Your trusted partner for premium signage and custom design solutions",
@@ -38,7 +38,7 @@ const About = () => {
       story: {
         title: "Our Story",
         text1:
-          "Founded with a vision to transform businesses through impactful visual communication, One Direction has become a leading name in the signage and custom design industry.",
+          "Founded with a vision to transform businesses through impactful visual communication, Decolab has become a leading name in the signage and custom design industry.",
         text2:
           "For over 15 years, we've been dedicated to creating stunning, high-quality products that help our clients stand out. From custom house numbers to illuminated business signage, every piece we create is a testament to our commitment to excellence.",
         text3:
@@ -326,7 +326,7 @@ const About = () => {
       </section> */}
 
       <ShapeHero
-        badge="ONE DIRECTION"
+        badge="DECOLAB"
         title1={currentContent.hero.title}
         // title2={locale === "en" ? "and Vision" : "ورؤيتنا"}
         description={currentContent.hero.description}
@@ -373,7 +373,7 @@ const About = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-brand-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity z-10" />
                 <Image
                   src="/images/home/banner7.jpg"
-                  alt="One Direction Story"
+                  alt="Decolab Story"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />

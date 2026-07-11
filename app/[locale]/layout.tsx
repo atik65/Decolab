@@ -55,9 +55,9 @@ const cairo = Cairo({
 
 export const metadata: Metadata = {
   title:
-    "One Direction – Illuminated Signage, LED House Numbers & Custom Advertising",
+    "Decolab – Illuminated Signage, LED House Numbers & Custom Advertising",
   description:
-    "One Direction is a Kuwait-based advertising company specializing in illuminated signage, LED house numbers, acrylic 3D letters, and custom printing and installation of banners and stickers. High-quality materials and fast installation service guaranteed.",
+    "Decolab is a Kuwait-based advertising company specializing in illuminated signage, LED house numbers, acrylic 3D letters, and custom printing and installation of banners and stickers. High-quality materials and fast installation service guaranteed.",
 };
 
 export default async function RootLayout({

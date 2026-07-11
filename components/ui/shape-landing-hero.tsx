@@ -65,7 +65,7 @@ const ElegantShape: FC<ElegantShapeProps> = ({
             "backdrop-blur-[2px] border-2 border-white/60",
             "shadow-[0_8px_32px_0_rgba(99,102,241,0.15)]",
             "after:absolute after:inset-0 after:rounded-full",
-            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_70%)]"
+            "after:bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.8),transparent_70%)]",
           )}
         />
       </motion.div>
@@ -95,7 +95,7 @@ const fadeUpVariants: Variants = {
 };
 
 const HeroGeometric: FC<HeroGeometricProps> = ({
-  badge = "ONE DIRECTION",
+  badge = "DECOLAB",
   title1 = "",
   title2 = "",
   description = "",
@@ -105,7 +105,7 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
     <div
       className={cn(
         "relative min-h-[300px] sm:min-h-auto pb-16 sm:py-16 w-full flex items-center justify-center overflow-hidden bg-linear-to-br from-slate-200 via-white to-blue-50/30",
-        className
+        className,
       )}
     >
       {/* Soft ambient gradient overlay */}
@@ -197,7 +197,7 @@ const HeroGeometric: FC<HeroGeometricProps> = ({
                   <br />
                   <span
                     className={cn(
-                      "bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-600 to-brand-primary"
+                      "bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 via-violet-600 to-brand-primary",
                     )}
                   >
                     {title2}
