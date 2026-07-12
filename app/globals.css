@@ -206,6 +206,12 @@
   html[data-locale="ar"] span {
     direction: rtl;
   }
+
+  /* Use Manrope font for English only */
+  html[data-locale="en"],
+  html[data-locale="en"] * {
+    font-family: var(--font-manrope), sans-serif;
+  }
 }
 
 /* Product description styling - keep default fonts */

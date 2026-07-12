@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
-import { Montserrat, Roboto_Flex, Cairo } from "next/font/google";
+// import { Montserrat, Roboto_Flex, Cairo } from "next/font/google";
+import { Cairo, Manrope } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
@@ -31,6 +32,7 @@ const geDiner = localFont({
   style: "normal",
 });
 
+/*
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
@@ -44,6 +46,7 @@ const roboto = Roboto_Flex({
   display: "swap",
   style: ["normal"],
 });
+*/
 
 const cairo = Cairo({
   variable: "--font-cairo",
@@ -51,6 +54,12 @@ const cairo = Cairo({
   weight: ["400", "700"],
   display: "swap",
   style: ["normal"],
+});
+
+const manrope = Manrope({
+  variable: "--font-manrope",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata: Metadata = {
@@ -73,7 +82,8 @@ export default async function RootLayout({
     notFound();
   }
 
-  const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
+  // const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
+  const allFonts = `${manrope.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
 
   return (
     <html
