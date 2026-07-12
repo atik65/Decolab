@@ -227,7 +227,7 @@ export const LightColorOptions = ({
               {values.lightColor == color.id.toString() && (
                 <div className={cn(
                   "absolute inset-0 bg-black/10 flex items-center justify-center",
-                  locale === "ar" ? "rounded-r-full" : "rounded-l-full"
+                  locale === "ar" ? "rounded-l-full" : "rounded-l-full"
                 )}>
                   <svg
                     className={cn(
