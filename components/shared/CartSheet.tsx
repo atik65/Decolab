@@ -16,7 +16,7 @@ import { Link, useRouter } from "@/i18n/navigation";
 import cart, { CartItem } from "@/utils/localStorage";
 import { useLocale } from "next-intl";
 
-const CartSheet = () => {
+const CartSheet = ({ tone = "dark" }: { tone?: "dark" | "light" }) => {
   const [items, setItems] = useState<CartItem[]>([]);
   const [isOpen, setIsOpen] = useState(false);
   const locale = useLocale();
@@ -57,8 +57,18 @@ const CartSheet = () => {
   return (
     <Sheet open={isOpen} onOpenChange={setIsOpen}>
       <SheetTrigger asChild>
-        <div className="relative cursor-pointer p-2 hover:bg-gray-100 rounded-full transition-all duration-300 group">
-          <ShoppingCart className="w-6 h-6 text-gray-700 group-hover:text-black" />
+        <div
+          className={`relative cursor-pointer p-2 rounded-full transition-all duration-300 group ${
+            tone === "light" ? "hover:bg-white/10" : "hover:bg-gray-100"
+          }`}
+        >
+          <ShoppingCart
+            className={`w-6 h-6 ${
+              tone === "light"
+                ? "text-white"
+                : "text-gray-700 group-hover:text-black"
+            }`}
+          />
           {items.length > 0 && (
             <span className="absolute -top-1 -right-1 bg-brand-primary text-white text-[10px] w-5 h-5 rounded-full flex items-center justify-center font-bold animate-in zoom-in duration-300 !font-roboto">
               {items.reduce((acc, item) => acc + item.quantity, 0)}
@@ -66,7 +76,7 @@ const CartSheet = () => {
           )}
         </div>
       </SheetTrigger>
-      <SheetContent isShowCloseButton={true} className="flex flex-col w-full sm:max-w-md p-0 gap-0">
+      <SheetContent isShowCloseButton={true} className="flex flex-col w-[calc(100%-1.5rem)] sm:max-w-md p-0 gap-0">
         <SheetHeader className="p-6 border-b">
           <SheetTitle className="flex items-center gap-2">
             <ShoppingBag className="w-5 h-5 text-brand-primary" />

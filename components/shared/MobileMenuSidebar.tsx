@@ -13,10 +13,12 @@ export default function MobileMenuSidebar({
   isOpen,
   onOpenChange,
   onSearchOpen,
+  tone = "dark",
 }: {
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
   onSearchOpen: () => void;
+  tone?: "dark" | "light";
 }) {
   const locale = useGetLocale();
 
@@ -24,7 +26,11 @@ export default function MobileMenuSidebar({
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
       <SheetTrigger asChild>
         <button
-          className="lg:hidden text-gray-700 hover:text-black transition-colors"
+          className={
+            tone === "light"
+              ? "lg:hidden text-white hover:text-white/70 transition-colors"
+              : "lg:hidden text-gray-700 hover:text-black transition-colors"
+          }
           //   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label="Toggle mobile menu"
         >

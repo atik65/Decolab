@@ -6,7 +6,11 @@ import { useParams, useSearchParams } from "next/navigation";
 import { useTransition } from "react";
 import { cn } from "@/lib/utils";
 
-export default function LocaleSwitcher() {
+export default function LocaleSwitcher({
+  tone = "dark",
+}: {
+  tone?: "dark" | "light";
+}) {
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
@@ -36,15 +40,15 @@ export default function LocaleSwitcher() {
     >
       {locale === "en" ? (
         <div className="flex items-center gap-1.5 text-[13px] font-bold tracking-widest uppercase">
-          <span className="text-black">EN</span>
-          <span className="text-gray-300">/</span>
-          <span className="text-gray-400 group-hover:text-gray-600 transition-colors">AR</span>
+          <span className={tone === "light" ? "text-white" : "text-black"}>EN</span>
+          <span className={tone === "light" ? "text-white/30" : "text-gray-300"}>/</span>
+          <span className={tone === "light" ? "text-white/55" : "text-gray-400 group-hover:text-gray-600 transition-colors"}>AR</span>
         </div>
       ) : (
         <div className="flex items-center gap-1.5 text-[13px] font-bold tracking-widest uppercase">
-          <span className="text-black">AR</span>
-          <span className="text-gray-300">/</span>
-          <span className="text-gray-400 group-hover:text-gray-600 transition-colors">EN</span>
+          <span className={tone === "light" ? "text-white" : "text-black"}>AR</span>
+          <span className={tone === "light" ? "text-white/30" : "text-gray-300"}>/</span>
+          <span className={tone === "light" ? "text-white/55" : "text-gray-400 group-hover:text-gray-600 transition-colors"}>EN</span>
         </div>
       )}
     </button>

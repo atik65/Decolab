@@ -1,22 +1,5 @@
-import FeaturedProducts from "../_pages/home/FeaturedProducts";
-import HomeBanner from "../_pages/home/HomeBanner";
-import HomeCategories from "../_pages/home/HomeCategories";
-// import StatsSection from "../_pages/home/StatsSection";
-// import WhyChooseUsSection from "../_pages/home/WhyChooseUsSection";
-// import TestimonialsSection from "../_pages/home/TestimonialsSection";
+import HomeCinematic from "../_pages/home/cinematic/HomeCinematic";
 
 export default function Home() {
-  return (
-    <>
-      <HomeBanner />
-      <div className="block">
-        <HomeCategories />
-      </div>
-      <FeaturedProducts />
-      {/* <StatsSection /> */}
-      {/* <WhyChooseUsSection /> */}
-      {/* <TestimonialsSection /> */}
-      {/* <ContactSection /> */}
-    </>
-  );
+  return <HomeCinematic />;
 }

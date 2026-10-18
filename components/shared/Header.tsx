@@ -108,6 +108,104 @@ const Header: React.FC = () => {
     pathname === "/" ||
     pathname === "";
 
+  // cinematic landing page: floating glass bar that hides while scrolling down
+  const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  React.useEffect(() => {
+    if (!isHomePage) return;
+    let lastY = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 60);
+      setHidden(y > 500 && y > lastY + 2);
+      if (y < lastY - 2) setHidden(false);
+      lastY = y;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHomePage]);
+
+  if (isHomePage) {
+    return (
+      <>
+        <div className="relative z-[95]">
+          <AnnounceBar variant="cinematic" />
+        </div>
+
+        <header
+          className="cn-header"
+          style={{
+            top: scrolled ? 12 : 68,
+            transform: hidden ? "translateY(-160%)" : "translateY(0)",
+            transition:
+              "top 0.6s cubic-bezier(0.77,0,0.18,1), transform 0.7s cubic-bezier(0.77,0,0.18,1)",
+          }}
+        >
+          <div className="mx-auto max-w-[1500px] px-3 sm:px-6">
+            <div
+              className={cn(
+                "flex items-center justify-between h-14 lg:h-[62px] rounded-full px-4 sm:px-6 border border-black/10 backdrop-blur-xl shadow-[0_8px_30px_rgba(0,0,0,0.08)] transition-colors duration-500",
+                scrolled ? "bg-white/90" : "bg-white/80",
+              )}
+            >
+              <MobileMenuSidebar
+                isOpen={isMobileMenuOpen}
+                onOpenChange={setIsMobileMenuOpen}
+                onSearchOpen={() => setIsSearchOpen(true)}
+              />
+
+              <div className="flex items-center h-full">
+                <LinkedLogo
+                  ref={logoRef}
+                  logoSrc="/decolab/black-logo-large.png"
+                  width={150}
+                  height={40}
+                  imgClassName="h-7 lg:h-8 w-auto"
+                />
+              </div>
+
+              <nav className="hidden lg:flex justify-center items-center gap-1 xl:gap-4">
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.label}
+                    href={link.href}
+                    className="relative px-4 py-2 text-[12px] xl:text-[13px] font-semibold tracking-[0.14em] uppercase text-[#1a1613]/70 hover:text-[#1a1613] transition-colors duration-300 group"
+                  >
+                    {locale === "ar" && link.labelAr
+                      ? link.labelAr
+                      : link?.label?.split("_")?.join(" ")}
+                    <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-0 h-px bg-[#1a1613] transition-all duration-300 group-hover:w-1/2" />
+                  </Link>
+                ))}
+              </nav>
+
+              <div ref={actionRef} className="flex items-center gap-1 sm:gap-3">
+                <div
+                  onClick={() => setIsSearchOpen(true)}
+                  className="p-2 hidden md:block rounded-full hover:bg-black/5 transition-all duration-300 cursor-pointer"
+                >
+                  <Search size={20} className="text-[#1a1613]" />
+                </div>
+                <CartSheet />
+                <div className="h-5 w-px bg-black/15 hidden md:block" />
+                <div className="rounded-full overflow-hidden min-w-[80px] hover:bg-black/5 transition-colors">
+                  <LocaleSwitcher />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <SearchBar
+            isOpen={isSearchOpen}
+            onOpenChange={setIsSearchOpen}
+            showTrigger={false}
+          />
+        </header>
+      </>
+    );
+  }
+
   return (
     <header className="w-full bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm z-40 sticky top-0 transition-all duration-300">
       <AnnounceBar />

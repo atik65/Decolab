@@ -4,7 +4,7 @@ import { routing } from "@/i18n/routing";
 
 import type { Metadata } from "next";
 // import { Montserrat, Roboto_Flex, Cairo } from "next/font/google";
-import { Cairo, Manrope } from "next/font/google";
+import { Cairo, Manrope, Michroma, Unbounded } from "next/font/google";
 import localFont from "next/font/local";
 import "../globals.css";
 import CustomRootProvider from "@/providers/CustomRootProvider";
@@ -62,6 +62,20 @@ const manrope = Manrope({
   weight: ["200", "300", "400", "500", "600", "700", "800"],
 });
 
+const unbounded = Unbounded({
+  variable: "--font-display",
+  subsets: ["latin"],
+  weight: ["200", "300", "400", "600"],
+  display: "swap",
+});
+
+const michroma = Michroma({
+  variable: "--font-logo",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title:
     "Decolab – Illuminated Signage, LED House Numbers & Custom Advertising",
@@ -83,7 +97,7 @@ export default async function RootLayout({
   }
 
   // const allFonts = `${montserrat.variable} ${roboto.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
-  const allFonts = `${manrope.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
+  const allFonts = `${michroma.variable} ${unbounded.variable} ${manrope.variable} ${geDiner.variable} ${vexa.variable} ${dgRarah.variable} ${cairo.variable}`;
 
   return (
     <html
