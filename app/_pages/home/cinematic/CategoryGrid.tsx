@@ -229,7 +229,11 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   const activeCat = n ? mod(k, n) : 0;
 
   return (
-    <section ref={root} className="cn-section cn-paper cn-ring-section" id="categories">
+    <section
+      ref={root}
+      className="cn-section cn-paper cn-ring-section"
+      id="categories"
+    >
       <div
         className="cn-ring3d cn-rv"
         onMouseEnter={() => setPaused(true)}
