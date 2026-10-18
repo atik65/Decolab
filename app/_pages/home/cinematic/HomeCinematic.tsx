@@ -36,8 +36,9 @@ const HomeCinematic = () => {
 
     if (!reduce) {
       const l = new Lenis({
-        duration: 1.15,
-        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        /* lerp feels continuous; a fixed-duration expo ease creeps then lurches per wheel tick */
+        lerp: 0.085,
+        wheelMultiplier: 0.9,
         smoothWheel: true,
       });
       lenis.current = l;

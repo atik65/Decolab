@@ -1768,3 +1768,15 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
     opacity: 1;
   }
 }
+
+/* hero scroll-out: keep it on the compositor */
+.cn-slides,
+.cn-hero-content,
+.cn-hero-meta,
+.cn-hero-dim {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+.cn-hero-wrap {
+  height: 132svh;
+}

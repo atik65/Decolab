@@ -121,13 +121,14 @@ const Hero = ({ locale, play }: { locale: Locale; play: boolean }) => {
               trigger: wrap.current,
               start: "top top",
               end: "bottom bottom",
-              scrub: 0.6,
+              /* Lenis already eases the scroll; a second scrub lag makes it feel sticky */
+              scrub: true,
             },
           })
-          .to(".cn-slides", { yPercent: 10, scale: 1.08 }, 0)
-          .to(".cn-hero-content", { y: -60, opacity: 0 }, 0)
-          .to(".cn-hero-meta", { y: -40, opacity: 0 }, 0)
-          .to(".cn-hero-dim", { opacity: 0.7 }, 0.15);
+          .to(".cn-slides", { yPercent: 7, ease: "none", force3D: true }, 0)
+          .to(".cn-hero-content", { y: -48, opacity: 0, ease: "power1.out" }, 0)
+          .to(".cn-hero-meta", { y: -32, opacity: 0, ease: "power1.out" }, 0)
+          .to(".cn-hero-dim", { opacity: 0.55, ease: "none" }, 0);
       });
     },
     { scope: wrap, dependencies: [locale], revertOnUpdate: true },
