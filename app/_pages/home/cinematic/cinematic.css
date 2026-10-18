@@ -1410,3 +1410,12 @@ html[data-locale] .cine[dir="rtl"] .cn-index li i b {
 .cn-scenes.is-static .cn-index {
   display: none;
 }
+
+/* service index: time-based fill instead of scroll-scrubbed */
+.cn-index li i b {
+  transition: transform 0.9s var(--ease);
+}
+.cn-index li.on i b,
+.cn-index li.done i b {
+  transform: scaleX(1);
+}
