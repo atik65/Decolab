@@ -173,13 +173,16 @@ const Scenes = ({ locale }: { locale: Locale }) => {
                 <div className="cn-scene-photos">
                   {s.photos.map((p) => (
                     <div key={p} className="cn-ph">
-                      <span>
+                      <span className="cn-ph-bg" aria-hidden="true">
+                        <Image src={p} alt="" fill sizes="40vw" className="object-cover" />
+                      </span>
+                      <span className="cn-ph-main">
                         <Image
                           src={p}
                           alt={c.title}
                           fill
                           quality={85}
-                          sizes="(max-width: 860px) 40vw, 24vw"
+                          sizes="(max-width: 860px) 100vw, 24vw"
                           className="object-cover"
                         />
                       </span>
