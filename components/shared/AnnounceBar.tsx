@@ -92,7 +92,16 @@ const WavyText: React.FC<{ text: string; className?: string }> = ({
   );
 };
 
-const AnnounceBar: React.FC = () => {
+const AnnounceBar: React.FC<{ variant?: "default" | "cinematic" }> = ({
+  variant = "default",
+}) => {
+  const light = variant === "cinematic";
+  const link = light
+    ? "text-[#1a1613]/80 hover:text-[#1a1613]"
+    : "text-white/90 hover:text-white";
+  const arrow = light
+    ? "text-[#1a1613]/50 hover:text-[#1a1613] hover:bg-black/5"
+    : "text-white/60 hover:text-white hover:bg-white/10";
   const [index, setIndex] = useState(0);
   const intervalRef = useRef<number | null>(null);
   const hovering = useRef(false);
@@ -130,7 +139,11 @@ const AnnounceBar: React.FC = () => {
   return (
     <div
       id="announce-bar"
-      className="w-full direction-ltr bg-brand-primary text-white py-0.5 text-sm relative z-[100]"
+      className={`w-full direction-ltr py-0.5 text-sm relative z-[100] ${
+        light
+          ? "bg-[#f3eee6] text-[#1a1613] border-b border-black/10"
+          : "bg-brand-primary text-white"
+      }`}
       onMouseEnter={() => (hovering.current = true)}
       onMouseLeave={() => (hovering.current = false)}
       aria-live="polite"
@@ -142,9 +155,9 @@ const AnnounceBar: React.FC = () => {
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden md:flex items-center gap-1.5 text-white/90 hover:text-white hover:scale-105 transition-all duration-300 text-sm font-medium roboto-num"
+            className={`hidden md:flex items-center gap-1.5 ${link} hover:scale-105 transition-all duration-300 text-sm font-medium roboto-num`}
           >
-            <Phone className="h-3.5 w-3.5 fill-white/10" />
+            <Phone className="h-3.5 w-3.5" />
             <span className="roboto-num">
               {PHONE_NUMBER}
             </span>
@@ -155,7 +168,7 @@ const AnnounceBar: React.FC = () => {
             target="_blank"
             // rel="noopener noreferrer"
             aria-label={`WhatsApp ${PHONE_NUMBER}`}
-            className="md:hidden text-white/90 hover:text-white transition-all duration-300 p-2 active:scale-95"
+            className={`md:hidden ${link} transition-all duration-300 p-2 active:scale-95`}
           >
             <Phone className="h-4 w-4" />
           </Link>
@@ -167,7 +180,7 @@ const AnnounceBar: React.FC = () => {
             <button
               onClick={prev}
               aria-label="Previous announcement"
-              className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
+              className={`${arrow} p-2 rounded-full transition-all duration-300 flex-shrink-0`}
             >
               <ChevronLeftIcon className="h-4 w-4" />
             </button>
@@ -201,7 +214,7 @@ const AnnounceBar: React.FC = () => {
             <button
               onClick={next}
               aria-label="Next announcement"
-              className="text-white/60 hover:text-white p-2 rounded-full transition-all duration-300 flex-shrink-0 hover:bg-white/10"
+              className={`${arrow} p-2 rounded-full transition-all duration-300 flex-shrink-0`}
             >
               <ChevronRightIcon className="h-4 w-4" />
             </button>
@@ -215,7 +228,7 @@ const AnnounceBar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
+            className={`${link} hover:scale-110 transition-all duration-300`}
           >
             <Facebook className="h-4 w-4 fill-white/5" />
           </Link> */}
@@ -224,7 +237,7 @@ const AnnounceBar: React.FC = () => {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-white/90 hover:text-white hover:scale-110 transition-all duration-300"
+            className={`${link} hover:scale-110 transition-all duration-300`}
           >
             <Instagram className="h-4 w-4" />
           </Link>
