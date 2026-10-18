@@ -708,267 +708,6 @@ html[data-locale] .cine[dir="rtl"] .cn-cat:hover .cn-cat-arrow {
   }
 }
 
-/* ───────── Framed scenes ───────── */
-.cn-scenes {
-  position: relative;
-  z-index: 10;
-  background: var(--paper);
-  --gap: clamp(8px, 1.1vw, 16px);
-}
-.cn-scenes-frame {
-  padding: var(--gap);
-  height: 100svh;
-}
-.cn-stage {
-  position: relative;
-  height: 100%;
-  border-radius: clamp(14px, 1.5vw, 24px);
-  overflow: hidden;
-  background: var(--ink);
-  isolation: isolate;
-}
-.cn-scene {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-  background: var(--ink);
-  clip-path: inset(0 0 0 0);
-  will-change: clip-path;
-}
-.cn-scene-bg {
-  position: absolute;
-  inset: -6%;
-  z-index: 0;
-}
-.cn-scene-bg img {
-  object-fit: cover;
-  filter: blur(34px) brightness(0.34) saturate(1.35);
-  transform: scale(1.2);
-}
-.cn-scene-bg::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background:
-    radial-gradient(80% 70% at 62% 50%, transparent 0%, rgba(8, 6, 5, 0.55) 100%),
-    linear-gradient(180deg, rgba(8, 6, 5, 0.5), transparent 30%, rgba(8, 6, 5, 0.65));
-}
-.cn-scene-photos {
-  position: absolute;
-  z-index: 2;
-  top: 50%;
-  inset-inline-end: clamp(14px, 5%, 90px);
-  translate: 0 -50%;
-  display: flex;
-  gap: clamp(10px, 1.7vw, 26px);
-  align-items: center;
-  direction: ltr;
-  --ph: min(57svh, 33vw);
-}
-.cn-ph {
-  position: relative;
-  height: var(--ph);
-  aspect-ratio: 9 / 16;
-  border-radius: clamp(8px, 0.9vw, 14px);
-  overflow: hidden;
-  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08);
-  will-change: transform;
-}
-.cn-ph:nth-child(2) {
-  margin-top: clamp(24px, 6svh, 70px);
-}
-.cn-ph:nth-child(3) {
-  margin-top: calc(clamp(24px, 6svh, 70px) * -1.4);
-}
-.cn-ph > span {
-  position: absolute;
-  inset: -8% 0;
-}
-.cn-scene-text {
-  position: absolute;
-  z-index: 4;
-  inset-inline-start: clamp(18px, 4vw, 72px);
-  top: 50%;
-  translate: 0 -34%;
-  width: min(25vw, 380px);
-  display: grid;
-  gap: 18px;
-  pointer-events: none;
-}
-.cn-scene-text h3 {
-  font-weight: 300;
-  font-size: clamp(1.6rem, 3.1vw, 3.3rem);
-  line-height: 1.1;
-  letter-spacing: -0.015em;
-  text-transform: uppercase;
-}
-html[data-locale="ar"] .cine .cn-scene-text h3 {
-  font-weight: 700;
-  text-transform: none;
-  line-height: 1.35;
-}
-.cn-scene-text p {
-  font-size: clamp(12.5px, 1vw, 15px);
-  line-height: 1.75;
-  color: rgba(255, 255, 255, 0.72);
-  max-width: 34ch;
-}
-.cn-scene-text .cn-kicker {
-  color: var(--glow);
-}
-.cn-ghost {
-  position: absolute;
-  z-index: 5;
-  left: 50%;
-  bottom: -0.17em;
-  translate: -50% 0;
-  font-weight: 200;
-  font-size: clamp(3rem, 14.4vw, 21rem);
-  line-height: 1;
-  letter-spacing: -0.02em;
-  white-space: nowrap;
-  color: transparent;
-  -webkit-text-stroke: clamp(1px, 0.14vw, 2px) rgba(255, 236, 214, 0.32);
-  background: linear-gradient(180deg, rgba(255, 236, 214, 0.2), transparent 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  pointer-events: none;
-  direction: ltr;
-}
-.cn-glass-card {
-  position: absolute;
-  z-index: 6;
-  top: clamp(12px, 1.6vw, 24px);
-  inset-inline-start: clamp(12px, 1.6vw, 24px);
-  width: min(264px, 64vw);
-  padding: 14px 16px 16px;
-  display: grid;
-  gap: 12px;
-  color: #fff;
-}
-.cn-glass-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.cn-glass-ico {
-  display: grid;
-  place-items: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 9px;
-  background: #fff;
-  color: var(--ink);
-}
-.cn-tag {
-  padding: 4px 10px;
-  border-radius: 6px;
-  background: linear-gradient(90deg, var(--glow), var(--glow-2));
-  color: var(--ink);
-  font-size: 10.5px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-}
-.cn-glass-card p {
-  font-size: 13.5px;
-  line-height: 1.45;
-  font-weight: 600;
-}
-.cn-glass-card .cn-link {
-  font-size: 12px;
-  color: var(--glow);
-}
-.cn-counter {
-  position: absolute;
-  z-index: 6;
-  top: clamp(14px, 1.8vw, 28px);
-  inset-inline-end: clamp(16px, 2vw, 32px);
-  display: grid;
-  justify-items: end;
-  gap: 8px;
-  font-size: 12px;
-  letter-spacing: 0.24em;
-  font-variant-numeric: tabular-nums;
-  direction: ltr;
-}
-.cn-counter b {
-  font-weight: 300;
-  font-size: clamp(1.2rem, 2vw, 1.9rem);
-  letter-spacing: 0.1em;
-}
-.cn-counter-bar {
-  width: 90px;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.25);
-  position: relative;
-}
-.cn-counter-bar i {
-  position: absolute;
-  inset: 0;
-  background: var(--glow);
-  transform: scaleX(0);
-  transform-origin: left;
-}
-
-@media (max-width: 860px) {
-  .cn-scene-photos {
-    --ph: min(40svh, 62vw);
-    inset-inline: 0;
-    top: 38%;
-    justify-content: center;
-    gap: 10px;
-  }
-  .cn-ph {
-    height: min(37svh, 58vw);
-  }
-  .cn-ph:nth-child(3) {
-    display: none;
-  }
-  .cn-ph:nth-child(2) {
-    margin-top: 28px;
-  }
-  .cn-scene-text {
-    inset-inline: 18px;
-    top: auto;
-    bottom: clamp(104px, 16svh, 140px);
-    translate: 0 0;
-    width: auto;
-    gap: 10px;
-  }
-  .cn-scene-text h3 {
-    font-size: clamp(1.25rem, 6vw, 1.9rem);
-  }
-  .cn-scene-text p {
-    display: none;
-  }
-  .cn-glass-card p {
-    display: none;
-  }
-  .cn-glass-card {
-    width: auto;
-    gap: 8px;
-    padding: 10px 12px;
-  }
-}
-
-/* reduced motion: no pinning, scenes simply stack */
-.cn-scenes.is-static .cn-scenes-frame {
-  height: auto;
-  display: grid;
-  gap: var(--gap);
-}
-.cn-scenes.is-static .cn-stage {
-  height: auto;
-  display: grid;
-  gap: var(--gap);
-  background: transparent;
-}
-.cn-scenes.is-static .cn-scene {
-  position: relative;
-  height: 100svh;
-  border-radius: 18px;
-}
-
 /* ───────── Products ───────── */
 .cn-prod-grid {
   display: grid;
@@ -1439,71 +1178,235 @@ html[data-locale] .cine .cn-meta-cap small {
 
 
 
-/* ───────── pinned scenes: light stage ───────── */
+/* ───────── Pinned scenes (what we do) ───────── */
+.cn-scenes {
+  position: relative;
+  z-index: 10;
+  background: var(--paper);
+}
+.cn-scenes-frame {
+  padding: var(--gap);
+  height: 100svh;
+}
 .cn-stage {
+  position: relative;
+  height: 100%;
+  border-radius: clamp(14px, 1.6vw, 26px);
+  overflow: hidden;
   background: var(--paper-2);
   color: var(--txt);
+  isolation: isolate;
 }
 .cn-scene {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  gap: clamp(28px, 4vw, 72px);
+  padding: 104px clamp(24px, 4vw, 72px) 96px;
   background: var(--paper-2);
+  will-change: opacity;
 }
-.cn-scene-bg img {
-  filter: blur(46px) brightness(1.08) saturate(1.15);
-}
-.cn-scene-bg::after {
-  background: linear-gradient(180deg, rgba(247, 245, 240, 0.82), rgba(247, 245, 240, 0.7) 50%, rgba(247, 245, 240, 0.9));
-}
-.cn-ph {
-  box-shadow: 0 24px 60px rgba(40, 30, 20, 0.22), 0 0 0 1px rgba(26, 22, 19, 0.06);
-}
-.cn-scene-text p {
-  color: var(--muted);
+.cn-scene-text {
+  flex: none;
+  width: min(34vw, 470px);
+  display: grid;
+  gap: 20px;
+  align-content: center;
 }
 .cn-scene-text .cn-kicker {
   color: var(--accent);
 }
-.cn-ghost {
-  -webkit-text-stroke: clamp(1px, 0.14vw, 2px) rgba(26, 22, 19, 0.2);
-  background: linear-gradient(180deg, rgba(26, 22, 19, 0.06), transparent 70%);
-  -webkit-background-clip: text;
-  background-clip: text;
+.cn-scene-text h3 {
+  font-weight: 300;
+  font-size: clamp(1.7rem, 2.7vw, 3rem);
+  line-height: 1.14;
+  letter-spacing: -0.02em;
 }
-.cn-glass-card {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid rgba(26, 22, 19, 0.1);
-  box-shadow: 0 10px 30px rgba(40, 30, 20, 0.1);
+html[data-locale="ar"] .cine .cn-scene-text h3 {
+  font-weight: 700;
+  line-height: 1.4;
+  font-size: clamp(1.6rem, 2.5vw, 2.7rem);
+}
+.cn-scene-text > p {
+  font-size: clamp(14px, 1.1vw, 16.5px);
+  line-height: 1.75;
+  color: var(--muted);
+  max-width: 40ch;
+}
+.cn-specs {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 0;
+  display: grid;
+  border-top: 1px solid var(--line-l);
+}
+.cn-specs li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 0;
+  border-bottom: 1px solid var(--line-l);
+  font-size: clamp(13.5px, 1.05vw, 15.5px);
+}
+.cn-specs li svg {
+  flex: none;
+  color: var(--accent);
+}
+.cn-scene-cta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px 24px;
+  margin-top: 6px;
+}
+.cn-scenes .cn-btn {
+  background: var(--ink);
+  color: #fff !important;
+}
+.cn-scenes .cn-btn .cn-btn-ico {
+  background: #fff;
+  color: var(--ink);
+}
+.cn-scenes .cn-btn:hover {
+  color: var(--ink) !important;
+}
+.cn-scenes .cn-text-link {
   color: var(--txt);
 }
-.cn-glass-ico {
+
+.cn-scene-photos {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: clamp(10px, 1.4vw, 22px);
+  direction: ltr;
+  --ph: min(66svh, calc((100vw - 640px) / 3 * 1.72));
+}
+.cn-ph {
+  position: relative;
+  flex: none;
+  height: var(--ph);
+  aspect-ratio: 9 / 16;
+  border-radius: clamp(10px, 1vw, 16px);
+  overflow: hidden;
+  background: #ddd8ce;
+  box-shadow: 0 18px 44px rgba(40, 30, 20, 0.16);
+  will-change: transform;
+}
+.cn-ph:nth-child(2) {
+  margin-top: clamp(24px, 6svh, 64px);
+}
+.cn-ph:nth-child(3) {
+  margin-top: calc(clamp(24px, 6svh, 64px) * -0.6);
+}
+.cn-ph > span {
+  position: absolute;
+  inset: 0;
+}
+
+/* service index, bottom of the stage */
+.cn-index {
+  position: absolute;
+  z-index: 5;
+  inset-inline: clamp(24px, 4vw, 72px);
+  bottom: 26px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(10px, 2vw, 28px);
+  padding: 0;
+  margin: 0;
+}
+.cn-index li {
+  list-style: none;
+  display: grid;
+  gap: 10px;
+  opacity: 0.4;
+  transition: opacity 0.6s var(--ease-out);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  font-weight: 600;
+}
+.cn-index li.on {
+  opacity: 1;
+}
+.cn-index li i {
+  display: block;
+  height: 2px;
+  background: rgba(26, 22, 19, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+.cn-index li i b {
+  position: absolute;
+  inset: 0;
   background: var(--ink);
-  color: #fff;
+  transform: scaleX(0);
+  transform-origin: left;
 }
-.cn-glass-card .cn-link {
-  color: var(--txt);
+html[data-locale] .cine[dir="rtl"] .cn-index li i b {
+  transform-origin: right;
 }
-.cn-counter-bar {
-  background: rgba(26, 22, 19, 0.18);
-}
-.cn-counter-bar i {
-  background: var(--ink);
-}
+
 @media (max-width: 860px) {
-  .cn-glass-card {
+  .cn-scene {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 22px;
+    padding: 92px 18px 70px;
+  }
+  .cn-scene-photos {
+    --ph: min(34svh, 62vw);
+    flex: none;
+    justify-content: center;
+    gap: 10px;
+  }
+  .cn-ph:nth-child(3) {
+    display: none;
+  }
+  .cn-ph:nth-child(2) {
+    margin-top: 22px;
+  }
+  .cn-scene-text {
     width: auto;
-    inset-inline-end: 110px;
+    gap: 12px;
+  }
+  .cn-scene-text h3 {
+    font-size: clamp(1.3rem, 6vw, 1.8rem);
+  }
+  .cn-scene-text > p,
+  .cn-specs li:nth-child(n + 3) {
+    display: none;
+  }
+  .cn-index {
+    bottom: 18px;
+    gap: 6px;
+  }
+  .cn-index li span {
+    display: none;
   }
 }
 
-/* RTL: photos sit on the opposite side from the text (the strip itself stays ltr) */
-@media (min-width: 861px) {
-  html[data-locale] .cine[dir="rtl"] .cn-scene-photos {
-    right: auto;
-    left: clamp(14px, 5%, 90px);
-  }
+/* reduced motion: no pinning, scenes simply stack */
+.cn-scenes.is-static .cn-scenes-frame {
+  height: auto;
+  display: grid;
+  gap: var(--gap);
 }
-@media (max-width: 860px) {
-  .cn-glass-card {
-    width: calc(100% - 150px);
-    max-width: 260px;
-  }
+.cn-scenes.is-static .cn-stage {
+  height: auto;
+  display: grid;
+  gap: var(--gap);
+  background: transparent;
+}
+.cn-scenes.is-static .cn-scene {
+  position: relative;
+  min-height: 100svh;
+  border-radius: 18px;
+}
+.cn-scenes.is-static .cn-index {
+  display: none;
 }
