@@ -196,7 +196,7 @@ export const copy = {
       "Custom printing & installation",
     ],
     badge: "Illuminated signage • LED house numbers • ",
-    catTitle: "Shop by category",
+    catTitle: "Services by Category",
     catCount: "collections",
     viewAll: "View all",
     explore: "Explore",

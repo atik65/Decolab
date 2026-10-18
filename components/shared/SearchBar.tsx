@@ -1,15 +1,38 @@
+"use client";
+
 import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerFooter,
-  DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 import { useRouter } from "@/i18n/navigation";
-import { Search, X } from "lucide-react";
+import { useGetCategories } from "@/hooks/tanstack/useProducts";
+import { useGetLocale } from "@/hooks/useGetLocale";
+import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
+import { ArrowUpRight, Search, X } from "lucide-react";
 import { useState } from "react";
+import { cn } from "@/lib/utils";
+
+const text = {
+  en: {
+    title: "Search",
+    placeholder: "Search for products",
+    hint: "Start typing to see products you are looking for.",
+    popular: "Browse by category",
+    search: "Search",
+    close: "Close search",
+  },
+  ar: {
+    title: "بحث",
+    placeholder: "ابحث عن المنتجات",
+    hint: "ابدأ الكتابة لعرض المنتجات التي تبحث عنها.",
+    popular: "تصفح حسب الفئة",
+    search: "بحث",
+    close: "إغلاق البحث",
+  },
+} as const;
 
 const SearchBar = ({
   isOpen: externalOpen,
@@ -21,43 +44,29 @@ const SearchBar = ({
   showTrigger?: boolean;
 }) => {
   const [internalOpen, setInternalOpen] = useState(false);
+  const locale = useGetLocale();
+  const t = text[locale];
 
   const open = externalOpen !== undefined ? externalOpen : internalOpen;
   const setOpen = externalOnOpenChange || setInternalOpen;
 
-  const handleOpenChange = (isOpen: boolean) => {
-    setOpen(isOpen);
-  };
   return (
-    <Drawer open={open} onOpenChange={handleOpenChange}>
-      {showTrigger && <DrawerTrigger className="">
-        {" "}
-        <span
-          className="text-gray-700 hover:text-black transition-colors relative h-full "
-          // onClick={() => setIsSearchOpen(!isSearchOpen)}
-          aria-label="Toggle search"
-        >
-          <Search size={20} />
-        </span>
-      </DrawerTrigger>}
-      {/* <DrawerOverlay /> */}
-      <DrawerContent
-        overlayClassName="bg-white md:bg-transparent"
-        className="!h-[calc(60vh-70px)] md:!h-[calc(100vh-140px)] rounded-none border-none outline-none "
-      >
-        <DrawerHeader className="px-0 ">
-          <DrawerTitle>
-            <SearchInput open={open} onOpenChange={setOpen} />
-          </DrawerTitle>
-          {/* <DrawerDescription>This action cannot be undone.</DrawerDescription> */}
-        </DrawerHeader>
-        <DrawerFooter>
-          <DrawerClose>
-            <span className="text-gray-700  span:text-black transition-colors">
-              Cancel
-            </span>
-          </DrawerClose>
-        </DrawerFooter>
+    <Drawer open={open} onOpenChange={setOpen}>
+      {showTrigger && (
+        <DrawerTrigger className="">
+          {" "}
+          <span
+            className="text-gray-700 hover:text-black transition-colors relative h-full "
+            aria-label="Toggle search"
+          >
+            <Search size={20} />
+          </span>
+        </DrawerTrigger>
+      )}
+      <DrawerContent className="!h-[min(52svh,460px)] md:!h-[min(520px,calc(100svh-32px))]">
+        <DrawerTitle className="sr-only">{t.title}</DrawerTitle>
+        <SearchInput open={open} onOpenChange={setOpen} />
+        <DrawerClose className="sr-only">{t.close}</DrawerClose>
       </DrawerContent>
     </Drawer>
   );
@@ -70,73 +79,88 @@ interface Props {
   onOpenChange: (open: boolean) => void;
 }
 
-const SearchInput = ({ open, onOpenChange }: Props) => {
+const SearchInput = ({ onOpenChange }: Props) => {
   const router = useRouter();
+  const locale = useGetLocale();
+  const t = text[locale];
+  const isRtl = locale === "ar";
   const [searchTerm, setSearchTerm] = useState("");
-
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    setSearchTerm(value);
-    // router.push(`/shop?search=${encodeURIComponent(value)}`);
-  };
+  const { data: categoriesData } = useGetCategories<CategoresResponse>();
+  const categories = categoriesData?.results ?? [];
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push(`/shop?search=${encodeURIComponent(searchTerm)}`);
+    if (!searchTerm.trim()) return;
+    router.push(`/shop?search=${encodeURIComponent(searchTerm.trim())}`);
+    onOpenChange(false);
+  };
+
+  const goCategory = (name: string) => {
+    router.push(`/shop?category=${encodeURIComponent(name)}`);
     onOpenChange(false);
   };
 
   return (
-    <div className="">
-      <form onSubmit={handleSubmit} className="border-b flex">
+    <div
+      dir={isRtl ? "rtl" : "ltr"}
+      className="flex flex-1 flex-col overflow-y-auto px-5 pb-6 pt-5 sm:px-10 sm:pb-10 sm:pt-8 md:px-16"
+    >
+      <form
+        onSubmit={handleSubmit}
+        className="flex items-center gap-3 border-b border-black/10 pb-4 sm:gap-5 sm:pb-6"
+      >
+        <button type="submit" aria-label={t.search} className="shrink-0">
+          <Search className="h-5 w-5 text-black/45 sm:h-7 sm:w-7" />
+        </button>
         <input
           type="text"
-          placeholder="Search for products"
+          placeholder={t.placeholder}
           value={searchTerm}
-          onChange={handleInputChange}
+          onChange={(e) => setSearchTerm(e.target.value)}
           autoFocus
-          className="w-full min-h-16 lg:min-h-28 flex items-center  placeholder:text-black placeholder:text-center placeholder:font-bold placeholder:text-xl sm:placeholder:text-2xl md:placeholder:text-3xl xl:placeholder:text-5xl placeholder:pt-5  text-center outline-none text-black text-xl sm:text-2xl md:text-3xl xl:text-5xl font-bold py-10"
+          style={{ direction: isRtl ? "rtl" : "ltr" }}
+          className="min-w-0 flex-1 bg-transparent text-xl font-semibold text-[#1a1613] outline-none placeholder:text-black/30 sm:text-3xl md:text-4xl"
         />
-
-        {/* close button */}
-        {searchTerm.trim() === "" && (
-          <button
-            type="button"
-            onClick={() => onOpenChange(false)}
-            className="flex items-center justify-center px-5"
-          >
-            <X className="hidden md:block" size={40} />
-            <X className="block md:hidden" size={20} />
-          </button>
-        )}
-
-        {/* search button */}
-
         {searchTerm.trim() && (
           <button
             type="submit"
-            onClick={() => onOpenChange(false)}
-            className="flex items-center justify-center px-5"
+            className="hidden shrink-0 items-center gap-2 rounded-full bg-[#1a1613] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-black sm:flex"
           >
-            <Search className="hidden md:block" size={40} />
-            <Search className="block md:hidden" size={20} />
+            {t.search}
+            <ArrowUpRight size={16} className={cn(isRtl && "-scale-x-100")} />
           </button>
         )}
-      </form>
-      {/* Start typing to see products you are looking for.
-       */}
-      <div className="flex mt-2 px-2">
-        <p className="text-sm sm:text-base opacity-65 text-center w-full">
-          Start typing to see products you are looking for.
-        </p>
         <button
-          onClick={() => onOpenChange(!open)}
-          className="flex items-center justify-center px-3 opacity-0"
+          type="button"
+          onClick={() => onOpenChange(false)}
+          aria-label={t.close}
+          className="grid h-10 w-10 shrink-0 place-items-center rounded-full border border-black/10 text-[#1a1613] transition-colors hover:bg-black hover:text-white sm:h-12 sm:w-12"
         >
-          <X className="hidden md:block" size={40} />
-          <X className="block md:hidden" size={20} />
+          <X size={20} />
         </button>
-      </div>
+      </form>
+
+      <p className="mt-4 text-sm text-black/55 sm:text-base">{t.hint}</p>
+
+      {categories.length > 0 && (
+        <div className="mt-8 sm:mt-10">
+          <p className="mb-4 text-[11px] font-bold uppercase tracking-[0.2em] text-black/45">
+            {t.popular}
+          </p>
+          <div className="flex flex-wrap gap-2.5">
+            {categories.map((c) => (
+              <button
+                key={c.id}
+                type="button"
+                onClick={() => goCategory(c.name)}
+                className="rounded-full border border-black/10 px-5 py-2.5 text-sm font-semibold text-[#1a1613] transition-colors hover:border-[#1a1613] hover:bg-[#1a1613] hover:text-white"
+              >
+                {isRtl && c.name_ar ? c.name_ar : c.name}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 };

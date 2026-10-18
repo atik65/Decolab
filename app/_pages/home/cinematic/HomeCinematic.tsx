@@ -24,7 +24,9 @@ const HomeCinematic = () => {
 
   /* smooth scrolling, wired into ScrollTrigger; home page only */
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const reduce = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
     const prevRestoration = history.scrollRestoration;
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
@@ -85,7 +87,8 @@ const HomeCinematic = () => {
       trigger: "#top",
       start: "top top",
       end: "bottom 55%",
-      onToggle: (self) => document.body.classList.toggle("cn-hero-active", self.isActive),
+      onToggle: (self) =>
+        document.body.classList.toggle("cn-hero-active", self.isActive),
     });
     document.body.classList.add("cn-hero-active");
     return () => {
