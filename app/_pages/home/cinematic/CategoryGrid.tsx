@@ -48,7 +48,10 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   const faces = useMemo(() => {
     if (!n) return [];
     const reps = Math.ceil(MIN_CARDS / n);
-    return Array.from({ length: n * reps }, (_, i) => ({ item: items[i % n], i }));
+    return Array.from({ length: n * reps }, (_, i) => ({
+      item: items[i % n],
+      i,
+    }));
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [n, data]);
   const total = faces.length;
@@ -61,7 +64,15 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   const [reduce, setReduce] = useState(false);
   const rot = useRef({ v: 0 }); // physical ring angle in degrees
   const kRef = useRef(0);
-  const drag = useRef({ id: -1, x: 0, start: 0, moved: false, lastX: 0, lastT: 0, vel: 0 });
+  const drag = useRef({
+    id: -1,
+    x: 0,
+    start: 0,
+    moved: false,
+    lastX: 0,
+    lastT: 0,
+    vel: 0,
+  });
 
   useReveal(root, [ready, n]);
 
@@ -83,7 +94,9 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
       }
     });
     Array.from(el.children).forEach((c, i) => {
-      (c as HTMLElement).dataset.front = String(i === best && bestA < step / 2 + 1);
+      (c as HTMLElement).dataset.front = String(
+        i === best && bestA < step / 2 + 1,
+      );
     });
   }, [dir, step]);
 
@@ -115,7 +128,11 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   const goCategory = (j: number) => {
     let best = 0;
     for (let d = -Math.floor(total / 2); d <= Math.floor(total / 2); d++) {
-      if (mod(kRef.current + d, n) === j && (best === 0 || Math.abs(d) < Math.abs(best))) best = d;
+      if (
+        mod(kRef.current + d, n) === j &&
+        (best === 0 || Math.abs(d) < Math.abs(best))
+      )
+        best = d;
     }
     if (best !== 0) spinTo(kRef.current + best);
   };
@@ -134,7 +151,9 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   useEffect(() => {
     const el = stage.current;
     if (!el) return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0.35 });
+    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), {
+      threshold: 0.35,
+    });
     io.observe(el);
     return () => io.disconnect();
   }, [ready]);
@@ -153,7 +172,9 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
 
   /* ───────── drag with inertia ───────── */
   const pxToDeg = () => {
-    const w = stage.current?.querySelector<HTMLElement>(".cn-ring3d-card")?.offsetWidth ?? 280;
+    const w =
+      stage.current?.querySelector<HTMLElement>(".cn-ring3d-card")
+        ?.offsetWidth ?? 280;
     return step / (w * 0.9);
   };
   const onPointerDown = (e: React.PointerEvent) => {
@@ -191,7 +212,10 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
     d.id = -1;
     if (d.moved) {
       const projected = rot.current.v + d.vel * 260; // coast a little, then settle on a face
-      spinTo(Math.round((-dir * projected) / step), { duration: 1.6, ease: "power3.out" });
+      spinTo(Math.round((-dir * projected) / step), {
+        duration: 1.6,
+        ease: "power3.out",
+      });
       setPaused(false);
     }
     window.setTimeout(() => (d.moved = false), 0);
@@ -205,25 +229,7 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
   const activeCat = n ? mod(k, n) : 0;
 
   return (
-    <section ref={root} className="cn-section cn-paper" id="categories">
-      <div className="cn-wrap">
-        <div className="cn-sec-head">
-          <h2 className="cn-sec-title f-display cn-rv">
-            <i className="cn-dot" />
-            {t.catTitle}
-          </h2>
-          <div className="cn-sec-meta cn-rv">
-            <span className="f-logo">
-              {String(n || 4).padStart(2, "0")} {t.catCount}
-            </span>
-            <Link href="/shop" className="cn-link">
-              {t.viewAll}
-              <ArrowUpRight size={15} />
-            </Link>
-          </div>
-        </div>
-      </div>
-
+    <section ref={root} className="cn-section cn-paper cn-ring-section" id="categories">
       <div
         className="cn-ring3d cn-rv"
         onMouseEnter={() => setPaused(true)}
@@ -242,71 +248,90 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
           onPointerCancel={onPointerUp}
         >
           <div className="cn-ring3d-ring">
-          <div ref={ring} className="cn-ring3d-rot">
-            {!ready
-              ? Array.from({ length: MIN_CARDS }).map((_, i) => (
-                  <div
-                    key={i}
-                    className="cn-ring3d-card cn-skel"
-                    style={{ transform: `rotateY(${dir * i * 45}deg) translateZ(var(--R))` }}
-                  />
-                ))
-              : faces.map(({ item: c, i }) => {
-                  const name = locale === "ar" && c.name_ar ? c.name_ar : c.name;
-                  return (
-                    <Link
-                      key={`${c.id}-${i}`}
-                      href={`/shop?category=${encodeURIComponent(c.name)}`}
-                      className="cn-ring3d-card"
-                      aria-label={name}
-                      draggable={false}
-                      tabIndex={mod(i - k, total) === 0 ? 0 : -1}
-                      onClick={(e) => {
-                        /* a drag never navigates; a side card spins to the front first */
-                        const front = mod(i, total) === mod(kRef.current, total);
-                        if (drag.current.moved || !front) {
-                          e.preventDefault();
-                          if (!drag.current.moved) {
-                            let d = mod(i - kRef.current, total);
-                            if (d > total / 2) d -= total;
-                            spinTo(kRef.current + d);
-                          }
-                        }
+            <div ref={ring} className="cn-ring3d-rot">
+              {!ready
+                ? Array.from({ length: MIN_CARDS }).map((_, i) => (
+                    <div
+                      key={i}
+                      className="cn-ring3d-card cn-skel"
+                      style={{
+                        transform: `rotateY(${dir * i * 45}deg) translateZ(var(--R))`,
                       }}
-                      style={{ transform: `rotateY(${dir * i * step}deg) translateZ(var(--R))` }}
-                    >
-                      <span className="cn-ring3d-media">
-                        <SmartImage
-                          src={c.image}
-                          fallback={fallbackImages[i % fallbackImages.length]}
-                          alt={name}
-                          sizes="(max-width: 860px) 60vw, 300px"
-                        />
-                      </span>
-                      <span className="cn-ring3d-idx f-logo">
-                        {String((i % n) + 1).padStart(2, "0")}
-                      </span>
-                      <span className="cn-ring3d-foot">
-                        <span className="cn-ring3d-name f-display">{name}</span>
-                        <span className="cn-ring3d-go">
-                          <span className="cn-ring3d-explore">{t.explore}</span>
-                          <span className="cn-cat-arrow">
-                            <ArrowUpRight size={18} />
+                    />
+                  ))
+                : faces.map(({ item: c, i }) => {
+                    const name =
+                      locale === "ar" && c.name_ar ? c.name_ar : c.name;
+                    return (
+                      <Link
+                        key={`${c.id}-${i}`}
+                        href={`/shop?category=${encodeURIComponent(c.name)}`}
+                        className="cn-ring3d-card"
+                        aria-label={name}
+                        draggable={false}
+                        tabIndex={mod(i - k, total) === 0 ? 0 : -1}
+                        onClick={(e) => {
+                          /* a drag never navigates; a side card spins to the front first */
+                          const front =
+                            mod(i, total) === mod(kRef.current, total);
+                          if (drag.current.moved || !front) {
+                            e.preventDefault();
+                            if (!drag.current.moved) {
+                              let d = mod(i - kRef.current, total);
+                              if (d > total / 2) d -= total;
+                              spinTo(kRef.current + d);
+                            }
+                          }
+                        }}
+                        style={{
+                          transform: `rotateY(${dir * i * step}deg) translateZ(var(--R))`,
+                        }}
+                      >
+                        <span className="cn-ring3d-media">
+                          <SmartImage
+                            src={c.image}
+                            fallback={fallbackImages[i % fallbackImages.length]}
+                            alt={name}
+                            sizes="(max-width: 860px) 60vw, 300px"
+                          />
+                        </span>
+                        <span className="cn-ring3d-idx f-logo">
+                          {String((i % n) + 1).padStart(2, "0")}
+                        </span>
+                        <span className="cn-ring3d-foot">
+                          <span className="cn-ring3d-name f-display">
+                            {name}
+                          </span>
+                          <span className="cn-ring3d-go">
+                            <span className="cn-ring3d-explore">
+                              {t.explore}
+                            </span>
+                            <span className="cn-cat-arrow">
+                              <ArrowUpRight size={18} />
+                            </span>
                           </span>
                         </span>
-                      </span>
-                      <span className="cn-ring3d-veil" />
-                    </Link>
-                  );
-                })}
-          </div>
+                        <span className="cn-ring3d-veil" />
+                      </Link>
+                    );
+                  })}
+            </div>
           </div>
         </div>
 
         {ready && n > 1 && (
           <div className="cn-ring-ctrl">
-            <button type="button" className="cn-ring-btn" onClick={prev} aria-label="Previous">
-              {dir === -1 ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+            <button
+              type="button"
+              className="cn-ring-btn"
+              onClick={prev}
+              aria-label="Previous"
+            >
+              {dir === -1 ? (
+                <ChevronRight size={18} />
+              ) : (
+                <ChevronLeft size={18} />
+              )}
             </button>
             <div className="cn-ring-dots">
               {items.map((c, i) => (
@@ -324,7 +349,9 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
                       key={`${k}-${paused}-${inView}`}
                       style={
                         i === activeCat && !reduce && !paused && inView
-                          ? { animation: `cn-dotfill ${AUTOPLAY_MS + SPIN_S * 1000}ms linear forwards` }
+                          ? {
+                              animation: `cn-dotfill ${AUTOPLAY_MS + SPIN_S * 1000}ms linear forwards`,
+                            }
                           : undefined
                       }
                     />
@@ -332,8 +359,17 @@ const CategoryGrid = ({ locale }: { locale: Locale }) => {
                 </button>
               ))}
             </div>
-            <button type="button" className="cn-ring-btn" onClick={next} aria-label="Next">
-              {dir === -1 ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
+            <button
+              type="button"
+              className="cn-ring-btn"
+              onClick={next}
+              aria-label="Next"
+            >
+              {dir === -1 ? (
+                <ChevronLeft size={18} />
+              ) : (
+                <ChevronRight size={18} />
+              )}
             </button>
           </div>
         )}
