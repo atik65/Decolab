@@ -1419,3 +1419,237 @@ html[data-locale] .cine[dir="rtl"] .cn-index li i b {
 .cn-index li.done i b {
   transform: scaleX(1);
 }
+
+/* ───────── Category ring (3D cylinder carousel) ───────── */
+.cn-ring3d {
+  --cw: clamp(210px, 20vw, 300px);
+  --R: calc(var(--cw) * var(--rk, 1.3));
+  position: relative;
+  padding-bottom: clamp(48px, 7vw, 96px);
+}
+.cn-ring3d-stage {
+  position: relative;
+  height: calc(var(--cw) * 1.36);
+  perspective: 1500px;
+  perspective-origin: 50% 50%;
+  touch-action: pan-y;
+  user-select: none;
+  cursor: grab;
+  direction: ltr;
+}
+.cn-ring3d-stage:active {
+  cursor: grabbing;
+}
+.cn-ring3d-ring {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: var(--cw);
+  height: 100%;
+  margin-left: calc(var(--cw) / -2);
+  transform-style: preserve-3d;
+  /* pull the ring back so the front card sits on the z=0 plane */
+  transform: translateZ(calc(var(--R) * -1));
+}
+.cn-ring3d-rot {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+.cn-ring3d-card {
+  position: absolute;
+  inset: 0;
+  display: block;
+  border-radius: clamp(14px, 1.4vw, 22px);
+  overflow: hidden;
+  background: var(--paper-2);
+  color: #fff;
+  box-shadow: 0 18px 44px rgba(40, 30, 20, 0.2);
+  backface-visibility: visible;
+  -webkit-user-drag: none;
+}
+.cn-ring3d-card[data-back="true"] {
+  pointer-events: none;
+}
+.cn-ring3d-card.cn-skel {
+  background: var(--paper-2);
+}
+.cn-ring3d-media {
+  position: absolute;
+  inset: 0;
+  transition: transform 1.4s var(--ease-out);
+}
+.cn-ring3d-card[data-front="true"]:hover .cn-ring3d-media {
+  transform: scale(1.05);
+}
+.cn-ring3d-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(0deg, rgba(10, 9, 8, 0.78) 0%, rgba(10, 9, 8, 0) 52%),
+    linear-gradient(180deg, rgba(10, 9, 8, 0.28) 0%, rgba(10, 9, 8, 0) 26%);
+}
+/* cards that turn away fade into the page, like the reference */
+.cn-ring3d-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  background: var(--paper);
+  opacity: min(0.72, calc(var(--a, 0) * 1.1));
+  pointer-events: none;
+}
+.cn-ring3d-idx {
+  position: absolute;
+  z-index: 3;
+  top: 16px;
+  inset-inline-start: 18px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  padding: 6px 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.16);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+.cn-ring3d-foot {
+  position: absolute;
+  z-index: 3;
+  inset-inline: 18px;
+  bottom: 18px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+}
+.cn-ring3d-name {
+  font-weight: 300;
+  font-size: clamp(1.05rem, 1.6vw, 1.5rem);
+  line-height: 1.15;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+}
+html[data-locale="ar"] .cine .cn-ring3d-name {
+  font-weight: 700;
+  text-transform: none;
+}
+.cn-ring3d-go {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+.cn-ring3d-explore {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateX(8px);
+  transition: opacity 0.5s ease, transform 0.7s var(--ease-out);
+}
+html[data-locale="ar"] .cine .cn-ring3d-explore {
+  letter-spacing: 0;
+  text-transform: none;
+  font-size: 13px;
+}
+.cn-ring3d-card[data-front="true"] .cn-ring3d-explore {
+  opacity: 1;
+  transform: none;
+}
+.cn-ring3d-card .cn-cat-arrow {
+  width: 40px;
+  height: 40px;
+}
+.cn-ring3d-card[data-front="true"]:hover .cn-cat-arrow {
+  background: var(--glow);
+  border-color: var(--glow);
+  color: var(--ink);
+  transform: rotate(-45deg);
+}
+html[data-locale] .cine[dir="rtl"] .cn-ring3d-card[data-front="true"]:hover .cn-cat-arrow {
+  transform: rotate(45deg);
+}
+
+.cn-ring-ctrl {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(14px, 2vw, 26px);
+  margin-top: clamp(26px, 3vw, 44px);
+}
+.cn-ring-btn {
+  display: grid;
+  place-items: center;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 1px solid var(--line-l);
+  background: transparent;
+  color: var(--txt);
+  cursor: pointer;
+  transition: background 0.4s, color 0.4s, border-color 0.4s, transform 0.5s var(--ease-out);
+}
+.cn-ring-btn:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+.cn-ring-btn:active {
+  transform: scale(0.92);
+}
+.cn-ring-dots {
+  display: flex;
+  gap: 8px;
+  width: min(360px, 52vw);
+}
+.cn-ring-dot {
+  flex: 1;
+  padding: 14px 0;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.cn-ring-dot i {
+  display: block;
+  height: 2px;
+  background: rgba(26, 22, 19, 0.16);
+  position: relative;
+  overflow: hidden;
+}
+.cn-ring-dot i b {
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+html[data-locale] .cine[dir="rtl"] .cn-ring-dot i b {
+  transform-origin: right;
+}
+.cn-ring-dot[data-on="true"] i b {
+  transform: scaleX(1);
+}
+@keyframes cn-dotfill {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@media (max-width: 860px) {
+  .cn-ring3d {
+    --cw: min(56vw, 250px);
+    --R: calc(var(--cw) * var(--rk, 1.3) * 0.78);
+  }
+  .cn-ring3d-stage {
+    perspective: 1300px;
+  }
+  .cn-ring3d-explore {
+    display: none;
+  }
+}
