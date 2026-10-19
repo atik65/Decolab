@@ -1,10 +1,11 @@
 "use client";
 
-import { ArrowUpRight, Check, Minus, Plus, X } from "lucide-react";
+import { ArrowUpRight, Check } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { Locale, WHATSAPP_URL } from "../../home/cinematic/content";
 import { coCopy } from "./checkoutContent";
 import { describeItem, money } from "./checkoutUtils";
+import CartControls from "./CartControls";
 import { OrderLine } from "./OrderLines";
 import { useCartItems } from "./useCartItems";
 
@@ -48,26 +49,12 @@ const OrderSummaryCinematic = ({ locale, cart }: { locale: Locale; cart: Cart })
             price={it.price}
             quantity={it.quantity}
             controls={
-              <div className="cn-co-controls">
-                <div className="cn-co-stepper" role="group">
-                  <button
-                    type="button"
-                    aria-label={t.decrease}
-                    disabled={it.quantity <= 1}
-                    onClick={() => setQuantity(i, it.quantity - 1)}
-                  >
-                    <Minus size={14} />
-                  </button>
-                  <output lang="en">{it.quantity}</output>
-                  <button type="button" aria-label={t.increase} onClick={() => setQuantity(i, it.quantity + 1)}>
-                    <Plus size={14} />
-                  </button>
-                </div>
-                <button type="button" className="cn-co-remove" onClick={() => remove(i)}>
-                  <X size={13} />
-                  {t.remove}
-                </button>
-              </div>
+              <CartControls
+                locale={locale}
+                quantity={it.quantity}
+                onQuantity={(q) => setQuantity(i, q)}
+                onRemove={() => remove(i)}
+              />
             }
           />
         ))}

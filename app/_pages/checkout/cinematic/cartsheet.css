@@ -1,0 +1,194 @@
+/* ───────────────────────────────────────────────────────────────
+   Cart sheet contents. The sheet renders in a portal, so everything is
+   wrapped in .cine (variables, fonts, direction) and scoped under .cn-cs.
+   ─────────────────────────────────────────────────────────────── */
+
+.cn-cs {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 0;
+  background: #fff;
+}
+
+.cn-cs-head {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 24px 26px 16px;
+  padding-inline-end: 64px;
+}
+.cn-cs-head h2 {
+  font-weight: 300;
+  font-size: 1.55rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+html[data-locale="ar"] .cine .cn-cs-head h2 {
+  font-weight: 700;
+}
+.cn-cs-head span {
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}
+
+.cn-cs-banner {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 11px 26px;
+  border-block: 1px solid var(--line-l);
+  background: var(--paper);
+  font-size: 12.5px;
+  color: var(--txt);
+}
+.cn-cs-banner .cn-dot {
+  width: 7px;
+  height: 7px;
+}
+
+.cn-cs-body {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 4px 26px;
+  overscroll-behavior: contain;
+}
+.cn-cs .cn-co-lines .cn-co-line:first-child {
+  border-top: 0;
+}
+.cn-cs .cn-co-line {
+  grid-template-columns: 72px minmax(0, 1fr) auto;
+  padding-block: 18px;
+}
+.cn-cs .cn-co-thumb {
+  width: 72px;
+}
+
+.cn-cs-foot {
+  display: grid;
+  gap: 14px;
+  padding: 16px 26px calc(22px + env(safe-area-inset-bottom));
+  border-top: 1px solid var(--line-l);
+  background: #fff;
+}
+.cn-cs-foot .cn-co-totals {
+  border-top: 0;
+}
+.cn-cs-foot .cn-co-totals > div {
+  padding-block: 8px;
+}
+.cn-cs-foot .cn-co-totals .cn-co-grand {
+  padding-top: 10px;
+}
+.cn-cs-foot .cn-co-totals .cn-co-grand b {
+  font-size: 2rem;
+}
+.cn-cs .cn-pd-btn {
+  width: 100%;
+  grid-column: auto;
+  text-decoration: none;
+}
+.cn-cs-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+}
+.cn-cs .cn-text-link {
+  padding: 0 0 4px;
+  border: 0;
+  background: none;
+  font-family: inherit;
+  font-size: 12px;
+  color: var(--txt);
+  cursor: pointer;
+}
+html[data-locale] .cine[dir="rtl"] .cn-cs .cn-text-link svg {
+  transform: scaleX(-1);
+}
+
+/* empty */
+.cn-cs-empty {
+  display: grid;
+  align-content: center;
+  justify-items: start;
+  gap: 16px;
+  min-height: 100%;
+  padding-block: 36px;
+}
+.cn-cs-empty h3 {
+  font-weight: 300;
+  font-size: 1.9rem;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+}
+html[data-locale="ar"] .cine .cn-cs-empty h3 {
+  font-weight: 700;
+  line-height: 1.4;
+}
+.cn-cs-empty p {
+  margin: 0;
+  max-width: 34ch;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.cn-cs .cn-btn {
+  background: var(--ink);
+  color: #fff !important;
+}
+.cn-cs .cn-btn .cn-btn-ico {
+  background: #fff;
+  color: var(--ink);
+}
+.cn-cs .cn-btn:hover {
+  color: var(--ink) !important;
+}
+.cn-cs-quick {
+  display: grid;
+  gap: 10px;
+  margin-top: 18px;
+}
+.cn-cs-quick small {
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(26, 22, 19, 0.5);
+}
+html[data-locale="ar"] .cine .cn-cs-quick small {
+  letter-spacing: 0.02em;
+  font-size: 12.5px;
+  text-transform: none;
+}
+.cn-cs-quick div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.cn-cs-quick a {
+  display: inline-flex;
+  align-items: center;
+  height: 40px;
+  padding-inline: 18px;
+  border: 1px solid var(--line-l);
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 600;
+  transition: background 0.4s var(--ease), color 0.4s var(--ease), border-color 0.4s var(--ease);
+}
+.cn-cs-quick a:hover {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+}
+
+/* anchors inside .cine inherit the surrounding text colour; keep the primary button readable */
+.cn-cs .cn-pd-btn-solid {
+  color: #fff !important;
+}
+.cn-cs .cn-pd-btn-solid:hover {
+  color: var(--ink) !important;
+}

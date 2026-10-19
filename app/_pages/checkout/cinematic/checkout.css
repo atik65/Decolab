@@ -680,3 +680,12 @@ html[data-locale="ar"] .cine .cn-co-plain h1 {
 .cn-co-steps-sec .cn-co-actions {
   margin-top: clamp(20px, 2.4vw, 32px);
 }
+
+/* lines that open the product (cart sheet) */
+.cn-co-thumb[data-link="true"],
+.cn-co-line-body h3[data-link="true"] {
+  cursor: pointer;
+}
+.cn-co-line-body h3[data-link="true"]:hover {
+  color: var(--accent);
+}

@@ -14,13 +14,14 @@ export interface LineProps {
   index: number;
   /** quantity stepper / remove button (cart only) */
   controls?: ReactNode;
-  href?: string;
+  /** makes the photo and title open the product */
+  onOpen?: () => void;
 }
 
 /** One order line: photo, title, option list, price. Shared by checkout, success and failed pages. */
-export const OrderLine = ({ title, image, options, price, quantity, index, controls }: LineProps) => (
+export const OrderLine = ({ title, image, options, price, quantity, index, controls, onOpen }: LineProps) => (
   <li className="cn-co-line">
-    <div className="cn-co-thumb">
+    <div className="cn-co-thumb" data-link={onOpen ? "true" : undefined} onClick={onOpen}>
       <SmartImage
         src={image}
         fallback={fallbackImages[index % fallbackImages.length]}
@@ -29,7 +30,9 @@ export const OrderLine = ({ title, image, options, price, quantity, index, contr
       />
     </div>
     <div className="cn-co-line-body">
-      <h3>{title}</h3>
+      <h3 data-link={onOpen ? "true" : undefined} onClick={onOpen}>
+        {title}
+      </h3>
       {options.length > 0 && <p dir="auto">{options.join(" · ")}</p>}
       {controls ? (
         controls
