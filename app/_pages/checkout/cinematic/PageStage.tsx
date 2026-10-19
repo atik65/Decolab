@@ -23,13 +23,15 @@ interface Props {
   tall?: boolean;
   /** no photo: a light, quiet header (used for the order confirmation) */
   plain?: boolean;
+  /** plain mode only: a card shown beside the copy */
+  aside?: ReactNode;
   tone?: "ok" | "bad";
   steps?: Step[];
   children?: ReactNode;
 }
 
 /** Dark photographic header used by checkout and its result pages (same language as the home hero). */
-const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, tone, steps, children }: Props) => {
+const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, aside, tone, steps, children }: Props) => {
   const wrap = useRef<HTMLElement>(null);
   const stage = useRef<HTMLDivElement>(null);
   const key = lines.join("|");
@@ -44,8 +46,8 @@ const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, tone, steps, c
       }
       const spans = el.querySelectorAll(".cn-line > span");
       const fades = el.querySelectorAll(".cn-co-fade");
-      const mark = el.querySelector(".cn-co-mark path, .cn-co-mark line");
-      const marks = el.querySelectorAll(".cn-co-mark path");
+      const marks = el.querySelectorAll(".cn-co-mark path, .cn-co-tick path");
+      const mark = marks.length > 0;
 
       gsap.set(spans, { yPercent: 115 });
       gsap.set(fades, { opacity: 0, y: 22 });
@@ -116,7 +118,7 @@ const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, tone, steps, c
         )}
 
         <div className={plain ? "cn-co-copy" : "cn-hero-content cn-co-copy"}>
-          {tone && (
+          {tone && !plain && (
             <span className="cn-co-mark cn-co-fade" data-tone={tone} aria-hidden="true">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                 {tone === "ok" ? (
@@ -131,7 +133,13 @@ const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, tone, steps, c
             </span>
           )}
           <span className="cn-kicker f-display cn-co-fade">
-            <i className="cn-dot" />
+            {plain && tone === "ok" ? (
+              <svg className="cn-co-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M4.5 12.5l5 5L19.5 7" pathLength="1" />
+              </svg>
+            ) : (
+              <i className="cn-dot" />
+            )}
             {kicker}
           </span>
           <h1 className="f-display" aria-label={lines.join(" ")}>
@@ -144,6 +152,8 @@ const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, tone, steps, c
           {body && <p className="cn-co-fade">{body}</p>}
           {children && <div className="cn-hero-ctas cn-co-fade">{children}</div>}
         </div>
+
+        {plain && aside && <div className="cn-co-aside cn-co-fade">{aside}</div>}
 
         {steps && (
           <ol className="cn-co-steps cn-co-fade">
