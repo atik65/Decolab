@@ -133,9 +133,16 @@ const PageStage = ({ kicker, lines, body, photo = 1, tall, plain, aside, tone, s
             </span>
           )}
           <span className="cn-kicker f-display cn-co-fade">
-            {plain && tone === "ok" ? (
-              <svg className="cn-co-tick" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M4.5 12.5l5 5L19.5 7" pathLength="1" />
+            {plain && tone ? (
+              <svg className="cn-co-tick" data-tone={tone} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                {tone === "ok" ? (
+                  <path d="M4.5 12.5l5 5L19.5 7" pathLength="1" />
+                ) : (
+                  <>
+                    <path d="M6.5 6.5l11 11" pathLength="1" />
+                    <path d="M17.5 6.5l-11 11" pathLength="1" />
+                  </>
+                )}
               </svg>
             ) : (
               <i className="cn-dot" />

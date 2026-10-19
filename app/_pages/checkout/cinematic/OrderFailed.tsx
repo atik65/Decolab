@@ -59,52 +59,15 @@ const OrderFailed = () => {
 
   return (
     <div ref={root} className="cine cn-co" dir={dir}>
-      <PageStage tall tone="bad" photo={2} kicker={t.failKicker} lines={[...t.failLines]} body={t.failBody}>
-        <Link href="/checkout" className="cn-btn">
-          {t.tryAgain}
-          <span className="cn-btn-ico">
-            <ArrowUpRight size={16} />
-          </span>
-        </Link>
-        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="cn-btn cn-btn-ghost">
-          {t.viaWhatsapp}
-          <span className="cn-btn-ico">
-            <MessageCircle size={16} />
-          </span>
-        </a>
-      </PageStage>
-
-      <section className="cn-section cn-paper cn-white cn-co-main">
-        <div className="cn-wrap cn-co-split">
-          <div>
-            <div className="cn-co-next-head">
-              <span className="cn-kicker f-display cn-rv">
-                <i className="cn-dot" />
-                {t.helpKicker}
-              </span>
-              <h2 className="f-display cn-rv">{t.helpTitle}</h2>
-            </div>
-            <ol className="cn-co-next cn-rv">
-              {t.helpItems.map((s, i) => (
-                <li key={s.t}>
-                  <small className="f-logo" dir="ltr">
-                    {String(i + 1).padStart(2, "0")}
-                  </small>
-                  <h3>{s.t}</h3>
-                  <p>{s.b}</p>
-                </li>
-              ))}
-            </ol>
-            <div className="cn-co-actions cn-rv">
-              <Link href="/shop" className="cn-text-link">
-                {t.backShop}
-                <ArrowUpRight size={15} />
-              </Link>
-            </div>
-          </div>
-
-          {(snap.length > 0 || state.fail?.message) && (
-            <aside className="cn-co-summary cn-rv">
+      <PageStage
+        plain
+        tone="bad"
+        kicker={t.failKicker}
+        lines={[...t.failLines]}
+        body={t.failBody}
+        aside={
+          snap.length > 0 || state.fail?.message ? (
+            <aside className="cn-co-summary">
               {state.fail?.message && (
                 <p className="cn-co-reason">
                   <strong>{t.reason}: </strong>
@@ -132,7 +95,49 @@ const OrderFailed = () => {
                 </>
               )}
             </aside>
-          )}
+          ) : undefined
+        }
+      >
+        <Link href="/checkout" className="cn-btn">
+          {t.tryAgain}
+          <span className="cn-btn-ico">
+            <ArrowUpRight size={16} />
+          </span>
+        </Link>
+        <a href={waUrl} target="_blank" rel="noopener noreferrer" className="cn-btn cn-btn-ghost">
+          {t.viaWhatsapp}
+          <span className="cn-btn-ico">
+            <MessageCircle size={16} />
+          </span>
+        </a>
+      </PageStage>
+
+      <section className="cn-section cn-paper cn-co-steps-sec">
+        <div className="cn-wrap">
+          <div className="cn-co-next-head">
+            <span className="cn-kicker f-display cn-rv">
+              <i className="cn-dot" />
+              {t.helpKicker}
+            </span>
+            <h2 className="f-display cn-rv">{t.helpTitle}</h2>
+          </div>
+          <ol className="cn-co-next cn-co-next-row cn-rv">
+            {t.helpItems.map((s, i) => (
+              <li key={s.t}>
+                <small className="f-logo" dir="ltr">
+                  {String(i + 1).padStart(2, "0")}
+                </small>
+                <h3>{s.t}</h3>
+                <p>{s.b}</p>
+              </li>
+            ))}
+          </ol>
+          <div className="cn-co-actions cn-rv">
+            <Link href="/shop" className="cn-text-link">
+              {t.backShop}
+              <ArrowUpRight size={15} />
+            </Link>
+          </div>
         </div>
       </section>
     </div>
