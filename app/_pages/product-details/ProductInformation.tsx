@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState, useRef, useMemo } from "react";
+import React from "react";
 
 // interface ProductIntroCartProps {
 //   productName?: string;
@@ -12,7 +12,7 @@ import { ColorOptions, LightColorOptions } from "./ColorSelection";
 import DesignSelection from "./DesignSelection";
 import { BaggageClaim, ShoppingCart } from "lucide-react";
 // import FontSelection from "./FontSelection";
-import { Link, useRouter } from "@/i18n/navigation";
+import { Link } from "@/i18n/navigation";
 import { Input, TextArea } from "@/components/ui/input";
 
 import {
@@ -24,24 +24,16 @@ import {
 } from "@/components/ui/select";
 import { useGetLocale } from "@/hooks/useGetLocale";
 
-import { enqueueSnackbar } from "notistack";
-import * as Yup from "yup";
 // import { useOrderStore } from "@/hooks/zustand/useOrderStore";
 import { useGetProductDetails } from "@/hooks/tanstack/useProducts";
 import { ProductDetails } from "@/types/api/products";
 import ProductInfoSkt from "@/components/skeletons/productDetails/ProductInfoSkt";
 import { NoDetails } from "@/components/skeletons/productDetails/Not-found";
-import prepareCartItem, { validateUserOptions } from "@/utils/productUtils";
-import cart from "@/utils/localStorage";
 import { cn } from "@/lib/utils";
-import { useFormik } from "formik";
-import {
-  calculateCustomizationPrice,
-  buildVariantConditions,
-  getRequiredVariantKeys,
-  isFieldUsedInVariants,
-} from "@/lib/variantSystem";
+import { isFieldUsedInVariants } from "@/lib/variantSystem";
 import FontSelection from "./FontSelection";
+import { useProductForm } from "./useProductForm";
+import ProductDescription from "./ProductDescription";
 import { useParams } from "next/navigation";
 
 const ProductInformation = () => {
@@ -56,89 +48,6 @@ const ProductInformation = () => {
 
   // console.log(currentProduct);
 
-  // State to manage the quantity
-  const [quantity, setQuantity] = useState(1);
-  const [currentPrice, setCurrentPrice] = useState<number | null>(null);
-
-  const router = useRouter();
-  // const { setProductInfo } = useOrderStore();
-  const submitType = useRef<"addToCart" | "orderNow">("addToCart");
-
-  // Dynamically build validation schema based on product configuration
-  const productValidation = useMemo(() => {
-    if (!currentProduct) return Yup.object().shape({});
-
-    const schema: Record<string, any> = {};
-
-    // For variant pricing, only require fields that affect pricing
-    // For base pricing, fields are optional (used only for customization)
-    const isVariantPricing = currentProduct.pricing?.type === "variant";
-    const requiredKeys = isVariantPricing
-      ? getRequiredVariantKeys(currentProduct)
-      : [];
-
-    // Size validation - required only if used in variant pricing
-    if (
-      currentProduct.sizes?.length > 0
-      // && requiredKeys.includes("sizeId")
-    ) {
-      schema.size = Yup.string().required("Size is required");
-    }
-
-    // Digit count validation - required only if used in variant pricing
-    if (
-      currentProduct.minDigits &&
-      currentProduct.maxDigits
-      // && requiredKeys.includes("digitCount")
-    ) {
-      schema.digitCount = Yup.number()
-        .required("Digit count is required")
-        .min(
-          currentProduct.minDigits,
-          `Minimum ${currentProduct.minDigits} digits`,
-        )
-        .max(
-          currentProduct.maxDigits,
-          `Maximum ${currentProduct.maxDigits} digits`,
-        );
-    }
-
-    // Color validation
-    if (currentProduct.colors?.length > 0) {
-      schema.color = Yup.string().required("Color is required");
-    }
-
-    // Light color validation
-    if (currentProduct.lightColors?.length > 0) {
-      schema.lightColor = Yup.string().required("Light color is required");
-    }
-
-    // Design validation
-    if (currentProduct.designs?.length > 0) {
-      schema.design = Yup.string().required("Design is required");
-    }
-
-    // Font validation
-    if (currentProduct.fonts?.length > 0) {
-      schema.font = Yup.string().required("Font is required");
-    }
-
-    // House number is always required for customizable products
-    if (currentProduct.isCustomizable) {
-      schema.houseNumber = Yup.string().required("House number is required");
-    }
-
-    // Text is optional
-    schema.text = Yup.string().notRequired();
-
-    // Quantity is always required
-    schema.quantity = Yup.number()
-      .required("Quantity is required")
-      .min(1, "Minimum quantity is 1");
-
-    return Yup.object().shape(schema);
-  }, [currentProduct]);
-
   const {
     values,
     handleChange,
@@ -146,206 +55,10 @@ const ProductInformation = () => {
     setFieldValue,
     errors,
     touched,
-    submitCount,
-    isValidating,
-    // resetForm,
-  } = useFormik({
-    initialValues: {
-      size: "",
-      digitCount: "",
-      color: "",
-      lightColor: "",
-      houseNumber: "",
-      text: "",
-      design: "",
-      font: "",
-      quantity: 1,
-    },
-    validationSchema: productValidation,
-    onSubmit: (values) => {
-      console.log(values);
-      // enqueueSnackbar(
-      //   submitType.current === "orderNow"
-      //     ? "Checkout is Initiating."
-      //     : "Added to Cart successfully!",
-      //   {
-      //     variant: "success",
-      //     style: {
-      //       backgroundColor: "var(--brand-secondary)",
-      //       color: "white",
-      //     },
-      //   },
-      // );
-
-      const orderStorePayload = {
-        productId: Array.isArray(slug) ? slug[0] : slug?.toString() || "",
-        sizeId: values.size?.toString(),
-        ...(currentProduct?.minDigits && currentProduct?.maxDigits
-          ? { digitId: values.digitCount?.toString() }
-          : {}),
-        colorId: values.color?.toString(),
-        lightColorId: values.lightColor?.toString(),
-        houseNumber: values.houseNumber?.toString(),
-        text: values.text,
-        designId: values.design?.toString(),
-        fontId: values.font?.toString(),
-        quantity: values.quantity,
-        digitCount: values.digitCount,
-        price: currentPrice || 0,
-      };
-
-      // Validate variant selection if using variant pricing
-      if (currentProduct?.pricing?.type === "variant") {
-        const variantConditions = buildVariantConditions(
-          currentProduct,
-          values,
-        );
-        const { price } = calculateCustomizationPrice(
-          currentProduct,
-          variantConditions,
-        );
-
-        if (!price) {
-          enqueueSnackbar(
-            locale === "en"
-              ? "Please select valid options to get a price"
-              : "الرجاء اختيار خيارات صالحة للحصول على السعر",
-            {
-              variant: "error",
-              style: {
-                backgroundColor: "var(--brand-destructive)",
-                color: "white",
-              },
-            },
-          );
-          const optionsTop = document.getElementById("product-title");
-          if (optionsTop) {
-            optionsTop.scrollIntoView({ behavior: "smooth", block: "center" });
-          }
-          return;
-        }
-      }
-
-      // Guard: currentProduct must be defined (TypeScript can't narrow across closure boundary)
-      if (!currentProduct) return;
-
-      // Validate first (optional)
-      const validation = validateUserOptions(orderStorePayload);
-      if (!validation.isValid) {
-        console.error("Missing fields:", validation.missingFields);
-        enqueueSnackbar(
-          `Missing required fields: ${validation.missingFields.join(", ")}`,
-          {
-            variant: "error",
-            style: {
-              backgroundColor: "var(--brand-destructive)",
-              color: "white",
-            },
-          },
-        );
-        return;
-      }
-
-      // Prepare complete cart item
-      const cartItem = prepareCartItem(currentProduct, orderStorePayload);
-
-      if (cartItem && submitType.current === "addToCart") {
-        // Add to cart
-        cart.addProduct(cartItem);
-        console.log("Added to cart:", cartItem);
-
-        enqueueSnackbar("Added to Cart successfully!", {
-          variant: "success",
-          style: {
-            backgroundColor: "var(--brand-primary)",
-            color: "white",
-          },
-        });
-      } else if (!cartItem) {
-        console.error("Failed to prepare cart item");
-        enqueueSnackbar("Failed to prepare cart item", {
-          variant: "error",
-          style: {
-            backgroundColor: "var(--brand-destructive)",
-            color: "white",
-          },
-        });
-        return;
-      }
-
-      // console.log("order payload = ", orderStorePayload);
-      // return;
-
-      // set product order - info to global state
-      if (submitType.current === "orderNow") {
-        // setProductInfo(orderStorePayload);
-
-        if (cartItem) {
-          cart.addProduct(cartItem);
-          router.push("/checkout");
-
-          enqueueSnackbar("Checkout is Initiating.", {
-            variant: "success",
-            style: {
-              backgroundColor: "var(--brand-primary)",
-              color: "white",
-            },
-          });
-        }
-      }
-    },
-  });
-
-  // Calculate price dynamically whenever relevant form values change
-  useEffect(() => {
-    if (!currentProduct) return;
-
-    // For base pricing, use base price directly
-    if (currentProduct.pricing?.type === "base") {
-      setCurrentPrice(
-        currentProduct.pricing.price ?? currentProduct.minPrice ?? 0,
-      );
-      return;
-    }
-
-    // For variant pricing, calculate based on selections
-    const variantConditions = buildVariantConditions(currentProduct, values);
-    const { price } = calculateCustomizationPrice(
-      currentProduct,
-      variantConditions,
-    );
-
-    setCurrentPrice(price);
-  }, [
-    currentProduct,
-    values.size,
-    values.digitCount,
-    // Add other fields that might affect pricing in the future
-  ]);
-
-
-
-  // Scroll to first error on failed submission
-  useEffect(() => {
-    if (submitCount > 0 && Object.keys(errors).length > 0 && !isValidating) {
-      const firstErrorKey = Object.keys(errors)[0];
-      const element = document.getElementById(`field-${firstErrorKey}`);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth", block: "center" });
-      }
-    }
-  }, [submitCount, isValidating]);
-
-  // Function to handle quantity change
-  const handleQuantityChange = (type: "increase" | "decrease") => {
-    if (type === "increase") {
-      setQuantity((prev) => prev + 1);
-      setFieldValue("quantity", values.quantity + 1);
-    } else if (type === "decrease" && quantity > 1) {
-      setQuantity((prev) => prev - 1);
-      setFieldValue("quantity", values.quantity - 1);
-    }
-  };
+    currentPrice,
+    submitType,
+    handleQuantityChange,
+  } = useProductForm(currentProduct, slug);
 
   // console.log("current product = ", currentProduct);
 
@@ -771,95 +484,5 @@ const ProductOptions = ({
         </div>
       )}
     </div>
-  );
-};
-
-/**
- * Wraps numbers (digits, percentages, decimals) in the HTML string with a span
- * that has roboto-num class to force Roboto font rendering.
- * Only wraps numbers in text content, not in HTML tags or attributes.
- */
-const wrapNumbersWithSpan = (html: string): string => {
-  let result = "";
-  let insideTag = false;
-  let i = 0;
-
-  while (i < html.length) {
-    const char = html[i];
-
-    // Track if we're inside an HTML tag
-    if (char === "<") {
-      insideTag = true;
-      result += char;
-      i++;
-      continue;
-    }
-
-    if (char === ">") {
-      insideTag = false;
-      result += char;
-      i++;
-      continue;
-    }
-
-    // If we're inside a tag, just copy the character
-    if (insideTag) {
-      result += char;
-      i++;
-      continue;
-    }
-
-    // Outside tags: check if this is the start of a number
-    if (/\d/.test(char)) {
-      // Extract the full number (including decimals, commas, percentage)
-      let number = "";
-      let j = i;
-
-      // Capture: digits, optional decimal/comma, optional percentage, optional trailing space before %
-      while (
-        j < html.length &&
-        /[\d.,\s%]/.test(html[j]) &&
-        (html[j] !== " " || (j + 1 < html.length && html[j + 1] === "%"))
-      ) {
-        number += html[j];
-        j++;
-
-        // Stop after capturing percentage
-        if (html[j - 1] === "%") break;
-      }
-
-      // Trim any trailing spaces (except before %)
-      number = number.trimEnd();
-      if (
-        number &&
-        html[j - 1] !== "%" &&
-        /\s/.test(number[number.length - 1])
-      ) {
-        number = number.trimEnd();
-        j = i + number.length;
-      }
-
-      // Wrap the number in a span
-      result += `<span class="roboto-num">${number}</span>`;
-      // result += `<span className="!font-roboto text-blue-600">${number}</span>`;
-      i = j;
-    } else {
-      result += char;
-      i++;
-    }
-  }
-
-  return result;
-};
-
-const ProductDescription = ({ description }: { description: string }) => {
-  const processedDescription = wrapNumbersWithSpan(description);
-
-  // console.log("processed description = ", processedDescription);
-  return (
-    <div
-      className="product-description mt-5"
-      dangerouslySetInnerHTML={{ __html: processedDescription }}
-    />
   );
 };

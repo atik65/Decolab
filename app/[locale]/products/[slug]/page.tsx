@@ -1,17 +1,7 @@
-
-import ProductInfoContainer from "@/app/_pages/product-details/ProductInfoContainer";
-import RelatedProducts from "@/app/_pages/product-details/RealtedProducts";
-
+import ProductCinematic from "@/app/_pages/product-details/cinematic/ProductCinematic";
 
 const page = () => {
-  return (
-    <div>
-      <ProductInfoContainer />
-      {/* <AdditionalInfoTabs /> */}
-
-      <RelatedProducts />
-    </div>
-  );
+  return <ProductCinematic />;
 };
 
 export default page;
