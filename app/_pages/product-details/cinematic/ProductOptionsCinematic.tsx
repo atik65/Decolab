@@ -20,7 +20,7 @@ interface Props {
   locale: Locale;
 }
 
-const Group = ({
+export const Group = ({
   id,
   label,
   required,

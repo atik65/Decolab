@@ -5,8 +5,8 @@ import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import { ArrowDown, ArrowUpRight, Check } from "lucide-react";
-import { copy, heroSlides, Locale, WHATSAPP_URL } from "../../home/cinematic/content";
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { heroSlides, Locale, WHATSAPP_URL } from "../../home/cinematic/content";
 import { heroIndexFor, shopCopy } from "./shopContent";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -80,7 +80,7 @@ const ShopHero = ({ locale, category, onBrowse }: Props) => {
           })
           .to(".cn-shop-photos", { yPercent: 8, force3D: true }, 0)
           .to(".cn-shop-copy", { y: -40, opacity: 0, ease: "power1.out" }, 0)
-          .to(".cn-shop-note", { y: -28, opacity: 0, ease: "power1.out" }, 0);
+          .to(".cn-shop-strip", { y: -28, opacity: 0, ease: "power1.out" }, 0);
       });
     },
     { scope: wrap },
@@ -151,18 +151,11 @@ const ShopHero = ({ locale, category, onBrowse }: Props) => {
           </div>
         </div>
 
-        <aside className="cn-shop-note cn-glass cn-shop-fade" aria-label={t.noteTitle}>
-          <small className="f-display">{t.noteTitle}</small>
-          <ul>
-            {t.notes.map((n) => (
-              <li key={n}>
-                <Check size={15} />
-                {n}
-              </li>
-            ))}
-          </ul>
-          <span className="cn-shop-note-foot">{copy[locale].wordSub}</span>
-        </aside>
+        <ul className="cn-shop-strip cn-shop-fade" aria-label={t.noteTitle}>
+          {t.notes.map((n) => (
+            <li key={n}>{n}</li>
+          ))}
+        </ul>
       </div>
     </section>
   );
