@@ -65,7 +65,7 @@ const Footer = () => {
           <div
             className={cn(
               "space-y-7 sm:col-span-2",
-              isAr && "lg:order-3",
+              isAr && "flex flex-col items-end lg:order-3",
             )}
           >
             <LinkedLogo
@@ -81,41 +81,42 @@ const Footer = () => {
               {tagline}
             </p>
 
-            <ul className="max-w-md space-y-4 text-sm md:text-[15px]">
+            <ul
+              className={cn(
+                "max-w-md space-y-4 text-sm md:text-[15px]",
+                isAr && "flex flex-col items-end",
+              )}
+            >
               <li>
                 <Link
                   href={`https://wa.me/${contactInfo.phone.replace(/[\s+]/g, "")}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className={cn(
-                    "group flex items-center gap-3 text-white/85 transition-colors hover:text-[#ffb347]",
-                    isAr && "flex-row-reverse justify-end",
-                  )}
+                  className="group flex items-center gap-3 text-white/85 transition-colors hover:text-[#ffb347]"
                 >
                   <Phone size={16} className="shrink-0 text-white/40" />
-                  <span className="roboto-num">{contactInfo.phone}</span>
+                  <span dir="ltr" className="roboto-num">
+                    {contactInfo.phone}
+                  </span>
                 </Link>
               </li>
               <li>
                 <Link
                   href={`mailto:${contactInfo.email}`}
-                  className={cn(
-                    "flex items-center gap-3 text-white/85 transition-colors hover:text-[#ffb347]",
-                    isAr && "flex-row-reverse justify-end",
-                  )}
+                  className="flex items-center gap-3 text-white/85 transition-colors hover:text-[#ffb347]"
                 >
                   <Mail size={16} className="shrink-0 text-white/40" />
-                  <span>{contactInfo.email}</span>
+                  <span dir="ltr">{contactInfo.email}</span>
                 </Link>
               </li>
               <li
                 className={cn(
                   "flex items-start gap-3 text-white/55",
-                  isAr && "flex-row-reverse justify-end",
+                  isAr && "[direction:rtl]",
                 )}
               >
                 <MapPin size={16} className="mt-0.5 shrink-0 text-white/40" />
-                <span className="leading-relaxed">{contactInfo.address}</span>
+                <span className="min-w-0 leading-relaxed">{contactInfo.address}</span>
               </li>
             </ul>
           </div>
