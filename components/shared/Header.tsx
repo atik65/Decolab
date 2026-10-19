@@ -109,7 +109,7 @@ const Header: React.FC = () => {
     pathname === "";
 
   // cinematic pages (home, shop): same floating bar
-  const isCinematic = isHomePage || /^\/(en|ar)?\/?(shop|products|checkout)(\/|$)/.test(pathname || "");
+  const isCinematic = isHomePage || /^\/(en|ar)?\/?(shop|products|checkout|about)(\/|$)/.test(pathname || "");
 
   // cinematic landing page: floating glass bar that hides while scrolling down
   const [scrolled, setScrolled] = useState(false);

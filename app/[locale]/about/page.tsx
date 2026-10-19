@@ -1,12 +1,7 @@
-import About from "@/app/_pages/about/About";
-import React from "react";
+import AboutCinematic from "@/app/_pages/about/cinematic/AboutCinematic";
 
 const page = () => {
-  return (
-    <div>
-      <About />
-    </div>
-  );
+  return <AboutCinematic />;
 };
 
 export default page;
