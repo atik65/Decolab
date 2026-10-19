@@ -111,9 +111,10 @@ const Hero = ({ locale, play }: { locale: Locale; play: boolean }) => {
         }, 2.0);
       intro.current = tl;
 
-      /* scroll: photo drifts, copy fades, next section rises over it */
+      /* scroll: photo drifts, copy fades, next section rises over it.
+         Desktop only — on phones the scrubbed exit janks the scroll, so the hero just scrolls away natively */
       const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
+      mm.add("(min-width: 768px) and (prefers-reduced-motion: no-preference)", () => {
         gsap
           .timeline({
             defaults: { ease: "none" },
