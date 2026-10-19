@@ -151,17 +151,17 @@ const AnnounceBar: React.FC<{ variant?: "default" | "cinematic" }> = ({
       <div className="container mx-auto px-4 sm:px-6 grid grid-cols-[1fr_auto_1fr] items-center min-h-[40px]">
         {/* ─── Left Zone: Phone Number ─── */}
         <div className="flex items-center justify-start">
-          <span className="hidden md:block">  <Link
-            href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            className={`hidden md:flex items-center gap-1.5 ${link} hover:scale-105 transition-all duration-300 text-sm font-medium roboto-num`}
-          >
-            <Phone className="h-3.5 w-3.5" />
-            <span className="roboto-num">
-              {PHONE_NUMBER}
-            </span>
-          </Link>
+          <span className="hidden md:block">
+            {" "}
+            <Link
+              href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={`hidden md:flex items-center gap-1.5 ${link} hover:scale-105 transition-all duration-300 text-sm font-medium roboto-num`}
+            >
+              <Phone className="h-3.5 w-3.5" />
+              <span className="roboto-num">{PHONE_NUMBER}</span>
+            </Link>
           </span>
           <Link
             href={`https://wa.me/${PHONE_NUMBER.replace(/[\s+]/g, "")}`}
