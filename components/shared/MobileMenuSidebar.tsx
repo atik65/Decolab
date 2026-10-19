@@ -40,7 +40,7 @@ export default function MobileMenuSidebar({
       <SheetContent
         isShowCloseButton={true}
         side={locale === "ar" ? "right" : "left"}
-        className="p-0 border-none w-[300px] sm:w-[350px]"
+        className="p-0 border-none w-[calc(100%-1.5rem)] max-w-[380px] sm:max-w-[380px]"
       >
         <SheetHeader className="hidden">
           <SheetTitle></SheetTitle>

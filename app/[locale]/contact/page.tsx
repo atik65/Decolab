@@ -1,12 +1,7 @@
-import Contact from "@/app/_pages/contact/Contact";
-import React from "react";
+import ContactCinematic from "@/app/_pages/contact/cinematic/ContactCinematic";
 
 const page = () => {
-  return (
-    <div>
-      <Contact />
-    </div>
-  );
+  return <ContactCinematic />;
 };
 
 export default page;

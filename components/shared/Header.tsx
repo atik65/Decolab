@@ -108,11 +108,14 @@ const Header: React.FC = () => {
     pathname === "/" ||
     pathname === "";
 
+  // cinematic pages (home, shop): same floating bar
+  const isCinematic = isHomePage || /^\/(en|ar)?\/?(shop|products|checkout|about|contact)(\/|$)/.test(pathname || "");
+
   // cinematic landing page: floating glass bar that hides while scrolling down
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   React.useEffect(() => {
-    if (!isHomePage) return;
+    if (!isCinematic) return;
     let lastY = window.scrollY;
     const onScroll = () => {
       const y = window.scrollY;
@@ -124,9 +127,9 @@ const Header: React.FC = () => {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, [isHomePage]);
+  }, [isCinematic]);
 
-  if (isHomePage) {
+  if (isCinematic) {
     return (
       <>
         <div className="relative z-[95]">

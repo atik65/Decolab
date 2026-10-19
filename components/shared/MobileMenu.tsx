@@ -1,39 +1,41 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import "@/app/_pages/home/cinematic/cinematic.css";
+import "@/app/_pages/product-details/cinematic/pd.css";
+import "@/app/_pages/checkout/cinematic/checkout.css";
+import "@/app/_pages/checkout/cinematic/cartsheet.css";
+import "./mobile-menu.css";
+import React from "react";
+import { ArrowUpRight, Mail, MessageCircle, Phone, Search } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import {
-  ChevronRight,
-  ChevronLeft,
-  Phone,
-  Mail,
-  Instagram,
-  Search,
-} from "lucide-react";
-import Image from "next/image";
-import LinkedLogo from "./LinkedLogo";
 import { useGetCategories } from "@/hooks/tanstack/useProducts";
 import { CategoresResponse } from "@/app/_pages/home/HomeCategories";
-import { cn } from "@/lib/utils";
+import { cartCopy } from "@/app/_pages/checkout/cinematic/cartCopy";
+import { contact, WHATSAPP_URL } from "@/app/_pages/home/cinematic/content";
+import LinkedLogo from "./LinkedLogo";
+import InstagramLink from "./InstagramLink";
 
-interface NavLink {
-  href: string;
-  label: string;
-  labelAr?: string;
-  icon?: React.ReactNode;
-}
-
-export const staticNavLinks: NavLink[] = [
-  // { href: "/shop", label: "shop", labelAr: "تسوق", icon: <Home /> },
-  // { href: "/about", label: "about", labelAr: "حول", icon: <Users /> },
-  // {
-  //   href: "/contact",
-  //   label: "contact",
-  //   labelAr: "اتصل",
-  //   icon: <MessageCircle />,
-  // },
-];
+const mmCopy = {
+  en: {
+    search: "Search products",
+    collections: "Collections",
+    all: "All products",
+    about: "About us",
+    contact: "Contact",
+    order: "Order on WhatsApp",
+    menu: "Menu",
+  },
+  ar: {
+    search: "ابحث عن منتج",
+    collections: "المجموعات",
+    all: "جميع المنتجات",
+    about: "من نحن",
+    contact: "اتصل بنا",
+    order: "اطلب عبر واتساب",
+    menu: "القائمة",
+  },
+} as const;
 
 const MobileMenu = ({
   onOpenChange,
@@ -43,157 +45,109 @@ const MobileMenu = ({
   onOpenChange: (open: boolean) => void;
   onSearchOpen: () => void;
 }) => {
-  const [navLinks, setNavLinks] = useState<NavLink[]>(staticNavLinks);
-  const { data: categoriesData, isLoading } =
-    useGetCategories<CategoresResponse>();
   const locale = useGetLocale();
+  const t = mmCopy[locale];
+  const banner = cartCopy[locale].banner;
+  const { data, isLoading } = useGetCategories<CategoresResponse>();
+  const close = () => onOpenChange(false);
 
-  useEffect(() => {
-    if (!isLoading && categoriesData) {
-      const categoryLinks = categoriesData.results.map((category) => ({
-        href: `/shop?category=${encodeURIComponent(category.name)}`,
-        label: category.name,
-        labelAr: category.name_ar,
-      }));
-      setNavLinks([...categoryLinks, ...staticNavLinks]);
-    }
-  }, [isLoading, categoriesData]);
+  const rows = [
+    { key: "all", href: "/shop", label: t.all },
+    ...(data?.results ?? []).map((c) => ({
+      key: String(c.id),
+      href: `/shop?category=${encodeURIComponent(c.name)}`,
+      label: locale === "ar" ? c.name_ar || c.name : c.name,
+    })),
+  ];
 
   return (
-    <div className="flex flex-col h-full bg-white font-roboto w-full">
-      {/* ─── Header Section ─── */}
-      <div
-        className={cn(
-          "flex items-center p-6 border-b border-gray-100",
-          locale === "ar" ? "justify-end" : "justify-start",
-        )}
-      >
-        <LinkedLogo
-          onClick={() => onOpenChange(false)}
-          imgClassName="w-32 h-auto object-contain"
-        />
-      </div>
+    <div className="cine cn-white cn-cs cn-mm" dir={locale === "ar" ? "rtl" : "ltr"}>
+      <header className="cn-mm-head">
+        <LinkedLogo onClick={close} imgClassName="h-8 w-auto object-contain" />
+      </header>
 
-      {/* ─── Scrollable Navigation ─── */}
-      <div className="flex-1 overflow-y-auto px-6 py-8">
-        <h3
-          className={cn(
-            "text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-6",
-            locale === "ar" && "text-right font-montserrat tracking-normal",
-          )}
+      <p className="cn-cs-banner">
+        <i className="cn-dot" />
+        {banner}
+      </p>
+
+      <div className="cn-cs-body cn-mm-body">
+        <button
+          type="button"
+          className="cn-mm-search"
+          onClick={() => {
+            close();
+            setTimeout(onSearchOpen, 400);
+          }}
         >
-          {locale === "en" ? "Our Categories" : "فئاتنا"}
-        </h3>
+          <Search size={16} aria-hidden="true" />
+          {t.search}
+        </button>
 
-        {/* ─── Search Bar Trigger ─── */}
-        <div className="mb-6">
-          <button
-            onClick={() => {
-              onOpenChange(false);
-              setTimeout(() => {
-                onSearchOpen();
-              }, 400);
-            }}
-            className={cn(
-              "w-full flex items-center gap-3 px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-gray-400 hover:bg-gray-100 transition-all duration-300 group",
-              locale === "ar" && "flex-row-reverse text-right",
-            )}
-          >
-            <Search className="w-5 h-5 text-gray-400 group-hover:text-brand-primary transition-colors" />
-            <span className="text-sm font-medium">
-              {locale === "en"
-                ? "Search for products..."
-                : "البحث عن المنتجات..."}
-            </span>
-          </button>
-        </div>
+        <span className="cn-kicker f-display cn-mm-label">
+          <i className="cn-dot" />
+          {t.collections}
+        </span>
 
-        <nav className="space-y-2">
-          {navLinks.map((link) => (
-            <Link
-              key={link.label}
-              href={link.href}
-              onClick={() => onOpenChange(false)}
-              className={cn(
-                "group flex items-center justify-between py-3 border-b border-transparent hover:border-gray-50 transition-all duration-300 rounded-lg outline-none",
-                locale === "ar" && "flex-row-reverse hover:bg-gray-50/50",
-              )}
-            >
-              <span
-                className={cn(
-                  "text-base font-medium text-gray-800 group-hover:text-brand-primary group-hover:translate-x-1 transition-all duration-300",
-                  locale === "ar" &&
-                    "font-montserrat group-hover:-translate-x-1 group-hover:translate-x-0",
-                )}
-              >
-                {locale === "ar" && link.labelAr ? link.labelAr : link.label}
-              </span>
-              <span className="text-gray-300 group-hover:text-brand-primary transition-colors">
-                {locale === "ar" ? (
-                  <ChevronLeft className="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" />
-                ) : (
-                  <ChevronRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
-                )}
-              </span>
-            </Link>
-          ))}
+        <nav aria-label={t.menu}>
+          <ul className="cn-mm-list">
+            {isLoading
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <li key={i} className="cn-mm-skel">
+                    <i />
+                  </li>
+                ))
+              : rows.map((r, i) => (
+                  <li key={r.key}>
+                    <Link href={r.href} onClick={close}>
+                      <small className="f-logo" dir="ltr">
+                        {String(i + 1).padStart(2, "0")}
+                      </small>
+                      <span className="f-display">{r.label}</span>
+                      <span className="cn-cat-arrow" aria-hidden="true">
+                        <ArrowUpRight size={14} />
+                      </span>
+                    </Link>
+                  </li>
+                ))}
+          </ul>
         </nav>
+
+        <div className="cn-mm-sub">
+          <Link href="/about" onClick={close}>
+            {t.about}
+          </Link>
+          <Link href="/contact" onClick={close}>
+            {t.contact}
+          </Link>
+        </div>
       </div>
 
-      {/* ─── Professional Footer Container ─── */}
-      <div className="bg-gray-50 p-6 border-t border-gray-100 mt-auto">
-        <div
-          className={cn(
-            "flex flex-col space-y-4 mb-8",
-            locale === "ar" && "items-end",
-          )}
-        >
-          <a
-            href="https://wa.me/96566889159"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={cn(
-              "flex items-center gap-3 text-sm text-gray-600 hover:text-brand-primary transition-colors",
-            )}
-          >
-            <Phone className="w-4 h-4 text-gray-400" />
-            <span className="roboto-num font-medium tracking-wide">
-              +965 6688 9159
+      <footer className="cn-cs-foot cn-mm-foot">
+        <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="cn-btn" onClick={close}>
+          {t.order}
+          <span className="cn-btn-ico">
+            <MessageCircle size={16} />
+          </span>
+        </a>
+
+        <InstagramLink isAr={locale === "ar"} tone="light" />
+
+        <div className="cn-mm-contact">
+          <a href={`https://wa.me/${contact.phone.replace(/[\s+]/g, "")}`} target="_blank" rel="noopener noreferrer">
+            <Phone size={14} aria-hidden="true" />
+            <span dir="ltr" style={{ direction: "ltr", unicodeBidi: "isolate" }}>
+              {contact.phone}
             </span>
           </a>
-
-          <a
-            href="mailto:onedirectionkwt@gmail.com"
-            className={cn(
-              "flex items-center gap-3 text-sm text-gray-600 hover:text-brand-primary transition-colors",
-            )}
-          >
-            <Mail className="w-4 h-4 text-gray-400" />
-            <span className="font-medium">onedirectionkwt@gmail.com</span>
+          <a href="mailto:onedirectionkwt@gmail.com">
+            <Mail size={14} aria-hidden="true" />
+            <span dir="ltr" style={{ direction: "ltr", unicodeBidi: "isolate" }}>
+              onedirectionkwt@gmail.com
+            </span>
           </a>
         </div>
-
-        <div
-          className={cn(
-            "flex items-center justify-between pt-5 border-t border-gray-200",
-            locale === "ar" && "flex-row-reverse",
-          )}
-        >
-          <p className="text-[11px] text-gray-400 uppercase tracking-widest">
-            © {new Date().getFullYear()}{" "}
-            {locale === "en" ? "Decolab" : "وان دايركشن"}
-          </p>
-          <a
-            href="https://instagram.com"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 hover:text-brand-primary transition-transform hover:scale-110"
-            aria-label="Instagram"
-          >
-            <Instagram className="w-5 h-5" />
-          </a>
-        </div>
-      </div>
+      </footer>
     </div>
   );
 };

@@ -1,12 +1,7 @@
-import ShopContainer from "@/app/_pages/shop/ShopContainer";
-import React from "react";
+import ShopCinematic from "@/app/_pages/shop/cinematic/ShopCinematic";
 
 const page = () => {
-  return (
-    <div>
-      <ShopContainer />
-    </div>
-  );
+  return <ShopCinematic />;
 };
 
 export default page;

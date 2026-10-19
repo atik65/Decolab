@@ -1,12 +1,7 @@
-import { CheckoutContainer } from "@/app/_pages/checkout/CheckoutContainer";
-import React from "react";
+import CheckoutCinematic from "@/app/_pages/checkout/cinematic/CheckoutCinematic";
 
 const page = () => {
-  return (
-    <div>
-      <CheckoutContainer />
-    </div>
-  );
+  return <CheckoutCinematic />;
 };
 
 export default page;

@@ -1,0 +1,324 @@
+/* ───────────────────────────────────────────────────────────────
+   Decolab – cinematic About page. Builds on cinematic.css (home),
+   shop.css and checkout.css (PageStage); only About-specific pieces.
+   ─────────────────────────────────────────────────────────────── */
+
+/* ───────── Story ───────── */
+.cn-ab-story {
+  padding-block: clamp(48px, 6vw, 92px);
+}
+.cn-ab-story-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(26px, 4.5vw, 76px);
+  align-items: center;
+}
+@media (min-width: 960px) {
+  .cn-ab-story-grid {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+  }
+}
+.cn-ab-story-copy {
+  display: grid;
+  gap: clamp(18px, 2vw, 26px);
+  justify-items: start;
+  min-width: 0;
+}
+.cn-ab-story .cn-st-text {
+  max-width: none;
+  font-size: clamp(1.6rem, 3vw, 2.95rem);
+  line-height: 1.2;
+}
+html[data-locale="ar"] .cine .cn-ab-story .cn-st-text {
+  line-height: 1.5;
+}
+.cn-ab-story-text {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px 36px;
+  width: 100%;
+  margin-top: clamp(4px, 1vw, 14px);
+  padding-top: clamp(18px, 2.2vw, 28px);
+  border-top: 1px solid var(--line-l);
+}
+@media (min-width: 1180px) {
+  .cn-ab-story-text {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.cn-ab-story .cn-st-body {
+  max-width: 54ch;
+  font-size: clamp(14px, 1.02vw, 15.5px);
+  line-height: 1.8;
+}
+.cn-ab-photo {
+  position: relative;
+  aspect-ratio: 4 / 4.4;
+  max-height: 600px;
+  width: 100%;
+  border-radius: clamp(14px, 1.6vw, 26px);
+  overflow: hidden;
+  background: var(--ink);
+  isolation: isolate;
+}
+@media (max-width: 959px) {
+  .cn-ab-photo {
+    aspect-ratio: 4 / 3;
+  }
+}
+.cn-ab-photo-img {
+  position: absolute;
+  inset: -8% 0;
+  will-change: transform;
+}
+@media (max-width: 767px) {
+  .cn-ab-photo-img {
+    inset: 0;
+    will-change: auto;
+  }
+}
+
+/* ───────── Stats band ───────── */
+.cn-ab-stats-sec {
+  padding: var(--gap);
+}
+.cn-ab-stats {
+  border-radius: clamp(14px, 1.6vw, 26px);
+  background: var(--ink);
+  color: #fff;
+  padding-inline: var(--pad);
+  overflow: hidden;
+}
+.cn-ab-stats ul {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+@media (min-width: 900px) {
+  .cn-ab-stats ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+.cn-ab-stat {
+  display: grid;
+  align-content: end;
+  gap: 12px;
+  padding: clamp(34px, 5vw, 76px) clamp(10px, 2vw, 32px);
+  border-inline-start: 1px solid var(--line-d);
+}
+.cn-ab-stat:nth-child(odd) {
+  border-inline-start: 0;
+  padding-inline-start: 0;
+}
+@media (min-width: 900px) {
+  .cn-ab-stat:nth-child(odd) {
+    border-inline-start: 1px solid var(--line-d);
+    padding-inline-start: clamp(10px, 2vw, 32px);
+  }
+  .cn-ab-stat:first-child {
+    border-inline-start: 0;
+    padding-inline-start: 0;
+  }
+}
+.cn-ab-stat b {
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-start;
+  font-weight: 200;
+  font-size: clamp(2.2rem, 4.6vw, 4.6rem);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  direction: ltr;
+}
+html[data-locale] .cine[dir="rtl"] .cn-ab-stat b {
+  justify-content: flex-end;
+}
+.cn-ab-stat b i {
+  font-style: normal;
+  color: var(--glow);
+  margin-inline-start: 2px;
+}
+.cn-ab-stat > span {
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+/* ───────── Mission, vision, values ───────── */
+.cn-ab-principles {
+  padding-block: clamp(60px, 8vw, 120px) clamp(60px, 9vw, 130px);
+}
+.cn-ab-mv {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  border-top: 1px solid var(--line-l);
+}
+@media (min-width: 900px) {
+  .cn-ab-mv {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+.cn-ab-mv article {
+  display: grid;
+  align-content: start;
+  gap: 22px;
+  padding: clamp(26px, 3vw, 44px) 0 clamp(30px, 4vw, 56px);
+  border-bottom: 1px solid var(--line-l);
+}
+@media (min-width: 900px) {
+  .cn-ab-mv article:first-child {
+    padding-inline-end: clamp(24px, 3.2vw, 56px);
+  }
+  .cn-ab-mv article + article {
+    padding-inline-start: clamp(24px, 3.2vw, 56px);
+    border-inline-start: 1px solid var(--line-l);
+  }
+}
+.cn-ab-mv small {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.cn-ab-mv p {
+  margin: 0;
+  max-width: 34ch;
+  font-weight: 300;
+  font-size: clamp(1.15rem, 1.9vw, 1.75rem);
+  line-height: 1.5;
+  letter-spacing: -0.01em;
+}
+html[data-locale="ar"] .cine .cn-ab-mv p {
+  font-weight: 600;
+  line-height: 1.8;
+}
+.cn-ab-values-head {
+  padding-bottom: clamp(18px, 2.4vw, 32px);
+}
+
+.cn-ab-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-l);
+  border-inline-start: 1px solid var(--line-l);
+}
+@media (min-width: 640px) {
+  .cn-ab-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+@media (min-width: 1000px) {
+  .cn-ab-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+.cn-ab-grid li {
+  display: grid;
+  align-content: start;
+  gap: 12px;
+  padding: clamp(22px, 2.6vw, 38px) clamp(18px, 2.2vw, 32px) clamp(28px, 3.2vw, 48px);
+  border-inline-end: 1px solid var(--line-l);
+  border-bottom: 1px solid var(--line-l);
+  transition: background 0.6s var(--ease);
+}
+.cn-ab-grid li:hover {
+  background: rgba(255, 255, 255, 0.7);
+}
+.cn-ab-grid small {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.cn-ab-grid h3 {
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 700;
+  line-height: 1.3;
+}
+.cn-ab-grid p {
+  margin: 0;
+  max-width: 38ch;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* ───────── What we make ───────── */
+.cn-ab-rows {
+  margin: 0 0 clamp(50px, 7vw, 110px);
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-l);
+}
+.cn-ab-rows li {
+  border-bottom: 1px solid var(--line-l);
+}
+.cn-ab-rows a {
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto;
+  grid-template-areas:
+    "n t a"
+    ". p a";
+  align-items: center;
+  gap: 6px 16px;
+  padding-block: clamp(20px, 2.4vw, 34px);
+  transition: padding 0.7s var(--ease);
+}
+@media (min-width: 900px) {
+  .cn-ab-rows a {
+    grid-template-columns: 56px minmax(0, 1fr) minmax(0, 1.1fr) auto;
+    grid-template-areas: "n t p a";
+    gap: 24px;
+  }
+  .cn-ab-rows a:hover {
+    padding-inline-start: 14px;
+  }
+}
+.cn-ab-rows small {
+  grid-area: n;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.cn-ab-rows h3 {
+  grid-area: t;
+  font-weight: 300;
+  font-size: clamp(1.2rem, 2.3vw, 2.2rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+}
+html[data-locale="ar"] .cine .cn-ab-rows h3 {
+  font-weight: 700;
+}
+.cn-ab-rows p {
+  grid-area: p;
+  margin: 0;
+  max-width: 44ch;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.cn-ab-rows .cn-cat-arrow {
+  grid-area: a;
+  width: 44px;
+  height: 44px;
+}
+.cn-ab-rows a:hover .cn-cat-arrow,
+.cn-ab-rows a:focus-visible .cn-cat-arrow {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+html[data-locale] .cine[dir="rtl"] .cn-ab-rows a:hover .cn-cat-arrow {
+  transform: rotate(45deg);
+}
+
+/* numerals stay left-to-right (the cinematic root resets direction on every element) */
+html[data-locale] .cine .cn-ab-stat b {
+  direction: ltr;
+}

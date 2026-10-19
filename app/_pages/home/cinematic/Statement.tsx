@@ -72,9 +72,16 @@ const Statement = ({ locale }: { locale: Locale }) => {
           </Link>
         </div>
 
-        <h2 className="cn-st-text f-display" aria-label={t.statement.replace(/\*/g, "")}>
+        <h2
+          className="cn-st-text f-display"
+          aria-label={t.statement.replace(/\*/g, "")}
+        >
           {words.map((x, i) => (
-            <span key={i} className={`cn-w${x.hl ? " hl" : ""}`} aria-hidden="true">
+            <span
+              key={i}
+              className={`cn-w${x.hl ? " hl" : ""}`}
+              aria-hidden="true"
+            >
               {x.w + (i < words.length - 1 ? " " : "")}
             </span>
           ))}
@@ -86,12 +93,13 @@ const Statement = ({ locale }: { locale: Locale }) => {
           <ul className="cn-services cn-rv">
             {t.services.map((s, i) => (
               <li key={s}>
-                <small className="f-logo">{String(i + 1).padStart(2, "0")}</small>
+                <small className="f-logo">
+                  {String(i + 1).padStart(2, "0")}
+                </small>
                 <span>{s}</span>
               </li>
             ))}
           </ul>
-
         </div>
       </div>
     </section>

@@ -1780,3 +1780,17 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
 .cn-hero-wrap {
   height: 132svh;
 }
+
+/* phones: no scroll-out animation, so no pinned runway and no permanent compositor layers */
+@media (max-width: 767px) {
+  .cn-hero-wrap {
+    height: auto;
+  }
+  .cn-slides,
+  .cn-hero-content,
+  .cn-hero-meta,
+  .cn-hero-dim {
+    will-change: auto;
+    backface-visibility: visible;
+  }
+}

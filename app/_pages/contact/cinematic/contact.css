@@ -1,0 +1,183 @@
+/* ───────────────────────────────────────────────────────────────
+   Decolab – cinematic Contact page. Builds on cinematic.css, shop.css
+   and checkout.css (PageStage); only Contact-specific pieces here.
+   ─────────────────────────────────────────────────────────────── */
+
+.cn-ct-main {
+  padding-block: clamp(46px, 6vw, 90px) clamp(30px, 4vw, 60px);
+}
+.cn-ct-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(36px, 5vw, 88px);
+  align-items: start;
+}
+@media (min-width: 1000px) {
+  .cn-ct-grid {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  }
+}
+
+/* ───────── Rows ───────── */
+.cn-ct-rows {
+  margin: clamp(18px, 2.4vw, 30px) 0 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-l);
+}
+.cn-ct-rows li {
+  border-bottom: 1px solid var(--line-l);
+}
+.cn-ct-rows a {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-template-areas:
+    "l a"
+    "v a"
+    "h a";
+  align-items: center;
+  gap: 4px 16px;
+  padding-block: clamp(20px, 2.4vw, 32px);
+  transition: padding 0.7s var(--ease);
+}
+@media (min-width: 900px) {
+  .cn-ct-rows a:hover {
+    padding-inline-start: 14px;
+  }
+}
+.cn-ct-rows small {
+  grid-area: l;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+html[data-locale="ar"] .cine .cn-ct-rows small {
+  letter-spacing: 0.02em;
+  font-size: 12.5px;
+  text-transform: none;
+}
+.cn-ct-rows a > span:nth-of-type(1) {
+  grid-area: v;
+  font-weight: 300;
+  font-size: clamp(1.25rem, 2.5vw, 2.3rem);
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  overflow-wrap: anywhere;
+}
+html[data-locale="ar"] .cine .cn-ct-rows a > span:nth-of-type(1) {
+  font-weight: 700;
+}
+.cn-ct-rows em {
+  grid-area: h;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--muted);
+}
+.cn-ct-rows .cn-cat-arrow {
+  grid-area: a;
+  width: 46px;
+  height: 46px;
+}
+.cn-ct-rows a:hover .cn-cat-arrow,
+.cn-ct-rows a:focus-visible .cn-cat-arrow {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: #fff;
+  transform: rotate(-45deg);
+}
+html[data-locale] .cine[dir="rtl"] .cn-ct-rows a:hover .cn-cat-arrow {
+  transform: rotate(45deg);
+}
+
+/* ───────── WhatsApp card ───────── */
+.cn-ct-card {
+  position: relative;
+  display: grid;
+  justify-items: start;
+  gap: 20px;
+  padding: clamp(26px, 3vw, 44px);
+  border-radius: clamp(14px, 1.6vw, 26px);
+  background: var(--ink);
+  color: #fff;
+  overflow: hidden;
+  isolation: isolate;
+}
+.cn-ct-card::before {
+  content: "";
+  position: absolute;
+  width: 90%;
+  aspect-ratio: 1;
+  inset-inline-end: -35%;
+  bottom: -55%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(255, 140, 30, 0.5), transparent 70%);
+}
+.cn-ct-card .cn-kicker {
+  color: rgba(255, 255, 255, 0.65);
+}
+.cn-ct-card h2 {
+  font-weight: 300;
+  font-size: clamp(1.6rem, 2.8vw, 2.6rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+html[data-locale="ar"] .cine .cn-ct-card h2 {
+  font-weight: 700;
+  line-height: 1.4;
+}
+.cn-ct-card p {
+  margin: 0;
+  max-width: 36ch;
+  font-size: 14.5px;
+  line-height: 1.8;
+  color: rgba(255, 255, 255, 0.72);
+}
+.cn-ct-card .cn-btn {
+  cursor: pointer;
+}
+.cn-ct-follow {
+  display: grid;
+  justify-items: start;
+  gap: 12px;
+  width: 100%;
+  margin-top: 8px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line-d);
+}
+.cn-ct-follow small {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+}
+html[data-locale="ar"] .cine .cn-ct-follow small {
+  letter-spacing: 0.02em;
+  font-size: 12.5px;
+  text-transform: none;
+}
+
+/* ───────── Map ───────── */
+.cn-ct-map {
+  padding-bottom: clamp(60px, 9vw, 130px);
+}
+.cn-ct-frame {
+  position: relative;
+  aspect-ratio: 16 / 6;
+  min-height: 260px;
+  border-radius: clamp(14px, 1.6vw, 26px);
+  overflow: hidden;
+  background: var(--paper-2);
+}
+.cn-ct-frame iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter 0.8s var(--ease);
+}
+.cn-ct-frame:hover iframe {
+  filter: grayscale(0);
+}

@@ -1,11 +1,11 @@
 "use client";
 
 import "./cinematic.css";
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
 import { useGetLocale } from "@/hooks/useGetLocale";
+import { useSmoothScroll } from "./useSmoothScroll";
 import Preloader from "./Preloader";
 import Hero from "./Hero";
 import Statement from "./Statement";
@@ -19,50 +19,17 @@ gsap.registerPlugin(ScrollTrigger);
 const HomeCinematic = () => {
   const locale = useGetLocale();
   const [intro, setIntro] = useState(false);
-  const lenis = useRef<Lenis | null>(null);
   const onStart = useCallback(() => setIntro(true), []);
 
-  /* smooth scrolling, wired into ScrollTrigger; home page only */
+  /* smooth scrolling, wired into ScrollTrigger */
+  const lenis = useSmoothScroll();
+
+  /* always open at the top */
   useEffect(() => {
-    const reduce = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
     const prevRestoration = history.scrollRestoration;
     history.scrollRestoration = "manual";
     window.scrollTo(0, 0);
-
-    let tick: ((time: number) => void) | undefined;
-    let observer: MutationObserver | undefined;
-
-    if (!reduce) {
-      const l = new Lenis({
-        /* lerp feels continuous; a fixed-duration expo ease creeps then lurches per wheel tick */
-        lerp: 0.085,
-        wheelMultiplier: 0.9,
-        smoothWheel: true,
-      });
-      lenis.current = l;
-      l.on("scroll", ScrollTrigger.update);
-      tick = (time) => l.raf(time * 1000);
-      gsap.ticker.add(tick);
-      gsap.ticker.lagSmoothing(0);
-
-      /* let Radix sheets / dialogs lock the page */
-      observer = new MutationObserver(() => {
-        if (document.body.hasAttribute("data-scroll-locked")) l.stop();
-        else l.start();
-      });
-      observer.observe(document.body, {
-        attributes: true,
-        attributeFilter: ["data-scroll-locked"],
-      });
-    }
-
     return () => {
-      observer?.disconnect();
-      if (tick) gsap.ticker.remove(tick);
-      lenis.current?.destroy();
-      lenis.current = null;
       history.scrollRestoration = prevRestoration;
       document.documentElement.style.overflow = "";
     };
@@ -80,7 +47,7 @@ const HomeCinematic = () => {
     lenis.current?.start();
     const id = window.setTimeout(() => ScrollTrigger.refresh(), 600);
     return () => window.clearTimeout(id);
-  }, [intro]);
+  }, [intro, lenis]);
 
   /* hide the global floating buttons while the hero owns the screen */
   useEffect(() => {
