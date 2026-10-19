@@ -3,11 +3,9 @@ import { Link } from "@/i18n/navigation";
 import React from "react";
 import LinkedLogo from "./LinkedLogo";
 import { useGetLocale } from "@/hooks/useGetLocale";
-import { ArrowUpRight, Instagram, Mail, MapPin, Phone } from "lucide-react";
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { cn } from "@/lib/utils";
-
-const INSTAGRAM_URL = "https://www.instagram.com/decorist.kw/";
-const INSTAGRAM_HANDLE = "@decorist.kw";
+import InstagramLink from "./InstagramLink";
 
 const Footer = () => {
   const locale = useGetLocale();
@@ -124,36 +122,7 @@ const Footer = () => {
             </ul>
 
             {/* Instagram */}
-            <a
-              href={INSTAGRAM_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label={`Instagram ${INSTAGRAM_HANDLE}`}
-              className="group inline-flex items-center gap-3 rounded-full border border-white/15 bg-white/[0.03] p-1.5 pe-5 transition-colors duration-300 hover:border-[#ffb347]/60 hover:bg-white/[0.07]"
-            >
-              <span className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[linear-gradient(45deg,#f9ce34,#ee2a7b_55%,#6228d7)] text-white transition-transform duration-500 group-hover:scale-105">
-                <Instagram size={19} />
-              </span>
-              <span className="flex flex-col leading-tight">
-                <span className="text-[10.5px] font-bold uppercase tracking-[0.2em] text-white/45">
-                  {isAr ? "تابعنا على إنستغرام" : "Follow us on Instagram"}
-                </span>
-                <span
-                  dir="ltr"
-                  style={{ direction: "ltr", unicodeBidi: "isolate" }}
-                  className={cn(
-                    "text-sm font-semibold text-white/90 transition-colors group-hover:text-[#ffb347] md:text-[15px]",
-                    isAr && "text-right",
-                  )}
-                >
-                  {INSTAGRAM_HANDLE}
-                </span>
-              </span>
-              <ArrowUpRight
-                size={16}
-                className="text-white/40 transition-colors group-hover:text-[#ffb347] rtl:-scale-x-100"
-              />
-            </a>
+            <InstagramLink isAr={isAr} />
           </div>
 
           {/* About */}
