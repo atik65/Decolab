@@ -45,9 +45,15 @@ const Products = ({ locale }: { locale: Locale }) => {
         <div className="cn-prod-grid">
           {!ready
             ? Array.from({ length: 4 }).map((_, i) => (
-                <div key={i} className="cn-skel" style={{ aspectRatio: "4 / 5.6" }} />
+                <div
+                  key={i}
+                  className="cn-skel"
+                  style={{ aspectRatio: "4 / 5.6" }}
+                />
               ))
-            : items.map((p, i) => <ProductTile key={p.id} p={p} i={i} locale={locale} />)}
+            : items.map((p, i) => (
+                <ProductTile key={p.id} p={p} i={i} locale={locale} />
+              ))}
 
           {ready && (
             <Link

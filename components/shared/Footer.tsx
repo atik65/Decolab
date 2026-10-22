@@ -18,17 +18,17 @@ const Footer = () => {
         name: locale === "en" ? "Meet the Founders" : "تعرف على المؤسسين",
         href: "/",
       },
-      { name: locale === "en" ? "F.A.Q." : "الأسئلة الشائعة", href: "/" },
+      { name: locale === "en" ? "F.A.Q." : "الأسئلة الشائعة", href: "/faq" },
     ],
     support: [
-      { name: locale === "en" ? "Support" : "الدعم", href: "/" },
+      { name: locale === "en" ? "Support" : "الدعم", href: "/support" },
       {
         name: locale === "en" ? "Care Guide" : "دليل العناية",
-        href: "/",
+        href: "/care-guide",
       },
       {
         name: locale === "en" ? "Warranty Policy" : "سياسة الضمان",
-        href: "/",
+        href: "/warranty-policy",
       },
     ],
   };

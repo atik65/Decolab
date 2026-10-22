@@ -160,13 +160,23 @@ html[data-locale] .cine .f-logo * {
   pointer-events: none;
   background:
     linear-gradient(180deg, rgba(8, 7, 6, 0.62) 0%, rgba(8, 7, 6, 0) 26%),
-    linear-gradient(0deg, rgba(8, 7, 6, 0.88) 0%, rgba(8, 7, 6, 0.55) 32%, rgba(8, 7, 6, 0) 62%),
+    linear-gradient(
+      0deg,
+      rgba(8, 7, 6, 0.88) 0%,
+      rgba(8, 7, 6, 0.55) 32%,
+      rgba(8, 7, 6, 0) 62%
+    ),
     linear-gradient(90deg, rgba(8, 7, 6, 0.45) 0%, rgba(8, 7, 6, 0) 55%);
 }
 html[data-locale] .cine[dir="rtl"] .cn-hero-shade {
   background:
     linear-gradient(180deg, rgba(8, 7, 6, 0.62) 0%, rgba(8, 7, 6, 0) 26%),
-    linear-gradient(0deg, rgba(8, 7, 6, 0.88) 0%, rgba(8, 7, 6, 0.55) 32%, rgba(8, 7, 6, 0) 62%),
+    linear-gradient(
+      0deg,
+      rgba(8, 7, 6, 0.88) 0%,
+      rgba(8, 7, 6, 0.55) 32%,
+      rgba(8, 7, 6, 0) 62%
+    ),
     linear-gradient(270deg, rgba(8, 7, 6, 0.45) 0%, rgba(8, 7, 6, 0) 55%);
 }
 .cn-hero-dim {
@@ -244,7 +254,9 @@ html[data-locale="ar"] .cine .cn-text-link {
   background: currentColor;
   opacity: 0.6;
   transform-origin: left;
-  transition: transform 0.6s var(--ease), opacity 0.4s;
+  transition:
+    transform 0.6s var(--ease),
+    opacity 0.4s;
 }
 html[data-locale] .cine[dir="rtl"] .cn-text-link::after {
   transform-origin: right;
@@ -547,7 +559,9 @@ html[data-locale="ar"] .cine .cn-st-text {
   padding: 18px 0;
   border-bottom: 1px solid var(--line-l);
   font-size: clamp(15px, 1.5vw, 22px);
-  transition: padding 0.6s var(--ease-out), color 0.4s;
+  transition:
+    padding 0.6s var(--ease-out),
+    color 0.4s;
 }
 .cn-services li:hover {
   padding-inline-start: 14px;
@@ -607,7 +621,11 @@ html[data-locale="ar"] .cine .cn-st-text {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(10, 9, 8, 0.1) 30%, rgba(10, 9, 8, 0.78) 100%);
+  background: linear-gradient(
+    180deg,
+    rgba(10, 9, 8, 0.1) 30%,
+    rgba(10, 9, 8, 0.78) 100%
+  );
   opacity: 0;
   transition: opacity 0.8s;
 }
@@ -663,7 +681,10 @@ html[data-locale="ar"] .cine .cn-cat-name {
   height: 42px;
   border-radius: 50%;
   border: 1px solid currentColor;
-  transition: background 0.5s, color 0.5s, transform 0.7s var(--ease);
+  transition:
+    background 0.5s,
+    color 0.5s,
+    transform 0.7s var(--ease);
 }
 html[data-locale] .cine[dir="rtl"] .cn-cat-arrow svg {
   transform: scaleX(-1);
@@ -701,7 +722,13 @@ html[data-locale] .cine[dir="rtl"] .cn-cat:hover .cn-cat-arrow {
   aspect-ratio: 3 / 4.1;
   border-inline-end: 1px solid var(--line-l);
   border-bottom: 1px solid var(--line-l);
-  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, 0.55) 50%, transparent 70%) var(--paper-2);
+  background: linear-gradient(
+      100deg,
+      transparent 30%,
+      rgba(255, 255, 255, 0.55) 50%,
+      transparent 70%
+    )
+    var(--paper-2);
   background-size: 250% 100%;
   animation: cn-shimmer 1.6s infinite linear;
 }
@@ -720,6 +747,7 @@ html[data-locale] .cine[dir="rtl"] .cn-cat:hover .cn-cat-arrow {
   grid-template-columns: repeat(2, 1fr);
   border-top: 1px solid var(--line-l);
   border-inline-start: 1px solid var(--line-l);
+  gap: 2;
 }
 @media (min-width: 1000px) {
   .cn-prod-grid {
@@ -851,7 +879,11 @@ html[data-locale] .cine[dir="rtl"] .cn-prod:hover .cn-cat-arrow {
   inset-inline-end: -30%;
   bottom: -50%;
   z-index: -1;
-  background: radial-gradient(closest-side, rgba(255, 140, 30, 0.55), transparent 70%);
+  background: radial-gradient(
+    closest-side,
+    rgba(255, 140, 30, 0.55),
+    transparent 70%
+  );
   transition: transform 1s var(--ease);
 }
 .cn-prod-more:hover::before {
@@ -1002,7 +1034,9 @@ html[data-locale="ar"] .cine .cn-closing-info dt {
 
 /* the global floating WhatsApp button would sit on top of the hero copy */
 .whatsapp-booking {
-  transition: opacity 0.5s ease, transform 0.5s ease;
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
 body.cn-hero-active .whatsapp-booking {
   opacity: 0;
@@ -1011,7 +1045,17 @@ body.cn-hero-active .whatsapp-booking {
 }
 
 /* decorative / numeric pieces stay left-to-right in both locales */
-html[data-locale] .cine :is(.cn-plate, .cn-scene-photos, .cn-ghost, .cn-counter, .cn-marq, .cn-wordmark, .cn-pre-inner) {
+html[data-locale]
+  .cine
+  :is(
+    .cn-plate,
+    .cn-scene-photos,
+    .cn-ghost,
+    .cn-counter,
+    .cn-marq,
+    .cn-wordmark,
+    .cn-pre-inner
+  ) {
   direction: ltr;
 }
 
@@ -1134,7 +1178,12 @@ html[data-locale="ar"] .cine .cn-hero-content h1 {
 .cn-hero-shade {
   background:
     linear-gradient(180deg, rgba(8, 7, 6, 0.75) 0%, rgba(8, 7, 6, 0) 28%),
-    linear-gradient(0deg, rgba(8, 7, 6, 0.9) 0%, rgba(8, 7, 6, 0.58) 34%, rgba(8, 7, 6, 0) 64%),
+    linear-gradient(
+      0deg,
+      rgba(8, 7, 6, 0.9) 0%,
+      rgba(8, 7, 6, 0.58) 34%,
+      rgba(8, 7, 6, 0) 64%
+    ),
     linear-gradient(90deg, rgba(8, 7, 6, 0.4) 0%, rgba(8, 7, 6, 0) 60%);
 }
 
@@ -1143,7 +1192,6 @@ html[data-locale] .cine .cn-meta-cap small {
   unicode-bidi: isolate;
   text-align: start;
 }
-
 
 /* ───────── light-theme button variants ───────── */
 .cn-closing .cn-btn {
@@ -1173,7 +1221,6 @@ html[data-locale] .cine .cn-meta-cap small {
   background: var(--paper);
 }
 
-
 /* photographic blocks keep light text on a light page */
 .cn-hero-stage {
   color: #fff;
@@ -1181,8 +1228,6 @@ html[data-locale] .cine .cn-meta-cap small {
 .cine .cn-prod-more {
   color: #fff;
 }
-
-
 
 /* ───────── Pinned scenes (what we do) ───────── */
 .cn-scenes {
@@ -1605,7 +1650,9 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
   text-transform: uppercase;
   opacity: 0;
   transform: translateX(8px);
-  transition: opacity 0.5s ease, transform 0.7s var(--ease-out);
+  transition:
+    opacity 0.5s ease,
+    transform 0.7s var(--ease-out);
 }
 html[data-locale="ar"] .cine .cn-ring3d-explore {
   letter-spacing: 0;
@@ -1626,7 +1673,10 @@ html[data-locale="ar"] .cine .cn-ring3d-explore {
   color: var(--ink);
   transform: rotate(-45deg);
 }
-html[data-locale] .cine[dir="rtl"] .cn-ring3d-card[data-front="true"]:hover .cn-cat-arrow {
+html[data-locale]
+  .cine[dir="rtl"]
+  .cn-ring3d-card[data-front="true"]:hover
+  .cn-cat-arrow {
   transform: rotate(45deg);
 }
 
@@ -1647,7 +1697,11 @@ html[data-locale] .cine[dir="rtl"] .cn-ring3d-card[data-front="true"]:hover .cn-
   background: transparent;
   color: var(--txt);
   cursor: pointer;
-  transition: background 0.4s, color 0.4s, border-color 0.4s, transform 0.5s var(--ease-out);
+  transition:
+    background 0.4s,
+    color 0.4s,
+    border-color 0.4s,
+    transform 0.5s var(--ease-out);
 }
 .cn-ring-btn:hover {
   background: var(--ink);
@@ -1711,7 +1765,6 @@ html[data-locale] .cine[dir="rtl"] .cn-ring-dot i b {
   }
 }
 
-
 /* `.cine a { color: inherit }` was turning the card text dark; keep it white over photos */
 .cine .cn-ring3d-card,
 .cine .cn-ring3d-card .cn-ring3d-name,
@@ -1725,7 +1778,12 @@ html[data-locale] .cine[dir="rtl"] .cn-ring-dot i b {
 }
 .cn-ring3d-card::after {
   background:
-    linear-gradient(0deg, rgba(10, 9, 8, 0.88) 0%, rgba(10, 9, 8, 0.45) 30%, rgba(10, 9, 8, 0) 58%),
+    linear-gradient(
+      0deg,
+      rgba(10, 9, 8, 0.88) 0%,
+      rgba(10, 9, 8, 0.45) 30%,
+      rgba(10, 9, 8, 0) 58%
+    ),
     linear-gradient(180deg, rgba(10, 9, 8, 0.4) 0%, rgba(10, 9, 8, 0) 26%);
 }
 .cn-ring3d-name {

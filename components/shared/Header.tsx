@@ -76,7 +76,7 @@ const Header: React.FC = () => {
   // cinematic pages (home, shop): same floating bar
   const isCinematic =
     isHomePage ||
-    /^\/(en|ar)?\/?(shop|products|checkout|about|contact)(\/|$)/.test(
+    /^\/(en|ar)?\/?(shop|products|checkout|about|contact|warranty-policy|support|care-guide|faq)(\/|$)/.test(
       pathname || "",
     );
 

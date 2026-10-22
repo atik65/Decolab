@@ -1,0 +1,64 @@
+/* ───────────────────────────────────────────────────────────────
+   Decolab – cinematic Warranty Policy page. Builds on cinematic.css,
+   shop.css and checkout.css (PageStage); only page-specific pieces here.
+   ─────────────────────────────────────────────────────────────── */
+
+/* ───────── Terms ───────── */
+.cn-ip-terms {
+  padding-bottom: clamp(60px, 8vw, 120px);
+}
+.cn-ip-terms .cn-ip-list {
+  margin-top: 0;
+}
+.cn-ip-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  border-top: 1px solid var(--line-l);
+}
+.cn-ip-list li {
+  display: grid;
+  gap: 8px 24px;
+  padding-block: clamp(22px, 2.6vw, 36px);
+  border-bottom: 1px solid var(--line-l);
+}
+@media (min-width: 900px) {
+  .cn-ip-list li {
+    grid-template-columns: 80px minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: baseline;
+  }
+}
+.cn-ip-list small {
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+}
+.cn-ip-list h3 {
+  margin: 0;
+  font-weight: 400;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+html[data-locale="ar"] .cine .cn-ip-list h3 {
+  font-weight: 700;
+}
+.cn-ip-list p {
+  margin: 0;
+  font-size: clamp(14.5px, 1.1vw, 16px);
+  line-height: 1.8;
+  color: var(--muted);
+}
+
+/* ───────── Important note: same row, accent label only ───────── */
+.cn-ip-list .cn-ip-note small {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+html[data-locale="ar"] .cine .cn-ip-list .cn-ip-note small {
+  letter-spacing: 0.02em;
+  font-size: 12.5px;
+  text-transform: none;
+}
