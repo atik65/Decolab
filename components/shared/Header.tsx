@@ -64,41 +64,6 @@ const Header: React.FC = () => {
   // const linksRef = useRef<HTMLDivElement>(null);
   const actionRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
-
-    tl.from(
-      logoRef.current,
-      {
-        opacity: 0,
-        x: -200,
-        duration: 0.5,
-        ease: "power3.out",
-      },
-      "same",
-    );
-
-    // tl.from(".nav-link", {
-    //   opacity: 0,
-    //   y: -100,
-    //   duration: 0.5,
-    //   ease: "power3.out",
-    //   stagger: 0.1,
-    //   scope: linksRef.current,
-    // });
-
-    tl.from(
-      actionRef.current,
-      {
-        opacity: 0,
-        x: 200,
-        duration: 0.5,
-        ease: "power3.out",
-      },
-      "same",
-    );
-  });
-
   // const t = useTranslations("NavLinks");
   const locale = useLocale();
   const pathname = usePathname();
@@ -109,7 +74,56 @@ const Header: React.FC = () => {
     pathname === "";
 
   // cinematic pages (home, shop): same floating bar
-  const isCinematic = isHomePage || /^\/(en|ar)?\/?(shop|products|checkout|about|contact)(\/|$)/.test(pathname || "");
+  const isCinematic =
+    isHomePage ||
+    /^\/(en|ar)?\/?(shop|products|checkout|about|contact)(\/|$)/.test(
+      pathname || "",
+    );
+
+  // Re-run when the header variant changes: the logo/actions elements are
+  // remounted when switching between the cinematic and standard layouts, so a
+  // one-time animation would leave the new elements stuck at opacity 0.
+  useGSAP(
+    () => {
+      const targets = [logoRef.current, actionRef.current].filter(Boolean);
+      if (!targets.length) return;
+
+      const tl = gsap.timeline();
+      if (logoRef.current) {
+        tl.fromTo(
+          logoRef.current,
+          { opacity: 0, x: -200 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            clearProps: "opacity,transform",
+          },
+          "same",
+        );
+      }
+      if (actionRef.current) {
+        tl.fromTo(
+          actionRef.current,
+          { opacity: 0, x: 200 },
+          {
+            opacity: 1,
+            x: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            clearProps: "opacity,transform",
+          },
+          "same",
+        );
+      }
+      // if the animation is interrupted, never leave elements hidden
+      return () => {
+        gsap.set(targets, { clearProps: "opacity,transform" });
+      };
+    },
+    { dependencies: [isCinematic] },
+  );
 
   // cinematic landing page: floating glass bar that hides while scrolling down
   const [scrolled, setScrolled] = useState(false);
@@ -162,6 +176,7 @@ const Header: React.FC = () => {
                 <LinkedLogo
                   ref={logoRef}
                   logoSrc="/decolab/black-logo-large.png"
+                  priority
                   width={150}
                   height={40}
                   imgClassName="h-7 lg:h-8 w-auto"
