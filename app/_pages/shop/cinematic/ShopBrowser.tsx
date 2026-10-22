@@ -280,7 +280,12 @@ const ShopBrowser = ({ locale, category, setCategory, search, setSearch }: Props
                   } as React.CSSProperties
                 }
               >
-                <h3 className="f-display">{t.customTitle}</h3>
+                <div>
+                  <h3 className="f-display">{t.customTitle}</h3>
+                  <p style={{ marginTop: 8, opacity: 0.75, fontSize: 14 }}>
+                    {t.customBody}
+                  </p>
+                </div>
                 <span className="cn-cat-arrow">
                   <ArrowUpRight size={22} />
                 </span>

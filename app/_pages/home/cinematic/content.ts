@@ -100,9 +100,9 @@ export const copy = {
     villa: "VILLA",
     statementKicker: "About Decolab",
     statement:
-      "We turn *addresses* into landmarks and *storefronts* into stories that *glow* after dark.",
+      "Specialists in manufacturing *house numbers*, *advertising signs*, traditional guest houses, chalets, farms, and *“Mashallah” signs*.",
     statementBody:
-      "A Kuwait-based advertising company specializing in illuminated signage, LED house numbers, acrylic 3D letters, and custom printing and installation — with high-quality materials and fast installation guaranteed.",
+      "Kuwait-based advertising company specializing in illuminated signage, LED house numbers, acrylic 3D letters, and custom printing and installation — with high-quality materials and fast installation guaranteed.",
     aboutCta: "Our story",
     services: [
       "Illuminated signage",
@@ -146,7 +146,7 @@ export const copy = {
     villa: "فيلا",
     statementKicker: "عن ديكولاب",
     statement:
-      "نحوّل *العناوين* إلى علامات مميزة، و*الواجهات* إلى حكايات *تضيء* الليل.",
+      "متخصصون في تصنيع *أرقام المنازل* و*اللوحات الإعلانية* ولوحات الديوانيات والمزارع والشاليهات، ولوحات *«ما شاء الله»*.",
     statementBody:
       "شركة دعاية وإعلان كويتية متخصصة في اللافتات المضيئة وأرقام المنازل LED والحروف ثلاثية الأبعاد من الأكريليك، والطباعة والتركيب المخصص — بمواد عالية الجودة وخدمة تركيب سريعة مضمونة.",
     aboutCta: "قصتنا",

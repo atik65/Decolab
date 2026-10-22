@@ -42,8 +42,8 @@ const Footer = () => {
   };
 
   const tagline = isAr
-    ? "لافتات مضيئة · أرقام منازل LED · حروف ثلاثية الأبعاد"
-    : "Illuminated signage · LED house numbers · 3D letters";
+    ? "لافتات مضيئة — أرقام منازل LED — حروف ثلاثية الأبعاد — طباعة البانر والفلاش"
+    : "Illuminated signage — LED house numbers — 3D letters — Banner and Flash Printing";
 
   const colTitle =
     "text-[11px] font-bold uppercase tracking-[0.22em] text-white/45";
