@@ -77,6 +77,18 @@ const michroma = Michroma({
 });
 
 export const metadata: Metadata = {
+  icons: {
+    icon: [
+      {
+        url: "/favicons/favicon-light.ico",
+        media: "(prefers-color-scheme: light)",
+      },
+      {
+        url: "/favicons/favicon-dark.ico",
+        media: "(prefers-color-scheme: dark)",
+      },
+    ],
+  },
   title:
     "Decolab – Illuminated Signage, LED House Numbers & Custom Advertising",
   description:
