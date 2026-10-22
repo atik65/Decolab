@@ -1742,6 +1742,11 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
 .cn-ring-section {
   padding-top: clamp(72px, 9vw, 150px);
 }
+@media (max-width: 860px) {
+  .cn-ring-section {
+    padding-top: 120px;
+  }
+}
 
 .cn-ph-bg {
   display: none;
