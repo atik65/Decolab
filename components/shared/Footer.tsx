@@ -28,7 +28,7 @@ const Footer = () => {
       },
       {
         name: locale === "en" ? "Warranty Policy" : "سياسة الضمان",
-        href: "/",
+        href: "/warranty-policy",
       },
     ],
   };
