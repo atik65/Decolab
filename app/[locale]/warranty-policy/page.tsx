@@ -1,7 +1,8 @@
-import WarrantyCinematic from "@/app/_pages/warranty/cinematic/WarrantyCinematic";
+import InfoPage from "@/app/_pages/info/InfoPage";
+import { warrantyPage } from "@/app/_pages/info/infoContent";
 
 const page = () => {
-  return <WarrantyCinematic />;
+  return <InfoPage copy={warrantyPage} />;
 };
 
 export default page;
