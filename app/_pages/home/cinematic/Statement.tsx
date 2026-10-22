@@ -1,29 +1,36 @@
 "use client";
 
 import { useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
 import { ArrowUpRight } from "lucide-react";
 import { Link } from "@/i18n/navigation";
 import { copy, Locale } from "./content";
 import { useReveal } from "./useReveal";
 
-gsap.registerPlugin(ScrollTrigger, useGSAP);
-
 /** "plain *glow* words" → [{w:"plain"},{w:"glow",hl:true}] */
 function parse(text: string) {
   const out: { w: string; hl: boolean }[] = [];
   let hl = false;
+  let prevStar = false;
   text.split(/(\*)/).forEach((chunk) => {
     if (chunk === "*") {
       hl = !hl;
+      prevStar = true;
       return;
     }
-    chunk
-      .split(/\s+/)
-      .filter(Boolean)
-      .forEach((w) => out.push({ w, hl }));
+    const afterStar = prevStar;
+    prevStar = false;
+    const parts = chunk.split(/\s+/).filter(Boolean);
+    // punctuation right after a closing "*" belongs to the previous word
+    if (
+      parts.length &&
+      out.length &&
+      /^[^\s]/.test(chunk) &&
+      afterStar &&
+      !hl
+    ) {
+      out[out.length - 1].w += parts.shift()!;
+    }
+    parts.forEach((w) => out.push({ w, hl }));
   });
   return out;
 }
@@ -34,29 +41,6 @@ const Statement = ({ locale }: { locale: Locale }) => {
   const words = parse(t.statement);
 
   useReveal(root);
-
-  useGSAP(
-    () => {
-      const mm = gsap.matchMedia();
-      mm.add("(prefers-reduced-motion: no-preference)", () => {
-        gsap.to(".cn-w", {
-          opacity: 1,
-          ease: "none",
-          stagger: 0.14,
-          scrollTrigger: {
-            trigger: ".cn-st-text",
-            start: "top 82%",
-            end: "bottom 48%",
-            scrub: true,
-          },
-        });
-      });
-      mm.add("(prefers-reduced-motion: reduce)", () => {
-        gsap.set(".cn-w", { opacity: 1 });
-      });
-    },
-    { scope: root, dependencies: [locale], revertOnUpdate: true },
-  );
 
   return (
     <section ref={root} className="cn-statement cn-white" id="about">
@@ -90,7 +74,7 @@ const Statement = ({ locale }: { locale: Locale }) => {
         <div className="cn-st-grid">
           <p className="cn-st-body cn-rv">{t.statementBody}</p>
 
-          <ul className="cn-services cn-rv">
+          {/* <ul className="cn-services cn-rv">
             {t.services.map((s, i) => (
               <li key={s}>
                 <small className="f-logo">
@@ -99,7 +83,7 @@ const Statement = ({ locale }: { locale: Locale }) => {
                 <span>{s}</span>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
     </section>

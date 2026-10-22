@@ -3,7 +3,8 @@
 import { useRef } from "react";
 import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { Link } from "@/i18n/navigation";
-import { contact, copy, Locale, WHATSAPP_URL } from "./content";
+import { copy, Locale, WHATSAPP_URL } from "./content";
+import Mascot from "./Mascot";
 import { useReveal } from "./useReveal";
 
 const Closing = ({ locale }: { locale: Locale }) => {
@@ -38,25 +39,7 @@ const Closing = ({ locale }: { locale: Locale }) => {
             </div>
           </div>
 
-          <dl className="cn-closing-info cn-rv">
-            <div>
-              <dt>{locale === "ar" ? "الهاتف" : "Phone"}</dt>
-              <dd>
-                <a
-                  href={`https://wa.me/${contact.phone.replace(/[\s+]/g, "")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  dir="ltr"
-                >
-                  {contact.phone}
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt>{locale === "ar" ? "العنوان" : "Address"}</dt>
-              <dd>{contact.address[locale]}</dd>
-            </div>
-          </dl>
+          <Mascot locale={locale} />
         </div>
       </div>
     </section>

@@ -466,7 +466,7 @@ html[data-locale] .cine[dir="rtl"] .cn-link svg {
   z-index: 10;
   background: var(--paper);
   color: var(--txt);
-  padding-block: clamp(90px, 14vw, 220px) clamp(70px, 9vw, 140px);
+  padding-block: clamp(48px, 6vw, 96px) clamp(70px, 9vw, 140px);
   overflow: hidden;
 }
 .cn-kicker {
@@ -487,15 +487,17 @@ html[data-locale="ar"] .cine .cn-kicker {
   justify-content: space-between;
   gap: 20px;
   align-items: center;
-  margin-bottom: clamp(26px, 4vw, 60px);
+  padding-bottom: clamp(16px, 1.6vw, 24px);
+  margin-bottom: clamp(32px, 5vw, 72px);
+  border-bottom: 1px solid var(--line-l);
 }
 .cn-st-text {
   font-weight: 300;
-  font-size: clamp(1.9rem, 5.2vw, 5.2rem);
-  line-height: 1.16;
+  font-size: clamp(1.45rem, 3.4vw, 3.4rem);
+  line-height: 1.2;
   letter-spacing: -0.02em;
   max-width: 19ch;
-  max-width: min(100%, 1250px);
+  max-width: min(100%, 1120px);
 }
 html[data-locale="ar"] .cine .cn-st-text {
   font-weight: 700;
@@ -504,29 +506,33 @@ html[data-locale="ar"] .cine .cn-st-text {
 .cn-w {
   display: inline-block;
   white-space: pre;
-  opacity: 0.16;
 }
 .cn-w.hl {
   color: var(--accent);
 }
 .cn-st-grid {
-  margin-top: clamp(46px, 7vw, 110px);
+  margin-top: clamp(36px, 5vw, 72px);
   display: grid;
   grid-template-columns: 1fr;
   gap: 40px;
   align-items: start;
 }
-@media (min-width: 960px) {
-  .cn-st-grid {
-    grid-template-columns: 1fr 1.1fr;
-    gap: clamp(30px, 5vw, 90px);
-  }
-}
 .cn-st-body {
-  font-size: clamp(14px, 1.15vw, 17px);
-  line-height: 1.85;
+  font-size: clamp(15px, 1.2vw, 18px);
+  line-height: 1.8;
   color: var(--muted);
-  max-width: 52ch;
+  max-width: 60ch;
+  padding-top: 20px;
+  border-top: 2px solid var(--accent);
+}
+@media (min-width: 960px) {
+  /* editorial layout: body copy sits in the right half under the headline */
+  .cn-st-grid {
+    grid-template-columns: repeat(12, 1fr);
+  }
+  .cn-st-body {
+    grid-column: 7 / -1;
+  }
 }
 .cn-services {
   list-style: none;
@@ -1742,6 +1748,11 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
 .cn-ring-section {
   padding-top: clamp(72px, 9vw, 150px);
 }
+@media (max-width: 860px) {
+  .cn-ring-section {
+    padding-top: 120px;
+  }
+}
 
 .cn-ph-bg {
   display: none;
@@ -1792,5 +1803,313 @@ html[data-locale="ar"] .cine .cn-ring3d-name {
   .cn-hero-dim {
     will-change: auto;
     backface-visibility: visible;
+  }
+}
+
+/* ───────── Closing mascot ("Hilal", the living crescent lightbox) ───────── */
+.cn-closing-grid {
+  align-items: center;
+}
+.cn-mascot {
+  display: grid;
+  justify-items: center;
+  gap: 18px;
+}
+.cn-mascot-svg {
+  width: min(100%, 500px);
+  height: auto;
+  overflow: visible;
+}
+/* animated parts rotate/scale around their own box */
+.mc-rock,
+.mc-hold,
+.mc-star-hop,
+.mc-eyes ellipse,
+.mc-spark {
+  transform-box: fill-box;
+}
+
+/* lightbox: black frame, laser-cut lattice lit from inside */
+.mc-lattice-bg {
+  fill: #eef3ff;
+}
+.mc-lattice-lines {
+  fill: none;
+  stroke: #15110f;
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+.mc-frame {
+  fill: none;
+  stroke: #15110f;
+  stroke-width: 9;
+  stroke-linejoin: round;
+}
+.mc-crescent {
+  filter: drop-shadow(0 0 14px rgba(190, 215, 255, 0.85));
+  animation:
+    mc-switch-on 1.4s steps(1) 0.3s both,
+    mc-lightbox 3s ease-in-out 1.7s infinite;
+}
+.mc-face {
+  fill: #f8faff;
+  stroke: #15110f;
+  stroke-width: 3;
+}
+.mc-eyes ellipse {
+  fill: #15110f;
+  transform-origin: center;
+  animation: mc-blink 4.5s infinite;
+}
+.mc-cheek {
+  fill: rgba(255, 138, 31, 0.4);
+}
+.mc-smile {
+  fill: none;
+  stroke: #15110f;
+  stroke-width: 3.5;
+  stroke-linecap: round;
+}
+.mc-rock {
+  transform-origin: 50% 100%;
+  animation: mc-rock 4.2s ease-in-out infinite;
+}
+
+/* villa number plate */
+.mc-arm {
+  fill: none;
+  stroke: #15110f;
+  stroke-width: 9;
+  stroke-linecap: round;
+}
+.mc-hand {
+  fill: #15110f;
+}
+.mc-hold {
+  transform-origin: 90% 10%;
+  animation: mc-hold 4.2s ease-in-out infinite;
+}
+.mc-plate {
+  fill: #0e0c0b;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.25));
+}
+.mc-plate-villa,
+.mc-plate-num {
+  fill: #fff;
+  font-family: "Brush Script MT", "Segoe Script", "Lucida Handwriting", cursive;
+  font-style: italic;
+}
+.mc-plate-villa {
+  font-size: 28px;
+}
+.mc-plate-num {
+  font-size: 50px;
+  font-weight: 700;
+}
+
+/* star sidekick */
+.mc-star-body {
+  stroke: #15110f;
+  stroke-width: 4.5;
+  stroke-linejoin: round;
+}
+.mc-star-eye {
+  fill: #15110f;
+}
+.mc-star-hop {
+  transform-origin: 50% 100%;
+  animation: mc-hop 2.4s cubic-bezier(0.3, 0, 0.3, 1) infinite;
+}
+
+/* 3D house-number plate + lantern */
+.mc-wall {
+  fill: #ddd0bb;
+}
+.mc-cornice {
+  stroke: #f4efe6;
+  stroke-width: 7;
+}
+.mc-wall-line {
+  stroke: rgba(26, 22, 19, 0.1);
+  stroke-width: 1.5;
+}
+.mc-halo {
+  animation: mc-halo 3s ease-in-out infinite;
+}
+.mc-lantern-hook,
+.mc-lantern-bars {
+  fill: none;
+  stroke: #3a2c22;
+  stroke-width: 1.8;
+}
+.mc-lantern-metal {
+  fill: #3a2c22;
+}
+.mc-lantern-glass {
+  fill: #ffd07a;
+  stroke: #3a2c22;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 7px rgba(255, 190, 90, 0.95));
+  animation: mc-flame 2.2s ease-in-out infinite;
+}
+.mc-house-depth {
+  fill: #3b322c;
+}
+.mc-house-plate {
+  filter: drop-shadow(0 0 8px rgba(255, 200, 110, 0.7));
+}
+.mc-house-face {
+  fill: #0e0c0b;
+}
+.mc-house-label,
+.mc-house-num {
+  fill: #fff;
+  font-family: "Arial Narrow", Arial, sans-serif;
+  font-weight: 700;
+}
+.mc-house-label {
+  font-size: 13px;
+  letter-spacing: 0.08em;
+}
+.mc-house-num {
+  font-size: 24px;
+}
+.mc-mosaic polygon {
+  fill: #fff6e6;
+  animation: mc-mosaic 3s ease-in-out infinite;
+}
+.mc-mosaic polygon:nth-child(odd) {
+  animation-delay: 1.5s;
+}
+
+.mc-stone {
+  fill: #e4d6bd;
+}
+.mc-shadow {
+  fill: rgba(26, 22, 19, 0.14);
+}
+.mc-spark {
+  fill: var(--glow);
+  transform-origin: center;
+  animation: mc-twinkle 2.4s ease-in-out infinite;
+}
+.mc-spark-2 {
+  animation-delay: 0.8s;
+}
+.mc-spark-3 {
+  animation-delay: 1.5s;
+}
+
+.cn-mascot-tags {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+.cn-mascot-tags li {
+  font-size: 12px;
+  padding: 7px 14px;
+  border-radius: 999px;
+  border: 1px solid var(--line-l);
+  background: rgba(255, 255, 255, 0.6);
+  color: var(--txt);
+}
+
+@keyframes mc-switch-on {
+  0% {
+    opacity: 0.35;
+    filter: none;
+  }
+  15% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.4;
+    filter: none;
+  }
+  40%,
+  100% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(190, 215, 255, 0.85));
+  }
+}
+@keyframes mc-lightbox {
+  50% {
+    filter: drop-shadow(0 0 26px rgba(190, 215, 255, 1));
+  }
+}
+@keyframes mc-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.1);
+  }
+}
+@keyframes mc-rock {
+  0%,
+  100% {
+    transform: rotate(-1.5deg);
+  }
+  50% {
+    transform: rotate(1.5deg);
+  }
+}
+@keyframes mc-hold {
+  50% {
+    transform: rotate(-4deg) translateY(-3px);
+  }
+}
+@keyframes mc-hop {
+  0%,
+  55%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  60% {
+    transform: translateY(0) scale(1.12, 0.86);
+  }
+  72% {
+    transform: translateY(-26px) scale(0.94, 1.08) rotate(-12deg);
+  }
+  86% {
+    transform: translateY(0) scale(1.06, 0.92);
+  }
+}
+@keyframes mc-halo {
+  50% {
+    opacity: 0.6;
+  }
+}
+@keyframes mc-flame {
+  50% {
+    fill: #ffe3a8;
+    filter: drop-shadow(0 0 12px rgba(255, 190, 90, 1));
+  }
+}
+@keyframes mc-mosaic {
+  50% {
+    fill: #ffd98a;
+  }
+}
+@keyframes mc-twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.6);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.4);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cn-mascot-svg * {
+    animation: none !important;
   }
 }

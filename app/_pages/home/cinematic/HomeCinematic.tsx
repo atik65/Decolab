@@ -75,10 +75,10 @@ const HomeCinematic = () => {
   return (
     <div className="cine" dir={locale === "ar" ? "rtl" : "ltr"}>
       <Preloader onStart={onStart} />
-      <Hero locale={locale} play={intro} />
-      <Statement locale={locale} />
       <CategoryGrid locale={locale} />
-      <Scenes locale={locale} />
+      {/* <Hero locale={locale} play={intro} /> */}
+      <Statement locale={locale} />
+      {/* <Scenes locale={locale} /> */}
       <Products locale={locale} />
       <Closing locale={locale} />
     </div>

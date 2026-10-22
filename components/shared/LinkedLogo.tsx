@@ -13,6 +13,7 @@ export interface LinkedLogoProps extends Omit<
   width?: number;
   height?: number;
   imgClassName?: string;
+  priority?: boolean;
   containerClassName?: string;
 }
 
@@ -25,6 +26,7 @@ export const LinkedLogo = React.forwardRef<HTMLAnchorElement, LinkedLogoProps>(
       width = 140,
       height = 50,
       imgClassName,
+      priority = true,
       containerClassName,
       className,
       href = "/",
@@ -45,6 +47,7 @@ export const LinkedLogo = React.forwardRef<HTMLAnchorElement, LinkedLogoProps>(
         <Image
           src={logoSrc}
           alt={altText}
+          priority={priority}
           width={width}
           height={height}
           className={cn(

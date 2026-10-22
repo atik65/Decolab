@@ -35,7 +35,8 @@ export const shopCopy = {
     errorTitle: "We couldn't load the collection.",
     errorBody: "Please check your connection and try again.",
     retry: "Try again",
-    customTitle: "Can't find your design? We'll make it.",
+    customTitle: "You don't have a design?",
+    customBody: "If you don't have a design, we will make it for you.",
     promisesKicker: "Why Decolab",
     promisesTitle: "Crafted properly. Delivered and installed for you.",
     promises: [
@@ -91,7 +92,8 @@ export const shopCopy = {
     errorTitle: "تعذّر تحميل المجموعة.",
     errorBody: "تحقق من اتصالك بالإنترنت وحاول مرة أخرى.",
     retry: "حاول مرة أخرى",
-    customTitle: "لم تجد التصميم الذي تريده؟ سنصنعه لك.",
+    customTitle: "ليس لديك تصميم؟",
+    customBody: "إذا لم يكن لديك تصميم، سنصممه لك.",
     promisesKicker: "لماذا ديكولاب",
     promisesTitle: "صناعة متقنة. توصيل وتركيب علينا.",
     promises: [
